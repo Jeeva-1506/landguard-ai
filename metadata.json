@@ -1,0 +1,6 @@
+{
+  "name": "Land Acquisition Management & Delay Monitoring System",
+  "description": "Enterprise portal for infrastructure land acquisition management, progress tracking, and risk monitoring.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
