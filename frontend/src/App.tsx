@@ -270,7 +270,7 @@ export default function App() {
               />
             )}
 
-            {activeTab === "predict-delay" && (
+            {(activeTab === "predict-delay" || activeTab === "forecast") && (
               <DelayForecastView showToast={showToast} />
             )}
 
@@ -291,10 +291,10 @@ export default function App() {
               />
             )}
 
-            {activeTab === "map" && (
+            {(activeTab === "map" || activeTab === "gis") && (
               <div className="space-y-4">
                 <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-2xs">
-                  <h3 className="font-bold text-slate-900 text-sm">Geographic Risk Map</h3>
+                  <h3 className="content-title-prominent text-[#0A192F] font-extrabold text-[17px] tracking-tight">Geographic Risk Map</h3>
                   <p className="text-xs text-slate-500">Spatial distribution of land acquisition corridors & survey boundaries by risk tier.</p>
                 </div>
                 <GisMap projects={projects} parcels={parcels} onViewParcel={triggerViewParcelDetails} />
@@ -337,22 +337,18 @@ export default function App() {
       <AIChatbot 
         userRole={userRole}
         onExecuteAction={(action) => {
-          if (action.type === "OPEN_GIS") {
-            setActiveTab("gis");
+          if (action.type === "OPEN_GIS" || action.type === "SHOW_HIGH_RISK") {
+            setActiveTab("map");
           } else if (action.type === "SEARCH_SURVEY") {
             if (action.surveyNumber) {
               triggerViewParcelDetails(action.surveyNumber);
             } else {
               setActiveTab("parcels");
             }
-          } else if (action.type === "OPEN_PROJECT" || action.type === "FILTER_PROJECTS") {
+          } else if (action.type === "OPEN_PROJECT" || action.type === "FILTER_PROJECTS" || action.type === "SHOW_STAGE") {
             setActiveTab("projects");
-          } else if (action.type === "SHOW_HIGH_RISK") {
-            setActiveTab("gis");
           } else if (action.type === "SHOW_COMPENSATION") {
             setActiveTab("compensation");
-          } else if (action.type === "SHOW_STAGE") {
-            setActiveTab("projects");
           }
         }}
       />

@@ -229,6 +229,13 @@ export default function AIChatbot({ currentProjectId, userRole = "Administrator"
   };
 
   const handleActionClick = (action: ChatAction) => {
+    if (action.type === "SEARCH_SURVEY" && !action.surveyNumber) {
+      handleSendMessage("What is the status of survey number 124/2?");
+      return;
+    }
+    if (action.type === "SHOW_HIGH_RISK") {
+      handleSendMessage("Show high risk lands");
+    }
     if (onExecuteAction) {
       onExecuteAction(action);
     }
