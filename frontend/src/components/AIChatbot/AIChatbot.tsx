@@ -283,62 +283,62 @@ export default function AIChatbot({ currentProjectId, userRole = "Administrator"
           }`}
         >
           {/* HEADER BAR */}
-          <div className="bg-slate-900 text-white px-4 py-3 flex items-center justify-between border-b border-slate-800 shrink-0 select-none">
+          <div className="bg-[#1B365D] text-white px-4 py-3 flex items-center justify-between border-b border-blue-900 shrink-0 select-none">
             <div className="flex items-center gap-2.5">
               <div className="relative">
-                <div className="w-9 h-9 rounded-2xl bg-blue-600/30 border border-blue-400/40 flex items-center justify-center">
-                  <Bot className="w-5 h-5 text-blue-400" />
+                <div className="w-9 h-9 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center">
+                  <Bot className="w-5 h-5 text-blue-300" />
                 </div>
-                <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-500 rounded-full border-2 border-slate-900" title="Online"></span>
+                <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-400 rounded-full border-2 border-[#1B365D]" title="Online"></span>
               </div>
               <div>
-                <h3 className="font-extrabold text-xs text-white tracking-wide flex items-center gap-1.5">
+                <h3 className="font-extrabold text-sm text-white tracking-wide flex items-center gap-1.5 font-sans">
                   <span>LandGuard AI Assistant</span>
-                  <Sparkles className="w-3 h-3 text-amber-400" />
+                  <Sparkles className="w-3.5 h-3.5 text-amber-400" />
                 </h3>
-                <span className="text-[10px] text-slate-400 font-semibold block">
+                <span className="text-[11px] text-blue-200 font-medium block">
                   Your Land Acquisition Assistant
                 </span>
               </div>
             </div>
 
             {/* HEADER ACTION CONTROLS */}
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1.5">
               {/* Language Switcher */}
               <button
                 onClick={() => setLanguage(l => l === "en" ? "ta" : "en")}
-                className="px-2 py-0.5 text-[10px] font-extrabold rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-all cursor-pointer flex items-center gap-1 border border-slate-700"
+                className="px-2.5 py-1 text-xs font-bold rounded-lg bg-white/10 hover:bg-white/20 text-white transition-all cursor-pointer flex items-center gap-1 border border-white/20"
                 title="Toggle English / Tamil"
               >
-                <Globe className="w-3 h-3 text-blue-400" />
-                <span>{language === "en" ? "தமிழ்" : "EN"}</span>
+                <Globe className="w-3.5 h-3.5 text-blue-300" />
+                <span>{language === "en" ? "English ▾" : "தமிழ் ▾"}</span>
               </button>
 
               {/* Clear Chat */}
               <button
                 onClick={handleClearChat}
-                className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-xl transition-colors cursor-pointer"
+                className="p-1.5 text-blue-200 hover:text-white hover:bg-white/10 rounded-xl transition-colors cursor-pointer"
                 title="Reset Chat Session"
               >
-                <RefreshCw className="w-3.5 h-3.5" />
+                <RefreshCw className="w-4 h-4" />
               </button>
 
               {/* Minimize */}
               <button
                 onClick={() => setIsMinimized(m => !m)}
-                className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-xl transition-colors cursor-pointer"
+                className="p-1.5 text-blue-200 hover:text-white hover:bg-white/10 rounded-xl transition-colors cursor-pointer"
                 title={isMinimized ? "Expand" : "Minimize"}
               >
-                <Minus className="w-3.5 h-3.5" />
+                <Minus className="w-4 h-4" />
               </button>
 
               {/* Close */}
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-1.5 text-slate-400 hover:text-rose-400 hover:bg-slate-800 rounded-xl transition-colors cursor-pointer"
+                className="p-1.5 text-blue-200 hover:text-rose-300 hover:bg-white/10 rounded-xl transition-colors cursor-pointer"
                 title="Close Assistant"
               >
-                <X className="w-3.5 h-3.5" />
+                <X className="w-4 h-4" />
               </button>
             </div>
           </div>
@@ -348,7 +348,7 @@ export default function AIChatbot({ currentProjectId, userRole = "Administrator"
             <div className="flex-1 flex flex-col justify-between overflow-hidden bg-slate-50/60">
               
               {/* SCROLLABLE MESSAGES STREAM */}
-              <div className="flex-1 p-4 overflow-y-auto space-y-3.5 text-xs">
+              <div className="flex-1 p-4 overflow-y-auto space-y-4 font-sans">
                 
                 {messages.map((msg) => (
                   <div
@@ -356,23 +356,23 @@ export default function AIChatbot({ currentProjectId, userRole = "Administrator"
                     className={`flex flex-col ${msg.sender === "user" ? "items-end" : "items-start"}`}
                   >
                     <div
-                      className={`max-w-[88%] p-3.5 rounded-2xl space-y-2 shadow-xs transition-all ${
+                      className={`max-w-[90%] p-3.5 rounded-2xl space-y-2 shadow-xs transition-all ${
                         msg.sender === "user"
-                          ? "bg-blue-600 text-white rounded-br-xs font-medium"
-                          : "bg-white text-slate-800 rounded-bl-xs border border-slate-200"
+                          ? "bg-[#2563EB] text-white rounded-br-xs font-semibold text-[15px] leading-relaxed"
+                          : "bg-[#1B365D] text-white rounded-bl-xs text-[15px] font-medium leading-relaxed border border-blue-900"
                       }`}
                     >
                       {/* Message Header Actions (Text-to-Speech for AI) */}
                       {msg.sender === "ai" && (
-                        <div className="flex items-center justify-between border-b border-slate-100 pb-1.5 mb-1">
-                          <span className="text-[10px] font-extrabold text-blue-600 tracking-wider uppercase flex items-center gap-1">
-                            <Bot className="w-3 h-3" />
+                        <div className="flex items-center justify-between border-b border-white/10 pb-1.5 mb-1">
+                          <span className="text-[11px] font-extrabold text-blue-300 tracking-wider uppercase flex items-center gap-1">
+                            <Bot className="w-3.5 h-3.5" />
                             <span>LandGuard AI</span>
                           </span>
                           <button
                             onClick={() => handleSpeakMessage(msg.id, msg.text)}
                             className={`p-1 rounded-lg transition-colors cursor-pointer ${
-                              speakingMsgId === msg.id ? "text-blue-600 bg-blue-50" : "text-slate-400 hover:text-slate-700"
+                              speakingMsgId === msg.id ? "text-amber-400 bg-white/10" : "text-blue-200 hover:text-white"
                             }`}
                             title="Listen Read Aloud"
                           >
@@ -381,16 +381,16 @@ export default function AIChatbot({ currentProjectId, userRole = "Administrator"
                         </div>
                       )}
 
-                      {/* Main Message Text Body */}
-                      <p className="whitespace-pre-line leading-relaxed font-sans text-xs">
+                      {/* Main Message Text Body - Prominent 15px font matching reference image */}
+                      <p className="whitespace-pre-line leading-relaxed font-sans text-[15px]">
                         {msg.text}
                       </p>
 
                       {/* RICH RESPONSE CARD: LAND STATUS */}
                       {msg.type === "land_card" && msg.data && (
-                        <div className="mt-2.5 p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs space-y-2">
+                        <div className="mt-2.5 p-3 bg-white text-slate-900 rounded-xl border border-slate-200 text-xs space-y-2">
                           <div className="flex items-center justify-between border-b pb-1.5">
-                            <span className="font-extrabold text-slate-900 font-mono">
+                            <span className="font-extrabold text-slate-900 font-mono text-[13px]">
                               Survey #{msg.data.surveyNumber}
                             </span>
                             <span className={`px-2 py-0.5 rounded-md text-[10px] font-extrabold ${
@@ -400,63 +400,63 @@ export default function AIChatbot({ currentProjectId, userRole = "Administrator"
                             </span>
                           </div>
 
-                          <div className="grid grid-cols-2 gap-2 text-[11px]">
-                            <div><span className="text-slate-400 block text-[9px] uppercase font-bold">Owner</span><strong>{msg.data.ownerName}</strong></div>
-                            <div><span className="text-slate-400 block text-[9px] uppercase font-bold">Area</span><strong>{msg.data.area}</strong></div>
+                          <div className="grid grid-cols-2 gap-2 text-[12px]">
+                            <div><span className="text-slate-500 block text-[10px] uppercase font-bold">Owner</span><strong>{msg.data.ownerName}</strong></div>
+                            <div><span className="text-slate-500 block text-[10px] uppercase font-bold">Area</span><strong>{msg.data.area}</strong></div>
                           </div>
 
-                          <div className="text-[11px]">
-                            <span className="text-slate-400 block text-[9px] uppercase font-bold">Location</span>
-                            <span>{msg.data.location}</span>
+                          <div className="text-[12px]">
+                            <span className="text-slate-500 block text-[10px] uppercase font-bold">Location</span>
+                            <span className="font-semibold">{msg.data.location}</span>
                           </div>
                         </div>
                       )}
 
                       {/* RICH RESPONSE CARD: PROJECT PROFILE */}
                       {msg.type === "project_card" && msg.data && (
-                        <div className="mt-2.5 p-3 bg-blue-50/70 rounded-xl border border-blue-200 text-xs space-y-2">
-                          <div className="flex items-center justify-between border-b border-blue-200 pb-1.5">
-                            <span className="font-extrabold text-blue-900">{msg.data.name}</span>
-                            <span className="font-mono text-[10px] font-bold text-blue-700">{msg.data.id}</span>
+                        <div className="mt-2.5 p-3 bg-white text-slate-900 rounded-xl border border-slate-200 text-xs space-y-2">
+                          <div className="flex items-center justify-between border-b border-slate-200 pb-1.5">
+                            <span className="font-extrabold text-slate-900 text-[13px]">{msg.data.name}</span>
+                            <span className="font-mono text-[11px] font-bold text-blue-700">{msg.data.id}</span>
                           </div>
 
-                          <div className="grid grid-cols-3 gap-2 text-[11px] text-slate-800">
-                            <div><span className="text-slate-400 block text-[9px] uppercase font-bold">Required</span><strong>{msg.data.landRequired} Ha</strong></div>
-                            <div><span className="text-slate-400 block text-[9px] uppercase font-bold">Acquired</span><strong className="text-emerald-600">{msg.data.landAcquired} Ha</strong></div>
-                            <div><span className="text-slate-400 block text-[9px] uppercase font-bold">Pending</span><strong className="text-amber-600">{msg.data.landPending} Ha</strong></div>
+                          <div className="grid grid-cols-3 gap-2 text-[12px] text-slate-800">
+                            <div><span className="text-slate-500 block text-[10px] uppercase font-bold">Required</span><strong>{msg.data.landRequired} Ha</strong></div>
+                            <div><span className="text-slate-500 block text-[10px] uppercase font-bold">Acquired</span><strong className="text-emerald-600">{msg.data.landAcquired} Ha</strong></div>
+                            <div><span className="text-slate-500 block text-[10px] uppercase font-bold">Pending</span><strong className="text-amber-600">{msg.data.landPending} Ha</strong></div>
                           </div>
                         </div>
                       )}
 
                       {/* STAGE INFO PROGRESSION BADGE */}
                       {msg.type === "stage_info" && msg.data && (
-                        <div className="mt-2.5 p-3 bg-slate-900 text-white rounded-xl border border-slate-800 text-xs space-y-1.5">
-                          <div className="flex items-center gap-1.5 text-blue-400 font-extrabold text-[11px]">
+                        <div className="mt-2.5 p-3 bg-white text-slate-900 rounded-xl border border-slate-200 text-xs space-y-1.5">
+                          <div className="flex items-center gap-1.5 text-blue-700 font-extrabold text-[12px]">
                             <CheckCircle2 className="w-4 h-4" />
                             <span>{msg.data.stageName}</span>
                           </div>
-                          <p className="text-slate-300 text-[11px] leading-snug">{msg.data.description}</p>
+                          <p className="text-slate-700 text-[12px] leading-snug">{msg.data.description}</p>
                         </div>
                       )}
 
                       {/* ACTION BUTTONS (E.G., OPEN GIS MAP, SEARCH SURVEY) */}
                       {msg.actions && msg.actions.length > 0 && (
-                        <div className="mt-2.5 pt-2 border-t border-slate-200/60 flex flex-wrap gap-1.5">
+                        <div className="mt-2.5 pt-2 border-t border-white/20 flex flex-wrap gap-2">
                           {msg.actions.map((act, idx) => (
                             <button
                               key={idx}
                               onClick={() => handleActionClick(act)}
-                              className="px-2.5 py-1 text-[11px] font-extrabold rounded-lg bg-blue-50 hover:bg-blue-600 text-blue-700 hover:text-white border border-blue-200 transition-all cursor-pointer flex items-center gap-1"
+                              className="px-3 py-1.5 text-[13px] font-extrabold rounded-xl bg-white text-[#1B365D] hover:bg-blue-50 transition-all cursor-pointer flex items-center gap-1.5 shadow-2xs border border-slate-200"
                             >
                               <span>{act.label}</span>
-                              <ExternalLink className="w-3 h-3" />
+                              <ExternalLink className="w-3.5 h-3.5" />
                             </button>
                           ))}
                         </div>
                       )}
                     </div>
 
-                    <span className="text-[9px] text-slate-400 mt-1 font-semibold px-1">
+                    <span className="text-[10px] text-slate-500 mt-1 font-medium px-1">
                       {msg.timestamp}
                     </span>
                   </div>
@@ -464,9 +464,9 @@ export default function AIChatbot({ currentProjectId, userRole = "Administrator"
 
                 {/* TYPING INDICATOR */}
                 {isTyping && (
-                  <div className="flex items-center gap-2 p-3 bg-white rounded-2xl border border-slate-200 max-w-xs shadow-xs">
-                    <Bot className="w-4 h-4 text-blue-600 animate-spin" />
-                    <span className="text-xs font-semibold text-slate-500">
+                  <div className="flex items-center gap-2 p-3 bg-[#1B365D] text-white rounded-2xl border border-blue-900 max-w-xs shadow-xs">
+                    <Bot className="w-4 h-4 text-blue-300 animate-spin" />
+                    <span className="text-xs font-semibold text-blue-100">
                       LandGuard AI is analyzing records...
                     </span>
                   </div>
@@ -475,15 +475,15 @@ export default function AIChatbot({ currentProjectId, userRole = "Administrator"
                 <div ref={messagesEndRef} />
               </div>
 
-              {/* QUICK ACTION CHIPS */}
-              <div className="px-3 py-2 bg-white border-t border-slate-200/70 overflow-x-auto flex items-center gap-1.5 shrink-0 select-none">
+              {/* QUICK ACTION CHIPS - MATCHING REFERENCE SUGGESTION BUTTONS */}
+              <div className="px-3 py-2 bg-white border-t border-slate-200 overflow-x-auto flex items-center gap-2 shrink-0 select-none">
                 {QUICK_ACTIONS.map((action, i) => (
                   <button
                     key={i}
                     onClick={() => handleSendMessage(action.query)}
-                    className="px-2.5 py-1 text-[11px] font-extrabold text-slate-700 bg-slate-100 hover:bg-blue-600 hover:text-white rounded-full transition-all whitespace-nowrap border border-slate-200 cursor-pointer"
+                    className="px-3 py-2 text-[14px] font-bold text-slate-800 bg-white hover:bg-slate-50 rounded-xl border border-slate-800 transition-all whitespace-nowrap cursor-pointer shadow-2xs flex items-center gap-1.5"
                   >
-                    {action.label}
+                    <span>{action.label}</span>
                   </button>
                 ))}
               </div>
@@ -500,17 +500,17 @@ export default function AIChatbot({ currentProjectId, userRole = "Administrator"
                 <button
                   type="button"
                   onClick={toggleVoiceInput}
-                  className={`p-2 rounded-xl transition-all cursor-pointer ${
+                  className={`p-2.5 rounded-xl transition-all cursor-pointer ${
                     isListening
                       ? "bg-rose-500 text-white animate-pulse"
-                      : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                      : "bg-slate-100 text-slate-700 hover:bg-slate-200"
                   }`}
                   title={isListening ? "Listening... Click to stop" : "Speak to Assistant"}
                 >
                   {isListening ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
                 </button>
 
-                {/* Textarea Input */}
+                {/* Text Input - 14px font matching reference screenshot */}
                 <input
                   type="text"
                   value={inputText}
@@ -522,21 +522,21 @@ export default function AIChatbot({ currentProjectId, userRole = "Administrator"
                       ? "கேள்வியைக் கேட்கவும்... (உதா: survey 124/2 status)"
                       : "Type your message... (e.g. status of 124/2)"
                   }
-                  className="flex-1 bg-slate-50 text-slate-900 text-xs font-semibold px-3 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-600 placeholder-slate-400"
+                  className="flex-1 bg-slate-50 text-slate-900 text-[14px] font-medium px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#1B365D] placeholder-slate-400"
                 />
 
                 {/* Send Button */}
                 <button
                   type="submit"
                   disabled={!inputText.trim() || isTyping}
-                  className="p-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl disabled:opacity-40 transition-all cursor-pointer shadow-xs"
+                  className="p-2.5 bg-[#1B365D] hover:bg-[#152a4a] text-white rounded-xl disabled:opacity-40 transition-all cursor-pointer shadow-xs"
                 >
                   <Send className="w-4 h-4" />
                 </button>
               </form>
 
               {/* LEGAL DISCLAIMER FOOTER */}
-              <div className="px-3 py-1.5 bg-slate-100 text-[9.5px] text-slate-500 text-center font-medium border-t border-slate-200 select-none">
+              <div className="px-3 py-1.5 bg-slate-100 text-[10px] text-slate-500 text-center font-medium border-t border-slate-200 select-none">
                 Guidance only. For legally binding decisions, contact Competent Authority for Land Acquisition (CALA).
               </div>
 
