@@ -182,3 +182,37 @@ export async function uploadLandCSV(csvContent: string): Promise<any> {
   return res.json();
 }
 
+// AI Chatbot APIs (/api/chat)
+export async function sendChatMessage(payload: {
+  message: string;
+  projectId?: string | null;
+  userId?: string;
+  userRole?: string;
+  language?: "en" | "ta";
+}): Promise<any> {
+  const res = await fetch("/api/chat", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  });
+  if (!res.ok) throw new Error("Failed to send chat message");
+  return res.json();
+}
+
+export async function fetchChatHistory(userId?: string): Promise<any> {
+  const url = userId ? `/api/chat/history?userId=${encodeURIComponent(userId)}` : "/api/chat/history";
+  const res = await fetch(url);
+  if (!res.ok) throw new Error("Failed to fetch chat history");
+  return res.json();
+}
+
+export async function clearChatHistory(userId?: string): Promise<any> {
+  const res = await fetch("/api/chat/clear", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ userId })
+  });
+  if (!res.ok) throw new Error("Failed to clear chat history");
+  return res.json();
+}
+

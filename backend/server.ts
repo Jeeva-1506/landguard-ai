@@ -6,6 +6,7 @@ import { GoogleGenAI } from "@google/genai";
 import dotenv from "dotenv";
 import { fileURLToPath } from "url";
 import { LandParcel, Project, Alert, DocumentAnalysis, PredictionHistory } from "../frontend/src/types";
+import { processChatMessage } from "./services/chatService";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -2429,6 +2430,46 @@ app.post("/api/reset", (req, res) => {
   } catch (err: any) {
     res.status(500).json({ error: "Failed to reset database: " + err.message });
   }
+});
+
+// 8. AI Chatbot API Endpoints
+const chatSessionsMap = new Map<string, any[]>();
+
+app.post("/api/chat", (req, res) => {
+  try {
+    const { message, projectId, userId, userRole, language } = req.body;
+    const db = getDB();
+
+    const responseMsg = processChatMessage(
+      { message, projectId, userId, userRole, language },
+      { projects: db.projects, parcels: db.parcels, alerts: db.alerts }
+    );
+
+    const sessionKey = userId || "default_session";
+    if (!chatSessionsMap.has(sessionKey)) {
+      chatSessionsMap.set(sessionKey, []);
+    }
+    const history = chatSessionsMap.get(sessionKey)!;
+    history.push({ sender: "user", text: message, timestamp: new Date().toISOString() });
+    history.push({ ...responseMsg, timestamp: new Date().toISOString() });
+
+    res.json(responseMsg);
+  } catch (err: any) {
+    console.error("Chat API error:", err);
+    res.status(500).json({ error: "Failed to process chat message: " + err.message });
+  }
+});
+
+app.get("/api/chat/history", (req, res) => {
+  const userId = (req.query.userId as string) || "default_session";
+  const history = chatSessionsMap.get(userId) || [];
+  res.json(history);
+});
+
+app.post("/api/chat/clear", (req, res) => {
+  const userId = req.body.userId || "default_session";
+  chatSessionsMap.set(userId, []);
+  res.json({ success: true, message: "Chat session cleared." });
 });
 
 // Vite Middleware & static serving setup

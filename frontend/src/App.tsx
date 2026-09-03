@@ -13,6 +13,7 @@ import AlertsView from "./components/AlertsView";
 import ReportsView from "./components/ReportsView";
 import SettingsView from "./components/SettingsView";
 import UsersView from "./components/UsersView";
+import AIChatbot from "./components/AIChatbot/AIChatbot";
 
 import { 
   fetchProjects, 
@@ -331,6 +332,30 @@ export default function App() {
 
       {/* Footer */}
       <Footer />
+
+      {/* FLOATING PRODUCTION-READY AI CHATBOT ASSISTANT */}
+      <AIChatbot 
+        userRole={userRole}
+        onExecuteAction={(action) => {
+          if (action.type === "OPEN_GIS") {
+            setActiveTab("gis");
+          } else if (action.type === "SEARCH_SURVEY") {
+            if (action.surveyNumber) {
+              triggerViewParcelDetails(action.surveyNumber);
+            } else {
+              setActiveTab("parcels");
+            }
+          } else if (action.type === "OPEN_PROJECT" || action.type === "FILTER_PROJECTS") {
+            setActiveTab("projects");
+          } else if (action.type === "SHOW_HIGH_RISK") {
+            setActiveTab("gis");
+          } else if (action.type === "SHOW_COMPENSATION") {
+            setActiveTab("compensation");
+          } else if (action.type === "SHOW_STAGE") {
+            setActiveTab("projects");
+          }
+        }}
+      />
 
       {/* Toast Notification */}
       {toast && (
