@@ -100,8 +100,8 @@ export default function ObjectionsView({ showToast }: ObjectionsViewProps) {
       {/* OBJECTIONS TABLE LEDGER */}
       <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-2xs space-y-4">
         <div className="border-b border-slate-100 pb-3">
-          <h3 className="text-base font-bold text-slate-900 font-heading">
-            Logged Section-15 Objections ({filtered.length})
+          <h3 className="content-title-prominent flex items-center gap-2 text-[#0A192F] font-extrabold text-[17px] tracking-tight">
+            <span>Logged Section-15 Objections ({filtered.length})</span>
           </h3>
         </div>
 

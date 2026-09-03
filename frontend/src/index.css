@@ -29,7 +29,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Typography Hierarchy */
+/* Typography Hierarchy - Enforcing 17px Bold #0A192F across all content titles */
 .page-title {
   font-family: 'Source Sans 3', sans-serif;
   font-size: 26px;
@@ -41,34 +41,28 @@ body {
 
 .section-title {
   font-family: 'Source Sans 3', sans-serif;
-  font-size: 22px;
-  font-weight: 800;
-  color: #0A192F;
-  letter-spacing: -0.01em;
+  font-size: 17px !important;
+  font-weight: 800 !important;
+  color: #0A192F !important;
+  letter-spacing: -0.01em !important;
 }
 
 .subsection-title {
   font-family: 'Source Sans 3', sans-serif;
-  font-size: 18px;
-  font-weight: 700;
-  color: #0A192F;
+  font-size: 17px !important;
+  font-weight: 800 !important;
+  color: #0A192F !important;
+  letter-spacing: -0.01em !important;
 }
 
-.card-title {
-  font-family: 'Source Sans 3', sans-serif;
-  font-size: 17px;
-  font-weight: 800;
-  color: #0A192F;
-  letter-spacing: -0.01em;
-}
-
+.card-title,
 .content-title-prominent {
   font-family: 'Source Sans 3', sans-serif;
-  font-size: 17px;
-  font-weight: 800;
-  color: #0A192F;
+  font-size: 17px !important;
+  font-weight: 800 !important;
+  color: #0A192F !important;
   line-height: 1.35;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.01em !important;
 }
 
 .content-subtext {
