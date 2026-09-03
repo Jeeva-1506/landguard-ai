@@ -3,6 +3,9 @@ import {
   Bot, 
   X, 
   Minus, 
+  Maximize2,
+  Square,
+  ChevronUp,
   Send, 
   Mic, 
   MicOff, 
@@ -278,59 +281,79 @@ export default function AIChatbot({ currentProjectId, userRole = "Administrator"
         <div 
           className={`fixed bottom-4 right-4 md:bottom-6 md:right-6 z-[9999] bg-white rounded-3xl shadow-2xl border border-slate-200 flex flex-col transition-all duration-300 overflow-hidden font-sans ${
             isMinimized 
-              ? "w-80 h-16" 
+              ? "w-[calc(100vw-32px)] sm:w-[380px] h-[64px]" 
               : "w-[calc(100vw-32px)] md:w-[380px] h-[75vh] md:h-[600px] max-h-[620px]"
           }`}
         >
           {/* HEADER BAR */}
-          <div className="bg-[#1B365D] text-white px-4 py-3 flex items-center justify-between border-b border-blue-900 shrink-0 select-none">
-            <div className="flex items-center gap-2.5">
-              <div className="relative">
+          <div 
+            onClick={() => isMinimized && setIsMinimized(false)}
+            className={`bg-[#1B365D] text-white px-4 py-3 flex items-center justify-between border-b border-blue-900 shrink-0 select-none ${
+              isMinimized ? "cursor-pointer hover:bg-[#152a4a] h-[64px]" : ""
+            }`}
+          >
+            <div className="flex items-center gap-2.5 min-w-0">
+              <div className="relative shrink-0">
                 <div className="w-9 h-9 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center">
                   <Bot className="w-5 h-5 text-blue-300" />
                 </div>
                 <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-400 rounded-full border-2 border-[#1B365D]" title="Online"></span>
               </div>
-              <div>
-                <h3 className="font-extrabold text-sm text-white tracking-wide flex items-center gap-1.5 font-sans">
-                  <span>LandGuard AI Assistant</span>
-                  <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+              <div className="min-w-0 truncate">
+                <h3 className="font-extrabold text-sm text-white tracking-wide flex items-center gap-1.5 font-sans truncate">
+                  <span className="truncate">LandGuard AI Assistant</span>
+                  <Sparkles className="w-3.5 h-3.5 text-amber-400 shrink-0" />
                 </h3>
-                <span className="text-[11px] text-blue-200 font-medium block">
+                <span className="text-[11px] text-blue-200 font-medium block truncate">
                   Your Land Acquisition Assistant
                 </span>
               </div>
             </div>
 
             {/* HEADER ACTION CONTROLS */}
-            <div className="flex items-center gap-1.5">
-              {/* Language Switcher */}
-              <button
-                onClick={() => setLanguage(l => l === "en" ? "ta" : "en")}
-                className="px-2.5 py-1 text-xs font-bold rounded-lg bg-white/10 hover:bg-white/20 text-white transition-all cursor-pointer flex items-center gap-1 border border-white/20"
-                title="Toggle English / Tamil"
-              >
-                <Globe className="w-3.5 h-3.5 text-blue-300" />
-                <span>{language === "en" ? "English ▾" : "தமிழ் ▾"}</span>
-              </button>
+            <div className="flex items-center gap-1.5 shrink-0" onClick={(e) => e.stopPropagation()}>
+              {!isMinimized && (
+                <>
+                  {/* Language Switcher */}
+                  <button
+                    onClick={() => setLanguage(l => l === "en" ? "ta" : "en")}
+                    className="px-2.5 py-1 text-xs font-bold rounded-lg bg-white/10 hover:bg-white/20 text-white transition-all cursor-pointer flex items-center gap-1 border border-white/20"
+                    title="Toggle English / Tamil"
+                  >
+                    <Globe className="w-3.5 h-3.5 text-blue-300" />
+                    <span>{language === "en" ? "English ▾" : "தமிழ் ▾"}</span>
+                  </button>
 
-              {/* Clear Chat */}
-              <button
-                onClick={handleClearChat}
-                className="p-1.5 text-blue-200 hover:text-white hover:bg-white/10 rounded-xl transition-colors cursor-pointer"
-                title="Reset Chat Session"
-              >
-                <RefreshCw className="w-4 h-4" />
-              </button>
+                  {/* Clear Chat */}
+                  <button
+                    onClick={handleClearChat}
+                    className="p-1.5 text-blue-200 hover:text-white hover:bg-white/10 rounded-xl transition-colors cursor-pointer"
+                    title="Reset Chat Session"
+                  >
+                    <RefreshCw className="w-4 h-4" />
+                  </button>
+                </>
+              )}
 
-              {/* Minimize */}
-              <button
-                onClick={() => setIsMinimized(m => !m)}
-                className="p-1.5 text-blue-200 hover:text-white hover:bg-white/10 rounded-xl transition-colors cursor-pointer"
-                title={isMinimized ? "Expand" : "Minimize"}
-              >
-                <Minus className="w-4 h-4" />
-              </button>
+              {/* Minimize / Maximize Button */}
+              {isMinimized ? (
+                <button
+                  onClick={() => setIsMinimized(false)}
+                  className="px-2.5 py-1 text-xs font-extrabold rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white transition-all cursor-pointer flex items-center gap-1 shadow-2xs border border-emerald-400"
+                  title="Maximize / Expand Chat"
+                >
+                  <Maximize2 className="w-3.5 h-3.5" />
+                  <span>Maximize</span>
+                </button>
+              ) : (
+                <button
+                  onClick={() => setIsMinimized(true)}
+                  className="p-1.5 text-blue-200 hover:text-white hover:bg-white/10 rounded-xl transition-colors cursor-pointer"
+                  title="Minimize"
+                >
+                  <Minus className="w-4 h-4" />
+                </button>
+              )}
 
               {/* Close */}
               <button
