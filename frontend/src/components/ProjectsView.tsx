@@ -67,10 +67,10 @@ export default function ProjectsView({
       {/* PAGE HEADER */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h2 className="page-title">
+          <h2 className="page-title text-[26px] font-extrabold text-[#0A192F] tracking-tight">
             Infrastructure Projects Registry
           </h2>
-          <p className="text-[14px] text-[#475569] mt-1 font-normal">
+          <p className="text-[14px] text-[#475569] mt-1 font-medium">
             Active acquisition corridors, land requirement boundaries, and 8-stage statutory progress.
           </p>
         </div>
@@ -101,12 +101,12 @@ export default function ProjectsView({
                 </span>
               </div>
               
-              {/* EXACT BOLD HEADING LIKE REFERENCE IMAGE */}
-              <h3 className="text-[24px] font-extrabold text-[#0A192F] mt-2 tracking-tight leading-snug">
+              {/* EXACT BOLD HEADING LIKE REFERENCE IMAGE 1 */}
+              <h3 className="text-[26px] font-extrabold text-[#0A192F] mt-2 tracking-tight leading-snug">
                 {selectedProject.name}
               </h3>
 
-              <p className="text-[14px] text-[#475569] mt-1 font-medium">
+              <p className="text-[14px] text-[#475569] mt-1 font-semibold">
                 {selectedProject.district} District, {selectedProject.state || "Tamil Nadu"} • {selectedProject.type} Corridor
               </p>
             </div>
@@ -114,12 +114,12 @@ export default function ProjectsView({
             <div className="flex items-center gap-4 text-[14px] font-medium text-[#475569] bg-[#F8FAFC] p-3 rounded-[6px] border border-[#E2E8F0]">
               <div>
                 <span className="small-label block text-[#64748B]">Acquisition Progress</span>
-                <span className="text-[20px] font-bold text-[#0A192F]">{selectedProject.progress}%</span>
+                <span className="text-[22px] font-extrabold text-[#0A192F]">{selectedProject.progress}%</span>
               </div>
               <div className="w-[1px] h-8 bg-[#E2E8F0]" />
               <div>
                 <span className="small-label block text-[#64748B]">Predicted Delay</span>
-                <span className="text-[20px] font-bold text-[#DC2626] font-mono">{selectedProject.predictedDelay} Days</span>
+                <span className="text-[22px] font-extrabold text-[#DC2626] font-mono">{selectedProject.predictedDelay} Days</span>
               </div>
             </div>
           </div>
@@ -127,34 +127,34 @@ export default function ProjectsView({
           {/* PROJECT PARAMETERS GRID */}
           <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3 text-[14px]">
             <div className="p-3 bg-[#F8FAFC] rounded-[5px] border border-[#E2E8F0]">
-              <span className="small-label block text-[#64748B]">Total Land Required</span>
-              <span className="table-value-bold">{selectedProject.landRequired} Hectares</span>
+              <span className="small-label block text-[#64748B] font-bold uppercase text-[10px]">Total Land Required</span>
+              <span className="table-value-bold text-[16px] font-extrabold text-[#0A192F]">{selectedProject.landRequired} Hectares</span>
             </div>
             <div className="p-3 bg-[#F8FAFC] rounded-[5px] border border-[#E2E8F0]">
-              <span className="small-label block text-[#64748B]">Land Acquired</span>
-              <span className="table-value-bold text-[#166534]">{selectedProject.landAcquired} Hectares</span>
+              <span className="small-label block text-[#64748B] font-bold uppercase text-[10px]">Land Acquired</span>
+              <span className="table-value-bold text-[16px] font-extrabold text-[#166534]">{selectedProject.landAcquired} Hectares</span>
             </div>
             <div className="p-3 bg-[#F8FAFC] rounded-[5px] border border-[#E2E8F0]">
-              <span className="small-label block text-[#64748B]">Land Pending</span>
-              <span className="table-value-bold text-[#991B1B]">{(selectedProject.landRequired - selectedProject.landAcquired).toFixed(1)} Hectares</span>
+              <span className="small-label block text-[#64748B] font-bold uppercase text-[10px]">Land Pending</span>
+              <span className="table-value-bold text-[16px] font-extrabold text-[#991B1B]">{(selectedProject.landRequired - selectedProject.landAcquired).toFixed(1)} Hectares</span>
             </div>
             <div className="p-3 bg-[#F8FAFC] rounded-[5px] border border-[#E2E8F0]">
-              <span className="small-label block text-[#64748B]">Estimated Cost</span>
-              <span className="table-value-bold">₹{((selectedProject.estimatedCost || 1250000000) / 10000000).toFixed(0)} Cr</span>
+              <span className="small-label block text-[#64748B] font-bold uppercase text-[10px]">Estimated Cost</span>
+              <span className="table-value-bold text-[16px] font-extrabold text-[#0A192F]">₹{((selectedProject.estimatedCost || 1250000000) / 10000000).toFixed(0)} Cr</span>
             </div>
             <div className="p-3 bg-[#F8FAFC] rounded-[5px] border border-[#E2E8F0]">
-              <span className="small-label block text-[#64748B]">Start Date</span>
-              <span className="font-semibold text-[#1E293B]">{selectedProject.startDate || "15 Jan 2025"}</span>
+              <span className="small-label block text-[#64748B] font-bold uppercase text-[10px]">Start Date</span>
+              <span className="font-extrabold text-[16px] text-[#0A192F]">{selectedProject.startDate || "15 Jan 2025"}</span>
             </div>
             <div className="p-3 bg-[#F8FAFC] rounded-[5px] border border-[#E2E8F0]">
-              <span className="small-label block text-[#64748B]">Target Completion</span>
-              <span className="font-semibold text-[#1E293B]">{selectedProject.targetCompletionDate || "30 Dec 2026"}</span>
+              <span className="small-label block text-[#64748B] font-bold uppercase text-[10px]">Target Completion</span>
+              <span className="font-extrabold text-[16px] text-[#0A192F]">{selectedProject.targetCompletionDate || "30 Dec 2026"}</span>
             </div>
           </div>
 
           {/* ACQUISITION STAGE TIMELINE */}
           <div className="space-y-3 pt-2">
-            <h4 className="table-header text-[#475569]">
+            <h4 className="text-[17px] font-extrabold text-[#0A192F] tracking-tight uppercase font-sans">
               Acquisition Stage Timeline
             </h4>
 
@@ -177,8 +177,8 @@ export default function ProjectsView({
                           : "bg-[#F8FAFC]/50 border-[#E2E8F0] text-[#94A3B8] opacity-60"
                     }`}
                   >
-                    <div className="table-header text-[10px] mb-1">Stage {i + 1}</div>
-                    <div className="font-semibold text-[13px] leading-tight mb-2">{stage}</div>
+                    <div className="font-extrabold text-[11px] uppercase tracking-wider text-[#475569] mb-1">Stage {i + 1}</div>
+                    <div className="font-bold text-[13px] leading-tight mb-2 text-[#0A192F]">{stage}</div>
 
                     <div className="mt-auto">
                       {isCurrent ? (
@@ -204,7 +204,7 @@ export default function ProjectsView({
       {/* ALL PROJECTS TABLE LEDGER */}
       <div className="card-enterprise space-y-4">
         <div className="flex items-center justify-between border-b border-[#E2E8F0] pb-3">
-          <h3 className="section-title">
+          <h3 className="text-[18px] font-extrabold text-[#0A192F] tracking-tight">
             Registered Acquisition Projects ({filteredProjects.length})
           </h3>
           <div className="relative w-64">
@@ -214,7 +214,7 @@ export default function ProjectsView({
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Filter by Project ID..."
-              className="input-enterprise w-full pl-9"
+              className="input-enterprise w-full pl-9 font-medium text-[13px]"
             />
           </div>
         </div>
@@ -223,15 +223,15 @@ export default function ProjectsView({
           <table className="table-enterprise">
             <thead>
               <tr>
-                <th className="table-header">Project ID</th>
-                <th className="table-header">Project Name</th>
-                <th className="table-header">State & District</th>
-                <th className="table-header">Type</th>
-                <th className="table-header">Required (Ha)</th>
-                <th className="table-header">Acquired (Ha)</th>
-                <th className="table-header">Progress</th>
-                <th className="table-header">Delay Risk</th>
-                <th className="table-header text-right">Action</th>
+                <th className="table-header font-extrabold text-[#334155]">Project ID</th>
+                <th className="table-header font-extrabold text-[#334155]">Project Name</th>
+                <th className="table-header font-extrabold text-[#334155]">State & District</th>
+                <th className="table-header font-extrabold text-[#334155]">Type</th>
+                <th className="table-header font-extrabold text-[#334155]">Required (Ha)</th>
+                <th className="table-header font-extrabold text-[#334155]">Acquired (Ha)</th>
+                <th className="table-header font-extrabold text-[#334155]">Progress</th>
+                <th className="table-header font-extrabold text-[#334155]">Delay Risk</th>
+                <th className="table-header font-extrabold text-[#334155] text-right">Action</th>
               </tr>
             </thead>
             <tbody className="table-body">
