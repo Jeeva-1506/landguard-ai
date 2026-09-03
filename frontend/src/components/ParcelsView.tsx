@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { LandParcel, Project, Alert } from "../types";
-import { Search, Info } from "lucide-react";
+import { Search, Info, X, MapPin, User, FileText, AlertTriangle, ShieldAlert, CheckCircle2, ExternalLink } from "lucide-react";
 
 interface ParcelsViewProps {
   parcels: LandParcel[];
@@ -32,6 +32,8 @@ export default function ParcelsView({
   const [selectedDistrict, setSelectedDistrict] = useState("All");
   const [selectedRisk, setSelectedRisk] = useState("All");
   const [selectedStage, setSelectedStage] = useState("All");
+
+  const [inspectingModalParcel, setInspectingModalParcel] = useState<LandParcel | null>(null);
 
   const [selectedParcel, setSelectedParcel] = useState<LandParcel | null>(
     activeParcelId ? parcels.find(p => p.id === activeParcelId) || parcels[0] : parcels[0]
@@ -146,7 +148,7 @@ export default function ParcelsView({
 
       {/* PARCEL SELECTION DETAILED INSPECTOR CARD */}
       {selectedParcel && (
-        <div className="card-enterprise space-y-6">
+        <div id="selected-parcel-inspector" className="card-enterprise space-y-6 scroll-mt-24">
           <div className="flex flex-col md:flex-row md:items-center justify-between border-b border-[#E2E8F0] pb-4 gap-4">
             <div>
               <div className="flex items-center gap-2">
@@ -268,9 +270,14 @@ export default function ParcelsView({
               {filteredParcels.map((parcel) => (
                 <tr 
                   key={parcel.id} 
-                  onClick={() => setSelectedParcel(parcel)}
+                  onClick={() => {
+                    setSelectedParcel(parcel);
+                    setActiveParcelId(parcel.id);
+                    setInspectingModalParcel(parcel);
+                    showToast(`Inspecting Survey #${parcel.surveyNumber || parcel.id}`, "success");
+                  }}
                   className={`hover:bg-[#F8FAFC] cursor-pointer ${
-                    selectedParcel?.id === parcel.id ? "bg-[#F1F5F9]" : ""
+                    selectedParcel?.id === parcel.id ? "bg-[#F1F5F9] border-l-4 border-l-blue-600" : ""
                   }`}
                 >
                   <td className="table-value-bold font-mono text-[#0A192F]">
@@ -306,10 +313,18 @@ export default function ParcelsView({
                   </td>
                   <td className="text-right">
                     <button
-                      onClick={(e) => { e.stopPropagation(); setSelectedParcel(parcel); }}
-                      className="btn-secondary h-[34px] text-[13px] px-3 font-semibold"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedParcel(parcel);
+                        setActiveParcelId(parcel.id);
+                        setInspectingModalParcel(parcel);
+                        showToast(`Inspecting Survey #${parcel.surveyNumber || parcel.id}`, "success");
+                        const el = document.getElementById("selected-parcel-inspector");
+                        if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+                      }}
+                      className="px-3.5 py-1.5 bg-blue-600 hover:bg-blue-700 text-white font-extrabold rounded-lg text-[13px] transition-all cursor-pointer shadow-2xs border border-blue-500 flex items-center gap-1 ml-auto"
                     >
-                      Inspect
+                      <span>Inspect</span>
                     </button>
                   </td>
                 </tr>
@@ -318,6 +333,89 @@ export default function ParcelsView({
           </table>
         </div>
       </div>
+
+      {/* PARCEL INSPECTION DETAILED MODAL POPUP */}
+      {inspectingModalParcel && (
+        <div className="fixed inset-0 z-[9999] bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl shadow-2xl border border-slate-200 max-w-2xl w-full p-6 space-y-5 animate-scale-up">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+              <div className="flex items-center gap-2.5">
+                <div className="p-2 bg-blue-50 text-blue-700 rounded-xl">
+                  <FileText className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-extrabold text-slate-900">
+                    Survey Inspection Record: #{inspectingModalParcel.surveyNumber || "124/2"}
+                  </h3>
+                  <span className="text-xs text-slate-500 font-semibold">
+                    Parcel ID: {inspectingModalParcel.id} • Corridor: {inspectingModalParcel.projectId}
+                  </span>
+                </div>
+              </div>
+              <button
+                onClick={() => setInspectingModalParcel(null)}
+                className="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-xl transition-colors cursor-pointer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
+              <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                <span className="text-[10px] uppercase font-bold text-slate-400 block">Owner Name</span>
+                <strong className="text-slate-900 text-sm">{inspectingModalParcel.ownerName || "R. Subramani & Bros"}</strong>
+              </div>
+
+              <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                <span className="text-[10px] uppercase font-bold text-slate-400 block">Land Area</span>
+                <strong className="text-slate-900 text-sm">{inspectingModalParcel.landArea} Acres</strong>
+              </div>
+
+              <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                <span className="text-[10px] uppercase font-bold text-slate-400 block">Acquisition Stage</span>
+                <strong className="text-blue-700 text-sm">{inspectingModalParcel.acquisitionStage}</strong>
+              </div>
+
+              <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                <span className="text-[10px] uppercase font-bold text-slate-400 block">Compensation Status</span>
+                <span className={`px-2 py-0.5 rounded text-[10px] font-extrabold ${
+                  inspectingModalParcel.compensationStatus === 'Paid' ? "bg-emerald-100 text-emerald-800" : "bg-amber-100 text-amber-800"
+                }`}>
+                  {inspectingModalParcel.compensationStatus}
+                </span>
+              </div>
+
+              <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                <span className="text-[10px] uppercase font-bold text-slate-400 block">Risk Score</span>
+                <span className={`px-2 py-0.5 rounded text-[10px] font-extrabold ${
+                  inspectingModalParcel.riskLevel === 'High' || inspectingModalParcel.riskLevel === 'Critical' ? "bg-rose-100 text-rose-800" : "bg-emerald-100 text-emerald-800"
+                }`}>
+                  {inspectingModalParcel.riskLevel || "High"} Risk ({inspectingModalParcel.riskScore || 82}%)
+                </span>
+              </div>
+
+              <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                <span className="text-[10px] uppercase font-bold text-slate-400 block">Expected Delay</span>
+                <strong className="text-rose-700 text-sm font-mono">{inspectingModalParcel.predictedDelayDays || 45} Days</strong>
+              </div>
+            </div>
+
+            <div className="p-3.5 bg-blue-50 rounded-xl border border-blue-200 text-xs text-blue-900 space-y-1">
+              <span className="font-extrabold block text-blue-950">Recommended Action Plan:</span>
+              <p className="leading-snug">{inspectingModalParcel.recommendedAction || "Resolve ownership verification and compensation issues before proceeding to the next acquisition stage."}</p>
+            </div>
+
+            <div className="flex items-center justify-end gap-2 border-t border-slate-100 pt-3">
+              <button
+                onClick={() => setInspectingModalParcel(null)}
+                className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold rounded-xl transition-all cursor-pointer"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
     </div>
   );
