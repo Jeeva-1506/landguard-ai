@@ -77,53 +77,113 @@
       "projectId": "NH-45",
       "district": "Villupuram",
       "landArea": 2.4,
+      "area": 2.4,
+      "areaUnit": "Acres",
       "landType": "Agricultural",
       "ownersCount": 3,
       "ownershipDispute": true,
       "documentsComplete": false,
-      "compensationStatus": "Disputed",
-      "compensationAmount": 3600000,
+      "compensationStatus": "Pending",
+      "compensationAmount": 850000,
       "objectionFiled": true,
-      "courtCase": true,
+      "courtCase": false,
       "surveyCompleted": true,
       "environmentalClearance": true,
-      "governmentApproval": true,
+      "governmentApproval": false,
       "acquisitionStage": "Negotiation",
-      "previousDelay": false,
-      "distanceFromProject": 2.5,
-      "predictedDelayDays": 222,
+      "previousDelay": true,
+      "distanceFromProject": 0.5,
+      "predictedDelayDays": 166,
       "delayProbability": 98,
+      "riskScore": 82,
       "riskLevel": "High",
-      "expectedAdditionalCost": 1620000,
-      "expectedFinalCost": 5220000,
-      "costOverrunPercentage": 45,
-      "legalRiskProbability": 96,
-      "legalRiskLevel": "High"
+      "location": "Koliyanur, Villupuram, Tamil Nadu",
+      "surveyNumber": "124/2",
+      "ownershipStatus": "Private",
+      "latitude": 11.9377,
+      "longitude": 79.4831,
+      "polygon": [
+        [
+          11.9367,
+          79.4821
+        ],
+        [
+          11.9367,
+          79.4841
+        ],
+        [
+          11.9387,
+          79.4841
+        ],
+        [
+          11.9387,
+          79.4821
+        ],
+        [
+          11.9367,
+          79.4821
+        ]
+      ],
+      "expectedAdditionalCost": 212500,
+      "expectedFinalCost": 1062500,
+      "costOverrunPercentage": 25,
+      "legalRiskProbability": 59,
+      "legalRiskLevel": "Medium"
     },
     {
       "id": "LA1025",
       "projectId": "NH-45",
       "district": "Villupuram",
       "landArea": 1.8,
+      "area": 1.8,
+      "areaUnit": "Acres",
       "landType": "Agricultural",
       "ownersCount": 2,
       "ownershipDispute": false,
       "documentsComplete": true,
-      "compensationStatus": "Pending",
-      "compensationAmount": 2700000,
+      "compensationStatus": "Paid",
+      "compensationAmount": 620000,
       "objectionFiled": false,
       "courtCase": false,
       "surveyCompleted": true,
       "environmentalClearance": true,
       "governmentApproval": true,
-      "acquisitionStage": "Negotiation",
+      "acquisitionStage": "Possession",
       "previousDelay": false,
-      "distanceFromProject": 2.5,
-      "predictedDelayDays": 41,
-      "delayProbability": 45,
-      "riskLevel": "Medium",
-      "expectedAdditionalCost": 108000,
-      "expectedFinalCost": 2808000,
+      "distanceFromProject": 0.8,
+      "predictedDelayDays": 20,
+      "delayProbability": 15,
+      "riskScore": 22,
+      "riskLevel": "Low",
+      "location": "Valavanur, Villupuram, Tamil Nadu",
+      "surveyNumber": "125/3",
+      "ownershipStatus": "Joint Family Title",
+      "latitude": 11.9389,
+      "longitude": 79.4875,
+      "polygon": [
+        [
+          11.9381,
+          79.4865
+        ],
+        [
+          11.9381,
+          79.4885
+        ],
+        [
+          11.9397,
+          79.4885
+        ],
+        [
+          11.9397,
+          79.4865
+        ],
+        [
+          11.9381,
+          79.4865
+        ]
+      ],
+      "expectedAdditionalCost": 24800,
+      "expectedFinalCost": 644800,
       "costOverrunPercentage": 4,
       "legalRiskProbability": 10,
       "legalRiskLevel": "Low"
@@ -133,26 +193,56 @@
       "projectId": "NH-48",
       "district": "Kanchipuram",
       "landArea": 3.2,
+      "area": 3.2,
+      "areaUnit": "Acres",
       "landType": "Agricultural",
       "ownersCount": 4,
       "ownershipDispute": true,
       "documentsComplete": false,
-      "compensationStatus": "Disputed",
-      "compensationAmount": 4800000,
+      "compensationStatus": "Pending",
+      "compensationAmount": 1120000,
       "objectionFiled": true,
       "courtCase": true,
       "surveyCompleted": true,
-      "environmentalClearance": true,
-      "governmentApproval": true,
-      "acquisitionStage": "Negotiation",
-      "previousDelay": false,
-      "distanceFromProject": 2.5,
-      "predictedDelayDays": 224,
+      "environmentalClearance": false,
+      "governmentApproval": false,
+      "acquisitionStage": "Objection",
+      "previousDelay": true,
+      "distanceFromProject": 1.2,
+      "predictedDelayDays": 278,
       "delayProbability": 98,
+      "riskScore": 85,
       "riskLevel": "High",
-      "expectedAdditionalCost": 2160000,
-      "expectedFinalCost": 6960000,
-      "costOverrunPercentage": 45,
+      "location": "Oragadam, Kanchipuram, Tamil Nadu",
+      "surveyNumber": "126/4",
+      "ownershipStatus": "Disputed",
+      "latitude": 12.8342,
+      "longitude": 79.7036,
+      "polygon": [
+        [
+          12.8332,
+          79.7026
+        ],
+        [
+          12.8332,
+          79.7046
+        ],
+        [
+          12.8352,
+          79.7046
+        ],
+        [
+          12.8352,
+          79.7026
+        ],
+        [
+          12.8332,
+          79.7026
+        ]
+      ],
+      "expectedAdditionalCost": 436800,
+      "expectedFinalCost": 1556800,
+      "costOverrunPercentage": 39,
       "legalRiskProbability": 96,
       "legalRiskLevel": "High"
     },
@@ -161,27 +251,57 @@
       "projectId": "NH-32",
       "district": "Chengalpattu",
       "landArea": 1.5,
+      "area": 1.5,
+      "areaUnit": "Acres",
       "landType": "Residential",
       "ownersCount": 2,
       "ownershipDispute": false,
       "documentsComplete": true,
       "compensationStatus": "Pending",
-      "compensationAmount": 2250000,
-      "objectionFiled": false,
+      "compensationAmount": 950000,
+      "objectionFiled": true,
       "courtCase": false,
       "surveyCompleted": true,
       "environmentalClearance": true,
       "governmentApproval": true,
       "acquisitionStage": "Negotiation",
       "previousDelay": false,
-      "distanceFromProject": 2.5,
-      "predictedDelayDays": 40,
-      "delayProbability": 45,
+      "distanceFromProject": 0.4,
+      "predictedDelayDays": 64,
+      "delayProbability": 63,
+      "riskScore": 48,
       "riskLevel": "Medium",
-      "expectedAdditionalCost": 90000,
-      "expectedFinalCost": 2340000,
-      "costOverrunPercentage": 4,
-      "legalRiskProbability": 10,
+      "location": "Singaperumal Koil, Chengalpattu, Tamil Nadu",
+      "surveyNumber": "127/2",
+      "ownershipStatus": "Verified",
+      "latitude": 12.6939,
+      "longitude": 79.9757,
+      "polygon": [
+        [
+          12.6929,
+          79.9747
+        ],
+        [
+          12.6929,
+          79.9767
+        ],
+        [
+          12.6949,
+          79.9767
+        ],
+        [
+          12.6949,
+          79.9747
+        ],
+        [
+          12.6929,
+          79.9747
+        ]
+      ],
+      "expectedAdditionalCost": 95000,
+      "expectedFinalCost": 1045000,
+      "costOverrunPercentage": 10,
+      "legalRiskProbability": 22,
       "legalRiskLevel": "Low"
     },
     {
@@ -189,53 +309,113 @@
       "projectId": "NH-81",
       "district": "Cuddalore",
       "landArea": 4.1,
+      "area": 4.1,
+      "areaUnit": "Acres",
       "landType": "Agricultural",
       "ownersCount": 5,
       "ownershipDispute": true,
       "documentsComplete": false,
-      "compensationStatus": "Disputed",
-      "compensationAmount": 6150000,
+      "compensationStatus": "Pending",
+      "compensationAmount": 1450000,
       "objectionFiled": true,
-      "courtCase": true,
-      "surveyCompleted": true,
+      "courtCase": false,
+      "surveyCompleted": false,
       "environmentalClearance": true,
-      "governmentApproval": true,
+      "governmentApproval": false,
       "acquisitionStage": "Negotiation",
-      "previousDelay": false,
-      "distanceFromProject": 2.5,
-      "predictedDelayDays": 226,
+      "previousDelay": true,
+      "distanceFromProject": 1.5,
+      "predictedDelayDays": 171,
       "delayProbability": 98,
+      "riskScore": 90,
       "riskLevel": "High",
-      "expectedAdditionalCost": 2767500,
-      "expectedFinalCost": 8917500,
-      "costOverrunPercentage": 45,
-      "legalRiskProbability": 96,
-      "legalRiskLevel": "High"
+      "location": "Panruti, Cuddalore, Tamil Nadu",
+      "surveyNumber": "128/3",
+      "ownershipStatus": "Private",
+      "latitude": 11.748,
+      "longitude": 79.5514,
+      "polygon": [
+        [
+          11.747,
+          79.5504
+        ],
+        [
+          11.747,
+          79.5524
+        ],
+        [
+          11.749,
+          79.5524
+        ],
+        [
+          11.749,
+          79.5504
+        ],
+        [
+          11.747,
+          79.5504
+        ]
+      ],
+      "expectedAdditionalCost": 362500,
+      "expectedFinalCost": 1812500,
+      "costOverrunPercentage": 25,
+      "legalRiskProbability": 59,
+      "legalRiskLevel": "Medium"
     },
     {
       "id": "LA1029",
       "projectId": "NH-83",
       "district": "Tiruchirappalli",
       "landArea": 2,
+      "area": 2,
+      "areaUnit": "Acres",
       "landType": "Commercial",
       "ownersCount": 1,
       "ownershipDispute": false,
       "documentsComplete": true,
-      "compensationStatus": "Pending",
-      "compensationAmount": 3000000,
+      "compensationStatus": "Paid",
+      "compensationAmount": 1250000,
       "objectionFiled": false,
       "courtCase": false,
       "surveyCompleted": true,
       "environmentalClearance": true,
       "governmentApproval": true,
-      "acquisitionStage": "Negotiation",
+      "acquisitionStage": "Possession",
       "previousDelay": false,
-      "distanceFromProject": 2.5,
-      "predictedDelayDays": 41,
-      "delayProbability": 45,
-      "riskLevel": "Medium",
-      "expectedAdditionalCost": 120000,
-      "expectedFinalCost": 3120000,
+      "distanceFromProject": 0.7,
+      "predictedDelayDays": 20,
+      "delayProbability": 15,
+      "riskScore": 18,
+      "riskLevel": "Low",
+      "location": "Samayapuram, Tiruchirappalli, Tamil Nadu",
+      "surveyNumber": "129/4",
+      "ownershipStatus": "Joint Family Title",
+      "latitude": 10.8905,
+      "longitude": 78.7347,
+      "polygon": [
+        [
+          10.8895,
+          78.7337
+        ],
+        [
+          10.8895,
+          78.7357
+        ],
+        [
+          10.8915,
+          78.7357
+        ],
+        [
+          10.8915,
+          78.7337
+        ],
+        [
+          10.8895,
+          78.7337
+        ]
+      ],
+      "expectedAdditionalCost": 50000,
+      "expectedFinalCost": 1300000,
       "costOverrunPercentage": 4,
       "legalRiskProbability": 10,
       "legalRiskLevel": "Low"
@@ -245,26 +425,56 @@
       "projectId": "NH-79",
       "district": "Salem",
       "landArea": 3.6,
+      "area": 3.6,
+      "areaUnit": "Acres",
       "landType": "Agricultural",
       "ownersCount": 6,
       "ownershipDispute": true,
       "documentsComplete": false,
-      "compensationStatus": "Disputed",
-      "compensationAmount": 5400000,
+      "compensationStatus": "Pending",
+      "compensationAmount": 1320000,
       "objectionFiled": true,
       "courtCase": true,
       "surveyCompleted": true,
       "environmentalClearance": true,
-      "governmentApproval": true,
-      "acquisitionStage": "Negotiation",
-      "previousDelay": false,
-      "distanceFromProject": 2.5,
-      "predictedDelayDays": 225,
+      "governmentApproval": false,
+      "acquisitionStage": "Objection",
+      "previousDelay": true,
+      "distanceFromProject": 1,
+      "predictedDelayDays": 254,
       "delayProbability": 98,
+      "riskScore": 95,
       "riskLevel": "High",
-      "expectedAdditionalCost": 2538000,
-      "expectedFinalCost": 7938000,
-      "costOverrunPercentage": 47,
+      "location": "Ayothiapattinam, Salem, Tamil Nadu",
+      "surveyNumber": "130/2",
+      "ownershipStatus": "Disputed",
+      "latitude": 11.66345,
+      "longitude": 78.14475,
+      "polygon": [
+        [
+          11.66245,
+          78.14375
+        ],
+        [
+          11.66245,
+          78.14575
+        ],
+        [
+          11.66445,
+          78.14575
+        ],
+        [
+          11.66445,
+          78.14375
+        ],
+        [
+          11.66245,
+          78.14375
+        ]
+      ],
+      "expectedAdditionalCost": 541200,
+      "expectedFinalCost": 1861200,
+      "costOverrunPercentage": 41,
       "legalRiskProbability": 96,
       "legalRiskLevel": "High"
     },
@@ -273,27 +483,57 @@
       "projectId": "NH-44",
       "district": "Madurai",
       "landArea": 2.7,
+      "area": 2.7,
+      "areaUnit": "Acres",
       "landType": "Agricultural",
       "ownersCount": 3,
       "ownershipDispute": false,
-      "documentsComplete": true,
+      "documentsComplete": false,
       "compensationStatus": "Pending",
-      "compensationAmount": 4050000,
-      "objectionFiled": false,
+      "compensationAmount": 880000,
+      "objectionFiled": true,
       "courtCase": false,
       "surveyCompleted": true,
       "environmentalClearance": true,
-      "governmentApproval": true,
+      "governmentApproval": false,
       "acquisitionStage": "Negotiation",
       "previousDelay": false,
-      "distanceFromProject": 2.5,
-      "predictedDelayDays": 43,
-      "delayProbability": 45,
-      "riskLevel": "Medium",
-      "expectedAdditionalCost": 162000,
-      "expectedFinalCost": 4212000,
-      "costOverrunPercentage": 4,
-      "legalRiskProbability": 10,
+      "distanceFromProject": 0.9,
+      "predictedDelayDays": 112,
+      "delayProbability": 93,
+      "riskScore": 76,
+      "riskLevel": "High",
+      "location": "Alanganallur, Madurai, Tamil Nadu",
+      "surveyNumber": "131/3",
+      "ownershipStatus": "Verified",
+      "latitude": 9.98555,
+      "longitude": 78.0988,
+      "polygon": [
+        [
+          9.98455,
+          78.0978
+        ],
+        [
+          9.98455,
+          78.0998
+        ],
+        [
+          9.98655,
+          78.0998
+        ],
+        [
+          9.98655,
+          78.0978
+        ],
+        [
+          9.98455,
+          78.0978
+        ]
+      ],
+      "expectedAdditionalCost": 114400,
+      "expectedFinalCost": 994400,
+      "costOverrunPercentage": 13,
+      "legalRiskProbability": 30,
       "legalRiskLevel": "Low"
     },
     {
@@ -301,26 +541,56 @@
       "projectId": "NH-85",
       "district": "Thoothukudi",
       "landArea": 5,
+      "area": 5,
+      "areaUnit": "Acres",
       "landType": "Agricultural",
       "ownersCount": 7,
       "ownershipDispute": true,
       "documentsComplete": false,
-      "compensationStatus": "Disputed",
-      "compensationAmount": 7500000,
+      "compensationStatus": "Pending",
+      "compensationAmount": 1780000,
       "objectionFiled": true,
       "courtCase": true,
-      "surveyCompleted": true,
-      "environmentalClearance": true,
-      "governmentApproval": true,
-      "acquisitionStage": "Negotiation",
-      "previousDelay": false,
-      "distanceFromProject": 2.5,
-      "predictedDelayDays": 229,
+      "surveyCompleted": false,
+      "environmentalClearance": false,
+      "governmentApproval": false,
+      "acquisitionStage": "Objection",
+      "previousDelay": true,
+      "distanceFromProject": 1.8,
+      "predictedDelayDays": 284,
       "delayProbability": 98,
+      "riskScore": 98,
       "riskLevel": "High",
-      "expectedAdditionalCost": 3525000,
-      "expectedFinalCost": 11025000,
-      "costOverrunPercentage": 47,
+      "location": "Srivaikuntam, Thoothukudi, Tamil Nadu",
+      "surveyNumber": "132/4",
+      "ownershipStatus": "Private",
+      "latitude": 8.6242,
+      "longitude": 77.9148,
+      "polygon": [
+        [
+          8.6232,
+          77.9138
+        ],
+        [
+          8.6232,
+          77.9158
+        ],
+        [
+          8.6252,
+          77.9158
+        ],
+        [
+          8.6252,
+          77.9138
+        ],
+        [
+          8.6232,
+          77.9138
+        ]
+      ],
+      "expectedAdditionalCost": 729800,
+      "expectedFinalCost": 2509800,
+      "costOverrunPercentage": 41,
       "legalRiskProbability": 96,
       "legalRiskLevel": "High"
     },
@@ -329,25 +599,55 @@
       "projectId": "NH-38",
       "district": "Dindigul",
       "landArea": 1.2,
+      "area": 1.2,
+      "areaUnit": "Acres",
       "landType": "Residential",
       "ownersCount": 2,
       "ownershipDispute": false,
       "documentsComplete": true,
-      "compensationStatus": "Pending",
-      "compensationAmount": 1800000,
+      "compensationStatus": "Paid",
+      "compensationAmount": 540000,
       "objectionFiled": false,
       "courtCase": false,
       "surveyCompleted": true,
       "environmentalClearance": true,
       "governmentApproval": true,
-      "acquisitionStage": "Negotiation",
+      "acquisitionStage": "Possession",
       "previousDelay": false,
-      "distanceFromProject": 2.5,
-      "predictedDelayDays": 39,
-      "delayProbability": 45,
-      "riskLevel": "Medium",
-      "expectedAdditionalCost": 72000,
-      "expectedFinalCost": 1872000,
+      "distanceFromProject": 0.3,
+      "predictedDelayDays": 18,
+      "delayProbability": 15,
+      "riskScore": 12,
+      "riskLevel": "Low",
+      "location": "Vedasandur, Dindigul, Tamil Nadu",
+      "surveyNumber": "133/2",
+      "ownershipStatus": "Joint Family Title",
+      "latitude": 10.5285,
+      "longitude": 77.9456,
+      "polygon": [
+        [
+          10.5275,
+          77.9446
+        ],
+        [
+          10.5275,
+          77.9466
+        ],
+        [
+          10.5295,
+          77.9466
+        ],
+        [
+          10.5295,
+          77.9446
+        ],
+        [
+          10.5275,
+          77.9446
+        ]
+      ],
+      "expectedAdditionalCost": 21600,
+      "expectedFinalCost": 561600,
       "costOverrunPercentage": 4,
       "legalRiskProbability": 10,
       "legalRiskLevel": "Low"
@@ -357,54 +657,114 @@
       "projectId": "NH-181",
       "district": "Coimbatore",
       "landArea": 2.9,
+      "area": 2.9,
+      "areaUnit": "Acres",
       "landType": "Agricultural",
       "ownersCount": 4,
       "ownershipDispute": true,
       "documentsComplete": false,
-      "compensationStatus": "Disputed",
-      "compensationAmount": 4350000,
+      "compensationStatus": "Pending",
+      "compensationAmount": 1040000,
       "objectionFiled": true,
-      "courtCase": true,
+      "courtCase": false,
       "surveyCompleted": true,
       "environmentalClearance": true,
-      "governmentApproval": true,
+      "governmentApproval": false,
       "acquisitionStage": "Negotiation",
-      "previousDelay": false,
-      "distanceFromProject": 2.5,
-      "predictedDelayDays": 223,
+      "previousDelay": true,
+      "distanceFromProject": 0.6,
+      "predictedDelayDays": 167,
       "delayProbability": 98,
+      "riskScore": 91,
       "riskLevel": "High",
-      "expectedAdditionalCost": 1957500,
-      "expectedFinalCost": 6307500,
-      "costOverrunPercentage": 45,
-      "legalRiskProbability": 96,
-      "legalRiskLevel": "High"
+      "location": "Karamadai, Coimbatore, Tamil Nadu",
+      "surveyNumber": "134/3",
+      "ownershipStatus": "Verified",
+      "latitude": 11.2451,
+      "longitude": 76.9558,
+      "polygon": [
+        [
+          11.2441,
+          76.9548
+        ],
+        [
+          11.2441,
+          76.9568
+        ],
+        [
+          11.2461,
+          76.9568
+        ],
+        [
+          11.2461,
+          76.9548
+        ],
+        [
+          11.2441,
+          76.9548
+        ]
+      ],
+      "expectedAdditionalCost": 260000,
+      "expectedFinalCost": 1300000,
+      "costOverrunPercentage": 25,
+      "legalRiskProbability": 59,
+      "legalRiskLevel": "Medium"
     },
     {
       "id": "LA1035",
       "projectId": "NH-785",
       "district": "Madurai",
       "landArea": 3.8,
+      "area": 3.8,
+      "areaUnit": "Acres",
       "landType": "Agricultural",
       "ownersCount": 5,
       "ownershipDispute": true,
       "documentsComplete": false,
-      "compensationStatus": "Disputed",
-      "compensationAmount": 5700000,
+      "compensationStatus": "Pending",
+      "compensationAmount": 1560000,
       "objectionFiled": true,
       "courtCase": true,
       "surveyCompleted": true,
-      "environmentalClearance": true,
-      "governmentApproval": true,
-      "acquisitionStage": "Negotiation",
-      "previousDelay": false,
-      "distanceFromProject": 2.5,
-      "predictedDelayDays": 226,
+      "environmentalClearance": false,
+      "governmentApproval": false,
+      "acquisitionStage": "Objection",
+      "previousDelay": true,
+      "distanceFromProject": 1.4,
+      "predictedDelayDays": 281,
       "delayProbability": 98,
+      "riskScore": 96,
       "riskLevel": "High",
-      "expectedAdditionalCost": 2565000,
-      "expectedFinalCost": 8265000,
-      "costOverrunPercentage": 45,
+      "location": "Melur, Madurai, Tamil Nadu",
+      "surveyNumber": "135/4",
+      "ownershipStatus": "Disputed",
+      "latitude": 10.0347,
+      "longitude": 78.33,
+      "polygon": [
+        [
+          10.0337,
+          78.329
+        ],
+        [
+          10.0337,
+          78.331
+        ],
+        [
+          10.0357,
+          78.331
+        ],
+        [
+          10.0357,
+          78.329
+        ],
+        [
+          10.0337,
+          78.329
+        ]
+      ],
+      "expectedAdditionalCost": 608400,
+      "expectedFinalCost": 2168400,
+      "costOverrunPercentage": 39,
       "legalRiskProbability": 96,
       "legalRiskLevel": "High"
     },
@@ -413,12 +773,14 @@
       "projectId": "NH-716",
       "district": "Vellore",
       "landArea": 2.1,
+      "area": 2.1,
+      "areaUnit": "Acres",
       "landType": "Commercial",
       "ownersCount": 2,
       "ownershipDispute": false,
       "documentsComplete": true,
       "compensationStatus": "Pending",
-      "compensationAmount": 3150000,
+      "compensationAmount": 1180000,
       "objectionFiled": false,
       "courtCase": false,
       "surveyCompleted": true,
@@ -426,12 +788,40 @@
       "governmentApproval": true,
       "acquisitionStage": "Negotiation",
       "previousDelay": false,
-      "distanceFromProject": 2.5,
-      "predictedDelayDays": 41,
+      "distanceFromProject": 0.5,
+      "predictedDelayDays": 40,
       "delayProbability": 45,
+      "riskScore": 43,
       "riskLevel": "Medium",
-      "expectedAdditionalCost": 126000,
-      "expectedFinalCost": 3276000,
+      "location": "Katpadi, Vellore, Tamil Nadu",
+      "surveyNumber": "136/2",
+      "ownershipStatus": "Private",
+      "latitude": 12.9708,
+      "longitude": 79.1366,
+      "polygon": [
+        [
+          12.9698,
+          79.1356
+        ],
+        [
+          12.9698,
+          79.1376
+        ],
+        [
+          12.9718,
+          79.1376
+        ],
+        [
+          12.9718,
+          79.1356
+        ],
+        [
+          12.9698,
+          79.1356
+        ]
+      ],
+      "expectedAdditionalCost": 47200,
+      "expectedFinalCost": 1227200,
       "costOverrunPercentage": 4,
       "legalRiskProbability": 10,
       "legalRiskLevel": "Low"
@@ -441,55 +831,115 @@
       "projectId": "NH-332",
       "district": "Nagapattinam",
       "landArea": 4.5,
+      "area": 4.5,
+      "areaUnit": "Acres",
       "landType": "Agricultural",
       "ownersCount": 6,
       "ownershipDispute": true,
       "documentsComplete": false,
-      "compensationStatus": "Disputed",
-      "compensationAmount": 6750000,
+      "compensationStatus": "Pending",
+      "compensationAmount": 1490000,
       "objectionFiled": true,
-      "courtCase": true,
-      "surveyCompleted": true,
+      "courtCase": false,
+      "surveyCompleted": false,
       "environmentalClearance": true,
-      "governmentApproval": true,
-      "acquisitionStage": "Negotiation",
-      "previousDelay": false,
-      "distanceFromProject": 2.5,
-      "predictedDelayDays": 227,
+      "governmentApproval": false,
+      "acquisitionStage": "Objection",
+      "previousDelay": true,
+      "distanceFromProject": 2,
+      "predictedDelayDays": 172,
       "delayProbability": 98,
+      "riskScore": 88,
       "riskLevel": "High",
-      "expectedAdditionalCost": 3172500,
-      "expectedFinalCost": 9922500,
-      "costOverrunPercentage": 47,
-      "legalRiskProbability": 96,
-      "legalRiskLevel": "High"
+      "location": "Vedaranyam, Nagapattinam, Tamil Nadu",
+      "surveyNumber": "137/3",
+      "ownershipStatus": "Joint Family Title",
+      "latitude": 10.372,
+      "longitude": 79.8468,
+      "polygon": [
+        [
+          10.371,
+          79.8458
+        ],
+        [
+          10.371,
+          79.8478
+        ],
+        [
+          10.373,
+          79.8478
+        ],
+        [
+          10.373,
+          79.8458
+        ],
+        [
+          10.371,
+          79.8458
+        ]
+      ],
+      "expectedAdditionalCost": 402300,
+      "expectedFinalCost": 1892300,
+      "costOverrunPercentage": 27,
+      "legalRiskProbability": 63,
+      "legalRiskLevel": "Medium"
     },
     {
       "id": "LA1038",
       "projectId": "NH-83",
       "district": "Thanjavur",
       "landArea": 2.6,
+      "area": 2.6,
+      "areaUnit": "Acres",
       "landType": "Agricultural",
       "ownersCount": 3,
       "ownershipDispute": false,
-      "documentsComplete": true,
+      "documentsComplete": false,
       "compensationStatus": "Pending",
-      "compensationAmount": 3900000,
-      "objectionFiled": false,
+      "compensationAmount": 910000,
+      "objectionFiled": true,
       "courtCase": false,
       "surveyCompleted": true,
       "environmentalClearance": true,
-      "governmentApproval": true,
+      "governmentApproval": false,
       "acquisitionStage": "Negotiation",
       "previousDelay": false,
-      "distanceFromProject": 2.5,
-      "predictedDelayDays": 43,
-      "delayProbability": 45,
-      "riskLevel": "Medium",
-      "expectedAdditionalCost": 156000,
-      "expectedFinalCost": 4056000,
-      "costOverrunPercentage": 4,
-      "legalRiskProbability": 10,
+      "distanceFromProject": 0.9,
+      "predictedDelayDays": 112,
+      "delayProbability": 93,
+      "riskScore": 68,
+      "riskLevel": "High",
+      "location": "Vallam, Thanjavur, Tamil Nadu",
+      "surveyNumber": "138/4",
+      "ownershipStatus": "Verified",
+      "latitude": 10.7232,
+      "longitude": 79.0571,
+      "polygon": [
+        [
+          10.7222,
+          79.0561
+        ],
+        [
+          10.7222,
+          79.0581
+        ],
+        [
+          10.7242,
+          79.0581
+        ],
+        [
+          10.7242,
+          79.0561
+        ],
+        [
+          10.7222,
+          79.0561
+        ]
+      ],
+      "expectedAdditionalCost": 118300,
+      "expectedFinalCost": 1028300,
+      "costOverrunPercentage": 13,
+      "legalRiskProbability": 30,
       "legalRiskLevel": "Low"
     },
     {
@@ -497,25 +947,55 @@
       "projectId": "NH-40",
       "district": "Ranipet",
       "landArea": 1.9,
+      "area": 1.9,
+      "areaUnit": "Acres",
       "landType": "Residential",
       "ownersCount": 2,
       "ownershipDispute": false,
       "documentsComplete": true,
-      "compensationStatus": "Pending",
-      "compensationAmount": 2850000,
+      "compensationStatus": "Paid",
+      "compensationAmount": 760000,
       "objectionFiled": false,
       "courtCase": false,
       "surveyCompleted": true,
       "environmentalClearance": true,
       "governmentApproval": true,
-      "acquisitionStage": "Negotiation",
+      "acquisitionStage": "Possession",
       "previousDelay": false,
-      "distanceFromProject": 2.5,
-      "predictedDelayDays": 41,
-      "delayProbability": 45,
-      "riskLevel": "Medium",
-      "expectedAdditionalCost": 114000,
-      "expectedFinalCost": 2964000,
+      "distanceFromProject": 0.4,
+      "predictedDelayDays": 20,
+      "delayProbability": 15,
+      "riskScore": 27,
+      "riskLevel": "Low",
+      "location": "Walajapet, Ranipet, Tamil Nadu",
+      "surveyNumber": "139/2",
+      "ownershipStatus": "Verified",
+      "latitude": 12.92875,
+      "longitude": 79.3576,
+      "polygon": [
+        [
+          12.92775,
+          79.3566
+        ],
+        [
+          12.92775,
+          79.3586
+        ],
+        [
+          12.92975,
+          79.3586
+        ],
+        [
+          12.92975,
+          79.3566
+        ],
+        [
+          12.92775,
+          79.3566
+        ]
+      ],
+      "expectedAdditionalCost": 30400,
+      "expectedFinalCost": 790400,
       "costOverrunPercentage": 4,
       "legalRiskProbability": 10,
       "legalRiskLevel": "Low"
@@ -525,26 +1005,56 @@
       "projectId": "NH-744",
       "district": "Virudhunagar",
       "landArea": 3.3,
+      "area": 3.3,
+      "areaUnit": "Acres",
       "landType": "Agricultural",
       "ownersCount": 4,
       "ownershipDispute": true,
       "documentsComplete": false,
-      "compensationStatus": "Disputed",
-      "compensationAmount": 4950000,
+      "compensationStatus": "Pending",
+      "compensationAmount": 1210000,
       "objectionFiled": true,
       "courtCase": true,
       "surveyCompleted": true,
-      "environmentalClearance": true,
-      "governmentApproval": true,
-      "acquisitionStage": "Negotiation",
-      "previousDelay": false,
-      "distanceFromProject": 2.5,
-      "predictedDelayDays": 224,
+      "environmentalClearance": false,
+      "governmentApproval": false,
+      "acquisitionStage": "Objection",
+      "previousDelay": true,
+      "distanceFromProject": 1.3,
+      "predictedDelayDays": 279,
       "delayProbability": 98,
+      "riskScore": 89,
       "riskLevel": "High",
-      "expectedAdditionalCost": 2227500,
-      "expectedFinalCost": 7177500,
-      "costOverrunPercentage": 45,
+      "location": "Aruppukkottai, Virudhunagar, Tamil Nadu",
+      "surveyNumber": "140/3",
+      "ownershipStatus": "Disputed",
+      "latitude": 9.50995,
+      "longitude": 78.09785,
+      "polygon": [
+        [
+          9.50895,
+          78.09685
+        ],
+        [
+          9.50895,
+          78.09885
+        ],
+        [
+          9.51095,
+          78.09885
+        ],
+        [
+          9.51095,
+          78.09685
+        ],
+        [
+          9.50895,
+          78.09685
+        ]
+      ],
+      "expectedAdditionalCost": 471900,
+      "expectedFinalCost": 1681900,
+      "costOverrunPercentage": 39,
       "legalRiskProbability": 96,
       "legalRiskLevel": "High"
     },
@@ -553,27 +1063,57 @@
       "projectId": "NH-36",
       "district": "Perambalur",
       "landArea": 2.8,
+      "area": 2.8,
+      "areaUnit": "Acres",
       "landType": "Agricultural",
       "ownersCount": 3,
       "ownershipDispute": false,
-      "documentsComplete": true,
-      "compensationStatus": "Paid",
-      "compensationAmount": 4200000,
-      "objectionFiled": false,
+      "documentsComplete": false,
+      "compensationStatus": "Pending",
+      "compensationAmount": 970000,
+      "objectionFiled": true,
       "courtCase": false,
       "surveyCompleted": true,
       "environmentalClearance": true,
       "governmentApproval": true,
       "acquisitionStage": "Negotiation",
       "previousDelay": false,
-      "distanceFromProject": 2.5,
-      "predictedDelayDays": 23,
-      "delayProbability": 35,
-      "riskLevel": "Low",
-      "expectedAdditionalCost": 168000,
-      "expectedFinalCost": 4368000,
-      "costOverrunPercentage": 4,
-      "legalRiskProbability": 10,
+      "distanceFromProject": 0.7,
+      "predictedDelayDays": 82,
+      "delayProbability": 78,
+      "riskScore": 72,
+      "riskLevel": "High",
+      "location": "Veppanthattai, Perambalur, Tamil Nadu",
+      "surveyNumber": "141/4",
+      "ownershipStatus": "Joint Family Title",
+      "latitude": 11.32115,
+      "longitude": 78.8381,
+      "polygon": [
+        [
+          11.32015,
+          78.8371
+        ],
+        [
+          11.32015,
+          78.8391
+        ],
+        [
+          11.32215,
+          78.8391
+        ],
+        [
+          11.32215,
+          78.8371
+        ],
+        [
+          11.32015,
+          78.8371
+        ]
+      ],
+      "expectedAdditionalCost": 126100,
+      "expectedFinalCost": 1096100,
+      "costOverrunPercentage": 13,
+      "legalRiskProbability": 30,
       "legalRiskLevel": "Low"
     },
     {
@@ -581,127 +1121,61 @@
       "projectId": "NH-183",
       "district": "Theni",
       "landArea": 4,
+      "area": 4,
+      "areaUnit": "Acres",
       "landType": "Agricultural",
       "ownersCount": 5,
       "ownershipDispute": true,
       "documentsComplete": false,
-      "compensationStatus": "Disputed",
-      "compensationAmount": 6000000,
+      "compensationStatus": "Pending",
+      "compensationAmount": 1380000,
       "objectionFiled": true,
-      "courtCase": true,
+      "courtCase": false,
       "surveyCompleted": true,
-      "environmentalClearance": true,
-      "governmentApproval": true,
-      "acquisitionStage": "Negotiation",
-      "previousDelay": false,
-      "distanceFromProject": 2.5,
-      "predictedDelayDays": 226,
+      "environmentalClearance": false,
+      "governmentApproval": false,
+      "acquisitionStage": "Objection",
+      "previousDelay": true,
+      "distanceFromProject": 1.6,
+      "predictedDelayDays": 196,
       "delayProbability": 98,
+      "riskScore": 94,
       "riskLevel": "High",
-      "expectedAdditionalCost": 2700000,
-      "expectedFinalCost": 8700000,
-      "costOverrunPercentage": 45,
-      "legalRiskProbability": 96,
-      "legalRiskLevel": "High"
-    },
-    {
-      "id": "LA1043",
-      "projectId": "NH-77",
-      "district": "Tiruvannamalai",
-      "landArea": 2.3,
-      "landType": "Agricultural",
-      "ownersCount": 3,
-      "ownershipDispute": false,
-      "documentsComplete": true,
-      "compensationStatus": "Pending",
-      "compensationAmount": 3450000,
-      "objectionFiled": false,
-      "courtCase": false,
-      "surveyCompleted": true,
-      "environmentalClearance": true,
-      "governmentApproval": true,
-      "acquisitionStage": "Negotiation",
-      "previousDelay": false,
-      "distanceFromProject": 2.5,
-      "predictedDelayDays": 42,
-      "delayProbability": 45,
-      "riskLevel": "Medium",
-      "expectedAdditionalCost": 138000,
-      "expectedFinalCost": 3588000,
-      "costOverrunPercentage": 4,
-      "legalRiskProbability": 10,
-      "legalRiskLevel": "Low"
-    },
-    {
-      "id": "LA9818",
-      "projectId": "NH-45",
-      "district": "Kanchipuram",
-      "landArea": 2.5,
-      "landType": "Agricultural",
-      "ownersCount": 2,
-      "ownershipDispute": false,
-      "documentsComplete": true,
-      "compensationStatus": "Pending",
-      "compensationAmount": 1200000,
-      "objectionFiled": false,
-      "courtCase": false,
-      "surveyCompleted": true,
-      "environmentalClearance": true,
-      "governmentApproval": true,
-      "acquisitionStage": "Survey",
-      "previousDelay": false,
-      "distanceFromProject": 1.5,
-      "predictedDelayDays": 42,
-      "delayProbability": 30,
-      "riskLevel": "Low",
-      "expectedAdditionalCost": 48000,
-      "expectedFinalCost": 1248000,
-      "costOverrunPercentage": 4,
-      "legalRiskProbability": 10,
-      "legalRiskLevel": "Low"
-    },
-    {
-      "id": "LA6189",
-      "projectId": "NH-45",
-      "district": "Kanchipuram",
-      "landArea": 2.5,
-      "landType": "Agricultural",
-      "ownersCount": 2,
-      "ownershipDispute": false,
-      "documentsComplete": true,
-      "compensationStatus": "Paid",
-      "compensationAmount": 1200001,
-      "objectionFiled": false,
-      "courtCase": false,
-      "surveyCompleted": true,
-      "environmentalClearance": true,
-      "governmentApproval": true,
-      "acquisitionStage": "Survey",
-      "previousDelay": false,
-      "distanceFromProject": 1.5,
-      "predictedDelayDays": 22,
-      "delayProbability": 20,
-      "riskLevel": "Low",
-      "expectedAdditionalCost": 48000,
-      "expectedFinalCost": 1248001,
-      "costOverrunPercentage": 4,
-      "legalRiskProbability": 10,
-      "legalRiskLevel": "Low"
+      "location": "Bodinayakanur, Theni, Tamil Nadu",
+      "surveyNumber": "142/2",
+      "ownershipStatus": "Verified",
+      "latitude": 10.01235,
+      "longitude": 77.34835,
+      "polygon": [
+        [
+          10.01135,
+          77.34735
+        ],
+        [
+          10.01135,
+          77.34935
+        ],
+        [
+          10.01335,
+          77.34935
+        ],
+        [
+          10.01335,
+          77.34735
+        ],
+        [
+          10.01135,
+          77.34735
+        ]
+      ],
+      "expectedAdditionalCost": 345000,
+      "expectedFinalCost": 1725000,
+      "costOverrunPercentage": 25,
+      "legalRiskProbability": 59,
+      "legalRiskLevel": "Medium"
     }
   ],
   "alerts": [
-    {
-      "id": "ALRT005",
-      "priority": "High",
-      "projectId": "NH-48",
-      "projectName": "Villupuram Six-Laning Highway",
-      "parcelId": "LA1026",
-      "issue": "Survey No: 124/2 Dispute",
-      "expectedDelay": 45,
-      "recommendedAction": "Resolve legal verification and compensation issues before proceeding to the next acquisition stage.",
-      "status": "Open",
-      "timestamp": "Just now"
-    },
     {
       "id": "ALRT001",
       "priority": "High",
@@ -753,184 +1227,6 @@
   ],
   "documents": [
     {
-      "id": "DOC-8609",
-      "name": "LandObjectionLetter_SLA.txt",
-      "parcelId": "126/4",
-      "text": "highway",
-      "category": "Other",
-      "risk": "Low",
-      "riskClassification": "Low",
-      "confidence": 0.75,
-      "importantTerms": [
-        "Objection",
-        "Landowner"
-      ],
-      "keyDisputes": [
-        "General land acquisition objection filed by property owner"
-      ],
-      "legalCitations": [],
-      "uploadDate": "2026-09-01"
-    },
-    {
-      "id": "DOC-3716",
-      "name": "LandObjectionLetter_SLA.txt",
-      "parcelId": "126/4",
-      "text": "I am the registered owner of the land situated in Survey No. 126/4. I hereby submit my objection to the proposed land acquisition. The compensation amount offered for the property is not acceptable and does not reflect the current market value of the land. The ownership documents and supporting records are available for verification.",
-      "category": "Compensation Issue",
-      "risk": "Medium",
-      "riskClassification": "Medium",
-      "confidence": 0.8,
-      "importantTerms": [
-        "Compensation",
-        "Valuation"
-      ],
-      "keyDisputes": [
-        "Compensation undervaluation claim",
-        "Rate disparity vs market value"
-      ],
-      "compensationIssue": "Landowner demands higher compensation based on adjacent land market rates.",
-      "legalCitations": [],
-      "uploadDate": "2026-09-01"
-    },
-    {
-      "id": "DOC-5459",
-      "name": "LandObjectionLetter_SLA.txt",
-      "parcelId": "124/6",
-      "text": "I am the registered owner of the land situated in Survey No. 124/6. I hereby submit my objection to the proposed land acquisition. The compensation amount offered for the property is not acceptable and does not reflect the current market value of the land. The ownership documents and supporting records are available for verification.",
-      "category": "Compensation Issue",
-      "risk": "Medium",
-      "riskClassification": "Medium",
-      "confidence": 0.8,
-      "importantTerms": [
-        "Compensation",
-        "Valuation"
-      ],
-      "keyDisputes": [
-        "Compensation undervaluation claim",
-        "Rate disparity vs market value"
-      ],
-      "compensationIssue": "Landowner demands higher compensation based on adjacent land market rates.",
-      "legalCitations": [],
-      "uploadDate": "2026-09-01"
-    },
-    {
-      "id": "DOC-2630",
-      "name": "LandObjectionLetter_SLA.txt",
-      "parcelId": "124/6",
-      "text": "I am the registered owner of the land situated in Survey No. 124/6. I hereby submit my objection to the proposed land acquisition. The compensation amount offered for the property is not acceptable and does not reflect the current market value of the land. The ownership documents and supporting records are available for verification.",
-      "category": "Compensation Issue",
-      "risk": "Medium",
-      "riskClassification": "Medium",
-      "confidence": 0.8,
-      "importantTerms": [
-        "Compensation",
-        "Valuation"
-      ],
-      "keyDisputes": [
-        "Compensation undervaluation claim",
-        "Rate disparity vs market value"
-      ],
-      "compensationIssue": "Landowner demands higher compensation based on adjacent land market rates.",
-      "legalCitations": [],
-      "uploadDate": "2026-09-01"
-    },
-    {
-      "id": "DOC-0483",
-      "name": "LandObjectionLetter_SLA.txt",
-      "parcelId": "126/4",
-      "text": "I am the registered owner of the land situated in Survey No. 126/4. I hereby submit my objection to the proposed land acquisition. The compensation amount offered for the property is not acceptable and does not reflect the current market value of the land. The ownership documents and supporting records are available for verification.",
-      "category": "Compensation Issue",
-      "risk": "Medium",
-      "riskClassification": "Medium",
-      "confidence": 0.8,
-      "importantTerms": [
-        "Compensation",
-        "Valuation"
-      ],
-      "keyDisputes": [
-        "Compensation undervaluation claim",
-        "Rate disparity vs market value"
-      ],
-      "compensationIssue": "Landowner demands higher compensation based on adjacent land market rates.",
-      "legalCitations": [],
-      "uploadDate": "2026-09-01"
-    },
-    {
-      "id": "DOC-4375",
-      "name": "LandObjectionLetter_SLA.txt",
-      "parcelId": "126/4",
-      "text": "highway",
-      "category": "Other",
-      "risk": "Low",
-      "riskClassification": "Low",
-      "confidence": 0.75,
-      "importantTerms": [
-        "Objection",
-        "Landowner"
-      ],
-      "keyDisputes": [
-        "General land acquisition objection filed by property owner"
-      ],
-      "legalCitations": [],
-      "uploadDate": "2026-09-01"
-    },
-    {
-      "id": "DOC-6992",
-      "name": "LandObjectionLetter_SLA.txt",
-      "parcelId": "126/4",
-      "text": "Highway",
-      "category": "Other",
-      "risk": "Low",
-      "confidence": 75,
-      "importantTerms": [
-        "Objection",
-        "Landowner"
-      ],
-      "uploadDate": "2026-09-01"
-    },
-    {
-      "id": "DOC-2695",
-      "name": "LandObjectionLetter_SLA.txt",
-      "parcelId": "126/4",
-      "text": "I am the registered owner of the land situated in Survey No. 126/4. I hereby submit my objection to the proposed land acquisition. The compensation amount offered for the property is not acceptable and does not reflect the current market value of the land. The ownership documents and supporting records are available for verification.",
-      "category": "Compensation Issue",
-      "risk": "Medium",
-      "confidence": 80,
-      "importantTerms": [
-        "Compensation",
-        "Market Value"
-      ],
-      "uploadDate": "2026-09-01"
-    },
-    {
-      "id": "DOC-0193",
-      "name": "LandObjectionLetter_SLA.txt",
-      "parcelId": "126/4",
-      "text": "Airport",
-      "category": "Other",
-      "risk": "Low",
-      "confidence": 75,
-      "importantTerms": [
-        "Objection",
-        "Landowner"
-      ],
-      "uploadDate": "2026-09-01"
-    },
-    {
-      "id": "DOC-7133",
-      "name": "LandObjectionLetter_SLA.txt",
-      "parcelId": "LA1043",
-      "text": "Highway villupuram",
-      "category": "Other",
-      "risk": "Low",
-      "confidence": 75,
-      "importantTerms": [
-        "Objection",
-        "Landowner"
-      ],
-      "uploadDate": "2026-08-31"
-    },
-    {
       "id": "DOC001",
       "name": "Objection_LA1024.txt",
       "parcelId": "LA1024",
@@ -965,354 +1261,5 @@
       "uploadDate": "2026-08-30"
     }
   ],
-  "predictions": [
-    {
-      "id": "PRED-8611",
-      "parcelId": "126/4",
-      "projectId": "unassigned",
-      "timestamp": "2026-09-01",
-      "type": "NLP",
-      "inputs": {
-        "textLength": 7
-      },
-      "outputs": {
-        "category": "Other",
-        "risk": "Low",
-        "riskClassification": "Low",
-        "confidence": 75,
-        "importantTerms": [
-          "Objection",
-          "Landowner"
-        ],
-        "keyDisputes": [
-          "General land acquisition objection filed by property owner"
-        ],
-        "legalCitations": []
-      }
-    },
-    {
-      "id": "PRED-3107",
-      "parcelId": "manual-input",
-      "projectId": "unassigned",
-      "timestamp": "2026-09-01",
-      "type": "Delay",
-      "inputs": {
-        "landArea": 5.4,
-        "ownersCount": 4,
-        "ownershipDispute": true,
-        "documentsComplete": false,
-        "previousDelay": false,
-        "distanceFromProject": 3.5
-      },
-      "outputs": {
-        "delayProbability": 98,
-        "riskLevel": "High",
-        "predictedDelayDays": 160
-      }
-    },
-    {
-      "id": "PRED-4096",
-      "parcelId": "manual-input",
-      "projectId": "unassigned",
-      "timestamp": "2026-09-01",
-      "type": "Delay",
-      "inputs": {
-        "landArea": 5.4,
-        "ownersCount": 4,
-        "ownershipDispute": true,
-        "documentsComplete": false,
-        "previousDelay": false,
-        "distanceFromProject": 3.5
-      },
-      "outputs": {
-        "delayProbability": 98,
-        "riskLevel": "High",
-        "predictedDelayDays": 160
-      }
-    },
-    {
-      "id": "PRED-0190",
-      "parcelId": "manual-input",
-      "projectId": "unassigned",
-      "timestamp": "2026-09-01",
-      "type": "Delay",
-      "inputs": {
-        "landArea": 5.4,
-        "ownersCount": 4,
-        "ownershipDispute": true,
-        "documentsComplete": true,
-        "previousDelay": true,
-        "distanceFromProject": 3.5
-      },
-      "outputs": {
-        "delayProbability": 98,
-        "riskLevel": "High",
-        "predictedDelayDays": 160
-      }
-    },
-    {
-      "id": "PRED-5883",
-      "parcelId": "manual-input",
-      "projectId": "unassigned",
-      "timestamp": "2026-09-01",
-      "type": "Delay",
-      "inputs": {
-        "landArea": 5.4,
-        "ownersCount": 4,
-        "ownershipDispute": true,
-        "documentsComplete": true,
-        "previousDelay": false,
-        "distanceFromProject": 3.5
-      },
-      "outputs": {
-        "delayProbability": 92,
-        "riskLevel": "High",
-        "predictedDelayDays": 145
-      }
-    },
-    {
-      "id": "PRED-0079",
-      "parcelId": "manual-input",
-      "projectId": "unassigned",
-      "timestamp": "2026-09-01",
-      "type": "Delay",
-      "inputs": {
-        "landArea": 5.4,
-        "ownersCount": 4,
-        "ownershipDispute": true,
-        "documentsComplete": false,
-        "previousDelay": false,
-        "distanceFromProject": 3.5
-      },
-      "outputs": {
-        "delayProbability": 98,
-        "riskLevel": "High",
-        "predictedDelayDays": 160
-      }
-    },
-    {
-      "id": "PRED-3716",
-      "parcelId": "126/4",
-      "projectId": "unassigned",
-      "timestamp": "2026-09-01",
-      "type": "NLP",
-      "inputs": {
-        "textLength": 335
-      },
-      "outputs": {
-        "category": "Compensation Issue",
-        "risk": "Medium",
-        "riskClassification": "Medium",
-        "confidence": 80,
-        "importantTerms": [
-          "Compensation",
-          "Valuation"
-        ],
-        "keyDisputes": [
-          "Compensation undervaluation claim",
-          "Rate disparity vs market value"
-        ],
-        "compensationIssue": "Landowner demands higher compensation based on adjacent land market rates.",
-        "legalCitations": []
-      }
-    },
-    {
-      "id": "PRED-5460",
-      "parcelId": "124/6",
-      "projectId": "unassigned",
-      "timestamp": "2026-09-01",
-      "type": "NLP",
-      "inputs": {
-        "textLength": 335
-      },
-      "outputs": {
-        "category": "Compensation Issue",
-        "risk": "Medium",
-        "riskClassification": "Medium",
-        "confidence": 80,
-        "importantTerms": [
-          "Compensation",
-          "Valuation"
-        ],
-        "keyDisputes": [
-          "Compensation undervaluation claim",
-          "Rate disparity vs market value"
-        ],
-        "compensationIssue": "Landowner demands higher compensation based on adjacent land market rates.",
-        "legalCitations": []
-      }
-    },
-    {
-      "id": "PRED-2633",
-      "parcelId": "124/6",
-      "projectId": "unassigned",
-      "timestamp": "2026-09-01",
-      "type": "NLP",
-      "inputs": {
-        "textLength": 335
-      },
-      "outputs": {
-        "category": "Compensation Issue",
-        "risk": "Medium",
-        "riskClassification": "Medium",
-        "confidence": 80,
-        "importantTerms": [
-          "Compensation",
-          "Valuation"
-        ],
-        "keyDisputes": [
-          "Compensation undervaluation claim",
-          "Rate disparity vs market value"
-        ],
-        "compensationIssue": "Landowner demands higher compensation based on adjacent land market rates.",
-        "legalCitations": []
-      }
-    },
-    {
-      "id": "PRED-0484",
-      "parcelId": "126/4",
-      "projectId": "unassigned",
-      "timestamp": "2026-09-01",
-      "type": "NLP",
-      "inputs": {
-        "textLength": 335
-      },
-      "outputs": {
-        "category": "Compensation Issue",
-        "risk": "Medium",
-        "riskClassification": "Medium",
-        "confidence": 80,
-        "importantTerms": [
-          "Compensation",
-          "Valuation"
-        ],
-        "keyDisputes": [
-          "Compensation undervaluation claim",
-          "Rate disparity vs market value"
-        ],
-        "compensationIssue": "Landowner demands higher compensation based on adjacent land market rates.",
-        "legalCitations": []
-      }
-    },
-    {
-      "id": "PRED-4382",
-      "parcelId": "126/4",
-      "projectId": "unassigned",
-      "timestamp": "2026-09-01",
-      "type": "NLP",
-      "inputs": {
-        "textLength": 7
-      },
-      "outputs": {
-        "category": "Other",
-        "risk": "Low",
-        "riskClassification": "Low",
-        "confidence": 75,
-        "importantTerms": [
-          "Objection",
-          "Landowner"
-        ],
-        "keyDisputes": [
-          "General land acquisition objection filed by property owner"
-        ],
-        "legalCitations": []
-      }
-    },
-    {
-      "id": "PRED-6993",
-      "parcelId": "126/4",
-      "projectId": "unassigned",
-      "timestamp": "2026-09-01",
-      "type": "NLP",
-      "inputs": {
-        "textLength": 7
-      },
-      "outputs": {
-        "category": "Other",
-        "risk": "Low",
-        "confidence": 75,
-        "importantTerms": [
-          "Objection",
-          "Landowner"
-        ]
-      }
-    },
-    {
-      "id": "PRED-2721",
-      "parcelId": "126/4",
-      "projectId": "unassigned",
-      "timestamp": "2026-09-01",
-      "type": "NLP",
-      "inputs": {
-        "textLength": 335
-      },
-      "outputs": {
-        "category": "Compensation Issue",
-        "risk": "Medium",
-        "confidence": 80,
-        "importantTerms": [
-          "Compensation",
-          "Market Value"
-        ]
-      }
-    },
-    {
-      "id": "PRED-0195",
-      "parcelId": "126/4",
-      "projectId": "unassigned",
-      "timestamp": "2026-09-01",
-      "type": "NLP",
-      "inputs": {
-        "textLength": 7
-      },
-      "outputs": {
-        "category": "Other",
-        "risk": "Low",
-        "confidence": 75,
-        "importantTerms": [
-          "Objection",
-          "Landowner"
-        ]
-      }
-    },
-    {
-      "id": "PRED-1532",
-      "parcelId": "manual-input",
-      "projectId": "unassigned",
-      "timestamp": "2026-08-31",
-      "type": "Delay",
-      "inputs": {
-        "landArea": 5.4,
-        "ownersCount": 4,
-        "ownershipDispute": false,
-        "documentsComplete": true,
-        "previousDelay": false,
-        "distanceFromProject": 3.5
-      },
-      "outputs": {
-        "delayProbability": 72,
-        "riskLevel": "High",
-        "predictedDelayDays": 105
-      }
-    },
-    {
-      "id": "PRED-7134",
-      "parcelId": "LA1043",
-      "projectId": "unassigned",
-      "timestamp": "2026-08-31",
-      "type": "NLP",
-      "inputs": {
-        "textLength": 18
-      },
-      "outputs": {
-        "category": "Other",
-        "risk": "Low",
-        "confidence": 75,
-        "importantTerms": [
-          "Objection",
-          "Landowner"
-        ]
-      }
-    }
-  ]
+  "predictions": []
 }

@@ -30,7 +30,7 @@ export interface LandParcel {
   landArea: number; // in Acres
   landType: 'Agricultural' | 'Residential' | 'Commercial' | 'Industrial' | 'Barren';
   ownersCount: number;
-  ownershipStatus?: 'Clear Title' | 'Under Verification' | 'Disputed' | 'Joint Family Title';
+  ownershipStatus?: 'Clear Title' | 'Under Verification' | 'Disputed' | 'Joint Family Title' | 'Verified';
   ownershipDispute: boolean;
   documentsComplete: boolean;
   legalStatus?: 'Clear' | 'Notice Issued' | 'Section-15 Objection' | 'Court Stay Order';
@@ -55,6 +55,16 @@ export interface LandParcel {
   costOverrunPercentage?: number; // 0-100
   legalRiskProbability?: number; // 0-100
   legalRiskLevel?: 'Low' | 'Medium' | 'High' | 'Critical';
+  
+  // GIS & Spatial Data
+  ownerName?: string;
+  area?: number;
+  areaUnit?: string;
+  latitude?: number;
+  longitude?: number;
+  location?: string;
+  polygon?: [number, number][];
+  riskScore?: number; // 0-100
   
   // Objection / NLP details
   nlpCategory?: string;

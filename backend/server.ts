@@ -27,6 +27,33 @@ if (!fs.existsSync(DB_DIR)) {
 }
 
 // Prediction models helper functions
+function calculateRiskScore(parcel: Partial<LandParcel>): { score: number; level: 'Low' | 'Medium' | 'High' } {
+  let score = 20;
+
+  if (parcel.riskScore !== undefined && parcel.riskScore !== null) {
+    score = Number(parcel.riskScore);
+  } else if (parcel.delayProbability !== undefined) {
+    score = Number(parcel.delayProbability);
+  } else {
+    if (parcel.ownershipStatus === 'Disputed' || parcel.ownershipDispute) score += 25;
+    if (parcel.documentsComplete === false) score += 15;
+    if (parcel.objectionFiled) score += 15;
+    if (parcel.courtCase) score += 20;
+    if (parcel.surveyCompleted === false) score += 10;
+    if (parcel.previousDelay) score += 10;
+    if (parcel.compensationStatus === 'Disputed') score += 15;
+    if (parcel.ownersCount && parcel.ownersCount > 4) score += 10;
+  }
+
+  score = Math.max(0, Math.min(100, Math.round(score)));
+
+  let level: 'Low' | 'Medium' | 'High' = 'Low';
+  if (score > 70) level = 'High';
+  else if (score > 40) level = 'Medium';
+
+  return { score, level };
+}
+
 function calculateDelay(parcel: Partial<LandParcel>) {
   const landArea = Number(parcel.landArea) || 1.0;
   const ownersCount = Number(parcel.ownersCount) || 1;
@@ -365,70 +392,12 @@ const initialProjects: Project[] = [
 
 const initialParcels: LandParcel[] = [
   {
-    id: "LA1021",
-    projectId: "NH-45",
-    district: "Kanchipuram",
-    landArea: 1.5,
-    landType: "Agricultural",
-    ownersCount: 2,
-    ownershipDispute: false,
-    documentsComplete: true,
-    compensationStatus: "Paid",
-    compensationAmount: 4500000,
-    objectionFiled: false,
-    courtCase: false,
-    surveyCompleted: true,
-    environmentalClearance: true,
-    governmentApproval: true,
-    acquisitionStage: "Possession",
-    previousDelay: false,
-    distanceFromProject: 1.2
-  },
-  {
-    id: "LA1022",
-    projectId: "NH-45",
-    district: "Kanchipuram",
-    landArea: 3.2,
-    landType: "Agricultural",
-    ownersCount: 4,
-    ownershipDispute: false,
-    documentsComplete: true,
-    compensationStatus: "Pending",
-    compensationAmount: 9600000,
-    objectionFiled: false,
-    courtCase: false,
-    surveyCompleted: true,
-    environmentalClearance: true,
-    governmentApproval: true,
-    acquisitionStage: "Agreement",
-    previousDelay: false,
-    distanceFromProject: 2.5
-  },
-  {
-    id: "LA1023",
-    projectId: "NH-45",
-    district: "Kanchipuram",
-    landArea: 2.1,
-    landType: "Commercial",
-    ownersCount: 1,
-    ownershipDispute: false,
-    documentsComplete: false,
-    compensationStatus: "Pending",
-    compensationAmount: 12000000,
-    objectionFiled: true,
-    courtCase: false,
-    surveyCompleted: true,
-    environmentalClearance: true,
-    governmentApproval: true,
-    acquisitionStage: "Negotiation",
-    previousDelay: true,
-    distanceFromProject: 0.5
-  },
-  {
     id: "LA1024",
     projectId: "NH-45",
     district: "Villupuram",
     landArea: 2.4,
+    area: 2.4,
+    areaUnit: "Acres",
     landType: "Agricultural",
     ownersCount: 3,
     ownershipDispute: true,
@@ -436,333 +405,713 @@ const initialParcels: LandParcel[] = [
     compensationStatus: "Pending",
     compensationAmount: 850000,
     objectionFiled: true,
-    courtCase: true,
+    courtCase: false,
     surveyCompleted: true,
-    environmentalClearance: false,
-    governmentApproval: true,
+    environmentalClearance: true,
+    governmentApproval: false,
     acquisitionStage: "Negotiation",
     previousDelay: true,
-    distanceFromProject: 4.2
+    distanceFromProject: 0.5,
+    predictedDelayDays: 75,
+    delayProbability: 82,
+    riskScore: 82,
+    riskLevel: "High",
+    location: "Koliyanur, Villupuram, Tamil Nadu",
+    surveyNumber: "124/2",
+    ownershipStatus: "Private",
+    latitude: 11.9377,
+    longitude: 79.4831,
+    polygon: [
+      [11.9367, 79.4821],
+      [11.9367, 79.4841],
+      [11.9387, 79.4841],
+      [11.9387, 79.4821],
+      [11.9367, 79.4821]
+    ]
   },
   {
     id: "LA1025",
     projectId: "NH-45",
-    district: "Kanchipuram",
-    landArea: 0.8,
-    landType: "Residential",
-    ownersCount: 6,
-    ownershipDispute: true,
-    documentsComplete: false,
-    compensationStatus: "Disputed",
-    compensationAmount: 3200000,
-    objectionFiled: true,
-    courtCase: true,
+    district: "Villupuram",
+    landArea: 1.8,
+    area: 1.8,
+    areaUnit: "Acres",
+    landType: "Agricultural",
+    ownersCount: 2,
+    ownershipDispute: false,
+    documentsComplete: true,
+    compensationStatus: "Paid",
+    compensationAmount: 620000,
+    objectionFiled: false,
+    courtCase: false,
     surveyCompleted: true,
     environmentalClearance: true,
     governmentApproval: true,
-    acquisitionStage: "Compensation",
-    previousDelay: true,
-    distanceFromProject: 0.2
+    acquisitionStage: "Possession",
+    previousDelay: false,
+    distanceFromProject: 0.8,
+    predictedDelayDays: 25,
+    delayProbability: 22,
+    riskScore: 22,
+    riskLevel: "Low",
+    location: "Valavanur, Villupuram, Tamil Nadu",
+    surveyNumber: "125/3",
+    ownershipStatus: "Joint Family Title",
+    latitude: 11.9389,
+    longitude: 79.4875,
+    polygon: [
+      [11.9381, 79.4865],
+      [11.9381, 79.4885],
+      [11.9397, 79.4885],
+      [11.9397, 79.4865],
+      [11.9381, 79.4865]
+    ]
   },
   {
     id: "LA1026",
     projectId: "NH-48",
-    district: "Villupuram",
-    landArea: 5.5,
+    district: "Kanchipuram",
+    landArea: 3.2,
+    area: 3.2,
+    areaUnit: "Acres",
     landType: "Agricultural",
-    ownersCount: 5,
+    ownersCount: 4,
     ownershipDispute: true,
-    documentsComplete: true,
+    documentsComplete: false,
     compensationStatus: "Pending",
-    compensationAmount: 11000000,
+    compensationAmount: 1120000,
     objectionFiled: true,
-    courtCase: false,
+    courtCase: true,
     surveyCompleted: true,
-    environmentalClearance: true,
+    environmentalClearance: false,
     governmentApproval: false,
-    acquisitionStage: "Negotiation",
-    previousDelay: false,
-    distanceFromProject: 8.5
+    acquisitionStage: "Objection",
+    previousDelay: true,
+    distanceFromProject: 1.2,
+    predictedDelayDays: 110,
+    delayProbability: 85,
+    riskScore: 85,
+    riskLevel: "High",
+    location: "Oragadam, Kanchipuram, Tamil Nadu",
+    surveyNumber: "126/4",
+    ownershipStatus: "Disputed",
+    latitude: 12.8342,
+    longitude: 79.7036,
+    polygon: [
+      [12.8332, 79.7026],
+      [12.8332, 79.7046],
+      [12.8352, 79.7046],
+      [12.8352, 79.7026],
+      [12.8332, 79.7026]
+    ]
   },
   {
     id: "LA1027",
-    projectId: "NH-48",
-    district: "Villupuram",
-    landArea: 4.1,
-    landType: "Barren",
+    projectId: "NH-32",
+    district: "Chengalpattu",
+    landArea: 1.5,
+    area: 1.5,
+    areaUnit: "Acres",
+    landType: "Residential",
     ownersCount: 2,
     ownershipDispute: false,
     documentsComplete: true,
-    compensationStatus: "Paid",
-    compensationAmount: 4100000,
-    objectionFiled: false,
+    compensationStatus: "Pending",
+    compensationAmount: 950000,
+    objectionFiled: true,
     courtCase: false,
     surveyCompleted: true,
     environmentalClearance: true,
     governmentApproval: true,
-    acquisitionStage: "Possession",
+    acquisitionStage: "Negotiation",
     previousDelay: false,
-    distanceFromProject: 12.0
+    distanceFromProject: 0.4,
+    predictedDelayDays: 55,
+    delayProbability: 48,
+    riskScore: 48,
+    riskLevel: "Medium",
+    location: "Singaperumal Koil, Chengalpattu, Tamil Nadu",
+    surveyNumber: "127/2",
+    ownershipStatus: "Verified",
+    latitude: 12.6939,
+    longitude: 79.9757,
+    polygon: [
+      [12.6929, 79.9747],
+      [12.6929, 79.9767],
+      [12.6949, 79.9767],
+      [12.6949, 79.9747],
+      [12.6929, 79.9747]
+    ]
   },
   {
     id: "LA1028",
-    projectId: "NH-48",
-    district: "Villupuram",
-    landArea: 12.0,
+    projectId: "NH-81",
+    district: "Cuddalore",
+    landArea: 4.1,
+    area: 4.1,
+    areaUnit: "Acres",
     landType: "Agricultural",
-    ownersCount: 12,
-    ownershipDispute: true,
-    documentsComplete: false,
-    compensationStatus: "Disputed",
-    compensationAmount: 24000000,
-    objectionFiled: true,
-    courtCase: true,
-    surveyCompleted: true,
-    environmentalClearance: false,
-    governmentApproval: false,
-    acquisitionStage: "Survey",
-    previousDelay: true,
-    distanceFromProject: 1.5
-  },
-  {
-    id: "LA1029",
-    projectId: "NH-32",
-    district: "Salem",
-    landArea: 1.8,
-    landType: "Agricultural",
-    ownersCount: 2,
-    ownershipDispute: false,
-    documentsComplete: true,
-    compensationStatus: "Paid",
-    compensationAmount: 3600000,
-    objectionFiled: false,
-    courtCase: false,
-    surveyCompleted: true,
-    environmentalClearance: true,
-    governmentApproval: true,
-    acquisitionStage: "Possession",
-    previousDelay: false,
-    distanceFromProject: 3.1
-  },
-  {
-    id: "LA1030",
-    projectId: "NH-32",
-    district: "Salem",
-    landArea: 2.2,
-    landType: "Agricultural",
-    ownersCount: 3,
-    ownershipDispute: false,
-    documentsComplete: true,
-    compensationStatus: "Pending",
-    compensationAmount: 4400000,
-    objectionFiled: false,
-    courtCase: false,
-    surveyCompleted: true,
-    environmentalClearance: true,
-    governmentApproval: true,
-    acquisitionStage: "Agreement",
-    previousDelay: false,
-    distanceFromProject: 5.0
-  },
-  {
-    id: "LA1031",
-    projectId: "NH-32",
-    district: "Salem",
-    landArea: 0.9,
-    landType: "Residential",
-    ownersCount: 1,
-    ownershipDispute: false,
-    documentsComplete: false,
-    compensationStatus: "Pending",
-    compensationAmount: 1800000,
-    objectionFiled: false,
-    courtCase: false,
-    surveyCompleted: true,
-    environmentalClearance: true,
-    governmentApproval: true,
-    acquisitionStage: "Notification",
-    previousDelay: false,
-    distanceFromProject: 0.6
-  },
-  {
-    id: "LA1032",
-    projectId: "NH-66",
-    district: "Nagapattinam",
-    landArea: 6.8,
-    landType: "Agricultural",
-    ownersCount: 8,
-    ownershipDispute: true,
-    documentsComplete: true,
-    compensationStatus: "Pending",
-    compensationAmount: 13600000,
-    objectionFiled: true,
-    courtCase: false,
-    surveyCompleted: true,
-    environmentalClearance: false,
-    governmentApproval: true,
-    acquisitionStage: "Negotiation",
-    previousDelay: true,
-    distanceFromProject: 0.9
-  },
-  {
-    id: "LA1033",
-    projectId: "NH-66",
-    district: "Nagapattinam",
-    landArea: 1.2,
-    landType: "Barren",
-    ownersCount: 1,
-    ownershipDispute: false,
-    documentsComplete: true,
-    compensationStatus: "Paid",
-    compensationAmount: 1200000,
-    objectionFiled: false,
-    courtCase: false,
-    surveyCompleted: true,
-    environmentalClearance: true,
-    governmentApproval: true,
-    acquisitionStage: "Possession",
-    previousDelay: false,
-    distanceFromProject: 15.2
-  },
-  {
-    id: "LA1034",
-    projectId: "NH-66",
-    district: "Nagapattinam",
-    landArea: 3.5,
-    landType: "Agricultural",
-    ownersCount: 4,
-    ownershipDispute: false,
-    documentsComplete: true,
-    compensationStatus: "Pending",
-    compensationAmount: 7000000,
-    objectionFiled: false,
-    courtCase: false,
-    surveyCompleted: true,
-    environmentalClearance: true,
-    governmentApproval: false,
-    acquisitionStage: "Survey",
-    previousDelay: false,
-    distanceFromProject: 6.4
-  },
-  {
-    id: "LA1035",
-    projectId: "NH-95",
-    district: "Madurai",
-    landArea: 8.2,
-    landType: "Agricultural",
-    ownersCount: 15,
-    ownershipDispute: true,
-    documentsComplete: false,
-    compensationStatus: "Disputed",
-    compensationAmount: 16400000,
-    objectionFiled: true,
-    courtCase: true,
-    surveyCompleted: true,
-    environmentalClearance: false,
-    governmentApproval: false,
-    acquisitionStage: "Negotiation",
-    previousDelay: true,
-    distanceFromProject: 2.1
-  },
-  {
-    id: "LA1036",
-    projectId: "NH-95",
-    district: "Madurai",
-    landArea: 2.0,
-    landType: "Industrial",
-    ownersCount: 2,
-    ownershipDispute: false,
-    documentsComplete: true,
-    compensationStatus: "Pending",
-    compensationAmount: 18000000,
-    objectionFiled: true,
-    courtCase: false,
-    surveyCompleted: true,
-    environmentalClearance: true,
-    governmentApproval: true,
-    acquisitionStage: "Notification",
-    previousDelay: false,
-    distanceFromProject: 1.1
-  },
-  {
-    id: "LA1037",
-    projectId: "NH-95",
-    district: "Madurai",
-    landArea: 4.8,
-    landType: "Agricultural",
-    ownersCount: 3,
-    ownershipDispute: false,
-    documentsComplete: false,
-    compensationStatus: "Pending",
-    compensationAmount: 9600000,
-    objectionFiled: false,
-    courtCase: false,
-    surveyCompleted: true,
-    environmentalClearance: true,
-    governmentApproval: false,
-    acquisitionStage: "Negotiation",
-    previousDelay: true,
-    distanceFromProject: 3.8
-  },
-  {
-    id: "LA1038",
-    projectId: "NH-45",
-    district: "Kanchipuram",
-    landArea: 2.7,
-    landType: "Agricultural",
-    ownersCount: 2,
-    ownershipDispute: false,
-    documentsComplete: true,
-    compensationStatus: "Paid",
-    compensationAmount: 5400000,
-    objectionFiled: false,
-    courtCase: false,
-    surveyCompleted: true,
-    environmentalClearance: true,
-    governmentApproval: true,
-    acquisitionStage: "Possession",
-    previousDelay: false,
-    distanceFromProject: 2.3
-  },
-  {
-    id: "LA1039",
-    projectId: "NH-48",
-    district: "Villupuram",
-    landArea: 1.9,
-    landType: "Agricultural",
-    ownersCount: 3,
-    ownershipDispute: false,
-    documentsComplete: true,
-    compensationStatus: "Pending",
-    compensationAmount: 3800000,
-    objectionFiled: false,
-    courtCase: false,
-    surveyCompleted: true,
-    environmentalClearance: true,
-    governmentApproval: true,
-    acquisitionStage: "Compensation",
-    previousDelay: false,
-    distanceFromProject: 5.4
-  },
-  {
-    id: "LA1040",
-    projectId: "NH-95",
-    district: "Madurai",
-    landArea: 3.4,
-    landType: "Residential",
     ownersCount: 5,
     ownershipDispute: true,
     documentsComplete: false,
-    compensationStatus: "Disputed",
-    compensationAmount: 6800000,
+    compensationStatus: "Pending",
+    compensationAmount: 1450000,
+    objectionFiled: true,
+    courtCase: false,
+    surveyCompleted: false,
+    environmentalClearance: true,
+    governmentApproval: false,
+    acquisitionStage: "Negotiation",
+    previousDelay: true,
+    distanceFromProject: 1.5,
+    predictedDelayDays: 130,
+    delayProbability: 90,
+    riskScore: 90,
+    riskLevel: "High",
+    location: "Panruti, Cuddalore, Tamil Nadu",
+    surveyNumber: "128/3",
+    ownershipStatus: "Private",
+    latitude: 11.7480,
+    longitude: 79.5514,
+    polygon: [
+      [11.7470, 79.5504],
+      [11.7470, 79.5524],
+      [11.7490, 79.5524],
+      [11.7490, 79.5504],
+      [11.7470, 79.5504]
+    ]
+  },
+  {
+    id: "LA1029",
+    projectId: "NH-83",
+    district: "Tiruchirappalli",
+    landArea: 2.0,
+    area: 2.0,
+    areaUnit: "Acres",
+    landType: "Commercial",
+    ownersCount: 1,
+    ownershipDispute: false,
+    documentsComplete: true,
+    compensationStatus: "Paid",
+    compensationAmount: 1250000,
+    objectionFiled: false,
+    courtCase: false,
+    surveyCompleted: true,
+    environmentalClearance: true,
+    governmentApproval: true,
+    acquisitionStage: "Possession",
+    previousDelay: false,
+    distanceFromProject: 0.7,
+    predictedDelayDays: 20,
+    delayProbability: 18,
+    riskScore: 18,
+    riskLevel: "Low",
+    location: "Samayapuram, Tiruchirappalli, Tamil Nadu",
+    surveyNumber: "129/4",
+    ownershipStatus: "Joint Family Title",
+    latitude: 10.8905,
+    longitude: 78.7347,
+    polygon: [
+      [10.8895, 78.7337],
+      [10.8895, 78.7357],
+      [10.8915, 78.7357],
+      [10.8915, 78.7337],
+      [10.8895, 78.7337]
+    ]
+  },
+  {
+    id: "LA1030",
+    projectId: "NH-79",
+    district: "Salem",
+    landArea: 3.6,
+    area: 3.6,
+    areaUnit: "Acres",
+    landType: "Agricultural",
+    ownersCount: 6,
+    ownershipDispute: true,
+    documentsComplete: false,
+    compensationStatus: "Pending",
+    compensationAmount: 1320000,
+    objectionFiled: true,
+    courtCase: true,
+    surveyCompleted: true,
+    environmentalClearance: true,
+    governmentApproval: false,
+    acquisitionStage: "Objection",
+    previousDelay: true,
+    distanceFromProject: 1.0,
+    predictedDelayDays: 145,
+    delayProbability: 95,
+    riskScore: 95,
+    riskLevel: "High",
+    location: "Ayothiapattinam, Salem, Tamil Nadu",
+    surveyNumber: "130/2",
+    ownershipStatus: "Disputed",
+    latitude: 11.66345,
+    longitude: 78.14475,
+    polygon: [
+      [11.66245, 78.14375],
+      [11.66245, 78.14575],
+      [11.66445, 78.14575],
+      [11.66445, 78.14375],
+      [11.66245, 78.14375]
+    ]
+  },
+  {
+    id: "LA1031",
+    projectId: "NH-44",
+    district: "Madurai",
+    landArea: 2.7,
+    area: 2.7,
+    areaUnit: "Acres",
+    landType: "Agricultural",
+    ownersCount: 3,
+    ownershipDispute: false,
+    documentsComplete: false,
+    compensationStatus: "Pending",
+    compensationAmount: 880000,
+    objectionFiled: true,
+    courtCase: false,
+    surveyCompleted: true,
+    environmentalClearance: true,
+    governmentApproval: false,
+    acquisitionStage: "Negotiation",
+    previousDelay: false,
+    distanceFromProject: 0.9,
+    predictedDelayDays: 80,
+    delayProbability: 76,
+    riskScore: 76,
+    riskLevel: "High",
+    location: "Alanganallur, Madurai, Tamil Nadu",
+    surveyNumber: "131/3",
+    ownershipStatus: "Verified",
+    latitude: 9.98555,
+    longitude: 78.0988,
+    polygon: [
+      [9.98455, 78.0978],
+      [9.98455, 78.0998],
+      [9.98655, 78.0998],
+      [9.98655, 78.0978],
+      [9.98455, 78.0978]
+    ]
+  },
+  {
+    id: "LA1032",
+    projectId: "NH-85",
+    district: "Thoothukudi",
+    landArea: 5.0,
+    area: 5.0,
+    areaUnit: "Acres",
+    landType: "Agricultural",
+    ownersCount: 7,
+    ownershipDispute: true,
+    documentsComplete: false,
+    compensationStatus: "Pending",
+    compensationAmount: 1780000,
     objectionFiled: true,
     courtCase: true,
     surveyCompleted: false,
     environmentalClearance: false,
     governmentApproval: false,
-    acquisitionStage: "Survey",
+    acquisitionStage: "Objection",
     previousDelay: true,
-    distanceFromProject: 0.8
+    distanceFromProject: 1.8,
+    predictedDelayDays: 165,
+    delayProbability: 98,
+    riskScore: 98,
+    riskLevel: "High",
+    location: "Srivaikuntam, Thoothukudi, Tamil Nadu",
+    surveyNumber: "132/4",
+    ownershipStatus: "Private",
+    latitude: 8.6242,
+    longitude: 77.9148,
+    polygon: [
+      [8.6232, 77.9138],
+      [8.6232, 77.9158],
+      [8.6252, 77.9158],
+      [8.6252, 77.9138],
+      [8.6232, 77.9138]
+    ]
+  },
+  {
+    id: "LA1033",
+    projectId: "NH-38",
+    district: "Dindigul",
+    landArea: 1.2,
+    area: 1.2,
+    areaUnit: "Acres",
+    landType: "Residential",
+    ownersCount: 2,
+    ownershipDispute: false,
+    documentsComplete: true,
+    compensationStatus: "Paid",
+    compensationAmount: 540000,
+    objectionFiled: false,
+    courtCase: false,
+    surveyCompleted: true,
+    environmentalClearance: true,
+    governmentApproval: true,
+    acquisitionStage: "Possession",
+    previousDelay: false,
+    distanceFromProject: 0.3,
+    predictedDelayDays: 15,
+    delayProbability: 12,
+    riskScore: 12,
+    riskLevel: "Low",
+    location: "Vedasandur, Dindigul, Tamil Nadu",
+    surveyNumber: "133/2",
+    ownershipStatus: "Joint Family Title",
+    latitude: 10.5285,
+    longitude: 77.9456,
+    polygon: [
+      [10.5275, 77.9446],
+      [10.5275, 77.9466],
+      [10.5295, 77.9466],
+      [10.5295, 77.9446],
+      [10.5275, 77.9446]
+    ]
+  },
+  {
+    id: "LA1034",
+    projectId: "NH-181",
+    district: "Coimbatore",
+    landArea: 2.9,
+    area: 2.9,
+    areaUnit: "Acres",
+    landType: "Agricultural",
+    ownersCount: 4,
+    ownershipDispute: true,
+    documentsComplete: false,
+    compensationStatus: "Pending",
+    compensationAmount: 1040000,
+    objectionFiled: true,
+    courtCase: false,
+    surveyCompleted: true,
+    environmentalClearance: true,
+    governmentApproval: false,
+    acquisitionStage: "Negotiation",
+    previousDelay: true,
+    distanceFromProject: 0.6,
+    predictedDelayDays: 85,
+    delayProbability: 91,
+    riskScore: 91,
+    riskLevel: "High",
+    location: "Karamadai, Coimbatore, Tamil Nadu",
+    surveyNumber: "134/3",
+    ownershipStatus: "Verified",
+    latitude: 11.2451,
+    longitude: 76.9558,
+    polygon: [
+      [11.2441, 76.9548],
+      [11.2441, 76.9568],
+      [11.2461, 76.9568],
+      [11.2461, 76.9548],
+      [11.2441, 76.9548]
+    ]
+  },
+  {
+    id: "LA1035",
+    projectId: "NH-785",
+    district: "Madurai",
+    landArea: 3.8,
+    area: 3.8,
+    areaUnit: "Acres",
+    landType: "Agricultural",
+    ownersCount: 5,
+    ownershipDispute: true,
+    documentsComplete: false,
+    compensationStatus: "Pending",
+    compensationAmount: 1560000,
+    objectionFiled: true,
+    courtCase: true,
+    surveyCompleted: true,
+    environmentalClearance: false,
+    governmentApproval: false,
+    acquisitionStage: "Objection",
+    previousDelay: true,
+    distanceFromProject: 1.4,
+    predictedDelayDays: 150,
+    delayProbability: 96,
+    riskScore: 96,
+    riskLevel: "High",
+    location: "Melur, Madurai, Tamil Nadu",
+    surveyNumber: "135/4",
+    ownershipStatus: "Disputed",
+    latitude: 10.0347,
+    longitude: 78.3300,
+    polygon: [
+      [10.0337, 78.3290],
+      [10.0337, 78.3310],
+      [10.0357, 78.3310],
+      [10.0357, 78.3290],
+      [10.0337, 78.3290]
+    ]
+  },
+  {
+    id: "LA1036",
+    projectId: "NH-716",
+    district: "Vellore",
+    landArea: 2.1,
+    area: 2.1,
+    areaUnit: "Acres",
+    landType: "Commercial",
+    ownersCount: 2,
+    ownershipDispute: false,
+    documentsComplete: true,
+    compensationStatus: "Pending",
+    compensationAmount: 1180000,
+    objectionFiled: false,
+    courtCase: false,
+    surveyCompleted: true,
+    environmentalClearance: true,
+    governmentApproval: true,
+    acquisitionStage: "Negotiation",
+    previousDelay: false,
+    distanceFromProject: 0.5,
+    predictedDelayDays: 45,
+    delayProbability: 43,
+    riskScore: 43,
+    riskLevel: "Medium",
+    location: "Katpadi, Vellore, Tamil Nadu",
+    surveyNumber: "136/2",
+    ownershipStatus: "Private",
+    latitude: 12.9708,
+    longitude: 79.1366,
+    polygon: [
+      [12.9698, 79.1356],
+      [12.9698, 79.1376],
+      [12.9718, 79.1376],
+      [12.9718, 79.1356],
+      [12.9698, 79.1356]
+    ]
+  },
+  {
+    id: "LA1037",
+    projectId: "NH-332",
+    district: "Nagapattinam",
+    landArea: 4.5,
+    area: 4.5,
+    areaUnit: "Acres",
+    landType: "Agricultural",
+    ownersCount: 6,
+    ownershipDispute: true,
+    documentsComplete: false,
+    compensationStatus: "Pending",
+    compensationAmount: 1490000,
+    objectionFiled: true,
+    courtCase: false,
+    surveyCompleted: false,
+    environmentalClearance: true,
+    governmentApproval: false,
+    acquisitionStage: "Objection",
+    previousDelay: true,
+    distanceFromProject: 2.0,
+    predictedDelayDays: 120,
+    delayProbability: 88,
+    riskScore: 88,
+    riskLevel: "High",
+    location: "Vedaranyam, Nagapattinam, Tamil Nadu",
+    surveyNumber: "137/3",
+    ownershipStatus: "Joint Family Title",
+    latitude: 10.3720,
+    longitude: 79.8468,
+    polygon: [
+      [10.3710, 79.8458],
+      [10.3710, 79.8478],
+      [10.3730, 79.8478],
+      [10.3730, 79.8458],
+      [10.3710, 79.8458]
+    ]
+  },
+  {
+    id: "LA1038",
+    projectId: "NH-83",
+    district: "Thanjavur",
+    landArea: 2.6,
+    area: 2.6,
+    areaUnit: "Acres",
+    landType: "Agricultural",
+    ownersCount: 3,
+    ownershipDispute: false,
+    documentsComplete: false,
+    compensationStatus: "Pending",
+    compensationAmount: 910000,
+    objectionFiled: true,
+    courtCase: false,
+    surveyCompleted: true,
+    environmentalClearance: true,
+    governmentApproval: false,
+    acquisitionStage: "Negotiation",
+    previousDelay: false,
+    distanceFromProject: 0.9,
+    predictedDelayDays: 70,
+    delayProbability: 68,
+    riskScore: 68,
+    riskLevel: "Medium",
+    location: "Vallam, Thanjavur, Tamil Nadu",
+    surveyNumber: "138/4",
+    ownershipStatus: "Verified",
+    latitude: 10.7232,
+    longitude: 79.0571,
+    polygon: [
+      [10.7222, 79.0561],
+      [10.7222, 79.0581],
+      [10.7242, 79.0581],
+      [10.7242, 79.0561],
+      [10.7222, 79.0561]
+    ]
+  },
+  {
+    id: "LA1039",
+    projectId: "NH-40",
+    district: "Ranipet",
+    landArea: 1.9,
+    area: 1.9,
+    areaUnit: "Acres",
+    landType: "Residential",
+    ownersCount: 2,
+    ownershipDispute: false,
+    documentsComplete: true,
+    compensationStatus: "Paid",
+    compensationAmount: 760000,
+    objectionFiled: false,
+    courtCase: false,
+    surveyCompleted: true,
+    environmentalClearance: true,
+    governmentApproval: true,
+    acquisitionStage: "Possession",
+    previousDelay: false,
+    distanceFromProject: 0.4,
+    predictedDelayDays: 30,
+    delayProbability: 27,
+    riskScore: 27,
+    riskLevel: "Low",
+    location: "Walajapet, Ranipet, Tamil Nadu",
+    surveyNumber: "139/2",
+    ownershipStatus: "Verified",
+    latitude: 12.92875,
+    longitude: 79.3576,
+    polygon: [
+      [12.92775, 79.3566],
+      [12.92775, 79.3586],
+      [12.92975, 79.3586],
+      [12.92975, 79.3566],
+      [12.92775, 79.3566]
+    ]
+  },
+  {
+    id: "LA1040",
+    projectId: "NH-744",
+    district: "Virudhunagar",
+    landArea: 3.3,
+    area: 3.3,
+    areaUnit: "Acres",
+    landType: "Agricultural",
+    ownersCount: 4,
+    ownershipDispute: true,
+    documentsComplete: false,
+    compensationStatus: "Pending",
+    compensationAmount: 1210000,
+    objectionFiled: true,
+    courtCase: true,
+    surveyCompleted: true,
+    environmentalClearance: false,
+    governmentApproval: false,
+    acquisitionStage: "Objection",
+    previousDelay: true,
+    distanceFromProject: 1.3,
+    predictedDelayDays: 105,
+    delayProbability: 89,
+    riskScore: 89,
+    riskLevel: "High",
+    location: "Aruppukkottai, Virudhunagar, Tamil Nadu",
+    surveyNumber: "140/3",
+    ownershipStatus: "Disputed",
+    latitude: 9.50995,
+    longitude: 78.09785,
+    polygon: [
+      [9.50895, 78.09685],
+      [9.50895, 78.09885],
+      [9.51095, 78.09885],
+      [9.51095, 78.09685],
+      [9.50895, 78.09685]
+    ]
+  },
+  {
+    id: "LA1041",
+    projectId: "NH-36",
+    district: "Perambalur",
+    landArea: 2.8,
+    area: 2.8,
+    areaUnit: "Acres",
+    landType: "Agricultural",
+    ownersCount: 3,
+    ownershipDispute: false,
+    documentsComplete: false,
+    compensationStatus: "Pending",
+    compensationAmount: 970000,
+    objectionFiled: true,
+    courtCase: false,
+    surveyCompleted: true,
+    environmentalClearance: true,
+    governmentApproval: true,
+    acquisitionStage: "Negotiation",
+    previousDelay: false,
+    distanceFromProject: 0.7,
+    predictedDelayDays: 65,
+    delayProbability: 72,
+    riskScore: 72,
+    riskLevel: "High",
+    location: "Veppanthattai, Perambalur, Tamil Nadu",
+    surveyNumber: "141/4",
+    ownershipStatus: "Joint Family Title",
+    latitude: 11.32115,
+    longitude: 78.8381,
+    polygon: [
+      [11.32015, 78.8371],
+      [11.32015, 78.8391],
+      [11.32215, 78.8391],
+      [11.32215, 78.8371],
+      [11.32015, 78.8371]
+    ]
+  },
+  {
+    id: "LA1042",
+    projectId: "NH-183",
+    district: "Theni",
+    landArea: 4.0,
+    area: 4.0,
+    areaUnit: "Acres",
+    landType: "Agricultural",
+    ownersCount: 5,
+    ownershipDispute: true,
+    documentsComplete: false,
+    compensationStatus: "Pending",
+    compensationAmount: 1380000,
+    objectionFiled: true,
+    courtCase: false,
+    surveyCompleted: true,
+    environmentalClearance: false,
+    governmentApproval: false,
+    acquisitionStage: "Objection",
+    previousDelay: true,
+    distanceFromProject: 1.6,
+    predictedDelayDays: 135,
+    delayProbability: 94,
+    riskScore: 94,
+    riskLevel: "High",
+    location: "Bodinayakanur, Theni, Tamil Nadu",
+    surveyNumber: "142/2",
+    ownershipStatus: "Verified",
+    latitude: 10.01235,
+    longitude: 77.34835,
+    polygon: [
+      [10.01135, 77.34735],
+      [10.01135, 77.34935],
+      [10.01335, 77.34935],
+      [10.01335, 77.34735],
+      [10.01135, 77.34735]
+    ]
   }
 ];
 
@@ -1059,7 +1408,300 @@ app.delete("/api/parcels/:id", (req, res) => {
   res.json({ success: true });
 });
 
-// 3. Early Warning Alerts API
+// Helper for GeoJSON Conversion
+function parcelToGeoJSON(parcel: any) {
+  const polygonCoords = parcel.polygon || [];
+  const geoJsonCoords = polygonCoords.map((pt: [number, number]) => [pt[1], pt[0]]);
+  if (geoJsonCoords.length > 0) {
+    const first = geoJsonCoords[0];
+    const last = geoJsonCoords[geoJsonCoords.length - 1];
+    if (first[0] !== last[0] || first[1] !== last[1]) {
+      geoJsonCoords.push([first[0], first[1]]);
+    }
+  }
+
+  const { score, level } = calculateRiskScore(parcel);
+
+  return {
+    type: "Feature",
+    properties: {
+      id: parcel.id,
+      surveyNumber: parcel.surveyNumber || parcel.id,
+      ownerName: parcel.ownerName || parcel.owner || "Sample Owner",
+      area: parcel.area || parcel.landArea || 1.0,
+      areaUnit: parcel.areaUnit || "Acres",
+      latitude: parcel.latitude || parcel.lat || 11.0168,
+      longitude: parcel.longitude || parcel.lng || 76.9558,
+      riskScore: parcel.riskScore !== undefined ? parcel.riskScore : score,
+      riskLevel: parcel.riskLevel || level,
+      ownershipStatus: parcel.ownershipStatus || "Verified",
+      location: parcel.location || parcel.village || parcel.district || "Sample Village"
+    },
+    geometry: {
+      type: "Polygon",
+      coordinates: [geoJsonCoords]
+    }
+  };
+}
+
+// 2b. Specialized Land Risk GIS API (/api/lands)
+app.get("/api/lands", (req, res) => {
+  const db = getDB();
+  const format = req.query.format;
+  if (format === "geojson") {
+    const featureCollection = {
+      type: "FeatureCollection",
+      features: db.parcels.map((p: any) => parcelToGeoJSON(p))
+    };
+    return res.json(featureCollection);
+  }
+  
+  // Return standard land parcels enriched with risk scores
+  const lands = db.parcels.map((p: any) => {
+    const { score, level } = calculateRiskScore(p);
+    return {
+      ...p,
+      surveyNumber: p.surveyNumber || p.id,
+      ownerName: p.ownerName || p.owner || "Sample Owner",
+      area: p.area || p.landArea || 1.0,
+      areaUnit: p.areaUnit || "Acres",
+      latitude: p.latitude || p.lat || 11.0168,
+      longitude: p.longitude || p.lng || 76.9558,
+      riskScore: p.riskScore !== undefined ? p.riskScore : score,
+      riskLevel: p.riskLevel || level,
+      ownershipStatus: p.ownershipStatus || "Verified",
+      location: p.location || p.village || p.district || "Sample Village"
+    };
+  });
+  res.json(lands);
+});
+
+app.get("/api/lands/risk/high", (req, res) => {
+  const db = getDB();
+  const highRiskLands = db.parcels.filter((p: any) => {
+    const { score, level } = calculateRiskScore(p);
+    return level === "High" || score > 70 || p.riskLevel === "High";
+  }).map((p: any) => {
+    const { score, level } = calculateRiskScore(p);
+    return {
+      ...p,
+      surveyNumber: p.surveyNumber || p.id,
+      ownerName: p.ownerName || p.owner || "Sample Owner",
+      area: p.area || p.landArea || 1.0,
+      areaUnit: p.areaUnit || "Acres",
+      latitude: p.latitude || p.lat || 11.0168,
+      longitude: p.longitude || p.lng || 76.9558,
+      riskScore: p.riskScore !== undefined ? p.riskScore : score,
+      riskLevel: "High",
+      ownershipStatus: p.ownershipStatus || "Verified",
+      location: p.location || p.village || p.district || "Sample Village"
+    };
+  });
+  res.json(highRiskLands);
+});
+
+app.get("/api/lands/:surveyNumber", (req, res) => {
+  const db = getDB();
+  const target = req.params.surveyNumber.toLowerCase();
+  const parcel = db.parcels.find((p: any) => 
+    (p.surveyNumber && p.surveyNumber.toLowerCase() === target) ||
+    (p.id && p.id.toLowerCase() === target)
+  );
+
+  if (!parcel) return res.status(404).json({ error: "Land parcel not found" });
+
+  const { score, level } = calculateRiskScore(parcel);
+  res.json({
+    ...parcel,
+    surveyNumber: parcel.surveyNumber || parcel.id,
+    ownerName: parcel.ownerName || parcel.owner || "Sample Owner",
+    area: parcel.area || parcel.landArea || 1.0,
+    areaUnit: parcel.areaUnit || "Acres",
+    latitude: parcel.latitude || parcel.lat || 11.0168,
+    longitude: parcel.longitude || parcel.lng || 76.9558,
+    riskScore: parcel.riskScore !== undefined ? parcel.riskScore : score,
+    riskLevel: parcel.riskLevel || level,
+    ownershipStatus: parcel.ownershipStatus || "Verified",
+    location: parcel.location || parcel.village || parcel.district || "Sample Village",
+    geoJson: parcelToGeoJSON(parcel)
+  });
+});
+
+app.post("/api/lands", (req, res) => {
+  const db = getDB();
+  const landData = req.body;
+  const surveyNumber = landData.surveyNumber || `124/${db.parcels.length + 1}`;
+  const { score, level } = calculateRiskScore(landData);
+
+  const newParcel: any = {
+    id: `LA${Date.now().toString().slice(-4)}`,
+    projectId: landData.projectId || "NH-45",
+    district: landData.location || landData.district || "Kanchipuram",
+    surveyNumber: surveyNumber,
+    ownerName: landData.ownerName || "Sample Owner",
+    landArea: Number(landData.area) || 2.45,
+    area: Number(landData.area) || 2.45,
+    areaUnit: landData.areaUnit || "Acres",
+    latitude: Number(landData.latitude) || 11.0168,
+    longitude: Number(landData.longitude) || 76.9558,
+    polygon: landData.polygon || [
+      [11.0175, 76.9545],
+      [11.0180, 76.9560],
+      [11.0165, 76.9570],
+      [11.0158, 76.9552]
+    ],
+    riskScore: score,
+    riskLevel: level,
+    ownershipStatus: landData.ownershipStatus || "Verified",
+    location: landData.location || "Sample Village",
+    landType: landData.landType || "Agricultural",
+    ownersCount: landData.ownersCount || 1,
+    ownershipDispute: landData.ownershipStatus === "Disputed",
+    documentsComplete: true,
+    compensationStatus: "Pending",
+    compensationAmount: Number(landData.area || 2.45) * 1500000,
+    objectionFiled: false,
+    courtCase: false,
+    surveyCompleted: true,
+    environmentalClearance: true,
+    governmentApproval: true,
+    acquisitionStage: "Survey",
+    previousDelay: false,
+    distanceFromProject: 1.0
+  };
+
+  db.parcels.push(newParcel);
+  hydrateAndSaveDB(db.projects, db.parcels, db.alerts, db.documents, db.predictions);
+  res.status(201).json(newParcel);
+});
+
+app.put("/api/lands/:surveyNumber", (req, res) => {
+  const db = getDB();
+  const target = req.params.surveyNumber.toLowerCase();
+  const idx = db.parcels.findIndex((p: any) => 
+    (p.surveyNumber && p.surveyNumber.toLowerCase() === target) ||
+    (p.id && p.id.toLowerCase() === target)
+  );
+
+  if (idx === -1) return res.status(404).json({ error: "Land parcel not found" });
+
+  const updated = {
+    ...db.parcels[idx],
+    ...req.body
+  };
+
+  const { score, level } = calculateRiskScore(updated);
+  updated.riskScore = req.body.riskScore !== undefined ? req.body.riskScore : score;
+  updated.riskLevel = req.body.riskLevel || level;
+
+  db.parcels[idx] = updated;
+  hydrateAndSaveDB(db.projects, db.parcels, db.alerts, db.documents, db.predictions);
+  res.json(updated);
+});
+
+app.delete("/api/lands/:surveyNumber", (req, res) => {
+  const db = getDB();
+  const target = req.params.surveyNumber.toLowerCase();
+  const originalLen = db.parcels.length;
+  db.parcels = db.parcels.filter((p: any) => 
+    !(p.surveyNumber && p.surveyNumber.toLowerCase() === target) &&
+    !(p.id && p.id.toLowerCase() === target)
+  );
+
+  if (db.parcels.length === originalLen) {
+    return res.status(404).json({ error: "Land parcel not found" });
+  }
+
+  hydrateAndSaveDB(db.projects, db.parcels, db.alerts, db.documents, db.predictions);
+  res.json({ success: true });
+});
+
+app.post("/api/lands/upload-csv", (req, res) => {
+  const { csvContent } = req.body;
+  if (!csvContent) return res.status(400).json({ error: "CSV content is required" });
+
+  try {
+    const lines = csvContent.split("\n").map((l: string) => l.trim()).filter((l: string) => l.length > 0);
+    if (lines.length < 2) return res.status(400).json({ error: "CSV must contain headers and data rows" });
+
+    const headers = lines[0].split(",").map((h: string) => h.replace(/["\r]/g, "").trim());
+    const newLands: any[] = [];
+
+    lines.slice(1).forEach((line: string) => {
+      const cols = line.split(",").map((c: string) => c.replace(/["\r]/g, "").trim());
+      if (cols.length < 2) return;
+
+      const obj: Record<string, any> = {};
+      headers.forEach((h: string, idx: number) => {
+        obj[h] = cols[idx];
+      });
+
+      let polygonCoords: [number, number][] = [];
+      if (obj.polygon) {
+        try {
+          if (obj.polygon.startsWith("[")) {
+            polygonCoords = JSON.parse(obj.polygon);
+          } else {
+            polygonCoords = obj.polygon.split(";").map((pair: string) => {
+              const [lat, lng] = pair.split(":").length === 2 ? pair.split(":") : pair.split(",");
+              return [parseFloat(lat), parseFloat(lng)];
+            });
+          }
+        } catch (e) {
+          polygonCoords = [];
+        }
+      }
+
+      const lat = parseFloat(obj.latitude || "11.0168");
+      const lng = parseFloat(obj.longitude || "76.9558");
+
+      if (polygonCoords.length === 0) {
+        polygonCoords = [
+          [lat + 0.001, lng - 0.001],
+          [lat + 0.001, lng + 0.001],
+          [lat - 0.001, lng + 0.001],
+          [lat - 0.001, lng - 0.001]
+        ];
+      }
+
+      const landItem = {
+        id: `LA${Date.now().toString().slice(-4)}${Math.floor(Math.random() * 100)}`,
+        surveyNumber: obj.surveyNumber || `124/${newLands.length + 1}`,
+        ownerName: obj.ownerName || "Sample Owner",
+        area: parseFloat(obj.area || "2.45"),
+        landArea: parseFloat(obj.area || "2.45"),
+        areaUnit: obj.areaUnit || "Acres",
+        latitude: lat,
+        longitude: lng,
+        polygon: polygonCoords,
+        ownershipStatus: obj.ownershipStatus || "Verified",
+        location: obj.location || "Sample Village",
+        district: obj.district || "Coimbatore",
+        projectId: obj.projectId || "NH-45",
+        riskScore: parseInt(obj.riskScore || "30", 10)
+      };
+
+      const { score, level } = calculateRiskScore(landItem);
+      landItem.riskScore = landItem.riskScore || score;
+      landItem.riskLevel = level;
+
+      newLands.push(landItem);
+    });
+
+    const db = getDB();
+    db.parcels.push(...newLands);
+    hydrateAndSaveDB(db.projects, db.parcels, db.alerts, db.documents, db.predictions);
+
+    res.json({
+      success: true,
+      importedCount: newLands.length,
+      lands: newLands
+    });
+  } catch (err: any) {
+    res.status(500).json({ error: "Failed to process CSV: " + err.message });
+  }
+});
+
 app.get("/api/alerts", (req, res) => {
   const db = getDB();
   res.json(db.alerts);

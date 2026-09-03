@@ -123,3 +123,62 @@ export async function runManualPrediction(type: 'delay' | 'cost' | 'legal', inpu
   if (!res.ok) throw new Error(`Failed to calculate ${type} risk`);
   return res.json();
 }
+
+// Specialized GIS Land Risk APIs (/api/lands)
+export async function fetchLands(format?: string): Promise<any> {
+  const url = format ? `/api/lands?format=${format}` : "/api/lands";
+  const res = await fetch(url);
+  if (!res.ok) throw new Error("Failed to fetch lands");
+  return res.json();
+}
+
+export async function fetchLandBySurveyNumber(surveyNumber: string): Promise<any> {
+  const res = await fetch(`/api/lands/${encodeURIComponent(surveyNumber)}`);
+  if (!res.ok) throw new Error("Failed to fetch land details");
+  return res.json();
+}
+
+export async function fetchHighRiskLands(): Promise<any> {
+  const res = await fetch("/api/lands/risk/high");
+  if (!res.ok) throw new Error("Failed to fetch high-risk lands");
+  return res.json();
+}
+
+export async function createLand(landData: any): Promise<any> {
+  const res = await fetch("/api/lands", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(landData)
+  });
+  if (!res.ok) throw new Error("Failed to create land parcel");
+  return res.json();
+}
+
+export async function updateLand(surveyNumber: string, landData: any): Promise<any> {
+  const res = await fetch(`/api/lands/${encodeURIComponent(surveyNumber)}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(landData)
+  });
+  if (!res.ok) throw new Error("Failed to update land parcel");
+  return res.json();
+}
+
+export async function deleteLand(surveyNumber: string): Promise<any> {
+  const res = await fetch(`/api/lands/${encodeURIComponent(surveyNumber)}`, {
+    method: "DELETE"
+  });
+  if (!res.ok) throw new Error("Failed to delete land parcel");
+  return res.json();
+}
+
+export async function uploadLandCSV(csvContent: string): Promise<any> {
+  const res = await fetch("/api/lands/upload-csv", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ csvContent })
+  });
+  if (!res.ok) throw new Error("Failed to upload land CSV");
+  return res.json();
+}
+
