@@ -207,9 +207,9 @@ export default function ParcelsView({
 
           {/* FACTOR TO IMPACT RELATIONSHIP EXPLANATION */}
           <div className="p-4 bg-[#F8FAFC] rounded-[6px] border border-[#E2E8F0] space-y-3">
-            <h4 className="card-title flex items-center gap-2 text-[#0A192F]">
-              <Info className="w-4 h-4 text-[#2563EB]" />
-              <span>Why is this parcel at risk? (Factor → Impact Relationship)</span>
+            <h4 className="content-title-prominent flex items-center gap-2 text-[#0A192F]">
+              <Info className="w-4 h-4 text-[#2563EB] shrink-0" />
+              <span className="font-extrabold text-[17px] tracking-tight">Why is this parcel at risk? (Factor → Impact Relationship)</span>
             </h4>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-[14px]">

@@ -57,8 +57,26 @@ body {
 .card-title {
   font-family: 'Source Sans 3', sans-serif;
   font-size: 17px;
-  font-weight: 700;
+  font-weight: 800;
   color: #0A192F;
+  letter-spacing: -0.01em;
+}
+
+.content-title-prominent {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+  color: #0A192F;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+
+.content-subtext {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #334155;
+  line-height: 1.5;
 }
 
 .table-header {
