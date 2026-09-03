@@ -420,6 +420,8 @@ const initialParcels: LandParcel[] = [
     id: "LA1024",
     projectId: "NH-45",
     district: "Villupuram",
+    state: "Tamil Nadu",
+    ownerName: "R. Subramani & Bros",
     landArea: 2.4,
     area: 2.4,
     areaUnit: "Acres",
@@ -458,6 +460,8 @@ const initialParcels: LandParcel[] = [
     id: "LA1025",
     projectId: "NH-45",
     district: "Villupuram",
+    state: "Tamil Nadu",
+    ownerName: "K. Valarmathi",
     landArea: 1.8,
     area: 1.8,
     areaUnit: "Acres",
@@ -496,6 +500,8 @@ const initialParcels: LandParcel[] = [
     id: "LA1026",
     projectId: "NH-48",
     district: "Kanchipuram",
+    state: "Tamil Nadu",
+    ownerName: "M. Thangaraj",
     landArea: 3.2,
     area: 3.2,
     areaUnit: "Acres",
@@ -1267,14 +1273,22 @@ function getDB() {
 // 1. Projects API
 app.get("/api/projects", (req, res) => {
   const db = getDB();
-  res.json(db.projects);
+  const enriched = db.projects.map((p: any) => ({
+    ...p,
+    state: p.state || "Tamil Nadu",
+    landPending: p.landPending !== undefined ? p.landPending : Math.max(0, (p.landRequired || 100) - (p.landAcquired || 0))
+  }));
+  res.json(enriched);
 });
 
 app.get("/api/projects/:id", (req, res) => {
   const db = getDB();
   const project = db.projects.find((p: any) => p.id === req.params.id);
   if (!project) return res.status(404).json({ error: "Project not found" });
-  res.json(project);
+  res.json({
+    ...project,
+    state: project.state || "Tamil Nadu"
+  });
 });
 
 app.post("/api/projects", (req, res) => {
@@ -1282,10 +1296,12 @@ app.post("/api/projects", (req, res) => {
   const newProject: Project = {
     id: req.body.id || `PROJ-${Date.now().toString().slice(-4)}`,
     name: req.body.name,
+    state: req.body.state || "Tamil Nadu",
     district: req.body.district,
     type: req.body.type || "Highway",
     landRequired: Number(req.body.landRequired) || 0,
     landAcquired: Number(req.body.landAcquired) || 0,
+    landPending: Math.max(0, (Number(req.body.landRequired) || 0) - (Number(req.body.landAcquired) || 0)),
     progress: Number(req.body.progress) || 0,
     delayRisk: req.body.delayRisk || "Low",
     predictedDelay: Number(req.body.predictedDelay) || 0,
@@ -1330,7 +1346,33 @@ app.delete("/api/projects/:id", (req, res) => {
 // 2. Land Parcels API
 app.get("/api/parcels", (req, res) => {
   const db = getDB();
-  res.json(db.parcels);
+  const defaultOwners = [
+    "R. Subramani & Bros", "K. Valarmathi", "M. Thangaraj", "S. Anbazhagan",
+    "P. Kaliyaperumal", "R. Sundaramurthy", "V. Palanisamy", "A. Muthuramalingam",
+    "S. Shanmugavel", "C. Rajagopal", "K. Maruthachalam", "N. Karuppiah",
+    "G. Venkatesan", "T. Rajendran", "M. Swaminathan", "D. Jayachandran",
+    "S. Alagarsamy", "A. Periyasamy", "P. Ramasamy"
+  ];
+
+  const enriched = db.parcels.map((p: any, idx: number) => {
+    const { score, level } = calculateRiskScore(p);
+    return {
+      ...p,
+      surveyNumber: p.surveyNumber || p.id,
+      ownerName: p.ownerName || p.owner || defaultOwners[idx % defaultOwners.length],
+      area: p.area || p.landArea || 2.45,
+      areaUnit: p.areaUnit || "Acres",
+      state: p.state || "Tamil Nadu",
+      district: p.district || "Villupuram",
+      latitude: p.latitude || 11.9377,
+      longitude: p.longitude || 79.4831,
+      riskScore: p.riskScore !== undefined ? p.riskScore : score,
+      riskLevel: p.riskLevel || level,
+      ownershipStatus: p.ownershipStatus || "Verified",
+      location: p.location || `${p.district || "Villupuram"}, Tamil Nadu`
+    };
+  });
+  res.json(enriched);
 });
 
 app.get("/api/parcels/:id", (req, res) => {
