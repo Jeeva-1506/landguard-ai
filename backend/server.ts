@@ -321,72 +321,97 @@ const initialProjects: Project[] = [
   {
     id: "NH-45",
     name: "Chennai Outer Ring Road Extension",
+    state: "Tamil Nadu",
     district: "Kanchipuram",
     type: "Highway",
     landRequired: 120,
     landAcquired: 93.6,
+    landPending: 26.4,
     progress: 78,
     delayRisk: "High",
     predictedDelay: 75,
     costOverrun: 9.41,
     status: "Delayed",
-    estimatedCost: 1250000000 // 125 Cr
+    estimatedCost: 1250000000, // 125 Cr
+    startDate: "10 Mar 2024",
+    targetCompletionDate: "15 Aug 2026",
+    currentStage: "Objection"
   },
   {
     id: "NH-48",
     name: "Villupuram Six-Laning Highway",
+    state: "Tamil Nadu",
     district: "Villupuram",
     type: "Highway",
     landRequired: 200,
     landAcquired: 90,
+    landPending: 110.0,
     progress: 45,
     delayRisk: "Medium",
     predictedDelay: 62,
     costOverrun: 6.23,
     status: "Delayed",
-    estimatedCost: 1800000000 // 180 Cr
+    estimatedCost: 1800000000, // 180 Cr
+    startDate: "01 Jun 2024",
+    targetCompletionDate: "30 Nov 2026",
+    currentStage: "Survey & Verification"
   },
   {
     id: "NH-32",
-    name: "Salem Bypass Road Bypass Link",
+    name: "Salem Bypass Road Link",
+    state: "Tamil Nadu",
     district: "Salem",
     type: "Highway",
     landRequired: 80,
     landAcquired: 60,
+    landPending: 20.0,
     progress: 75,
     delayRisk: "Low",
     predictedDelay: 18,
     costOverrun: 1.12,
     status: "On Track",
-    estimatedCost: 950000000 // 95 Cr
+    estimatedCost: 950000000, // 95 Cr
+    startDate: "15 Jan 2025",
+    targetCompletionDate: "30 Dec 2026",
+    currentStage: "Notification"
   },
   {
     id: "NH-66",
     name: "Coastal Port Connectivity Highway",
+    state: "Tamil Nadu",
     district: "Nagapattinam",
     type: "Highway",
     landRequired: 150,
     landAcquired: 82.5,
+    landPending: 67.5,
     progress: 55,
     delayRisk: "Medium",
     predictedDelay: 54,
     costOverrun: 4.85,
     status: "Delayed",
-    estimatedCost: 1450000000 // 145 Cr
+    estimatedCost: 1450000000, // 145 Cr
+    startDate: "05 Nov 2024",
+    targetCompletionDate: "20 May 2027",
+    currentStage: "Objection"
   },
   {
     id: "NH-95",
     name: "Madurai Southern Ring Road",
+    state: "Tamil Nadu",
     district: "Madurai",
     type: "Highway",
     landRequired: 100,
     landAcquired: 30,
+    landPending: 70.0,
     progress: 30,
     delayRisk: "High",
     predictedDelay: 120,
     costOverrun: 12.30,
     status: "Critical",
-    estimatedCost: 1100000000 // 110 Cr
+    estimatedCost: 1100000000, // 110 Cr
+    startDate: "01 Feb 2024",
+    targetCompletionDate: "15 Oct 2026",
+    currentStage: "Objection"
   }
 ];
 
