@@ -659,6 +659,34 @@
       "costOverrunPercentage": 4,
       "legalRiskProbability": 10,
       "legalRiskLevel": "Low"
+    },
+    {
+      "id": "LA6189",
+      "projectId": "NH-45",
+      "district": "Kanchipuram",
+      "landArea": 2.5,
+      "landType": "Agricultural",
+      "ownersCount": 2,
+      "ownershipDispute": false,
+      "documentsComplete": true,
+      "compensationStatus": "Paid",
+      "compensationAmount": 1200001,
+      "objectionFiled": false,
+      "courtCase": false,
+      "surveyCompleted": true,
+      "environmentalClearance": true,
+      "governmentApproval": true,
+      "acquisitionStage": "Survey",
+      "previousDelay": false,
+      "distanceFromProject": 1.5,
+      "predictedDelayDays": 22,
+      "delayProbability": 20,
+      "riskLevel": "Low",
+      "expectedAdditionalCost": 48000,
+      "expectedFinalCost": 1248001,
+      "costOverrunPercentage": 4,
+      "legalRiskProbability": 10,
+      "legalRiskLevel": "Low"
     }
   ],
   "alerts": [
@@ -724,6 +752,109 @@
     }
   ],
   "documents": [
+    {
+      "id": "DOC-8609",
+      "name": "LandObjectionLetter_SLA.txt",
+      "parcelId": "126/4",
+      "text": "highway",
+      "category": "Other",
+      "risk": "Low",
+      "riskClassification": "Low",
+      "confidence": 0.75,
+      "importantTerms": [
+        "Objection",
+        "Landowner"
+      ],
+      "keyDisputes": [
+        "General land acquisition objection filed by property owner"
+      ],
+      "legalCitations": [],
+      "uploadDate": "2026-09-01"
+    },
+    {
+      "id": "DOC-3716",
+      "name": "LandObjectionLetter_SLA.txt",
+      "parcelId": "126/4",
+      "text": "I am the registered owner of the land situated in Survey No. 126/4. I hereby submit my objection to the proposed land acquisition. The compensation amount offered for the property is not acceptable and does not reflect the current market value of the land. The ownership documents and supporting records are available for verification.",
+      "category": "Compensation Issue",
+      "risk": "Medium",
+      "riskClassification": "Medium",
+      "confidence": 0.8,
+      "importantTerms": [
+        "Compensation",
+        "Valuation"
+      ],
+      "keyDisputes": [
+        "Compensation undervaluation claim",
+        "Rate disparity vs market value"
+      ],
+      "compensationIssue": "Landowner demands higher compensation based on adjacent land market rates.",
+      "legalCitations": [],
+      "uploadDate": "2026-09-01"
+    },
+    {
+      "id": "DOC-5459",
+      "name": "LandObjectionLetter_SLA.txt",
+      "parcelId": "124/6",
+      "text": "I am the registered owner of the land situated in Survey No. 124/6. I hereby submit my objection to the proposed land acquisition. The compensation amount offered for the property is not acceptable and does not reflect the current market value of the land. The ownership documents and supporting records are available for verification.",
+      "category": "Compensation Issue",
+      "risk": "Medium",
+      "riskClassification": "Medium",
+      "confidence": 0.8,
+      "importantTerms": [
+        "Compensation",
+        "Valuation"
+      ],
+      "keyDisputes": [
+        "Compensation undervaluation claim",
+        "Rate disparity vs market value"
+      ],
+      "compensationIssue": "Landowner demands higher compensation based on adjacent land market rates.",
+      "legalCitations": [],
+      "uploadDate": "2026-09-01"
+    },
+    {
+      "id": "DOC-2630",
+      "name": "LandObjectionLetter_SLA.txt",
+      "parcelId": "124/6",
+      "text": "I am the registered owner of the land situated in Survey No. 124/6. I hereby submit my objection to the proposed land acquisition. The compensation amount offered for the property is not acceptable and does not reflect the current market value of the land. The ownership documents and supporting records are available for verification.",
+      "category": "Compensation Issue",
+      "risk": "Medium",
+      "riskClassification": "Medium",
+      "confidence": 0.8,
+      "importantTerms": [
+        "Compensation",
+        "Valuation"
+      ],
+      "keyDisputes": [
+        "Compensation undervaluation claim",
+        "Rate disparity vs market value"
+      ],
+      "compensationIssue": "Landowner demands higher compensation based on adjacent land market rates.",
+      "legalCitations": [],
+      "uploadDate": "2026-09-01"
+    },
+    {
+      "id": "DOC-0483",
+      "name": "LandObjectionLetter_SLA.txt",
+      "parcelId": "126/4",
+      "text": "I am the registered owner of the land situated in Survey No. 126/4. I hereby submit my objection to the proposed land acquisition. The compensation amount offered for the property is not acceptable and does not reflect the current market value of the land. The ownership documents and supporting records are available for verification.",
+      "category": "Compensation Issue",
+      "risk": "Medium",
+      "riskClassification": "Medium",
+      "confidence": 0.8,
+      "importantTerms": [
+        "Compensation",
+        "Valuation"
+      ],
+      "keyDisputes": [
+        "Compensation undervaluation claim",
+        "Rate disparity vs market value"
+      ],
+      "compensationIssue": "Landowner demands higher compensation based on adjacent land market rates.",
+      "legalCitations": [],
+      "uploadDate": "2026-09-01"
+    },
     {
       "id": "DOC-4375",
       "name": "LandObjectionLetter_SLA.txt",
@@ -835,6 +966,234 @@
     }
   ],
   "predictions": [
+    {
+      "id": "PRED-8611",
+      "parcelId": "126/4",
+      "projectId": "unassigned",
+      "timestamp": "2026-09-01",
+      "type": "NLP",
+      "inputs": {
+        "textLength": 7
+      },
+      "outputs": {
+        "category": "Other",
+        "risk": "Low",
+        "riskClassification": "Low",
+        "confidence": 75,
+        "importantTerms": [
+          "Objection",
+          "Landowner"
+        ],
+        "keyDisputes": [
+          "General land acquisition objection filed by property owner"
+        ],
+        "legalCitations": []
+      }
+    },
+    {
+      "id": "PRED-3107",
+      "parcelId": "manual-input",
+      "projectId": "unassigned",
+      "timestamp": "2026-09-01",
+      "type": "Delay",
+      "inputs": {
+        "landArea": 5.4,
+        "ownersCount": 4,
+        "ownershipDispute": true,
+        "documentsComplete": false,
+        "previousDelay": false,
+        "distanceFromProject": 3.5
+      },
+      "outputs": {
+        "delayProbability": 98,
+        "riskLevel": "High",
+        "predictedDelayDays": 160
+      }
+    },
+    {
+      "id": "PRED-4096",
+      "parcelId": "manual-input",
+      "projectId": "unassigned",
+      "timestamp": "2026-09-01",
+      "type": "Delay",
+      "inputs": {
+        "landArea": 5.4,
+        "ownersCount": 4,
+        "ownershipDispute": true,
+        "documentsComplete": false,
+        "previousDelay": false,
+        "distanceFromProject": 3.5
+      },
+      "outputs": {
+        "delayProbability": 98,
+        "riskLevel": "High",
+        "predictedDelayDays": 160
+      }
+    },
+    {
+      "id": "PRED-0190",
+      "parcelId": "manual-input",
+      "projectId": "unassigned",
+      "timestamp": "2026-09-01",
+      "type": "Delay",
+      "inputs": {
+        "landArea": 5.4,
+        "ownersCount": 4,
+        "ownershipDispute": true,
+        "documentsComplete": true,
+        "previousDelay": true,
+        "distanceFromProject": 3.5
+      },
+      "outputs": {
+        "delayProbability": 98,
+        "riskLevel": "High",
+        "predictedDelayDays": 160
+      }
+    },
+    {
+      "id": "PRED-5883",
+      "parcelId": "manual-input",
+      "projectId": "unassigned",
+      "timestamp": "2026-09-01",
+      "type": "Delay",
+      "inputs": {
+        "landArea": 5.4,
+        "ownersCount": 4,
+        "ownershipDispute": true,
+        "documentsComplete": true,
+        "previousDelay": false,
+        "distanceFromProject": 3.5
+      },
+      "outputs": {
+        "delayProbability": 92,
+        "riskLevel": "High",
+        "predictedDelayDays": 145
+      }
+    },
+    {
+      "id": "PRED-0079",
+      "parcelId": "manual-input",
+      "projectId": "unassigned",
+      "timestamp": "2026-09-01",
+      "type": "Delay",
+      "inputs": {
+        "landArea": 5.4,
+        "ownersCount": 4,
+        "ownershipDispute": true,
+        "documentsComplete": false,
+        "previousDelay": false,
+        "distanceFromProject": 3.5
+      },
+      "outputs": {
+        "delayProbability": 98,
+        "riskLevel": "High",
+        "predictedDelayDays": 160
+      }
+    },
+    {
+      "id": "PRED-3716",
+      "parcelId": "126/4",
+      "projectId": "unassigned",
+      "timestamp": "2026-09-01",
+      "type": "NLP",
+      "inputs": {
+        "textLength": 335
+      },
+      "outputs": {
+        "category": "Compensation Issue",
+        "risk": "Medium",
+        "riskClassification": "Medium",
+        "confidence": 80,
+        "importantTerms": [
+          "Compensation",
+          "Valuation"
+        ],
+        "keyDisputes": [
+          "Compensation undervaluation claim",
+          "Rate disparity vs market value"
+        ],
+        "compensationIssue": "Landowner demands higher compensation based on adjacent land market rates.",
+        "legalCitations": []
+      }
+    },
+    {
+      "id": "PRED-5460",
+      "parcelId": "124/6",
+      "projectId": "unassigned",
+      "timestamp": "2026-09-01",
+      "type": "NLP",
+      "inputs": {
+        "textLength": 335
+      },
+      "outputs": {
+        "category": "Compensation Issue",
+        "risk": "Medium",
+        "riskClassification": "Medium",
+        "confidence": 80,
+        "importantTerms": [
+          "Compensation",
+          "Valuation"
+        ],
+        "keyDisputes": [
+          "Compensation undervaluation claim",
+          "Rate disparity vs market value"
+        ],
+        "compensationIssue": "Landowner demands higher compensation based on adjacent land market rates.",
+        "legalCitations": []
+      }
+    },
+    {
+      "id": "PRED-2633",
+      "parcelId": "124/6",
+      "projectId": "unassigned",
+      "timestamp": "2026-09-01",
+      "type": "NLP",
+      "inputs": {
+        "textLength": 335
+      },
+      "outputs": {
+        "category": "Compensation Issue",
+        "risk": "Medium",
+        "riskClassification": "Medium",
+        "confidence": 80,
+        "importantTerms": [
+          "Compensation",
+          "Valuation"
+        ],
+        "keyDisputes": [
+          "Compensation undervaluation claim",
+          "Rate disparity vs market value"
+        ],
+        "compensationIssue": "Landowner demands higher compensation based on adjacent land market rates.",
+        "legalCitations": []
+      }
+    },
+    {
+      "id": "PRED-0484",
+      "parcelId": "126/4",
+      "projectId": "unassigned",
+      "timestamp": "2026-09-01",
+      "type": "NLP",
+      "inputs": {
+        "textLength": 335
+      },
+      "outputs": {
+        "category": "Compensation Issue",
+        "risk": "Medium",
+        "riskClassification": "Medium",
+        "confidence": 80,
+        "importantTerms": [
+          "Compensation",
+          "Valuation"
+        ],
+        "keyDisputes": [
+          "Compensation undervaluation claim",
+          "Rate disparity vs market value"
+        ],
+        "compensationIssue": "Landowner demands higher compensation based on adjacent land market rates.",
+        "legalCitations": []
+      }
+    },
     {
       "id": "PRED-4382",
       "parcelId": "126/4",

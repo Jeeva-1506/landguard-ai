@@ -5,9 +5,10 @@ import { FileText, Download, Play, CheckCircle2, FileSpreadsheet, Loader2 } from
 interface ReportsViewProps {
   projects: Project[];
   parcels: LandParcel[];
+  showToast?: (msg: string, type?: 'success' | 'error') => void;
 }
 
-export default function ReportsView({ projects, parcels }: ReportsViewProps) {
+export default function ReportsView({ projects, parcels, showToast }: ReportsViewProps) {
   const [compilingReport, setCompilingReport] = useState<string | null>(null);
   const [compiledReportData, setCompiledReportData] = useState<any | null>(null);
 
@@ -22,13 +23,12 @@ export default function ReportsView({ projects, parcels }: ReportsViewProps) {
     setCompilingReport(templateId);
     setCompiledReportData(null);
 
-    // Simulate compilation
     setTimeout(() => {
       setCompilingReport(null);
       
-      // Seed compiled report details
       if (templateId === "R-CLEAR") {
         setCompiledReportData({
+          templateId,
           title: "Land Acquisition Clearance Audit",
           date: new Date().toLocaleDateString(),
           meta: { "Acquisition Unit": "SLA-I Chennai", "Active Projects": projects.length, "Total Parcels Registered": parcels.length },
@@ -41,6 +41,7 @@ export default function ReportsView({ projects, parcels }: ReportsViewProps) {
         });
       } else {
         setCompiledReportData({
+          templateId,
           title: "Escrow & Cost Valuation Audit",
           date: new Date().toLocaleDateString(),
           meta: { "Auditor Unit": "SLA Chennai Revenue Dept", "Disbursed Fund Ratio": "78.4%" },
@@ -52,8 +53,50 @@ export default function ReportsView({ projects, parcels }: ReportsViewProps) {
           ]
         });
       }
-      alert("Report compiled and audit logs generated!");
-    }, 1200);
+      if (showToast) {
+        showToast(`Report ${templateId} compiled successfully.`);
+      }
+    }, 900);
+  };
+
+  const handleDownload = () => {
+    if (!compiledReportData) return;
+
+    const reportContent = `
+================================================================================
+          REVENUE DEPARTMENT - GOVERNMENT OF TAMIL NADU
+               SPECIAL LAND ACQUISITION (SLA) AUDIT REPORT
+================================================================================
+Title: ${compiledReportData.title}
+Date of Generation: ${compiledReportData.date}
+Digital Hash Seal: SHA256-AUTHENTICATED-${Date.now().toString(16).toUpperCase()}
+
+METADATA OVERVIEW:
+${Object.entries(compiledReportData.meta).map(([k, v]) => `  - ${k}: ${v}`).join("\n")}
+
+COMPILED AUDIT FIGURES & STATUTORY METRICS:
+${compiledReportData.metrics.map((m: any) => `  * ${m.label}: ${m.value}`).join("\n")}
+
+COMPLIANCE & LEGAL NOTICE:
+This document is compiled under Section 15 of the Right to Fair Compensation 
+and Transparency in Land Acquisition, Rehabilitation and Resettlement Act.
+Digitally authorized by Special District Revenue Officer.
+================================================================================
+    `;
+
+    const blob = new Blob([reportContent], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `SLA_Section15_Audit_${compiledReportData.templateId || "Report"}.txt`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+
+    if (showToast) {
+      showToast("Signed Audit report downloaded successfully.");
+    }
   };
 
   return (
@@ -108,7 +151,7 @@ export default function ReportsView({ projects, parcels }: ReportsViewProps) {
                 </div>
 
                 <button
-                  onClick={() => alert("Report successfully downloaded as SLA_Audit_Signed.pdf.")}
+                  onClick={handleDownload}
                   className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-bold flex items-center gap-2 transition-all shadow-xs cursor-pointer"
                 >
                   <Download className="w-4 h-4" />

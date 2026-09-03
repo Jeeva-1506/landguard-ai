@@ -1,7 +1,18 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
-import { Search, Bell, X, User, Edit3, Save, CheckCircle2, Shield, Mail, Phone, MapPin, Building, ArrowRight } from "lucide-react";
-import { Alert } from "../types";
+import { 
+  Search, 
+  Bell, 
+  X, 
+  Shield, 
+  Edit3, 
+  Save, 
+  CheckCircle2, 
+  SlidersHorizontal,
+  Settings as SettingsIcon,
+  User as UserIcon
+} from "lucide-react";
+import { Alert, Project, LandParcel } from "../types";
 
 export interface UserProfileData {
   name: string;
@@ -15,59 +26,81 @@ export interface UserProfileData {
 }
 
 interface NavbarProps {
-  title: string;
-  subtitle: string;
+  activeTab: string;
+  setActiveTab: (tab: string) => void;
   alerts: Alert[];
   userProfile: UserProfileData;
+  userRole: 'Administrator' | 'Project Officer';
+  setUserRole: (role: 'Administrator' | 'Project Officer') => void;
   onUpdateProfile: (updated: UserProfileData) => void;
   onSearch: (term: string) => void;
-  setActiveTab: (tab: string) => void;
+  globalSearchTerm: string;
   onViewParcel: (parcelId: string) => void;
+  projects?: Project[];
+  parcels?: LandParcel[];
 }
 
 export default function Navbar({
-  title,
-  subtitle,
+  activeTab,
+  setActiveTab,
   alerts,
   userProfile,
+  userRole,
+  setUserRole,
   onUpdateProfile,
   onSearch,
-  setActiveTab,
-  onViewParcel
+  globalSearchTerm,
+  onViewParcel,
+  projects = [],
+  parcels = []
 }: NavbarProps) {
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  
-  // Ref for click outside notification popover
-  const notificationRef = useRef<HTMLDivElement>(null);
+  const [showSearchDropdown, setShowSearchDropdown] = useState(false);
 
-  // Local edit profile state
+  const notificationRef = useRef<HTMLDivElement>(null);
+  const searchRef = useRef<HTMLDivElement>(null);
+
   const [editForm, setEditForm] = useState<UserProfileData>(userProfile);
 
   const activeAlerts = alerts.filter(a => a.status !== 'Resolved');
   const alertCount = activeAlerts.length;
 
-  const today = new Date();
-  const dateOptions: Intl.DateTimeFormatOptions = { 
-    weekday: 'long', 
-    year: 'numeric', 
-    month: 'short', 
-    day: 'numeric' 
-  };
-  const formattedDate = today.toLocaleDateString('en-US', dateOptions);
+  const mainNavLinks = [
+    { id: "dashboard", label: "Dashboard" },
+    { id: "projects", label: "Projects" },
+    { id: "parcels", label: "Land Parcels" },
+    { id: "predict-delay", label: "Delay Forecast" },
+    { id: "documents", label: "Documents" },
+    { id: "objections", label: "Objections" },
+    { id: "compensation", label: "Compensation" },
+    { id: "map", label: "GIS Map" },
+    { id: "alerts", label: "Early Warnings", badge: alertCount },
+    { id: "reports", label: "Reports" }
+  ];
 
-  // Handle click outside to close notification popover
+  const trimmedSearch = globalSearchTerm.trim().toLowerCase();
+  const matchingProjects = trimmedSearch
+    ? projects.filter(p => p.id.toLowerCase().includes(trimmedSearch) || p.name.toLowerCase().includes(trimmedSearch) || p.district.toLowerCase().includes(trimmedSearch))
+    : [];
+  const matchingParcels = trimmedSearch
+    ? parcels.filter(p => p.id.toLowerCase().includes(trimmedSearch) || (p.surveyNumber && p.surveyNumber.toLowerCase().includes(trimmedSearch)) || p.projectId.toLowerCase().includes(trimmedSearch) || p.district.toLowerCase().includes(trimmedSearch))
+    : [];
+
+  const totalMatches = matchingProjects.length + matchingParcels.length;
+
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (notificationRef.current && !notificationRef.current.contains(event.target as Node)) {
         setShowNotifications(false);
       }
+      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+        setShowSearchDropdown(false);
+      }
     }
     document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const handleOpenProfile = () => {
@@ -80,296 +113,317 @@ export default function Navbar({
     e.preventDefault();
     onUpdateProfile(editForm);
     setIsEditing(false);
-    alert("Profile updated successfully!");
+    setShowProfileModal(false);
   };
 
   return (
-    <header className="h-20 bg-white border-b border-slate-200 px-8 flex items-center justify-between shrink-0 select-none z-30 sticky top-0 shadow-2xs">
-      {/* Page Titles */}
-      <div>
-        <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2 font-heading">
-          {title}
-        </h2>
-        <p className="text-xs text-slate-500 font-medium mt-0.5">{subtitle} • {formattedDate}</p>
-      </div>
-
-      {/* Right Controls */}
-      <div className="flex items-center gap-4">
-        {/* Search Input */}
-        <div className="relative">
-          <input
-            type="text"
-            placeholder="Search records..."
-            onChange={(e) => onSearch(e.target.value)}
-            className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-xs w-64 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white text-slate-800 placeholder-slate-400 font-medium transition-all"
-          />
-        </div>
-
-        {/* Interactive Bell Notifications Dropdown Trigger */}
-        <div className="relative">
-          <button
-            onClick={() => setShowNotifications(!showNotifications)}
-            className="relative w-10 h-10 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center cursor-pointer hover:bg-slate-200 transition-colors"
-            title="System Early Warnings & Notifications"
-          >
-            <Bell className="w-5 h-5 text-slate-600" />
-            {alertCount > 0 && (
-              <span className="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-rose-500 rounded-full ring-2 ring-white animate-pulse" />
-            )}
-          </button>
-        </div>
-
-        {/* Interactive User Profile Trigger */}
-        <div
-          onClick={handleOpenProfile}
-          className="flex items-center gap-3 pl-3 border-l border-slate-200 cursor-pointer hover:opacity-85 transition-opacity"
-          title="Click to view/edit user profile"
+    <header className="w-full bg-white border-b border-[#E2E8F0] sticky top-0 z-40 select-none shadow-xs font-sans">
+      
+      {/* 1. TOP HEADER BRAND & USER CONTROLS */}
+      <div className="max-w-7xl mx-auto px-8 h-[64px] flex items-center justify-between">
+        
+        {/* BRAND TITLE */}
+        <div 
+          onClick={() => setActiveTab("dashboard")}
+          className="flex items-center gap-3 cursor-pointer"
         >
-          <div className="text-right flex flex-col justify-center">
-            <span className="text-xs font-bold text-slate-900 leading-none">{userProfile.name}</span>
-            <span className="text-[11px] text-slate-500 mt-1 font-semibold leading-none">{userProfile.title}</span>
+          <div className="w-[36px] h-[36px] bg-[#0F172A] text-white font-semibold flex items-center justify-center text-[15px] rounded-[5px] font-mono">
+            LT
           </div>
-          <div className="w-9 h-9 rounded-full bg-blue-600 flex items-center justify-center font-bold text-white text-xs shadow-xs font-mono">
-            {userProfile.initials || "JS"}
+          <div>
+            <h1 className="text-[20px] font-semibold text-[#0F172A] leading-none tracking-tight">
+              LANDTRACK
+            </h1>
+            <p className="text-[12px] text-[#64748B] font-normal leading-none mt-1">
+              Predictive Land Acquisition Monitoring System
+            </p>
+          </div>
+        </div>
+
+        {/* SEARCH & RIGHT CONTROLS */}
+        <div className="flex items-center gap-4">
+          
+          {/* SEARCH FIELD */}
+          <div className="relative hidden md:block" ref={searchRef}>
+            <div className="relative flex items-center">
+              <Search className="w-4 h-4 text-[#94A3B8] absolute left-3 pointer-events-none" />
+              <input
+                type="text"
+                value={globalSearchTerm}
+                placeholder="Search Project ID, Survey Number..."
+                onChange={(e) => {
+                  onSearch(e.target.value);
+                  setShowSearchDropdown(true);
+                }}
+                onFocus={() => setShowSearchDropdown(true)}
+                className="input-enterprise w-[280px] pl-9"
+              />
+              {globalSearchTerm && (
+                <button 
+                  onClick={() => { onSearch(""); setShowSearchDropdown(false); }}
+                  className="absolute right-2.5 p-0.5 text-[#94A3B8] hover:text-[#1E293B] cursor-pointer"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              )}
+            </div>
+
+            {/* Quick Search Popover */}
+            {showSearchDropdown && trimmedSearch.length > 0 && (
+              <div className="absolute right-0 top-12 w-[380px] bg-white border border-[#CBD5E1] rounded-[6px] shadow-lg z-50 max-h-96 overflow-y-auto divide-y divide-[#F1F5F9] animate-in fade-in">
+                <div className="px-4 py-2 bg-[#0F172A] text-white flex items-center justify-between text-[12px] font-semibold">
+                  <span>Search Matches ({totalMatches})</span>
+                  <span className="text-[11px] text-[#94A3B8]">Click to view</span>
+                </div>
+
+                {matchingProjects.length > 0 && (
+                  <div className="p-2">
+                    <div className="table-header px-2 py-1">Projects ({matchingProjects.length})</div>
+                    {matchingProjects.map(proj => (
+                      <div
+                        key={proj.id}
+                        onClick={() => { setActiveTab("projects"); setShowSearchDropdown(false); }}
+                        className="px-3 py-2 hover:bg-[#F8FAFC] rounded-[4px] cursor-pointer flex items-center justify-between text-[14px]"
+                      >
+                        <div>
+                          <p className="font-semibold text-[#0F172A]">{proj.id} - {proj.name}</p>
+                          <p className="text-[12px] text-[#64748B]">{proj.district}, {proj.state}</p>
+                        </div>
+                        <span className="status-badge status-badge-info">{proj.delayRisk} Risk</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {matchingParcels.length > 0 && (
+                  <div className="p-2">
+                    <div className="table-header px-2 py-1">Land Parcels ({matchingParcels.length})</div>
+                    {matchingParcels.map(parcel => (
+                      <div
+                        key={parcel.id}
+                        onClick={() => { onViewParcel(parcel.id); setShowSearchDropdown(false); }}
+                        className="px-3 py-2 hover:bg-[#F8FAFC] rounded-[4px] cursor-pointer flex items-center justify-between text-[14px]"
+                      >
+                        <div>
+                          <p className="font-semibold text-[#0F172A]">Survey No: {parcel.surveyNumber || parcel.id}</p>
+                          <p className="text-[12px] text-[#64748B]">{parcel.district} • {parcel.landArea} Acres</p>
+                        </div>
+                        <span className="status-badge status-badge-neutral">{parcel.acquisitionStage}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {totalMatches === 0 && (
+                  <div className="p-4 text-center text-[#64748B] text-[13px] font-normal">No matching records found</div>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* DESIGNATION TOGGLE */}
+          <button
+            onClick={() => setUserRole(userRole === 'Administrator' ? 'Project Officer' : 'Administrator')}
+            className="btn-secondary"
+            title="Switch User Designation"
+          >
+            <Shield className="w-4 h-4 text-[#2563EB]" />
+            <span>{userRole}</span>
+          </button>
+
+          {/* NOTIFICATIONS */}
+          <div className="relative">
+            <button
+              onClick={() => setShowNotifications(!showNotifications)}
+              className="w-[38px] h-[38px] bg-[#F8FAFC] border border-[#CBD5E1] rounded-[5px] flex items-center justify-center cursor-pointer hover:bg-[#F1F5F9] transition-colors relative"
+              title="Notifications"
+            >
+              <Bell className="w-4 h-4 text-[#475569]" />
+              {alertCount > 0 && (
+                <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 bg-[#DC2626] text-white text-[11px] font-semibold rounded-full flex items-center justify-center">
+                  {alertCount}
+                </span>
+              )}
+            </button>
+          </div>
+
+          {/* SETTINGS SHORTCUT */}
+          <button
+            onClick={() => setActiveTab("settings")}
+            className="w-[38px] h-[38px] bg-[#F8FAFC] border border-[#CBD5E1] rounded-[5px] flex items-center justify-center cursor-pointer hover:bg-[#F1F5F9] transition-colors"
+            title="Settings"
+          >
+            <SettingsIcon className="w-4 h-4 text-[#475569]" />
+          </button>
+
+          {/* OFFICER PROFILE */}
+          <div 
+            onClick={handleOpenProfile}
+            className="flex items-center gap-2.5 pl-3 border-l border-[#E2E8F0] cursor-pointer hover:opacity-85"
+          >
+            <div className="w-[36px] h-[36px] bg-[#0F172A] text-white font-semibold text-[13px] flex items-center justify-center rounded-[5px] font-mono">
+              {userProfile.initials || "JS"}
+            </div>
+            <div className="hidden lg:block text-left">
+              <p className="text-[14px] font-semibold text-[#0F172A] leading-tight">{userProfile.name}</p>
+              <p className="text-[12px] text-[#64748B] font-normal leading-tight mt-0.5">{userProfile.title}</p>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* REACT PORTAL: Notifications Popover Dropdown (Mounted directly on document.body for top z-index above map) */}
+      {/* 2. LOWER NAVIGATION MENU BAR */}
+      <div className="bg-[#0F172A] text-white px-8">
+        <div className="max-w-7xl mx-auto flex items-center justify-between overflow-x-auto scrollbar-none">
+          <nav className="flex items-center gap-1 py-1 text-[14px] font-medium">
+            {mainNavLinks.map((item) => {
+              const isActive = activeTab === item.id;
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => setActiveTab(item.id)}
+                  className={`px-4 py-2 rounded-[5px] flex items-center gap-2 transition-colors whitespace-nowrap cursor-pointer ${
+                    isActive
+                      ? "bg-[#2563EB] text-white font-semibold"
+                      : "text-[#CBD5E1] hover:bg-[#1E293B] hover:text-white"
+                  }`}
+                >
+                  <span>{item.label}</span>
+                  {item.badge !== undefined && item.badge > 0 && (
+                    <span className="px-1.5 py-0.2 bg-[#DC2626] text-white text-[11px] font-semibold rounded-[4px]">
+                      {item.badge}
+                    </span>
+                  )}
+                </button>
+              );
+            })}
+          </nav>
+        </div>
+      </div>
+
+      {/* NOTIFICATIONS DROPDOWN PORTAL */}
       {showNotifications && createPortal(
         <div
           ref={notificationRef}
-          className="fixed right-20 top-20 w-80 sm:w-96 bg-white border border-slate-200 rounded-2xl shadow-2xl z-[999999] overflow-hidden animate-in fade-in slide-in-from-top-2"
+          className="fixed right-8 top-16 w-[360px] bg-white border border-[#CBD5E1] rounded-[8px] shadow-lg z-[999999] overflow-hidden animate-in fade-in"
         >
-          <div className="p-4 bg-slate-900 text-white flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <Bell className="w-4 h-4 text-rose-400" />
-              <h4 className="text-xs font-bold uppercase tracking-wider">Early Warning Notifications ({alertCount})</h4>
-            </div>
-            <button
-              onClick={() => setShowNotifications(false)}
-              className="p-1 text-slate-400 hover:text-white rounded cursor-pointer"
-            >
+          <div className="p-3 bg-[#0F172A] text-white flex items-center justify-between">
+            <h4 className="text-[12px] font-semibold uppercase tracking-wider">
+              Early Warning Alerts ({alertCount})
+            </h4>
+            <button onClick={() => setShowNotifications(false)} className="text-[#94A3B8] hover:text-white">
               <X className="w-4 h-4" />
             </button>
           </div>
 
-          <div className="max-h-80 overflow-y-auto divide-y divide-slate-100">
+          <div className="max-h-80 overflow-y-auto divide-y divide-[#F1F5F9]">
             {activeAlerts.map((alert) => (
               <div
                 key={alert.id}
-                onClick={() => {
-                  setShowNotifications(false);
-                  onViewParcel(alert.parcelId);
-                }}
-                className="p-3.5 hover:bg-slate-50 transition-colors cursor-pointer flex gap-3 items-start"
+                onClick={() => { setShowNotifications(false); onViewParcel(alert.parcelId); }}
+                className="p-3 hover:bg-[#F8FAFC] cursor-pointer flex gap-2.5 items-start text-[14px]"
               >
                 <span className={`w-2 h-2 rounded-full mt-1.5 shrink-0 ${
-                  alert.priority === "High" ? "bg-rose-500 animate-pulse" : "bg-amber-500"
+                  alert.priority === "High" || alert.priority === "Critical" ? "bg-[#DC2626]" : "bg-[#D97706]"
                 }`} />
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center justify-between gap-1">
-                    <span className="font-mono text-xs font-bold text-slate-900">Parcel {alert.parcelId}</span>
-                    <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${
-                      alert.priority === "High" ? "bg-rose-50 text-rose-700" : "bg-amber-50 text-amber-700"
-                    }`}>
-                      {alert.priority}
-                    </span>
+                  <div className="flex justify-between items-center">
+                    <span className="table-value-bold">Survey {alert.surveyNumber || alert.parcelId}</span>
+                    <span className="status-badge status-badge-warning">{alert.priority}</span>
                   </div>
-                  <p className="text-xs font-medium text-slate-700 mt-1 line-clamp-2">{alert.issue}</p>
-                  <span className="text-[10px] text-slate-400 font-medium block mt-1">{alert.projectName}</span>
+                  <p className="text-[#1E293B] mt-0.5 text-[13px]">{alert.issue}</p>
+                  <p className="text-[12px] text-[#64748B] mt-0.5">{alert.projectName}</p>
                 </div>
               </div>
             ))}
-            {activeAlerts.length === 0 && (
-              <div className="p-6 text-center text-slate-400 text-xs font-medium">
-                No active system warnings. All SLA metrics normal.
-              </div>
-            )}
-          </div>
-
-          <div className="p-3 bg-slate-50 border-t border-slate-100 text-center">
-            <button
-              onClick={() => {
-                setShowNotifications(false);
-                setActiveTab("alerts");
-              }}
-              className="text-xs font-bold text-blue-600 hover:text-blue-800 flex items-center justify-center gap-1.5 w-full cursor-pointer"
-            >
-              <span>View Early Warning Desk</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </button>
           </div>
         </div>,
         document.body
       )}
 
-      {/* REACT PORTAL: USER PROFILE VIEW & EDIT MODAL (Mounted directly on document.body) */}
+      {/* PROFILE MODAL */}
       {showProfileModal && createPortal(
         <div
           onClick={() => setShowProfileModal(false)}
-          className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-[999999] flex items-center justify-center p-4 animate-in fade-in"
+          className="fixed inset-0 bg-[#0F172A]/40 z-[999999] flex items-center justify-center p-4"
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="bg-white border border-slate-200 rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden animate-in zoom-in-95"
+            className="bg-white border border-[#CBD5E1] rounded-[8px] shadow-xl w-full max-w-lg overflow-hidden text-[14px]"
           >
-            {/* Modal Header */}
-            <div className="bg-slate-900 text-white p-5 flex items-center justify-between">
+            <div className="bg-[#0F172A] text-white p-4 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center font-bold text-white font-mono">
+                <div className="w-[36px] h-[36px] bg-[#2563EB] text-white font-semibold flex items-center justify-center rounded-[5px] font-mono text-[14px]">
                   {editForm.initials}
                 </div>
                 <div>
-                  <h3 className="font-bold text-base">{userProfile.name}</h3>
-                  <p className="text-slate-400 text-xs">{userProfile.title} • {userProfile.department}</p>
+                  <h3 className="font-semibold text-[16px]">{userProfile.name}</h3>
+                  <p className="text-[#CBD5E1] text-[12px]">{userProfile.title}</p>
                 </div>
               </div>
-              <button
-                onClick={() => setShowProfileModal(false)}
-                className="p-1 text-slate-400 hover:text-white rounded cursor-pointer"
-              >
+              <button onClick={() => setShowProfileModal(false)} className="text-[#94A3B8] hover:text-white">
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            {/* Modal Body */}
             <div className="p-6">
               {!isEditing ? (
-                /* READ-ONLY VIEW MODE */
                 <div className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4 text-xs">
-                    <div className="p-3 bg-slate-50 rounded-xl border border-slate-100">
-                      <span className="text-[10px] uppercase font-bold text-slate-400 block mb-0.5">Full Name</span>
-                      <span className="font-bold text-slate-900">{userProfile.name}</span>
+                  <div className="grid grid-cols-2 gap-3 text-[14px]">
+                    <div className="p-3 bg-[#F8FAFC] rounded-[5px] border border-[#E2E8F0]">
+                      <span className="small-label block text-[#64748B]">Name</span>
+                      <span className="table-value-bold">{userProfile.name}</span>
                     </div>
-
-                    <div className="p-3 bg-slate-50 rounded-xl border border-slate-100">
-                      <span className="text-[10px] uppercase font-bold text-slate-400 block mb-0.5">Designation</span>
-                      <span className="font-bold text-slate-900">{userProfile.title}</span>
+                    <div className="p-3 bg-[#F8FAFC] rounded-[5px] border border-[#E2E8F0]">
+                      <span className="small-label block text-[#64748B]">Designation</span>
+                      <span className="table-value-bold">{userProfile.title}</span>
                     </div>
-
-                    <div className="p-3 bg-slate-50 rounded-xl border border-slate-100">
-                      <span className="text-[10px] uppercase font-bold text-slate-400 block mb-0.5">Department</span>
-                      <span className="font-semibold text-slate-800">{userProfile.department}</span>
+                    <div className="p-3 bg-[#F8FAFC] rounded-[5px] border border-[#E2E8F0]">
+                      <span className="small-label block text-[#64748B]">Department</span>
+                      <span className="font-normal text-[#1E293B]">{userProfile.department}</span>
                     </div>
-
-                    <div className="p-3 bg-slate-50 rounded-xl border border-slate-100">
-                      <span className="text-[10px] uppercase font-bold text-slate-400 block mb-0.5">Jurisdiction</span>
-                      <span className="font-semibold text-slate-800">{userProfile.district}</span>
-                    </div>
-
-                    <div className="p-3 bg-slate-50 rounded-xl border border-slate-100">
-                      <span className="text-[10px] uppercase font-bold text-slate-400 block mb-0.5">Official Email</span>
-                      <span className="font-semibold text-slate-800">{userProfile.email}</span>
-                    </div>
-
-                    <div className="p-3 bg-slate-50 rounded-xl border border-slate-100">
-                      <span className="text-[10px] uppercase font-bold text-slate-400 block mb-0.5">Phone Number</span>
-                      <span className="font-semibold text-slate-800">{userProfile.phone}</span>
+                    <div className="p-3 bg-[#F8FAFC] rounded-[5px] border border-[#E2E8F0]">
+                      <span className="small-label block text-[#64748B]">District</span>
+                      <span className="font-normal text-[#1E293B]">{userProfile.district}</span>
                     </div>
                   </div>
 
-                  <div className="pt-4 flex items-center justify-between border-t border-slate-100">
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-bold">
-                      <Shield className="w-3.5 h-3.5" />
-                      Role: {userProfile.role}
-                    </span>
-                    <button
-                      onClick={() => setIsEditing(true)}
-                      className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl flex items-center gap-1.5 transition-all shadow-xs cursor-pointer"
-                    >
-                      <Edit3 className="w-3.5 h-3.5" />
-                      <span>Edit Profile Info</span>
+                  <div className="pt-4 flex justify-between items-center border-t border-[#E2E8F0]">
+                    <span className="status-badge status-badge-info">Role: {userProfile.role}</span>
+                    <button onClick={() => setIsEditing(true)} className="btn-primary">
+                      <Edit3 className="w-4 h-4" />
+                      <span>Edit Profile</span>
                     </button>
                   </div>
                 </div>
               ) : (
-                /* EDIT FORM MODE */
-                <form onSubmit={handleSaveProfile} className="space-y-4">
-                  <div className="grid grid-cols-2 gap-3 text-xs">
+                <form onSubmit={handleSaveProfile} className="space-y-4 text-[14px]">
+                  <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">Full Name</label>
+                      <label className="small-label block text-[#64748B] mb-1">Full Name</label>
                       <input
                         type="text"
-                        required
                         value={editForm.name}
                         onChange={(e) => setEditForm({ ...editForm, name: e.target.value })}
-                        className="w-full p-2.5 border border-slate-200 rounded-xl text-xs"
+                        className="input-enterprise w-full"
                       />
                     </div>
-
                     <div>
-                      <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">Avatar Initials</label>
+                      <label className="small-label block text-[#64748B] mb-1">Designation</label>
                       <input
                         type="text"
-                        maxLength={3}
-                        required
-                        value={editForm.initials}
-                        onChange={(e) => setEditForm({ ...editForm, initials: e.target.value.toUpperCase() })}
-                        className="w-full p-2.5 border border-slate-200 rounded-xl text-xs font-mono uppercase"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">Designation</label>
-                      <input
-                        type="text"
-                        required
                         value={editForm.title}
                         onChange={(e) => setEditForm({ ...editForm, title: e.target.value })}
-                        className="w-full p-2.5 border border-slate-200 rounded-xl text-xs"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">Department</label>
-                      <input
-                        type="text"
-                        required
-                        value={editForm.department}
-                        onChange={(e) => setEditForm({ ...editForm, department: e.target.value })}
-                        className="w-full p-2.5 border border-slate-200 rounded-xl text-xs"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">Jurisdiction / District</label>
-                      <input
-                        type="text"
-                        required
-                        value={editForm.district}
-                        onChange={(e) => setEditForm({ ...editForm, district: e.target.value })}
-                        className="w-full p-2.5 border border-slate-200 rounded-xl text-xs"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-[10px] font-bold text-slate-500 uppercase mb-1">Official Email</label>
-                      <input
-                        type="email"
-                        required
-                        value={editForm.email}
-                        onChange={(e) => setEditForm({ ...editForm, email: e.target.value })}
-                        className="w-full p-2.5 border border-slate-200 rounded-xl text-xs"
+                        className="input-enterprise w-full"
                       />
                     </div>
                   </div>
-
-                  <div className="flex gap-2 justify-end pt-4 border-t border-slate-100">
-                    <button
-                      type="button"
-                      onClick={() => setIsEditing(false)}
-                      className="px-4 py-2 border border-slate-200 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-50 cursor-pointer"
-                    >
+                  <div className="flex gap-2 justify-end pt-4 border-t border-[#E2E8F0]">
+                    <button type="button" onClick={() => setIsEditing(false)} className="btn-secondary">
                       Cancel
                     </button>
-                    <button
-                      type="submit"
-                      className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl flex items-center gap-1.5 transition-all shadow-xs cursor-pointer"
-                    >
-                      <Save className="w-3.5 h-3.5" />
-                      <span>Save Profile Changes</span>
+                    <button type="submit" className="btn-primary">
+                      Save Changes
                     </button>
                   </div>
                 </form>
@@ -382,4 +436,3 @@ export default function Navbar({
     </header>
   );
 }
-

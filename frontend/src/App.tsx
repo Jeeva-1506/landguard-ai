@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
-import Sidebar from "./components/Sidebar";
-import Navbar from "./components/Navbar";
+import Navbar, { UserProfileData } from "./components/Navbar";
+import Footer from "./components/Footer";
 import DashboardView from "./components/DashboardView";
 import ProjectsView from "./components/ProjectsView";
 import ParcelsView from "./components/ParcelsView";
-import CompensationView from "./components/CompensationView";
+import DelayForecastView from "./components/DelayForecastView";
 import DocumentsView from "./components/DocumentsView";
-import PredictionsView from "./components/PredictionsView";
+import ObjectionsView from "./components/ObjectionsView";
+import CompensationView from "./components/CompensationView";
+import GisMap from "./components/GisMap";
 import AlertsView from "./components/AlertsView";
-import AnalyticsView from "./components/AnalyticsView";
 import ReportsView from "./components/ReportsView";
 import SettingsView from "./components/SettingsView";
 import UsersView from "./components/UsersView";
@@ -43,7 +44,27 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Elegant Toast State
+  // User Profile State with LocalStorage Persistence
+  const [userProfile, setUserProfile] = useState<UserProfileData>(() => {
+    try {
+      const saved = localStorage.getItem("landtrack_user_profile");
+      if (saved) return JSON.parse(saved);
+    } catch (err) {
+      console.error(err);
+    }
+    return {
+      name: "J. Selvam",
+      title: "Project Director (Land Acquisition)",
+      role: "Administrator",
+      department: "Infrastructure Monitoring Directorate",
+      district: "All Tamil Nadu Corridors",
+      email: "j.selvam@landtrack.gov.in",
+      phone: "+91 94440 12345",
+      initials: "JS"
+    };
+  });
+
+  // Custom Toast Notification State
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
 
   const showToast = (message: string, type: 'success' | 'error' = 'success') => {
@@ -65,7 +86,7 @@ export default function App() {
       setAlerts(alertData);
     } catch (err: any) {
       console.error(err);
-      setError("Failed to sync records with database. Operating in offline fallback.");
+      setError("Operating in offline fallback mode.");
     } finally {
       setIsLoading(false);
     }
@@ -80,7 +101,7 @@ export default function App() {
     try {
       const newProj = await createProject(projPayload);
       setProjects(prev => [newProj, ...prev]);
-      showToast(`Project ${newProj.id} registered successfully.`);
+      showToast(`Project ${newProj.id} registered.`);
     } catch (err) {
       console.error(err);
       showToast("Failed to register project.", "error");
@@ -114,8 +135,7 @@ export default function App() {
     try {
       const newParcel = await createParcel(parcelPayload);
       setParcels(prev => [newParcel, ...prev]);
-      showToast(`Parcel ${newParcel.id} survey record created.`);
-      // Reload alerts as new parcel triggers risk evaluation
+      showToast(`Parcel ${newParcel.id} registered.`);
       const updatedAlerts = await fetchAlerts();
       setAlerts(updatedAlerts);
     } catch (err) {
@@ -128,12 +148,12 @@ export default function App() {
     try {
       const updatedParcel = await updateParcel(id, parcelPayload);
       setParcels(prev => prev.map(p => p.id === id ? { ...p, ...updatedParcel } : p));
-      showToast(`Parcel ${id} variables updated.`);
+      showToast(`Parcel ${id} updated.`);
       const updatedAlerts = await fetchAlerts();
       setAlerts(updatedAlerts);
     } catch (err) {
       console.error(err);
-      showToast("Failed to update parcel variables.", "error");
+      showToast("Failed to update parcel.", "error");
     }
   };
 
@@ -141,7 +161,7 @@ export default function App() {
     try {
       await deleteParcel(id);
       setParcels(prev => prev.filter(p => p.id !== id));
-      showToast(`Parcel ${id} removed from survey registries.`);
+      showToast(`Parcel ${id} removed.`);
     } catch (err) {
       console.error(err);
       showToast("Failed to delete parcel.", "error");
@@ -153,179 +173,176 @@ export default function App() {
     try {
       const resolved = await resolveAlert(id);
       setAlerts(prev => prev.map(a => a.id === id ? resolved : a));
-      showToast("Early warning resolved and logged.");
+      showToast("Early warning resolved.");
     } catch (err) {
       console.error(err);
       showToast("Failed to resolve alert.", "error");
     }
   };
 
-  // Helper: jump directly to a parcel profile detail from anywhere
+  // Helper: jump directly to parcel profile
   const triggerViewParcelDetails = (parcelId: string) => {
     setActiveParcelId(parcelId);
     setActiveTab("parcels");
   };
 
-  // Titles dictionary
-  const tabTitles: Record<string, { title: string; subtitle: string }> = {
-    dashboard: { title: "Executive Dashboard", subtitle: "National Highway & Infrastructure Acquisition Monitoring Corridor" },
-    projects: { title: "Infrastructure Projects Registry", subtitle: "Active acquisition corridors & project boundaries" },
-    parcels: { title: "Land Survey Ledger", subtitle: "Individual land plots status, owner claims & risk weights" },
-    compensation: { title: "Valuation & Disbursements", subtitle: "Compensation escrow releases & awards clearance" },
-    documents: { title: "NLP Document Analysis Engine", subtitle: "Objections parsing & claims extraction" },
-    "predict-delay": { title: "Acquisition Delay Modeler", subtitle: "Random forest regression on survey delay estimates" },
-    "predict-cost": { title: "Overrun Estimation Engine", subtitle: "Simulate budget escalations based on stays & objections" },
-    "predict-legal": { title: "Legal Standings Sandbox", subtitle: "Writ stay stay likelihood & court case impacts" },
-    alerts: { title: "Early Warning Desk", subtitle: "Automated flags, incomplete documents & critical milestones" },
-    analytics: { title: "District Benchmarking analytics", subtitle: "Comparative spatial statistics across jurisdictions" },
-    reports: { title: "Report & Audit Center", subtitle: "Section-15 compliant statutory report compiler" },
-    settings: { title: "System Parameters & Import", subtitle: "Bulk CSV importing & database re-hydration" },
-    users: { title: "Officer Jurisdictions Registry", subtitle: "Role authorizations & district tasks" }
+  const handleUpdateUserProfile = (updated: UserProfileData) => {
+    setUserProfile(updated);
+    try {
+      localStorage.setItem("landtrack_user_profile", JSON.stringify(updated));
+    } catch (err) {
+      console.error(err);
+    }
+    showToast("Profile updated successfully.");
   };
 
-  const activeAlertsCount = alerts.filter(a => !a.resolved).length;
-
-  // User Profile State
-  const [userProfile, setUserProfile] = useState({
-    name: "J. Selvam",
-    title: "Director SLA",
-    role: "Administrator" as 'Administrator' | 'Project Officer',
-    department: "Revenue Department",
-    district: "All Tamil Nadu",
-    email: "j.selvam@tn.gov.in",
-    phone: "+91 94440 12345",
-    initials: "JS"
-  });
-
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800 font-sans flex flex-row antialiased">
-      {/* Sidebar - Fixed Left */}
-      <Sidebar 
-        activeTab={activeTab} 
+    <div className="min-h-screen bg-slate-50 text-slate-800 font-sans antialiased flex flex-col justify-between">
+      {/* Top Navbar */}
+      <Navbar 
+        activeTab={activeTab}
         setActiveTab={(tab) => {
           setActiveTab(tab);
           if (tab !== "parcels") setActiveParcelId(null);
         }}
+        alerts={alerts}
+        userProfile={userProfile}
         userRole={userRole}
         setUserRole={(role) => {
           setUserRole(role);
-          setUserProfile(prev => ({ ...prev, role }));
+          const updated = { ...userProfile, role };
+          setUserProfile(updated);
+          localStorage.setItem("landtrack_user_profile", JSON.stringify(updated));
         }}
+        onUpdateProfile={handleUpdateUserProfile}
+        onSearch={(term) => setGlobalSearchTerm(term)}
+        globalSearchTerm={globalSearchTerm}
+        onViewParcel={triggerViewParcelDetails}
+        projects={projects}
+        parcels={parcels}
       />
 
-      {/* Main Content Pane - Scrollable Right */}
-      <div className="flex-1 min-w-0 pl-64 flex flex-col h-screen">
-        {/* Navbar */}
-        <Navbar 
-          title={tabTitles[activeTab]?.title || "Land Acquisition Portal"}
-          subtitle={tabTitles[activeTab]?.subtitle || "SLA Clearance Monitor"}
-          alerts={alerts}
-          userProfile={userProfile}
-          onUpdateProfile={(updated) => setUserProfile(updated)}
-          onSearch={(term) => setGlobalSearchTerm(term)}
-          setActiveTab={setActiveTab}
-          onViewParcel={triggerViewParcelDetails}
-        />
+      {/* Main Content Area */}
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {isLoading ? (
+          <div className="min-h-[400px] flex flex-col items-center justify-center py-20">
+            <Loader2 className="w-10 h-10 text-blue-700 animate-spin" />
+            <p className="text-xs text-slate-500 font-bold uppercase tracking-wider mt-3">
+              Syncing LANDTRACK Predictive Analytics Engine...
+            </p>
+          </div>
+        ) : (
+          <div className="animate-fade-in space-y-6">
+            {activeTab === "dashboard" && (
+              <DashboardView 
+                projects={projects} 
+                parcels={parcels} 
+                alerts={alerts}
+                setActiveTab={setActiveTab}
+                onViewParcel={triggerViewParcelDetails}
+              />
+            )}
 
-        {/* Inner Tab Contents wrapper */}
-        <main className="flex-1 overflow-y-auto p-8 bg-slate-50 space-y-6 scrollbar-none">
-          {isLoading ? (
-            <div className="h-full flex flex-col items-center justify-center py-20">
-              <Loader2 className="w-10 h-10 text-blue-600 animate-spin" />
-              <p className="text-xs text-slate-400 mt-2 font-bold uppercase tracking-wider">
-                Syncing SLA Records Ledger...
-              </p>
-            </div>
-          ) : (
-            <div className="animate-fade-in">
-              {activeTab === "dashboard" && (
-                <DashboardView 
-                  projects={projects} 
-                  parcels={parcels} 
-                  alerts={alerts}
-                  setActiveTab={setActiveTab}
-                  onViewParcel={triggerViewParcelDetails}
-                />
-              )}
-              {activeTab === "projects" && (
-                <ProjectsView 
-                  projects={projects}
-                  onAddProject={handleAddProject}
-                  onUpdateProject={handleUpdateProject}
-                  onDeleteProject={handleWithDeleteProject}
-                />
-              )}
-              {activeTab === "parcels" && (
-                <ParcelsView 
-                  parcels={parcels}
-                  projects={projects}
-                  alerts={alerts}
-                  onAddParcel={handleAddParcel}
-                  onUpdateParcel={handleUpdateParcel}
-                  onDeleteParcel={handleWithDeleteParcel}
-                  activeParcelId={activeParcelId}
-                  setActiveParcelId={setActiveParcelId}
-                />
-              )}
-              {activeTab === "compensation" && (
-                <CompensationView 
-                  parcels={parcels}
-                  onUpdateParcel={handleUpdateParcel}
-                />
-              )}
-              {activeTab === "documents" && (
-                <DocumentsView />
-              )}
-              {activeTab === "predict-delay" && (
-                <PredictionsView />
-              )}
-              {activeTab === "predict-cost" && (
-                <PredictionsView />
-              )}
-              {activeTab === "predict-legal" && (
-                <PredictionsView />
-              )}
-              {activeTab === "alerts" && (
-                <AlertsView 
-                  alerts={alerts}
-                  onResolveAlert={handleResolveAlert}
-                  onViewParcel={triggerViewParcelDetails}
-                />
-              )}
-              {activeTab === "analytics" && (
-                <AnalyticsView 
-                  parcels={parcels}
-                  projects={projects}
-                />
-              )}
-              {activeTab === "reports" && (
-                <ReportsView 
-                  projects={projects}
-                  parcels={parcels}
-                />
-              )}
-              {activeTab === "settings" && (
-                <SettingsView onRefreshData={loadAllData} />
-              )}
-              {activeTab === "users" && (
-                <UsersView />
-              )}
-            </div>
-          )}
-        </main>
-      </div>
+            {activeTab === "projects" && (
+              <ProjectsView 
+                projects={projects}
+                globalSearchTerm={globalSearchTerm}
+                onAddProject={handleAddProject}
+                onUpdateProject={handleUpdateProject}
+                onDeleteProject={handleWithDeleteProject}
+                showToast={showToast}
+              />
+            )}
 
-      {/* Elegant Custom Toast Notification */}
+            {activeTab === "parcels" && (
+              <ParcelsView 
+                parcels={parcels}
+                projects={projects}
+                alerts={alerts}
+                globalSearchTerm={globalSearchTerm}
+                onAddParcel={handleAddParcel}
+                onUpdateParcel={handleUpdateParcel}
+                onDeleteParcel={handleWithDeleteParcel}
+                activeParcelId={activeParcelId}
+                setActiveParcelId={setActiveParcelId}
+                showToast={showToast}
+              />
+            )}
+
+            {activeTab === "predict-delay" && (
+              <DelayForecastView showToast={showToast} />
+            )}
+
+            {activeTab === "documents" && (
+              <DocumentsView onUpdateParcel={handleUpdateParcel} showToast={showToast} />
+            )}
+
+            {activeTab === "objections" && (
+              <ObjectionsView showToast={showToast} />
+            )}
+
+            {activeTab === "compensation" && (
+              <CompensationView 
+                parcels={parcels}
+                globalSearchTerm={globalSearchTerm}
+                onUpdateParcel={handleUpdateParcel}
+                showToast={showToast}
+              />
+            )}
+
+            {activeTab === "map" && (
+              <div className="space-y-4">
+                <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-2xs">
+                  <h3 className="font-bold text-slate-900 text-sm">Geographic Risk Map</h3>
+                  <p className="text-xs text-slate-500">Spatial distribution of land acquisition corridors & survey boundaries by risk tier.</p>
+                </div>
+                <GisMap projects={projects} parcels={parcels} onViewParcel={triggerViewParcelDetails} />
+              </div>
+            )}
+
+            {activeTab === "alerts" && (
+              <AlertsView 
+                alerts={alerts}
+                globalSearchTerm={globalSearchTerm}
+                onResolveAlert={handleResolveAlert}
+                onViewParcel={triggerViewParcelDetails}
+                showToast={showToast}
+              />
+            )}
+
+            {activeTab === "reports" && (
+              <ReportsView 
+                projects={projects}
+                parcels={parcels}
+                showToast={showToast}
+              />
+            )}
+
+            {activeTab === "settings" && (
+              <SettingsView onRefreshData={loadAllData} showToast={showToast} />
+            )}
+
+            {activeTab === "users" && (
+              <UsersView showToast={showToast} />
+            )}
+          </div>
+        )}
+      </main>
+
+      {/* Footer */}
+      <Footer />
+
+      {/* Toast Notification */}
       {toast && (
-        <div className={`fixed bottom-6 right-6 z-50 p-4 rounded-xl shadow-lg border animate-slide-up flex items-center gap-3 max-w-sm ${
+        <div className={`fixed bottom-6 right-6 z-50 p-4 rounded-xl shadow-xl border animate-slide-up flex items-center gap-3 max-w-sm ${
           toast.type === "success" 
             ? "bg-slate-900 border-slate-800 text-white" 
-            : "bg-red-500 border-red-400 text-white"
+            : "bg-red-600 border-red-500 text-white"
         }`}>
           {toast.type === "success" ? (
-            <CheckCircle2 className="w-5 h-5 text-emerald-400 flex-shrink-0" />
+            <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
           ) : (
-            <AlertCircle className="w-5 h-5 text-red-200 flex-shrink-0" />
+            <AlertCircle className="w-5 h-5 text-red-200 shrink-0" />
           )}
           <span className="text-xs font-bold leading-tight">{toast.message}</span>
         </div>

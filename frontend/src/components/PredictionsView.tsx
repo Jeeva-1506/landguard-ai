@@ -19,10 +19,20 @@ import {
   FileSpreadsheet
 } from "lucide-react";
 
-export default function PredictionsView() {
-  const [activeSubTab, setActiveSubTab] = useState<'delay' | 'cost' | 'legal'>('delay');
+interface PredictionsViewProps {
+  initialSubTab?: 'delay' | 'cost' | 'legal';
+  showToast?: (msg: string, type?: 'success' | 'error') => void;
+}
+
+export default function PredictionsView({ initialSubTab = 'delay', showToast }: PredictionsViewProps) {
+  const [activeSubTab, setActiveSubTab] = useState<'delay' | 'cost' | 'legal'>(initialSubTab);
   const [isLoading, setIsLoading] = useState(false);
   const [predictionResult, setPredictionResult] = useState<any>(null);
+
+  React.useEffect(() => {
+    setActiveSubTab(initialSubTab);
+    setPredictionResult(null);
+  }, [initialSubTab]);
 
   // Delay Model Inputs
   const [landArea, setLandArea] = useState(5.4);
@@ -84,9 +94,15 @@ export default function PredictionsView() {
             : `${res.probability}% ${res.riskClass}`
       };
       setHistory(prev => [newHistoryItem, ...prev]);
+
+      if (showToast) {
+        showToast("ML prediction inference solved successfully.");
+      }
     } catch (err) {
-      alert("Running in client-side Random Forest + XGBoost prediction fallback.");
       console.error(err);
+      if (showToast) {
+        showToast("Random Forest & XGBoost model processed using client-side engine.", "error");
+      }
     } finally {
       setIsLoading(false);
     }

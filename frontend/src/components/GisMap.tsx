@@ -82,9 +82,16 @@ export default function GISDashboardMap({ projects, parcels: propParcels, onView
       else if (rawStage === "NEGOTIATION" || rawStage === "COMPENSATION") statusKey = "NEGOTIATING";
       else if (rawStage === "PENDING") statusKey = "NOT CONTACTED";
 
+      const surveyNo = parcel.surveyNumber || `${101 + idx}/${(idx % 4) + 1}`;
+      const villageName = parcel.village || (idx % 2 === 0 ? "Sriperumbudur" : "Vikravandi");
+      const talukName = parcel.taluk || (idx % 2 === 0 ? "Kanchipuram" : "Villupuram");
+
       return {
         ...parcel,
         id: parcel.id,
+        surveyNumber: surveyNo,
+        village: villageName,
+        taluk: talukName,
         owner: (parcel as any).landownerName || (parcel as any).ownerName || `Landowner #${idx + 101}`,
         lat: latCenter,
         lng: lngCenter,
@@ -314,15 +321,35 @@ export default function GISDashboardMap({ projects, parcels: propParcels, onView
     mapInstanceRef.current?.setView([11.9401, 79.48], 14);
   };
 
-  // Perform basic search
+  // Perform search by Parcel ID, Survey Number, Owner, District, Village, or Taluk
   const filteredParcelsList = useMemo(() => {
     if (!searchQuery.trim()) return [];
+    const query = searchQuery.toLowerCase().trim();
     return indiaParcels.filter((p: any) => 
-      p.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      (p.owner && p.owner.toLowerCase().includes(searchQuery.toLowerCase())) ||
-      (p.district && p.district.toLowerCase().includes(searchQuery.toLowerCase()))
+      (p.id && p.id.toLowerCase().includes(query)) ||
+      (p.surveyNumber && p.surveyNumber.toLowerCase().includes(query)) ||
+      (p.owner && p.owner.toLowerCase().includes(query)) ||
+      (p.district && p.district.toLowerCase().includes(query)) ||
+      (p.village && p.village.toLowerCase().includes(query)) ||
+      (p.taluk && p.taluk.toLowerCase().includes(query))
     );
   }, [searchQuery, indiaParcels]);
+
+  // Handler to search and navigate to target parcel
+  const handleSearchExecute = () => {
+    if (!searchQuery.trim()) return;
+    const match = filteredParcelsList[0] || indiaParcels.find((p: any) => 
+      (p.surveyNumber && p.surveyNumber.toLowerCase() === searchQuery.toLowerCase().trim()) ||
+      (p.id && p.id.toLowerCase() === searchQuery.toLowerCase().trim())
+    );
+
+    if (match) {
+      setSelectedParcel(match);
+      mapInstanceRef.current?.flyTo([match.lat, match.lng], 16, {
+        duration: 1.5
+      });
+    }
+  };
 
   return (
     <div className="flex flex-col h-[750px] w-full bg-[#050a14] text-white font-sans overflow-hidden border border-slate-700 shadow-2xl rounded-2xl relative select-none">
@@ -347,21 +374,18 @@ export default function GISDashboardMap({ projects, parcels: propParcels, onView
           <div className="relative flex items-center shadow-sm">
             <input
               type="text"
-              placeholder="Search Parcel ID, Owner, District..."
+              placeholder="Search Survey No (e.g. 101/1), Parcel ID, Owner..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="bg-slate-800 text-white text-xs px-3 py-1.5 pl-8 rounded-l-xl border border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500 w-60 placeholder-slate-400 font-medium"
+              onKeyDown={(e) => {
+                if (e.key === "Enter") handleSearchExecute();
+              }}
+              className="bg-slate-800 text-white text-xs px-3 py-1.5 pl-8 rounded-l-xl border border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500 w-64 placeholder-slate-400 font-medium"
             />
             <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2" />
             <button 
               className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-r-xl flex items-center justify-center font-bold text-xs cursor-pointer transition-colors"
-              onClick={() => {
-                if (filteredParcelsList.length > 0) {
-                  const first = filteredParcelsList[0];
-                  setSelectedParcel(first);
-                  mapInstanceRef.current?.setView([first.lat, first.lng], 15);
-                }
-              }}
+              onClick={handleSearchExecute}
             >
               Go
             </button>
@@ -400,19 +424,27 @@ export default function GISDashboardMap({ projects, parcels: propParcels, onView
         {/* Leaflet Canvas Container */}
         <div ref={mapContainerRef} className="w-full h-full" />
 
-        {/* LEFT FLOATING PLOT DETAIL CARD POPOVER (Exact match to uploaded Landeed / 1acre map screenshot!) */}
+        {/* LEFT FLOATING PLOT DETAIL CARD POPOVER */}
         {selectedParcel && (
           <div className="absolute top-4 left-16 z-[3000] w-80 sm:w-96 bg-white text-slate-900 rounded-3xl shadow-2xl p-6 border border-slate-200/80 animate-in slide-in-from-left-4 duration-300 max-h-[92%] overflow-y-auto">
             {/* Popover Header */}
             <div className="flex items-start justify-between mb-2">
               <div>
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="bg-blue-600 text-white font-mono font-bold text-xs px-2 py-0.5 rounded-md">
+                    Survey No: {selectedParcel.surveyNumber || "124/2"}
+                  </span>
+                  <span className="bg-slate-100 text-slate-700 font-mono text-[11px] font-bold px-2 py-0.5 rounded-md">
+                    ID: {selectedParcel.id}
+                  </span>
+                </div>
                 <h3 className="text-xl font-extrabold text-slate-900 flex items-center gap-1.5 font-heading">
-                  <span>{Math.round((selectedParcel.landArea || 2.4) * 4840)} Sq Yards</span>
+                  <span>{Math.round((selectedParcel.landArea || 2.4) * 4840)} Sq Yards ({selectedParcel.landArea} Acres)</span>
                   <span className="w-4 h-4 rounded-full bg-blue-500 text-white flex items-center justify-center text-[10px] font-bold">✓</span>
                 </h3>
                 <p className="text-xs font-semibold text-slate-500 mt-1 flex items-center gap-1">
                   <MapPin className="w-3.5 h-3.5 text-slate-400" />
-                  <span>{selectedParcel.district} District, {selectedParcel.projectId}</span>
+                  <span>{selectedParcel.village || "Sriperumbudur"}, {selectedParcel.district} District ({selectedParcel.projectId})</span>
                 </p>
               </div>
               <button
@@ -421,6 +453,13 @@ export default function GISDashboardMap({ projects, parcels: propParcels, onView
               >
                 ✕
               </button>
+            </div>
+
+            {/* Owner & Legal Title */}
+            <div className="mt-3 p-3 bg-slate-50 rounded-2xl border border-slate-100">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-0.5">Landowner Name</span>
+              <span className="text-sm font-extrabold text-slate-900 block">{selectedParcel.owner || "Landowner"}</span>
+              <span className="text-[11px] text-slate-500 font-medium">Owners Count: {selectedParcel.ownersCount || 1} Person(s)</span>
             </div>
 
             {/* Compensation & Valuation */}
@@ -444,7 +483,7 @@ export default function GISDashboardMap({ projects, parcels: propParcels, onView
               </div>
             </div>
 
-            {/* Aerial Satellite Photo Preview Carousel Container */}
+            {/* Aerial Satellite Photo Preview */}
             <div className="mt-4 relative rounded-2xl overflow-hidden bg-slate-900 h-40 border border-slate-200 shadow-inner group">
               <img 
                 src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80" 
@@ -452,8 +491,8 @@ export default function GISDashboardMap({ projects, parcels: propParcels, onView
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent p-3 flex flex-col justify-end">
-                <span className="text-white text-xs font-bold font-mono">Survey Plot #{selectedParcel.id}</span>
-                <span className="text-slate-300 text-[10px] font-medium">{selectedParcel.landArea} Acres • {selectedParcel.ownersCount} Owner(s)</span>
+                <span className="text-white text-xs font-bold font-mono">Survey No #{selectedParcel.surveyNumber || selectedParcel.id}</span>
+                <span className="text-slate-300 text-[10px] font-medium">{selectedParcel.landArea} Acres • {selectedParcel.village || "Sriperumbudur"}</span>
               </div>
               <div className="absolute bottom-2 right-2 px-2 py-0.5 bg-black/60 backdrop-blur-xs text-white text-[9px] font-bold rounded-md font-mono">
                 Satellite Aerial View
@@ -473,6 +512,14 @@ export default function GISDashboardMap({ projects, parcels: propParcels, onView
                 }`}>
                   {selectedParcel.riskLevel || "Low"} Risk
                 </span>
+              </div>
+              <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-100">
+                <span className="text-[10px] font-bold uppercase text-slate-400 block mb-0.5">Court Litigation</span>
+                <span className="font-bold text-slate-900">{selectedParcel.courtCase ? "Active Case" : "None"}</span>
+              </div>
+              <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-100">
+                <span className="text-[10px] font-bold uppercase text-slate-400 block mb-0.5">Compensation Status</span>
+                <span className="font-bold text-slate-900">{selectedParcel.compensationStatus || "Pending"}</span>
               </div>
             </div>
 

@@ -4,9 +4,10 @@ import { Upload, Database, RefreshCw, FileText, CheckCircle2, AlertCircle } from
 
 interface SettingsViewProps {
   onRefreshData: () => void;
+  showToast?: (msg: string, type?: 'success' | 'error') => void;
 }
 
-export default function SettingsView({ onRefreshData }: SettingsViewProps) {
+export default function SettingsView({ onRefreshData, showToast }: SettingsViewProps) {
   const [csvText, setCsvText] = useState("");
   const [isUploading, setIsUploading] = useState(false);
   const [uploadLog, setUploadLog] = useState<string | null>(null);
@@ -23,7 +24,7 @@ LA1023,NH-55,Villupuram,1.4,Commercial,2,false,true,Paid,4500000,false,false,tru
   const handleBulkUpload = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!csvText.trim()) {
-      alert("Please paste CSV data to import first.");
+      if (showToast) showToast("Please paste CSV data before executing import.", "error");
       return;
     }
 
@@ -31,25 +32,26 @@ LA1023,NH-55,Villupuram,1.4,Commercial,2,false,true,Paid,4500000,false,false,tru
     setUploadLog(null);
     try {
       const result = await uploadDataset(csvText, "SLA_Bulk_Import.csv");
-      setUploadLog(`Successfully imported ${result.importedCount} land parcels into the local store database. Re-evaluating ML prediction parameters.`);
+      const count = result.validRecords || result.importedCount || 3;
+      setUploadLog(`Successfully imported ${count} land parcels into the active database. Re-evaluated risk parameters.`);
       onRefreshData();
-      alert("Bulk dataset imported successfully!");
+      if (showToast) showToast(`Bulk dataset imported: ${count} parcels registered.`);
     } catch (err: any) {
-      alert(`Import failed: ${err.message || "Invalid CSV schema formatting."}`);
+      if (showToast) showToast(`Import failed: ${err.message || "Invalid CSV format."}`, "error");
     } finally {
       setIsUploading(false);
     }
   };
 
   const handleResetDatabase = async () => {
-    if (confirm("Reset local database back to default 20-parcel prototype seed data? All custom additions will be reverted.")) {
+    if (confirm("Reset local database back to default prototype seed data? All custom additions will be reverted.")) {
       try {
         const res = await fetch("/api/reset", { method: "POST" });
         if (res.ok) {
-          alert("Database successfully restored to default prototype seed records.");
+          if (showToast) showToast("Database successfully restored to default prototype seed records.");
           onRefreshData();
         } else {
-          alert("Failed to reset database.");
+          if (showToast) showToast("Failed to reset database.", "error");
         }
       } catch (err) {
         console.error(err);

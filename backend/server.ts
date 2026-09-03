@@ -1617,6 +1617,16 @@ app.post("/api/upload", (req, res) => {
   }
 });
 
+// 7. Database Reset API
+app.post("/api/reset", (req, res) => {
+  try {
+    hydrateAndSaveDB(initialProjects, initialParcels, initialAlerts, initialDocuments, []);
+    res.json({ success: true, message: "Database reset to prototype seed records." });
+  } catch (err: any) {
+    res.status(500).json({ error: "Failed to reset database: " + err.message });
+  }
+});
+
 // Vite Middleware & static serving setup
 async function startServer() {
   if (process.env.NODE_ENV !== "production") {
