@@ -26,7 +26,11 @@ import {
   Filter,
   Route,
   Activity,
-  Navigation
+  Navigation,
+  Map,
+  FileText,
+  Eye,
+  Compass
 } from "lucide-react";
 
 interface GISDashboardMapProps {
@@ -129,9 +133,13 @@ export default function GISDashboardMap({ projects, parcels: propParcels, onView
   const corridorLayerGroupRef = useRef<L.FeatureGroup | null>(null);
   const labelLayerGroupRef = useRef<L.FeatureGroup | null>(null);
   const polygonMapRef = useRef<Map<string, L.Polygon>>(new Map());
+  const cadastralOverlayRef = useRef<L.ImageOverlay | null>(null);
 
   // States
   const [currentBaseMap, setCurrentBaseMap] = useState<'satellite' | 'street' | 'terrain'>('satellite');
+  const [showCadastralOverlay, setShowCadastralOverlay] = useState(true);
+  const [cadastralOpacity, setCadastralOpacity] = useState(0.85);
+  const [showCadastralModal, setShowCadastralModal] = useState(false);
   const [stageFilter, setStageFilter] = useState<string>("All Stages");
   const [activeCorridor, setActiveCorridor] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState("");
@@ -274,6 +282,32 @@ export default function GISDashboardMap({ projects, parcels: propParcels, onView
       attribution: baseConfig.attribution
     }).addTo(map);
   }, [currentBaseMap]);
+
+  // Dynamically update Cadastral Survey Plan Image Overlay on Leaflet Map
+  useEffect(() => {
+    const map = mapInstanceRef.current;
+    if (!map) return;
+
+    if (cadastralOverlayRef.current) {
+      map.removeLayer(cadastralOverlayRef.current);
+      cadastralOverlayRef.current = null;
+    }
+
+    if (showCadastralOverlay) {
+      const overlayBounds: L.LatLngBoundsExpression = [
+        [11.9320, 79.4750],
+        [11.9480, 79.4950]
+      ];
+
+      const overlay = L.imageOverlay("/cadastral_plan.jpg", overlayBounds, {
+        opacity: cadastralOpacity,
+        interactive: false,
+        zIndex: 5
+      }).addTo(map);
+
+      cadastralOverlayRef.current = overlay;
+    }
+  }, [showCadastralOverlay, cadastralOpacity]);
 
   // Draw Highway Corridor Alignment Polylines for each sector
   useEffect(() => {
@@ -757,8 +791,17 @@ export default function GISDashboardMap({ projects, parcels: propParcels, onView
               </button>
             </div>
 
-            {/* Base Map Selector & CSV Upload Button */}
+            {/* Base Map Selector, Cadastral Blueprint Button & Overlay Controls */}
             <div className="pointer-events-auto flex items-center gap-2">
+              <button
+                onClick={() => setShowCadastralModal(true)}
+                className="bg-slate-900 hover:bg-blue-900 text-white font-extrabold text-xs px-3.5 py-2 rounded-2xl transition-all shadow-xl flex items-center gap-1.5 cursor-pointer border border-slate-700"
+                title="View Full High-Resolution Highway Cadastral Survey Blueprint"
+              >
+                <Map className="w-4 h-4 text-blue-400" />
+                <span>Cadastral Plan (T6N R3W)</span>
+              </button>
+
               <div className="bg-white/95 backdrop-blur-md p-1 rounded-2xl shadow-xl border border-slate-200 flex items-center divide-x divide-slate-100">
                 <button
                   onClick={() => setCurrentBaseMap("satellite")}
@@ -784,6 +827,30 @@ export default function GISDashboardMap({ projects, parcels: propParcels, onView
                 >
                   Terrain
                 </button>
+              </div>
+
+              <div className="bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-2xl shadow-xl border border-slate-200 flex items-center gap-2 text-xs font-bold text-slate-700">
+                <label className="flex items-center gap-1.5 cursor-pointer select-none">
+                  <input
+                    type="checkbox"
+                    checked={showCadastralOverlay}
+                    onChange={(e) => setShowCadastralOverlay(e.target.checked)}
+                    className="w-3.5 h-3.5 text-blue-600 rounded focus:ring-blue-500 accent-blue-600 cursor-pointer"
+                  />
+                  <span>Survey Overlay</span>
+                </label>
+                {showCadastralOverlay && (
+                  <input
+                    type="range"
+                    min="0.1"
+                    max="1"
+                    step="0.05"
+                    value={cadastralOpacity}
+                    onChange={(e) => setCadastralOpacity(parseFloat(e.target.value))}
+                    className="w-16 accent-blue-600 cursor-pointer"
+                    title={`Overlay Opacity: ${Math.round(cadastralOpacity * 100)}%`}
+                  />
+                )}
               </div>
             </div>
           </div>
@@ -1164,6 +1231,118 @@ export default function GISDashboardMap({ projects, parcels: propParcels, onView
                 className="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition-all cursor-pointer"
               >
                 Save Changes
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* OFFICIAL CADASTRAL SURVEY PLAN FULLSCREEN BLUEPRINT MODAL */}
+      {showCadastralModal && (
+        <div className="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-3 md:p-6 animate-fade-in">
+          <div className="bg-slate-900 text-white rounded-3xl shadow-2xl border border-slate-700 max-w-6xl w-full max-h-[92vh] flex flex-col overflow-hidden">
+            
+            {/* Modal Header */}
+            <div className="p-4 md:p-5 bg-slate-950 border-b border-slate-800 flex items-center justify-between shrink-0">
+              <div className="flex items-center gap-3">
+                <div className="p-2.5 bg-blue-600/20 text-blue-400 border border-blue-500/30 rounded-2xl">
+                  <Map className="w-6 h-6" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <h3 className="font-black text-lg md:text-xl text-white tracking-tight font-heading">
+                      Official Cadastral & Highway Alignment Plan
+                    </h3>
+                    <span className="bg-blue-600/30 text-blue-300 border border-blue-500/40 text-[10px] font-mono font-extrabold px-2 py-0.5 rounded-full uppercase">
+                      Sector T6N R3W (SEC 14-16)
+                    </span>
+                  </div>
+                  <p className="text-xs text-slate-400 font-medium">
+                    State Highway Land Acquisition Map • Scale 1:10,000 • WGS84 Datum
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <a
+                  href="/cadastral_plan.jpg"
+                  download="LandGuard_Cadastral_Survey_Plan.jpg"
+                  className="hidden sm:flex items-center gap-1.5 px-3.5 py-2 bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold rounded-xl transition-all shadow-xs"
+                >
+                  <Download className="w-4 h-4" />
+                  <span>Download Blueprint</span>
+                </a>
+                <button
+                  onClick={() => setShowCadastralModal(false)}
+                  className="p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-2xl transition-colors cursor-pointer"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+            </div>
+
+            {/* Modal Content Body */}
+            <div className="flex-1 overflow-y-auto p-4 md:p-6 space-y-4">
+              
+              {/* Map Blueprint Display Card */}
+              <div className="bg-slate-950 border border-slate-800 rounded-2xl p-2 relative group overflow-hidden shadow-2xl">
+                <img
+                  src="/cadastral_plan.jpg"
+                  alt="Official Cadastral and Highway Land Acquisition Plan"
+                  className="w-full h-auto object-contain max-h-[580px] rounded-xl mx-auto border border-slate-800"
+                />
+              </div>
+
+              {/* Cadastral Blueprint Metadata & Key Junction Info */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="bg-slate-850 bg-slate-800/50 p-4 rounded-2xl border border-slate-700/60">
+                  <h4 className="text-xs font-black uppercase tracking-wider text-blue-400 mb-2 flex items-center gap-1.5">
+                    <Route className="w-4 h-4" />
+                    <span>Corridor Interchanges & Junctions</span>
+                  </h4>
+                  <ul className="text-xs space-y-1.5 text-slate-300 font-medium">
+                    <li>• <strong>Junction 22:</strong> West Off-Ramp Corridor Connection</li>
+                    <li>• <strong>Junction 23:</strong> Main Expressway Interchange (Station 56+00 - 100+00)</li>
+                    <li>• <strong>Junction 24:</strong> East Outer Ring Flyover (Station 300+00)</li>
+                  </ul>
+                </div>
+
+                <div className="bg-slate-800/50 p-4 rounded-2xl border border-slate-700/60">
+                  <h4 className="text-xs font-black uppercase tracking-wider text-amber-400 mb-2 flex items-center gap-1.5">
+                    <Layers className="w-4 h-4" />
+                    <span>Acquisition Parcels demarcated</span>
+                  </h4>
+                  <ul className="text-xs space-y-1.5 text-slate-300 font-medium">
+                    <li>• <strong>Parcel #108:</strong> 18.2 Acres • Acquisition Status: Pending</li>
+                    <li>• <strong>Parcel #112 & #119:</strong> 24.5 Acres • Co-ownership Verified</li>
+                    <li>• <strong>Parcel #125 & #131:</strong> 34.7 Acres • Contours & Creek Buffer</li>
+                  </ul>
+                </div>
+
+                <div className="bg-slate-800/50 p-4 rounded-2xl border border-slate-700/60">
+                  <h4 className="text-xs font-black uppercase tracking-wider text-emerald-400 mb-2 flex items-center gap-1.5">
+                    <Compass className="w-4 h-4" />
+                    <span>Cartographic Standards</span>
+                  </h4>
+                  <ul className="text-xs space-y-1.5 text-slate-300 font-medium">
+                    <li>• <strong>Projection:</strong> WGS84 Latitude / Longitude Grid</li>
+                    <li>• <strong>Scale:</strong> 1:10,000 (500m scale bar)</li>
+                    <li>• <strong>Environmental:</strong> Oak Creek Waterway & Contour lines (340')</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            {/* Modal Footer */}
+            <div className="p-4 bg-slate-950 border-t border-slate-800 flex items-center justify-between shrink-0">
+              <span className="text-xs text-slate-400 font-mono">
+                LandGuard AI Official Cadastral GIS Asset • ID: T6N-R3W-SEC14-16
+              </span>
+              <button
+                onClick={() => setShowCadastralModal(false)}
+                className="px-5 py-2 bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs rounded-xl cursor-pointer"
+              >
+                Close View
               </button>
             </div>
           </div>
