@@ -146,6 +146,4 @@ export async function runMigration() {
   }
 }
 
-if (require.main === module) {
-  runMigration();
-}
+runMigration();

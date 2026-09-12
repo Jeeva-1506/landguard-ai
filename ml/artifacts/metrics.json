@@ -1,0 +1,49 @@
+{
+  "version": "v1.2.0-RF-Ensemble",
+  "training_date": "2026-09-12T09:52:41.000844",
+  "training_records": 250,
+  "split_ratio": "70% Train / 15% Validation / 15% Test",
+  "features": [
+    "land_required_ha",
+    "land_acquired_ha",
+    "affected_families",
+    "landowners_count",
+    "approval_days",
+    "expected_approval_days",
+    "compensation_percentage",
+    "compensation_pending_count",
+    "legal_disputes",
+    "pending_cases",
+    "document_completeness",
+    "ownership_conflicts",
+    "rehabilitation_progress",
+    "possession_percentage",
+    "stakeholder_response_days",
+    "previous_delays",
+    "historical_delay_rate"
+  ],
+  "classification_metrics": {
+    "model_type": "RandomForestClassifier",
+    "baseline_model": "LogisticRegression",
+    "precision": 1.0,
+    "recall": 0.9615,
+    "f1_score": 0.9804,
+    "roc_auc": 1.0,
+    "confusion_matrix": [
+      [
+        12,
+        0
+      ],
+      [
+        1,
+        25
+      ]
+    ]
+  },
+  "regression_metrics": {
+    "model_type": "RandomForestRegressor",
+    "mae": 4.23,
+    "rmse": 5.72,
+    "r2_score": 0.9843
+  }
+}

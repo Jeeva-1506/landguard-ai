@@ -78,9 +78,9 @@ export default function App() {
     setError(null);
     try {
       const [projData, parcelData, alertData] = await Promise.all([
-        fetchProjects(),
-        fetchParcels(),
-        fetchAlerts()
+        fetchProjects().catch(err => { console.error('fetchProjects error:', err); return []; }),
+        fetchParcels().catch(err => { console.error('fetchParcels error:', err); return []; }),
+        fetchAlerts().catch(err => { console.error('fetchAlerts error:', err); return []; })
       ]);
       setProjects(projData);
       setParcels(parcelData);

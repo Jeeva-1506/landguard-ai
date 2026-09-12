@@ -2,7 +2,10 @@ import { Project, LandParcel, Alert, DocumentAnalysis } from "./types";
 
 export async function fetchProjects(): Promise<Project[]> {
   const res = await fetch("/api/projects");
-  if (!res.ok) throw new Error("Failed to fetch projects");
+  const contentType = res.headers.get("content-type");
+  if (!res.ok || !contentType || !contentType.includes("application/json")) {
+    throw new Error("Failed to fetch projects JSON");
+  }
   return res.json();
 }
 
@@ -34,7 +37,10 @@ export async function deleteProject(id: string): Promise<boolean> {
 
 export async function fetchParcels(): Promise<LandParcel[]> {
   const res = await fetch("/api/parcels");
-  if (!res.ok) throw new Error("Failed to fetch parcels");
+  const contentType = res.headers.get("content-type");
+  if (!res.ok || !contentType || !contentType.includes("application/json")) {
+    throw new Error("Failed to fetch parcels JSON");
+  }
   return res.json();
 }
 
@@ -72,7 +78,10 @@ export async function deleteParcel(id: string): Promise<boolean> {
 
 export async function fetchAlerts(): Promise<Alert[]> {
   const res = await fetch("/api/alerts");
-  if (!res.ok) throw new Error("Failed to fetch alerts");
+  const contentType = res.headers.get("content-type");
+  if (!res.ok || !contentType || !contentType.includes("application/json")) {
+    throw new Error("Failed to fetch alerts JSON");
+  }
   return res.json();
 }
 
