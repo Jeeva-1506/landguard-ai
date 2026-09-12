@@ -13,7 +13,21 @@ import {
   Cell,
   Legend
 } from "recharts";
-import { ChevronRight } from "lucide-react";
+import { 
+  ChevronRight, 
+  Plus, 
+  SlidersHorizontal, 
+  ArrowUpRight, 
+  ArrowDownRight, 
+  Calendar, 
+  MoreVertical, 
+  Clock, 
+  AlertTriangle,
+  FileCheck2,
+  Building2,
+  TrendingUp,
+  MapPin
+} from "lucide-react";
 
 interface DashboardViewProps {
   projects: Project[];
@@ -30,7 +44,7 @@ export default function DashboardView({
   setActiveTab,
   onViewParcel
 }: DashboardViewProps) {
-  // 1. KPI Calculations
+  // KPI Calculations
   const totalProjects = projects.length;
   const totalParcels = parcels.length;
   const highRiskParcels = parcels.filter(p => p.riskLevel === 'High' || p.riskLevel === 'Critical').length;
@@ -39,115 +53,253 @@ export default function DashboardView({
     ? Math.round(parcels.reduce((sum, p) => sum + (p.predictedDelayDays || 0), 0) / parcels.length)
     : 45;
 
-  const pendingCompensationCount = parcels.filter(p => p.compensationStatus === 'Pending' || p.compensationStatus === 'Disputed').length;
-  const pendingObjectionsCount = parcels.filter(p => p.objectionFiled).length;
+  const totalCostExposureCrores = (parcels.reduce((sum, p) => sum + (p.expectedAdditionalCost || 0), 0) / 10000000).toFixed(2);
+  const pendingDisputesCount = parcels.filter(p => p.ownershipDispute || p.courtCase).length;
 
-  // 2. Risk Distribution Data for Chart
+  // Chart Data
   const lowRiskCount = parcels.filter(p => p.riskLevel === 'Low').length;
   const medRiskCount = parcels.filter(p => p.riskLevel === 'Medium').length;
   const highRiskCount = parcels.filter(p => p.riskLevel === 'High').length;
   const criticalRiskCount = parcels.filter(p => p.riskLevel === 'Critical').length;
 
   const riskData = [
-    { name: "Low Risk", value: lowRiskCount || 6, color: "#16A34A" },
-    { name: "Medium Risk", value: medRiskCount || 5, color: "#D97706" },
-    { name: "High Risk", value: highRiskCount || 6, color: "#EA580C" },
-    { name: "Critical Risk", value: criticalRiskCount || 3, color: "#DC2626" }
+    { name: "Low Risk", value: lowRiskCount || 14, color: "#22C55E" },
+    { name: "Medium Risk", value: medRiskCount || 17, color: "#F59E0B" },
+    { name: "High Risk", value: highRiskCount || 37, color: "#FF6B52" },
+    { name: "Critical", value: criticalRiskCount || 4, color: "#EF4444" }
   ];
 
-  // 3. Predicted Delay by Project Data
-  const projectDelayData = projects.map(p => ({
-    name: p.id,
-    delay: p.predictedDelay || 45,
-    progress: p.progress
-  }));
-
-  // 4. Major Delay Factors Ranked
-  const delayFactors = [
-    { name: "Land Ownership Dispute", affected: 84, pct: 28, risk: "Critical" },
-    { name: "Compensation Pending", affected: 62, pct: 21, risk: "High" },
-    { name: "Court Case / Legal Objection", affected: 45, pct: 15, risk: "Critical" },
-    { name: "Document Verification Issue", affected: 38, pct: 13, risk: "Medium" },
-    { name: "Survey / Measurement Issue", affected: 25, pct: 8, risk: "Medium" },
-    { name: "Government Clearance Pending", affected: 18, pct: 6, risk: "Medium" },
-    { name: "Missing Land Records (Patta)", affected: 15, pct: 5, risk: "Low" },
-    { name: "Utility Relocation Delay", affected: 10, pct: 4, risk: "Low" }
+  // Bar Chart Data (Sample 6 Corridors with coral highlight)
+  const barChartData = [
+    { month: "NH-101", count: 78, isHighlight: false },
+    { month: "NH-102", count: 34, isHighlight: false },
+    { month: "PROJ-001", count: 67, isHighlight: true },
+    { month: "PROJ-002", count: 28, isHighlight: false },
+    { month: "PROJ-003", count: 39, isHighlight: false },
+    { month: "PROJ-005", count: 80, isHighlight: false },
   ];
 
   return (
-    <div className="space-y-7 font-sans text-[#1E293B] pb-12">
+    <div className="space-y-6 font-['Plus_Jakarta_Sans',sans-serif] text-[#12241C] pb-12 animate-fade-in">
 
-      {/* HEADER SECTION */}
-      <div>
-        <h2 className="page-title">
-          Land Acquisition Monitoring
-        </h2>
-        <p className="text-[14px] text-[#64748B] mt-1 font-normal">
-          Monitor acquisition progress, emerging risks and expected delays across registered infrastructure projects.
-        </p>
+      {/* 1. TOP WELCOME TITLE BAR & ACTION BUTTON */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h2 className="text-3xl font-extrabold text-[#0F382C] font-['Outfit'] tracking-tight">
+            Dashboard
+          </h2>
+          <p className="text-xs text-slate-500 font-medium mt-1">
+            Welcome, Let's dive into your personalized land acquisition setup guide.
+          </p>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => setActiveTab("projects")}
+            className="btn-primary"
+          >
+            <Plus className="w-4 h-4" />
+            <span>Create Infrastructure Project</span>
+          </button>
+        </div>
       </div>
 
-      {/* TOP 6 KPI CARDS */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4">
-        
-        {/* 1. Active Projects */}
-        <div className="card-enterprise space-y-2">
-          <span className="table-header block">Active Projects</span>
-          <h3 className="kpi-number">{totalProjects}</h3>
-          <p className="text-[12px] text-[#64748B]">Monitoring corridors</p>
-        </div>
-
-        {/* 2. Land Parcels Under Acquisition */}
-        <div className="card-enterprise space-y-2">
-          <span className="table-header block">Land Parcels</span>
-          <h3 className="kpi-number">{totalParcels}</h3>
-          <p className="text-[12px] text-[#64748B]">Surveyed plots</p>
-        </div>
-
-        {/* 3. High-Risk Parcels */}
-        <div className="card-enterprise space-y-2">
-          <span className="table-header block">High-Risk Parcels</span>
-          <h3 className="kpi-number text-[#DC2626]">{highRiskParcels}</h3>
-          <p className="text-[12px] text-[#DC2626] font-medium">Requires intervention</p>
-        </div>
-
-        {/* 4. Average Predicted Delay */}
-        <div className="card-enterprise space-y-2">
-          <span className="table-header block">Avg Delay</span>
-          <h3 className="kpi-number">{avgDelayDays} <span className="text-[14px] font-normal text-[#64748B]">Days</span></h3>
-          <p className="text-[12px] text-[#D97706] font-medium">+4 Days variance</p>
-        </div>
-
-        {/* 5. Compensation Pending */}
-        <div className="card-enterprise space-y-2">
-          <span className="table-header block">Compensation Pending</span>
-          <h3 className="kpi-number">{pendingCompensationCount}</h3>
-          <p className="text-[12px] text-[#64748B]">Disbursement pending</p>
-        </div>
-
-        {/* 6. Objections Pending */}
-        <div className="card-enterprise space-y-2">
-          <span className="table-header block">Objections</span>
-          <h3 className="kpi-number">{pendingObjectionsCount}</h3>
-          <p className="text-[12px] text-[#64748B]">Section 15 reviews</p>
-        </div>
-
-      </div>
-
-      {/* SECTION 1 — PROJECT RISK OVERVIEW */}
-      <div className="card-enterprise space-y-4">
-        <div className="flex items-center justify-between border-b border-[#E2E8F0] pb-3">
+      {/* 2. EMITLY STYLE ROW 1 — PERFORMANCE OVER TIME HORIZONTAL KPI METRICS */}
+      <div className="bg-white border border-slate-200/80 rounded-[28px] p-6 shadow-[0_4px_20px_-4px_rgba(15,56,44,0.03)] space-y-4">
+        <div className="flex items-center justify-between border-b border-slate-100 pb-4">
           <div>
-            <h3 className="section-title">
-              Project Risk Overview
+            <h3 className="text-base font-bold text-[#0F382C] font-['Outfit']">
+              Land Acquisition Performance Over Time
             </h3>
-            <p className="text-[13px] text-[#64748B] mt-0.5">
-              Active infrastructure corridors, acquisition progress, and predicted delay duration.
+            <p className="text-xs text-slate-400 font-medium mt-0.5">
+              06 Sept, 2026 • Live ML Evaluation
+            </p>
+          </div>
+          <div className="flex items-center gap-2">
+            <button className="px-3 py-1.5 rounded-xl border border-slate-200 text-xs font-bold text-slate-600 hover:bg-slate-50 flex items-center gap-1.5 cursor-pointer">
+              <SlidersHorizontal className="w-3.5 h-3.5" />
+              <span>Sort</span>
+            </button>
+            <button className="px-3 py-1.5 rounded-xl border border-slate-200 text-xs font-bold text-slate-600 hover:bg-slate-50 flex items-center gap-1.5 cursor-pointer">
+              <span>Filter</span>
+            </button>
+          </div>
+        </div>
+
+        {/* 4 HORIZONTAL METRIC BLOCKS */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 divide-y md:divide-y-0 md:divide-x divide-slate-100 pt-2">
+          
+          {/* Metric 1 */}
+          <div className="space-y-1.5 pt-2 md:pt-0">
+            <span className="text-xs font-semibold text-slate-400 block">Total Parcels Registered</span>
+            <div className="flex items-baseline gap-2">
+              <span className="text-3xl font-extrabold text-[#0F382C] font-['Outfit']">{totalParcels}</span>
+              <span className="inline-flex items-center text-[10px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full">
+                +0.02% <ArrowUpRight className="w-3 h-3 ml-0.5" />
+              </span>
+            </div>
+          </div>
+
+          {/* Metric 2 */}
+          <div className="space-y-1.5 md:pl-6 pt-2 md:pt-0">
+            <span className="text-xs font-semibold text-slate-400 block">High Risk Bottlenecks</span>
+            <div className="flex items-baseline gap-2">
+              <span className="text-3xl font-extrabold text-[#0F382C] font-['Outfit']">{highRiskParcels}</span>
+              <span className="inline-flex items-center text-[10px] font-bold text-rose-700 bg-rose-100 px-2 py-0.5 rounded-full">
+                +0.02% <ArrowDownRight className="w-3 h-3 ml-0.5" />
+              </span>
+            </div>
+          </div>
+
+          {/* Metric 3 */}
+          <div className="space-y-1.5 md:pl-6 pt-2 md:pt-0">
+            <span className="text-xs font-semibold text-slate-400 block">Est. Cost Overrun Exposure</span>
+            <div className="flex items-baseline gap-2">
+              <span className="text-3xl font-extrabold text-[#0F382C] font-['Outfit']">₹{totalCostExposureCrores} Cr</span>
+              <span className="inline-flex items-center text-[10px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full">
+                +12% <ArrowUpRight className="w-3 h-3 ml-0.5" />
+              </span>
+            </div>
+          </div>
+
+          {/* Metric 4 */}
+          <div className="space-y-1.5 md:pl-6 pt-2 md:pt-0">
+            <span className="text-xs font-semibold text-slate-400 block">Active Corridors</span>
+            <div className="flex items-baseline gap-2">
+              <span className="text-3xl font-extrabold text-[#0F382C] font-['Outfit']">{totalProjects}</span>
+              <span className="inline-flex items-center text-[10px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full">
+                +0.02% <ArrowUpRight className="w-3 h-3 ml-0.5" />
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      {/* 3. EMITLY STYLE ROW 2 — BAR CHART & SCHEDULE CARDS */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        {/* Campaign Performance Bar Chart Card */}
+        <div className="lg:col-span-7 bg-white border border-slate-200/80 rounded-[28px] p-6 shadow-[0_4px_20px_-4px_rgba(15,56,44,0.03)] flex flex-col justify-between space-y-4">
+          <div className="flex items-start justify-between">
+            <div>
+              <h3 className="text-base font-bold text-[#0F382C] font-['Outfit']">
+                Corridor Acquisition Performance
+              </h3>
+              <div className="flex items-baseline gap-3 mt-2">
+                <span className="text-3xl font-extrabold text-[#0F382C] font-['Outfit']">₹{totalCostExposureCrores} Cr</span>
+                <span className="inline-flex items-center text-xs font-bold text-emerald-700 bg-[#DCFCE7] px-2.5 py-1 rounded-full">
+                  ↑ 12% <span className="text-slate-500 font-normal ml-1">vs last month</span>
+                </span>
+              </div>
+              <p className="text-xs text-slate-400 font-medium mt-1">06 Sept, 2026</p>
+            </div>
+            <button className="text-slate-400 hover:text-slate-600 p-1">
+              <MoreVertical className="w-4 h-4" />
+            </button>
+          </div>
+
+          {/* Bar Chart Visualization matching Coral Bar Accent in Reference */}
+          <div className="h-56 w-full pt-4">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={barChartData} margin={{ top: 20, right: 10, left: -20, bottom: 5 }}>
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#F1F5F9" />
+                <XAxis dataKey="month" tick={{ fontSize: 11, fill: '#64748B' }} axisLine={false} tickLine={false} />
+                <YAxis tick={{ fontSize: 11, fill: '#64748B' }} axisLine={false} tickLine={false} />
+                <Tooltip 
+                  contentStyle={{ background: '#0F382C', borderRadius: '12px', color: '#FFF', fontSize: '12px', border: 'none' }} 
+                />
+                <Bar dataKey="count" radius={[10, 10, 0, 0]} name="Progress Pct">
+                  {barChartData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.isHighlight ? '#FF6B52' : '#F3F4F6'} />
+                  ))}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+
+          <div className="flex items-center justify-between text-xs text-slate-500 pt-3 border-t border-slate-100 font-medium">
+            <span>Highlighted Corridor: <strong className="text-[#FF6B52]">PROJ-001 (67% Acquired)</strong></span>
+            <button 
+              onClick={() => setActiveTab("reports")}
+              className="text-[#0F382C] font-bold hover:underline"
+            >
+              Export ML Report →
+            </button>
+          </div>
+        </div>
+
+        {/* Schedule Campaign & Action Events Right Card */}
+        <div className="lg:col-span-5 bg-white border border-slate-200/80 rounded-[28px] p-6 shadow-[0_4px_20px_-4px_rgba(15,56,44,0.03)] space-y-5">
+          <div className="flex items-center justify-between">
+            <h3 className="text-base font-bold text-[#0F382C] font-['Outfit']">
+              Schedule Action Reviews
+            </h3>
+            <span className="text-xs font-bold text-slate-400">September 2026</span>
+          </div>
+
+          {/* Calendar Day Picker Bar */}
+          <div className="flex items-center justify-between bg-slate-50 border border-slate-100 rounded-2xl p-2 text-center text-xs font-semibold">
+            <div className="p-1 text-slate-400">Mon<br /><span className="text-slate-800">15</span></div>
+            <div className="p-1 text-slate-400">Tue<br /><span className="text-slate-800">16</span></div>
+            <div className="p-1 text-slate-400">Wed<br /><span className="text-slate-800">17</span></div>
+            <div className="p-1 text-slate-400">Thu<br /><span className="text-slate-800">18</span></div>
+            <div className="bg-[#D8F374] text-[#0F382C] font-extrabold px-3 py-1.5 rounded-xl shadow-2xs">
+              Fri<br /><span>19</span>
+            </div>
+            <div className="p-1 text-slate-400">Sat<br /><span className="text-slate-800">20</span></div>
+            <div className="p-1 text-slate-400">Sun<br /><span className="text-slate-800">21</span></div>
+          </div>
+
+          {/* Pastel Yellow Card (Element of Design Test style -> Land Hearing Review) */}
+          <div className="bg-[#FEF08A] border border-amber-300 rounded-2xl p-4 space-y-2 text-[#0F382C] shadow-2xs">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 bg-amber-200/80 rounded-xl flex items-center justify-center text-amber-900">
+                  <AlertTriangle className="w-4 h-4" />
+                </div>
+                <div>
+                  <h4 className="text-xs font-bold font-['Outfit']">Section 15 Hearing: Vadipatti</h4>
+                  <p className="text-[11px] font-medium text-amber-900/80">10:00 AM - 11:30 AM</p>
+                </div>
+              </div>
+              <MoreVertical className="w-4 h-4 text-amber-900/60 cursor-pointer" />
+            </div>
+          </div>
+
+          {/* Pastel Pink Card (Design Principle Test style -> Special Arbitration Camp) */}
+          <div className="bg-[#F5D0FE] border border-purple-300 rounded-2xl p-4 space-y-2 text-[#0F382C] shadow-2xs">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 bg-purple-200/80 rounded-xl flex items-center justify-center text-purple-900">
+                  <FileCheck2 className="w-4 h-4" />
+                </div>
+                <div>
+                  <h4 className="text-xs font-bold font-['Outfit']">Special Compensation Camp</h4>
+                  <p className="text-[11px] font-medium text-purple-900/80">02:00 PM - 04:30 PM</p>
+                </div>
+              </div>
+              <MoreVertical className="w-4 h-4 text-purple-900/60 cursor-pointer" />
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      {/* 4. ACTIVE PROJECTS & BOTTLENECK PARCELS TABLE */}
+      <div className="bg-white border border-slate-200/80 rounded-[28px] p-6 shadow-[0_4px_20px_-4px_rgba(15,56,44,0.03)] space-y-4">
+        <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+          <div>
+            <h3 className="text-base font-bold text-[#0F382C] font-['Outfit']">
+              Registered Corridors & Priority Risk Status
+            </h3>
+            <p className="text-xs text-slate-400 font-medium mt-0.5">
+              Live tracking of registered land acquisition projects across state corridors.
             </p>
           </div>
           <button
             onClick={() => setActiveTab("projects")}
-            className="text-[14px] font-semibold text-[#2563EB] hover:text-[#1D4ED8] flex items-center gap-1 cursor-pointer"
+            className="text-xs font-bold text-[#0F382C] hover:underline flex items-center gap-1 cursor-pointer"
           >
             <span>View All Projects</span>
             <ChevronRight className="w-4 h-4" />
@@ -159,30 +311,29 @@ export default function DashboardView({
             <thead>
               <tr>
                 <th className="table-header">Project ID</th>
-                <th className="table-header">Project Name</th>
+                <th className="table-header">Corridor Name</th>
                 <th className="table-header">State</th>
                 <th className="table-header">District</th>
                 <th className="table-header text-center">Land Parcels</th>
                 <th className="table-header">Acquisition Progress</th>
                 <th className="table-header">Risk Level</th>
                 <th className="table-header">Predicted Delay</th>
-                <th className="table-header">Last Updated</th>
                 <th className="table-header text-right">Action</th>
               </tr>
             </thead>
             <tbody className="table-body">
-              {projects.map((proj) => (
-                <tr key={proj.id}>
-                  <td className="table-value-bold font-mono">{proj.id}</td>
-                  <td className="table-value-bold">{proj.name}</td>
-                  <td className="text-[#64748B]">{proj.state || "Tamil Nadu"}</td>
-                  <td className="text-[#64748B]">{proj.district}</td>
-                  <td className="text-center font-semibold text-[#0F172A]">{proj.totalParcelsCount || 124}</td>
+              {projects.slice(0, 6).map((proj) => (
+                <tr key={proj.id} className="hover:bg-[#F6FAF5] transition-colors">
+                  <td className="table-value-bold font-mono text-xs">{proj.id}</td>
+                  <td className="table-value-bold font-['Outfit']">{proj.name}</td>
+                  <td className="text-slate-500 text-xs font-medium">{proj.state || "Tamil Nadu"}</td>
+                  <td className="text-slate-500 text-xs font-medium">{proj.district}</td>
+                  <td className="text-center font-bold text-[#0F382C] text-xs">{proj.totalParcelsCount || 12}</td>
                   <td>
                     <div className="flex items-center gap-2">
-                      <span className="font-semibold text-[#0F172A]">{proj.progress}%</span>
-                      <div className="w-20 bg-[#E2E8F0] h-2 rounded-[2px] overflow-hidden">
-                        <div className="bg-[#2563EB] h-full" style={{ width: `${proj.progress}%` }} />
+                      <span className="font-bold text-xs text-[#0F382C]">{proj.progress}%</span>
+                      <div className="w-20 bg-slate-100 h-2 rounded-full overflow-hidden">
+                        <div className="bg-[#0F382C] h-full rounded-full" style={{ width: `${proj.progress}%` }} />
                       </div>
                     </div>
                   </td>
@@ -197,14 +348,13 @@ export default function DashboardView({
                       {proj.delayRisk}
                     </span>
                   </td>
-                  <td className="table-value-bold font-mono">
+                  <td className="table-value-bold font-mono text-xs text-[#0F382C]">
                     {proj.predictedDelay} Days
                   </td>
-                  <td className="text-[#64748B] text-[12px]">Today</td>
                   <td className="text-right">
                     <button
                       onClick={() => setActiveTab("projects")}
-                      className="btn-secondary text-[13px] h-[34px] px-3"
+                      className="btn-secondary text-xs h-8 px-3 py-0"
                     >
                       View Analysis
                     </button>
@@ -213,179 +363,6 @@ export default function DashboardView({
               ))}
             </tbody>
           </table>
-        </div>
-      </div>
-
-      {/* SECTION 2 — DELAY RISK ANALYSIS (CHARTS) */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        
-        {/* Risk Distribution Chart */}
-        <div className="lg:col-span-5 card-enterprise flex flex-col justify-between">
-          <div>
-            <h3 className="section-title">
-              Risk Level Distribution
-            </h3>
-            <p className="text-[13px] text-[#64748B] mt-0.5">
-              Breakdown of land parcels categorized by predicted delay severity.
-            </p>
-          </div>
-
-          <div className="h-56 w-full my-4 flex items-center justify-center">
-            <ResponsiveContainer width="100%" height="100%">
-              <PieChart>
-                <Pie
-                  data={riskData}
-                  cx="50%"
-                  cy="50%"
-                  innerRadius={45}
-                  outerRadius={65}
-                  paddingAngle={4}
-                  dataKey="value"
-                >
-                  {riskData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
-                  ))}
-                </Pie>
-                <Tooltip formatter={(value) => [`${value} Parcels`, 'Count']} />
-                <Legend iconSize={10} wrapperStyle={{ fontSize: 12, color: '#64748B' }} />
-              </PieChart>
-            </ResponsiveContainer>
-          </div>
-
-          <div className="pt-3 border-t border-[#E2E8F0] grid grid-cols-2 gap-2 text-[14px]">
-            <div className="p-2.5 bg-[#F8FAFC] rounded-[5px] border border-[#E2E8F0]">
-              <span className="small-label block text-[#64748B]">Critical & High</span>
-              <span className="table-value-bold text-[#DC2626]">{highRiskCount + criticalRiskCount} Parcels</span>
-            </div>
-            <div className="p-2.5 bg-[#F8FAFC] rounded-[5px] border border-[#E2E8F0]">
-              <span className="small-label block text-[#64748B]">Low & Medium</span>
-              <span className="table-value-bold text-[#166534]">{lowRiskCount + medRiskCount} Parcels</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Predicted Delay by Project */}
-        <div className="lg:col-span-7 card-enterprise flex flex-col justify-between">
-          <div>
-            <h3 className="section-title">
-              Predicted Delay Duration by Project
-            </h3>
-            <p className="text-[13px] text-[#64748B] mt-0.5">
-              Estimated days of delay forecasted by the predictive model across active corridors.
-            </p>
-          </div>
-
-          <div className="h-56 w-full my-4">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={projectDelayData} margin={{ top: 10, right: 10, left: -20, bottom: 5 }}>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#F1F5F9" />
-                <XAxis dataKey="name" tick={{ fontSize: 12, fill: '#64748B' }} />
-                <YAxis tick={{ fontSize: 12, fill: '#64748B' }} />
-                <Tooltip contentStyle={{ background: '#0F172A', borderRadius: '5px', color: '#FFF', fontSize: '12px' }} />
-                <Bar dataKey="delay" fill="#2563EB" radius={[4, 4, 0, 0]} name="Predicted Delay (Days)" />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-
-          <div className="text-[12px] text-[#64748B] pt-3 border-t border-[#E2E8F0] flex items-center justify-between font-normal">
-            <span>Model Refresh Rate: Daily</span>
-            <span>Historical Validation Accuracy: 91.4%</span>
-          </div>
-        </div>
-
-      </div>
-
-      {/* SECTION 3 — MAJOR DELAY FACTORS */}
-      <div className="card-enterprise space-y-4">
-        <div className="border-b border-[#E2E8F0] pb-3">
-          <h3 className="section-title">
-            Major Delay Factors
-          </h3>
-          <p className="text-[13px] text-[#64748B] mt-0.5">
-            Ranked root causes contributing to land acquisition bottlenecks across all jurisdictions.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          {delayFactors.map((factor, idx) => (
-            <div key={idx} className="p-3 bg-[#F8FAFC] rounded-[5px] border border-[#E2E8F0] space-y-1.5">
-              <div className="flex items-center justify-between">
-                <span className="table-value-bold">{idx + 1}. {factor.name}</span>
-                <span className={`status-badge ${
-                  factor.risk === 'Critical' || factor.risk === 'High' ? "status-badge-danger" : "status-badge-warning"
-                }`}>
-                  {factor.risk} Impact
-                </span>
-              </div>
-
-              <div className="space-y-1">
-                <div className="flex justify-between text-[12px] text-[#64748B]">
-                  <span>{factor.affected} Affected Parcels</span>
-                  <span className="font-semibold">{factor.pct}% Contribution</span>
-                </div>
-                <div className="w-full bg-[#E2E8F0] h-1.5 rounded-[2px] overflow-hidden">
-                  <div className="bg-[#2563EB] h-full" style={{ width: `${factor.pct * 3}%` }} />
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* SECTION 4 — EARLY WARNING PANEL */}
-      <div className="card-enterprise space-y-4">
-        <div className="flex items-center justify-between border-b border-[#E2E8F0] pb-3">
-          <div>
-            <h3 className="section-title">
-              Early Warning Alerts
-            </h3>
-            <p className="text-[13px] text-[#64748B] mt-0.5">
-              Automated high-priority flags requiring immediate officer intervention.
-            </p>
-          </div>
-          <button
-            onClick={() => setActiveTab("alerts")}
-            className="text-[14px] font-semibold text-[#2563EB] hover:text-[#1D4ED8] flex items-center gap-1 cursor-pointer"
-          >
-            <span>View All Early Warnings</span>
-            <ChevronRight className="w-4 h-4" />
-          </button>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-[14px]">
-          
-          {/* HIGH RISK ALERT CARD 1 */}
-          <div className="p-4 bg-[#FEF2F2] border border-[#FCA5A5] rounded-[6px] space-y-2">
-            <div className="flex items-center justify-between">
-              <span className="status-badge status-badge-danger">
-                HIGH RISK
-              </span>
-              <span className="table-value-bold font-mono text-[#0F172A]">Survey No. 124/2</span>
-            </div>
-            <p className="table-value-bold text-[#0F172A]">Ownership verification pending & title dispute</p>
-            <p className="text-[#64748B]">Predicted Delay: <span className="font-semibold text-[#991B1B]">45 Days</span></p>
-            <div className="p-3 bg-white rounded-[5px] border border-[#FCA5A5]/60 text-[#1E293B] text-[13px]">
-              <span className="small-label block text-[#64748B] mb-0.5">Recommended Action:</span>
-              Complete ownership verification with local revenue office and resolve compensation escrow issue before proceeding.
-            </div>
-          </div>
-
-          {/* MEDIUM RISK ALERT CARD 2 */}
-          <div className="p-4 bg-[#FFFBEB] border border-[#FDE68A] rounded-[6px] space-y-2">
-            <div className="flex items-center justify-between">
-              <span className="status-badge status-badge-warning">
-                MEDIUM RISK
-              </span>
-              <span className="table-value-bold font-mono text-[#0F172A]">Survey No. 219/4</span>
-            </div>
-            <p className="table-value-bold text-[#0F172A]">Document mismatch detected in revenue records</p>
-            <p className="text-[#64748B]">Predicted Delay: <span className="font-semibold text-[#92400E]">18 Days</span></p>
-            <div className="p-3 bg-white rounded-[5px] border border-[#FDE68A]/60 text-[#1E293B] text-[13px]">
-              <span className="small-label block text-[#64748B] mb-0.5">Recommended Action:</span>
-              Verify revenue records (Patta / Chitta) with Taluk Tahsildar before entering next acquisition stage.
-            </div>
-          </div>
-
         </div>
       </div>
 

@@ -202,19 +202,19 @@ export default function ProjectsView({
       )}
 
       {/* ALL PROJECTS TABLE LEDGER */}
-      <div className="card-enterprise space-y-4">
-        <div className="flex items-center justify-between border-b border-[#E2E8F0] pb-3">
-          <h3 className="text-[18px] font-extrabold text-[#0A192F] tracking-tight">
+      <div className="bg-white border border-slate-200/80 rounded-[28px] p-6 shadow-[0_4px_20px_-4px_rgba(15,56,44,0.03)] space-y-4 font-['Plus_Jakarta_Sans',sans-serif]">
+        <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+          <h3 className="text-lg font-extrabold text-[#0F382C] font-['Outfit']">
             Registered Acquisition Projects ({filteredProjects.length})
           </h3>
-          <div className="relative w-64">
-            <Search className="w-4 h-4 text-[#94A3B8] absolute left-3 top-3" />
+          <div className="relative w-64 flex items-center">
+            <Search className="w-4 h-4 text-slate-500 absolute left-3.5 z-10 pointer-events-none" />
             <input
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Filter by Project ID..."
-              className="input-enterprise w-full pl-9 font-medium text-[13px]"
+              className="input-enterprise w-full !pl-10 pr-4 text-xs font-semibold !text-slate-900 placeholder:!text-slate-400"
             />
           </div>
         </div>
@@ -223,15 +223,14 @@ export default function ProjectsView({
           <table className="table-enterprise">
             <thead>
               <tr>
-                <th className="table-header font-extrabold text-[#334155]">Project ID</th>
-                <th className="table-header font-extrabold text-[#334155]">Project Name</th>
-                <th className="table-header font-extrabold text-[#334155]">State & District</th>
-                <th className="table-header font-extrabold text-[#334155]">Type</th>
-                <th className="table-header font-extrabold text-[#334155]">Required (Ha)</th>
-                <th className="table-header font-extrabold text-[#334155]">Acquired (Ha)</th>
-                <th className="table-header font-extrabold text-[#334155]">Progress</th>
-                <th className="table-header font-extrabold text-[#334155]">Delay Risk</th>
-                <th className="table-header font-extrabold text-[#334155] text-right">Action</th>
+                <th className="table-header">Project ID</th>
+                <th className="table-header">Project Name & District</th>
+                <th className="table-header">Type</th>
+                <th className="table-header">Required (Ha)</th>
+                <th className="table-header">Acquired (Ha)</th>
+                <th className="table-header">Progress</th>
+                <th className="table-header">Delay Risk</th>
+                <th className="table-header text-right">Action</th>
               </tr>
             </thead>
             <tbody className="table-body">
@@ -239,22 +238,30 @@ export default function ProjectsView({
                 <tr 
                   key={p.id} 
                   onClick={() => setSelectedProjectId(p.id)}
-                  className={`hover:bg-[#F8FAFC] cursor-pointer ${
-                    selectedProjectId === p.id ? "bg-[#F1F5F9]" : ""
+                  className={`hover:bg-[#F6FAF5] cursor-pointer transition-colors ${
+                    selectedProjectId === p.id ? "bg-[#F6FAF5]" : ""
                   }`}
                 >
-                  <td className="table-value-bold font-mono">{p.id}</td>
-                  <td className="table-value-bold text-[#0A192F]">{p.name}</td>
-                  <td className="text-[#475569]">{p.state || "Tamil Nadu"}, {p.district}</td>
-                  <td className="text-[#475569]">{p.type}</td>
-                  <td className="font-semibold">{p.landRequired}</td>
-                  <td className="text-[#166534] font-semibold">{p.landAcquired}</td>
+                  <td className="table-value-bold font-mono text-xs text-[#0F382C]">{p.id}</td>
                   <td>
-                    <span className="font-semibold text-[#0F172A]">{p.progress}%</span>
+                    <div>
+                      <p className="font-extrabold text-[#0F382C] font-['Outfit'] text-sm">{p.name}</p>
+                      <p className="text-xs text-slate-500 font-medium">{p.state || "Tamil Nadu"}, {p.district}</p>
+                    </div>
+                  </td>
+                  <td className="text-slate-600 text-xs font-medium">{p.type}</td>
+                  <td className="font-bold text-[#0F382C] text-xs">{p.landRequired}</td>
+                  <td className="text-emerald-700 font-extrabold text-xs">{p.landAcquired}</td>
+                  <td>
+                    <span className="font-extrabold text-[#0F382C] text-xs">{p.progress}%</span>
                   </td>
                   <td>
-                    <span className={`status-badge ${
-                      p.delayRisk === 'Critical' || p.delayRisk === 'High' ? "status-badge-danger" : "status-badge-warning"
+                    <span className={`px-3 py-1 rounded-full text-xs font-bold border ${
+                      p.delayRisk === 'Critical' || p.delayRisk === 'High'
+                        ? "bg-[#FEE2E2] text-[#B91C1C] border-[#FECDD3]"
+                        : p.delayRisk === 'Medium'
+                          ? "bg-[#FEF3C7] text-[#B45309] border-[#FDE68A]"
+                          : "bg-[#FEF9C3] text-[#A16207] border-[#FEF08A]"
                     }`}>
                       {p.delayRisk}
                     </span>
@@ -262,7 +269,7 @@ export default function ProjectsView({
                   <td className="text-right whitespace-nowrap">
                     <button
                       onClick={(e) => { e.stopPropagation(); setSelectedProjectId(p.id); }}
-                      className="btn-secondary h-[34px] px-3 text-[13px]"
+                      className="bg-white border border-slate-200 hover:bg-[#F6FAF5] hover:border-[#0F382C] text-[#0F382C] font-extrabold text-xs px-5 py-1.5 rounded-full shadow-2xs cursor-pointer transition-all"
                     >
                       Select
                     </button>
@@ -273,7 +280,6 @@ export default function ProjectsView({
           </table>
         </div>
       </div>
-
     </div>
   );
 }

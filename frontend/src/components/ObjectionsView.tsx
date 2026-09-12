@@ -65,29 +65,29 @@ export default function ObjectionsView({ showToast }: ObjectionsViewProps) {
     : objections.filter(o => o.objectionType === selectedCategory);
 
   return (
-    <div className="space-y-8 font-sans antialiased text-slate-800 pb-12">
+    <div className="space-y-6 font-['Plus_Jakarta_Sans',sans-serif] text-[#12241C] pb-12 animate-fade-in">
       
       {/* HEADER BANNER */}
-      <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-2xs">
-        <h2 className="text-2xl font-bold text-slate-900 font-heading">
+      <div className="bg-white border border-slate-200/80 rounded-[28px] p-6 shadow-[0_4px_20px_-4px_rgba(15,56,44,0.03)]">
+        <h2 className="text-2xl font-extrabold text-[#0F382C] font-['Outfit']">
           Objection & Grievance Monitoring
         </h2>
-        <p className="text-xs text-slate-500 mt-1 max-w-3xl leading-relaxed">
+        <p className="text-xs text-slate-500 mt-1 max-w-3xl leading-relaxed font-medium">
           Monitor statutory Section-15 objections, legal writ petitions, boundary disputes, and compensation claims submitted by landowners.
         </p>
       </div>
 
       {/* FILTER BAR */}
-      <div className="bg-white border border-slate-200 rounded-2xl p-4 shadow-2xs flex flex-wrap items-center justify-between gap-3 text-xs">
-        <div className="flex items-center gap-2">
-          <span className="font-bold text-slate-500 uppercase text-[10px]">Objection Category Filter:</span>
+      <div className="bg-white border border-slate-200/80 rounded-[28px] p-4 shadow-2xs flex flex-wrap items-center justify-between gap-3 text-xs font-medium">
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="font-extrabold text-slate-400 uppercase text-[10px] tracking-wider">Objection Category:</span>
           {["All", "Ownership", "Compensation", "Boundary", "Legal", "Public Objection"].map(cat => (
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-3 py-1 rounded-lg font-bold transition-all cursor-pointer ${
+              className={`px-4 py-1.5 rounded-full font-bold transition-all cursor-pointer ${
                 selectedCategory === cat
-                  ? "bg-blue-700 text-white"
+                  ? "bg-[#0F382C] text-[#D8F374] shadow-2xs"
                   : "bg-slate-100 hover:bg-slate-200 text-slate-700"
               }`}
             >
@@ -97,56 +97,66 @@ export default function ObjectionsView({ showToast }: ObjectionsViewProps) {
         </div>
       </div>
 
-      {/* OBJECTIONS TABLE LEDGER */}
-      <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-2xs space-y-4">
+      {/* OBJECTIONS TABLE LEDGER — MATCHING USER REFERENCE IMAGE STYLE */}
+      <div className="bg-white border border-slate-200/80 rounded-[28px] p-6 shadow-[0_4px_20px_-4px_rgba(15,56,44,0.03)] space-y-4">
         <div className="border-b border-slate-100 pb-3">
-          <h3 className="content-title-prominent flex items-center gap-2 text-[#0A192F] font-extrabold text-[17px] tracking-tight">
-            <span>Logged Section-15 Objections ({filtered.length})</span>
+          <h3 className="text-lg font-extrabold text-[#0F382C] font-['Outfit']">
+            Logged Section-15 Objections ({filtered.length})
           </h3>
+          <p className="text-xs text-slate-500 font-medium mt-0.5">
+            Active landowner grievance filings requiring tahsildar inquiry or legal review.
+          </p>
         </div>
 
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs font-medium text-slate-700">
-            <thead className="bg-slate-50 text-slate-500 uppercase text-[10px] tracking-wider font-bold border-b border-slate-200">
+          <table className="table-enterprise">
+            <thead>
               <tr>
-                <th className="p-3">Objection ID</th>
-                <th className="p-3">Survey Number</th>
-                <th className="p-3">Project</th>
-                <th className="p-3">Category</th>
-                <th className="p-3">Submitted Date</th>
-                <th className="p-3">Status</th>
-                <th className="p-3">Risk Impact</th>
-                <th className="p-3">Expected Resolution</th>
-                <th className="p-3 text-right">Action</th>
+                <th className="table-header">Objection ID</th>
+                <th className="table-header">Survey & Project Details</th>
+                <th className="table-header">Category</th>
+                <th className="table-header">Submitted Date</th>
+                <th className="table-header">Status</th>
+                <th className="table-header">Risk Impact</th>
+                <th className="table-header text-right">Action</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="table-body">
               {filtered.map((obj) => (
-                <tr key={obj.id} className="hover:bg-slate-50/80 transition-colors">
-                  <td className="p-3 font-bold font-mono text-slate-900">{obj.id}</td>
-                  <td className="p-3 font-bold font-mono text-blue-700">Survey {obj.surveyNumber}</td>
-                  <td className="p-3 text-slate-800">{obj.project}</td>
-                  <td className="p-3 font-semibold text-slate-700">{obj.objectionType}</td>
-                  <td className="p-3 text-slate-500 text-[11px]">{obj.submittedDate}</td>
-                  <td className="p-3">
-                    <span className="px-2.5 py-0.5 rounded bg-blue-50 text-blue-800 font-bold text-[10px]">
+                <tr key={obj.id} className="hover:bg-[#F6FAF5] transition-colors">
+                  <td className="table-value-bold font-mono text-xs text-[#0F382C]">{obj.id}</td>
+                  <td>
+                    <div>
+                      <p className="font-extrabold text-[#0F382C] font-['Outfit'] text-sm">
+                        Survey {obj.surveyNumber} <span className="text-xs font-mono font-normal text-slate-400">({obj.parcelId})</span>
+                      </p>
+                      <p className="text-xs text-slate-500 font-medium">{obj.project}</p>
+                    </div>
+                  </td>
+                  <td className="font-bold text-[#0F382C] text-xs">{obj.objectionType}</td>
+                  <td className="text-slate-500 text-xs font-medium">{obj.submittedDate}</td>
+                  <td>
+                    <span className="px-3 py-1 rounded-full text-xs font-bold bg-blue-50 text-blue-800 border border-blue-200">
                       {obj.status}
                     </span>
                   </td>
-                  <td className="p-3">
-                    <span className={`px-2 py-0.5 rounded text-[10px] font-bold border ${
-                      obj.riskImpact === 'Critical' ? "bg-rose-50 text-rose-800 border-rose-200" : "bg-amber-50 text-amber-800 border-amber-200"
+                  <td>
+                    <span className={`px-3 py-1 rounded-full text-xs font-bold border ${
+                      obj.riskImpact === 'Critical'
+                        ? "bg-[#FEE2E2] text-[#B91C1C] border-[#FECDD3]"
+                        : obj.riskImpact === 'High'
+                          ? "bg-[#FEF3C7] text-[#B45309] border-[#FDE68A]"
+                          : "bg-[#FEF9C3] text-[#A16207] border-[#FEF08A]"
                     }`}>
                       {obj.riskImpact}
                     </span>
                   </td>
-                  <td className="p-3 text-slate-700 max-w-xs truncate">{obj.expectedResolution}</td>
-                  <td className="p-3 text-right">
+                  <td className="text-right">
                     <button
-                      onClick={() => showToast(`Opening inquiry file for ${obj.id}...`, "success")}
-                      className="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold rounded text-[11px] cursor-pointer"
+                      onClick={() => showToast(`Selected objection ${obj.id} for inquiry`, "success")}
+                      className="bg-white border border-slate-200 hover:bg-[#F6FAF5] hover:border-[#0F382C] text-[#0F382C] font-extrabold text-xs px-5 py-1.5 rounded-full shadow-2xs cursor-pointer transition-all"
                     >
-                      Inquire
+                      Select
                     </button>
                   </td>
                 </tr>

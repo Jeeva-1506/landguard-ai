@@ -785,14 +785,6 @@ export default function GISDashboardMap({ projects, parcels: propParcels, onView
                   Terrain
                 </button>
               </div>
-
-              <button
-                onClick={() => setShowCsvModal(true)}
-                className="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs px-3.5 py-2 rounded-2xl shadow-xl border border-emerald-500 flex items-center gap-1.5 transition-all cursor-pointer"
-              >
-                <Upload className="w-3.5 h-3.5" />
-                <span>Import CSV</span>
-              </button>
             </div>
           </div>
 

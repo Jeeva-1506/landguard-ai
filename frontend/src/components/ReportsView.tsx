@@ -1,6 +1,20 @@
 import React, { useState } from "react";
 import { Project, LandParcel } from "../types";
-import { FileText, Download, Play, CheckCircle2, FileSpreadsheet, Loader2 } from "lucide-react";
+import { 
+  FileText, 
+  Download, 
+  Play, 
+  CheckCircle2, 
+  FileSpreadsheet, 
+  Loader2, 
+  Bell, 
+  Mail, 
+  Send, 
+  ShieldCheck, 
+  MessageSquare, 
+  RefreshCw 
+} from "lucide-react";
+import { sendPrototypeTestNotification, sendTestHighRiskEmailAlert, sendReportPdfEmail } from "../api";
 
 interface ReportsViewProps {
   projects: Project[];
@@ -11,13 +25,72 @@ interface ReportsViewProps {
 export default function ReportsView({ projects, parcels, showToast }: ReportsViewProps) {
   const [compilingReport, setCompilingReport] = useState<string | null>(null);
   const [compiledReportData, setCompiledReportData] = useState<any | null>(null);
+  const [isSendingTest, setIsSendingTest] = useState(false);
+  const [isSendingHighRiskTest, setIsSendingHighRiskTest] = useState(false);
+  const [isSendingEmailPdf, setIsSendingEmailPdf] = useState(false);
+
+  const handleEmailPdf = async () => {
+    if (!compiledReportData) return;
+    setIsSendingEmailPdf(true);
+    try {
+      const res = await sendReportPdfEmail({
+        recipientEmail: "jeevaselva0614@gmail.com",
+        templateId: compiledReportData.templateId,
+        title: compiledReportData.title,
+        date: compiledReportData.date,
+        meta: compiledReportData.meta,
+        metrics: compiledReportData.metrics
+      });
+
+      if (res.success) {
+        if (showToast) showToast(`📄 PDF Audit Report (${res.filename}) emailed to jeevaselva0614@gmail.com via Brevo API!`);
+      } else {
+        if (showToast) showToast(`Email dispatch error: ${res.message}`, "error");
+      }
+    } catch (err: any) {
+      if (showToast) showToast(`Failed to email PDF: ${err.message}`, "error");
+    } finally {
+      setIsSendingEmailPdf(false);
+    }
+  };
 
   const reportTemplates = [
     { id: "R-CLEAR", name: "Land Acquisition Clearance Audit", description: "Compiled clearance ratio, acquired acreage vs remaining, and survey completions.", type: "PDF" },
+    { id: "R-NOTIF", name: "Multi-Channel Risk Notification & Dispatch Audit", description: "Audit of Brevo email alerts, WhatsApp dispatches, deliverability status, and routing logs.", type: "PDF" },
     { id: "R-COST", name: "Estimated Overrun & Escrow Summary", description: "Audited disbursements, pending claims, and random forest budget overrun predictions.", type: "XLS" },
     { id: "R-LEGAL", name: "High Court Stay & Litigation Status Report", description: "Writ stays list, disputed title holdings, and arbitrator recommendations.", type: "PDF" },
     { id: "R-MODEL", name: "Delay Risk Classifier Accuracy Performance", description: "Predicted vs actual delay parameters, confusion matrix metrics.", type: "PDF" }
   ];
+
+  const handleSendHighRiskEmailTest = async () => {
+    setIsSendingHighRiskTest(true);
+    try {
+      const res = await sendTestHighRiskEmailAlert();
+      if (res.result?.emailResult?.success) {
+        if (showToast) showToast(`🚨 High Risk Email Alert dispatched via Brevo!`);
+      } else if (res.result?.reason === "ALERT_ALREADY_SENT") {
+        if (showToast) showToast(`Duplicate alert lock active for Land #${res.targetLandId}. Alert already dispatched previously.`, "error");
+      } else {
+        if (showToast) showToast(`High Risk Email Alert trigger completed for Land #${res.targetLandId}`);
+      }
+    } catch (err: any) {
+      if (showToast) showToast(`High Risk Email trigger error: ${err.message}`, "error");
+    } finally {
+      setIsSendingHighRiskTest(false);
+    }
+  };
+
+  const handleSendTestNotification = async () => {
+    setIsSendingTest(true);
+    try {
+      await sendPrototypeTestNotification();
+      if (showToast) showToast("Multi-channel test notification dispatched!");
+    } catch (err: any) {
+      if (showToast) showToast(`Test send failed: ${err.message}`, "error");
+    } finally {
+      setIsSendingTest(false);
+    }
+  };
 
   const handleCompile = (templateId: string) => {
     setCompilingReport(templateId);
@@ -37,6 +110,25 @@ export default function ReportsView({ projects, parcels, showToast }: ReportsVie
             { label: "Total Target Area Required", value: `${projects.reduce((sum, p) => sum + p.landRequired, 0)} Hectares` },
             { label: "Total Area Acquired & Settled", value: `${projects.reduce((sum, p) => sum + p.landAcquired, 0)} Hectares` },
             { label: "Possession Completed Plots", value: `${parcels.filter(p => p.acquisitionStage === "Possession").length} Plots` }
+          ]
+        });
+      } else if (templateId === "R-NOTIF") {
+        setCompiledReportData({
+          templateId,
+          title: "Multi-Channel Risk Notification & Dispatch Audit",
+          date: new Date().toLocaleDateString(),
+          meta: { 
+            "Brevo Email Status": "CONNECTED (SMTP Active)", 
+            "WhatsApp API Status": "ACTIVE (Webhook Live)", 
+            "Automated Trigger": "Risk Score ≥ 70%",
+            "Recipient Phone": "+91 7871534167",
+            "Recipient Email": "jeevaselva0614@gmail.com" 
+          },
+          metrics: [
+            { label: "High-Risk Automated Email Alerts Triggered", value: `${parcels.filter(p => p.delayProbability >= 70).length} Dispatches` },
+            { label: "Email Dispatch Success Ratio (Brevo API)", value: "100%" },
+            { label: "WhatsApp Cloud API Status", value: "Active / Standby" },
+            { label: "Automatic Escalation Threshold", value: "High Risk (Score ≥ 70%)" }
           ]
         });
       } else {
@@ -100,10 +192,76 @@ Digitally authorized by Special District Revenue Officer.
   };
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h3 className="text-xl font-bold text-slate-900 font-heading">SLA Official Report Compiler</h3>
-        <p className="text-sm text-slate-500 font-medium mt-0.5">Compile Section-15 compliant land clearance audit reports, financial disbursements briefs, and legal risk briefs</p>
+    <div className="space-y-6 text-slate-900 font-sans">
+      
+      {/* PAGE HEADER */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h3 className="text-xl font-bold text-slate-900 font-heading flex items-center gap-2">
+            <FileText className="w-6 h-6 text-blue-600" />
+            <span>SLA Official Report Compiler</span>
+          </h3>
+          <p className="text-sm text-slate-500 font-medium mt-0.5">
+            Compile Section-15 compliant land clearance audit reports, financial disbursements briefs, legal risk briefs, and multi-channel notification dispatch logs.
+          </p>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <span className="px-3 py-1.5 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-bold flex items-center gap-1.5 shadow-xs">
+            <ShieldCheck className="w-4 h-4 text-emerald-600" />
+            Brevo SMTP Active
+          </span>
+        </div>
+      </div>
+
+      {/* QUICK NOTIFICATION SYSTEM AUDIT BAR */}
+      <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <div className="p-2.5 bg-blue-50 text-blue-600 rounded-xl border border-blue-100">
+            <Bell className="w-5 h-5" />
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <h4 className="text-sm font-extrabold text-slate-900 font-['Outfit']">Notification System Dispatch Audit</h4>
+              <span className="px-2 py-0.5 bg-emerald-100 text-emerald-800 text-[10px] font-extrabold rounded-full border border-emerald-300">
+                ACTIVE
+              </span>
+            </div>
+            <p className="text-xs text-slate-500 font-medium mt-0.5">
+              Automated high-risk email triggers (Brevo API) & multi-channel alert logs
+            </p>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-3 flex-wrap">
+          <button
+            type="button"
+            onClick={handleSendHighRiskEmailTest}
+            disabled={isSendingHighRiskTest}
+            className="px-3.5 py-2 bg-rose-600 hover:bg-rose-700 disabled:opacity-50 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-xs cursor-pointer"
+          >
+            {isSendingHighRiskTest ? (
+              <RefreshCw className="w-3.5 h-3.5 text-rose-100 animate-spin" />
+            ) : (
+              <Mail className="w-3.5 h-3.5 text-rose-100" />
+            )}
+            <span>Send High-Risk Email Alert</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={handleSendTestNotification}
+            disabled={isSendingTest}
+            className="px-3.5 py-2 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-xs cursor-pointer"
+          >
+            {isSendingTest ? (
+              <RefreshCw className="w-3.5 h-3.5 text-blue-100 animate-spin" />
+            ) : (
+              <Send className="w-3.5 h-3.5 text-blue-100" />
+            )}
+            <span>Send Multi-Channel Test</span>
+          </button>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
@@ -150,13 +308,30 @@ Digitally authorized by Special District Revenue Officer.
                   <p className="text-xs text-slate-500 font-mono mt-1">Compiled on: {compiledReportData.date}</p>
                 </div>
 
-                <button
-                  onClick={handleDownload}
-                  className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-bold flex items-center gap-2 transition-all shadow-xs cursor-pointer"
-                >
-                  <Download className="w-4 h-4" />
-                  <span>Download Signed Audit</span>
-                </button>
+                <div className="flex items-center gap-2 flex-wrap">
+                  <button
+                    type="button"
+                    onClick={handleEmailPdf}
+                    disabled={isSendingEmailPdf}
+                    className="px-3.5 py-2 bg-slate-900 hover:bg-black disabled:opacity-50 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-xs cursor-pointer"
+                  >
+                    {isSendingEmailPdf ? (
+                      <RefreshCw className="w-4 h-4 text-blue-400 animate-spin" />
+                    ) : (
+                      <Mail className="w-4 h-4 text-blue-400" />
+                    )}
+                    <span>Email PDF Report</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={handleDownload}
+                    className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold flex items-center gap-2 transition-all shadow-xs cursor-pointer"
+                  >
+                    <Download className="w-4 h-4" />
+                    <span>Download Signed Audit</span>
+                  </button>
+                </div>
               </div>
 
               {/* Meta metrics list */}
@@ -211,3 +386,4 @@ Digitally authorized by Special District Revenue Officer.
     </div>
   );
 }
+

@@ -68,9 +68,22 @@ export default function AIChatbot({ currentProjectId, userRole = "Administrator"
   const [isTyping, setIsTyping] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [speakingMsgId, setSpeakingMsgId] = useState<string | null>(null);
+  const [availableVoices, setAvailableVoices] = useState<SpeechSynthesisVoice[]>([]);
 
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const recognitionRef = useRef<any>(null);
+
+  // Pre-load available SpeechSynthesis voices
+  useEffect(() => {
+    if ("speechSynthesis" in window) {
+      const updateVoices = () => {
+        const voices = window.speechSynthesis.getVoices();
+        setAvailableVoices(voices);
+      };
+      updateVoices();
+      window.speechSynthesis.onvoiceschanged = updateVoices;
+    }
+  }, []);
 
   // Default Initial Messages
   const [messages, setMessages] = useState<Message[]>([
@@ -94,50 +107,88 @@ export default function AIChatbot({ currentProjectId, userRole = "Administrator"
     }
   }, [messages, isOpen, isMinimized, isTyping]);
 
-  // Setup Web Speech Recognition if available
+  // Setup Web Speech Recognition
   useEffect(() => {
     const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
     if (SpeechRecognition) {
-      const rec = new SpeechRecognition();
-      rec.continuous = false;
-      rec.interimResults = false;
-      rec.lang = language === "ta" ? "ta-IN" : "en-US";
+      try {
+        const rec = new SpeechRecognition();
+        rec.continuous = false;
+        rec.interimResults = true;
+        rec.lang = language === "ta" ? "ta-IN" : "en-US";
 
-      rec.onresult = (event: any) => {
-        const transcript = event.results[0][0].transcript;
-        setInputText(transcript);
-        setIsListening(false);
-      };
+        rec.onresult = (event: any) => {
+          let currentTranscript = "";
+          for (let i = event.resultIndex; i < event.results.length; i++) {
+            currentTranscript += event.results[i][0].transcript;
+          }
+          if (currentTranscript.trim()) {
+            setInputText(currentTranscript);
+          }
+        };
 
-      rec.onerror = (err: any) => {
-        console.error("Speech recognition error:", err);
-        setIsListening(false);
-      };
+        rec.onerror = (err: any) => {
+          console.warn("Speech recognition error:", err.error || err);
+          setIsListening(false);
+        };
 
-      rec.onend = () => {
-        setIsListening(false);
-      };
+        rec.onend = () => {
+          setIsListening(false);
+        };
 
-      recognitionRef.current = rec;
+        recognitionRef.current = rec;
+      } catch (e) {
+        console.warn("Speech recognition initialization error:", e);
+      }
     }
   }, [language]);
 
   const toggleVoiceInput = () => {
-    if (!recognitionRef.current) {
-      alert("Voice input is not supported in your browser.");
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      alert("Voice input is not supported in this browser. Please use Google Chrome or Microsoft Edge.");
       return;
     }
     if (isListening) {
-      recognitionRef.current.stop();
+      try {
+        recognitionRef.current?.stop();
+      } catch (e) {}
       setIsListening(false);
     } else {
-      setIsListening(true);
-      recognitionRef.current.start();
+      try {
+        // Re-instantiate if needed
+        if (!recognitionRef.current) {
+          const rec = new SpeechRecognition();
+          rec.continuous = false;
+          rec.interimResults = true;
+          rec.lang = language === "ta" ? "ta-IN" : "en-US";
+          rec.onresult = (event: any) => {
+            let currentTranscript = "";
+            for (let i = event.resultIndex; i < event.results.length; i++) {
+              currentTranscript += event.results[i][0].transcript;
+            }
+            if (currentTranscript.trim()) {
+              setInputText(currentTranscript);
+            }
+          };
+          rec.onerror = () => setIsListening(false);
+          rec.onend = () => setIsListening(false);
+          recognitionRef.current = rec;
+        }
+        setIsListening(true);
+        recognitionRef.current.start();
+      } catch (err: any) {
+        console.error("Failed to start voice recognition:", err);
+        setIsListening(false);
+      }
     }
   };
 
   const handleSpeakMessage = (msgId: string, text: string) => {
-    if (!("speechSynthesis" in window)) return;
+    if (!("speechSynthesis" in window)) {
+      alert("Text-to-speech is not supported in your browser.");
+      return;
+    }
     
     if (speakingMsgId === msgId) {
       window.speechSynthesis.cancel();
@@ -146,9 +197,67 @@ export default function AIChatbot({ currentProjectId, userRole = "Administrator"
     }
 
     window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text.replace(/[^\w\s.,?!]/gi, ''));
-    utterance.lang = language === "ta" ? "ta-IN" : "en-US";
-    utterance.rate = 0.95;
+
+    // Detect if text contains Tamil script (\u0B80-\u0BFF)
+    const isTamilScript = /[\u0B80-\u0BFF]/.test(text);
+
+    // Clean text safely for spoken audio
+    let spokenText = text
+      .replace(/[*#_~`•]/g, ' ')
+      .replace(/[\u{1F300}-\u{1F9FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]/gu, '');
+
+    if (!isTamilScript) {
+      // English spoken cleanup
+      spokenText = spokenText
+        .replace(/NH-(\d+)/gi, 'National Highway $1')
+        .replace(/(\d+)\/(\d+)/g, '$1 slash $2')
+        .replace(/\bGIS\b/gi, 'G I S')
+        .replace(/\bCALA\b/gi, 'Competent Authority for Land Acquisition')
+        .replace(/\be\.g\.\b/gi, 'for example');
+    } else {
+      // Tamil spoken cleanup
+      spokenText = spokenText
+        .replace(/AI/gi, 'ஏ ஐ')
+        .replace(/GIS/gi, 'ஜி ஐ எஸ்')
+        .replace(/(\d+)\/(\d+)/g, '$1 கீழ் $2');
+    }
+
+    spokenText = spokenText.replace(/\s+/g, ' ').trim();
+
+    if (!spokenText) return;
+
+    const utterance = new SpeechSynthesisUtterance(spokenText);
+    
+    // CRITICAL FIX: Match speech engine language strictly to the TEXT SCRIPT!
+    // If text contains Tamil characters, use ta-IN.
+    // If text is written in English alphabet, use en-IN / en-US for crystal clear pronunciation!
+    const targetLang = isTamilScript ? "ta-IN" : "en-IN";
+    utterance.lang = targetLang;
+    utterance.rate = isTamilScript ? 0.85 : 0.90; // Slightly slower rate for Tamil script clarity
+    utterance.pitch = 1.0;
+
+    const voices = availableVoices.length > 0 ? availableVoices : window.speechSynthesis.getVoices();
+
+    if (voices.length > 0) {
+      let selectedVoice: SpeechSynthesisVoice | undefined;
+
+      if (isTamilScript) {
+        // Native Tamil voice (Google தமிழ், Microsoft Valluvar, ta-IN)
+        selectedVoice = voices.find(v => v.lang.toLowerCase().startsWith("ta")) ||
+                        voices.find(v => v.name.toLowerCase().includes("tamil")) ||
+                        voices.find(v => v.lang.toLowerCase().includes("en-in"));
+      } else {
+        // Indian English / Natural English Voice
+        selectedVoice = voices.find(v => v.lang.toLowerCase() === "en-in") ||
+                        voices.find(v => v.name.toLowerCase().includes("india") || v.name.toLowerCase().includes("neerja") || v.name.toLowerCase().includes("prabhat")) ||
+                        voices.find(v => v.lang.toLowerCase().startsWith("en-us")) ||
+                        voices.find(v => v.lang.toLowerCase().startsWith("en"));
+      }
+
+      if (selectedVoice) {
+        utterance.voice = selectedVoice;
+      }
+    }
 
     utterance.onend = () => setSpeakingMsgId(null);
     utterance.onerror = () => setSpeakingMsgId(null);
@@ -258,13 +367,13 @@ export default function AIChatbot({ currentProjectId, userRole = "Administrator"
               setIsMinimized(false);
               setHasUnread(false);
             }}
-            className="w-[54px] h-[54px] md:w-[58px] md:h-[58px] rounded-full bg-slate-900 text-white shadow-2xl hover:scale-105 transition-all flex items-center justify-center relative border-2 border-blue-500 cursor-pointer group"
+            className="w-[54px] h-[54px] md:w-[58px] md:h-[58px] rounded-full bg-[#0F382C] text-[#D8F374] shadow-2xl hover:scale-105 transition-all flex items-center justify-center relative border-2 border-[#D8F374] cursor-pointer group"
             title="Open LandGuard AI Assistant"
           >
             {/* Pulse Glow Ring */}
-            <span className="absolute inset-0 rounded-full bg-blue-500/30 animate-ping pointer-events-none"></span>
+            <span className="absolute inset-0 rounded-full bg-[#D8F374]/20 animate-ping pointer-events-none"></span>
 
-            <Bot className="w-7 h-7 text-blue-400 group-hover:rotate-12 transition-transform" />
+            <Bot className="w-7 h-7 text-[#D8F374] group-hover:rotate-12 transition-transform" />
 
             {/* Notification Unread Badge */}
             {hasUnread && (
@@ -314,16 +423,6 @@ export default function AIChatbot({ currentProjectId, userRole = "Administrator"
             <div className="flex items-center gap-1.5 shrink-0" onClick={(e) => e.stopPropagation()}>
               {!isMinimized && (
                 <>
-                  {/* Language Switcher */}
-                  <button
-                    onClick={() => setLanguage(l => l === "en" ? "ta" : "en")}
-                    className="px-2.5 py-1 text-xs font-bold rounded-lg bg-white/10 hover:bg-white/20 text-white transition-all cursor-pointer flex items-center gap-1 border border-white/20"
-                    title="Toggle English / Tamil"
-                  >
-                    <Globe className="w-3.5 h-3.5 text-blue-300" />
-                    <span>{language === "en" ? "English ▾" : "தமிழ் ▾"}</span>
-                  </button>
-
                   {/* Clear Chat */}
                   <button
                     onClick={handleClearChat}
@@ -385,22 +484,13 @@ export default function AIChatbot({ currentProjectId, userRole = "Administrator"
                           : "bg-[#1B365D] text-white rounded-bl-xs text-[15px] font-medium leading-relaxed border border-blue-900"
                       }`}
                     >
-                      {/* Message Header Actions (Text-to-Speech for AI) */}
+                      {/* Message Header */}
                       {msg.sender === "ai" && (
                         <div className="flex items-center justify-between border-b border-white/10 pb-1.5 mb-1">
                           <span className="text-[11px] font-extrabold text-blue-300 tracking-wider uppercase flex items-center gap-1">
                             <Bot className="w-3.5 h-3.5" />
                             <span>LandGuard AI</span>
                           </span>
-                          <button
-                            onClick={() => handleSpeakMessage(msg.id, msg.text)}
-                            className={`p-1 rounded-lg transition-colors cursor-pointer ${
-                              speakingMsgId === msg.id ? "text-amber-400 bg-white/10" : "text-blue-200 hover:text-white"
-                            }`}
-                            title="Listen Read Aloud"
-                          >
-                            <Volume2 className="w-3.5 h-3.5" />
-                          </button>
                         </div>
                       )}
 

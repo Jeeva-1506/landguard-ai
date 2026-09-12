@@ -189,6 +189,196 @@
       "startDate": "15 Feb 2025",
       "targetCompletionDate": "30 Jan 2027",
       "currentStage": "Land Identification"
+    },
+    {
+      "id": "PROJ-001",
+      "name": "Highway Expansion - Villupuram",
+      "state": "Tamil Nadu",
+      "district": "Villupuram",
+      "type": "Highway",
+      "landRequired": 56,
+      "landAcquired": 30,
+      "landPending": 26,
+      "progress": 81,
+      "delayRisk": "High",
+      "predictedDelay": 171,
+      "costOverrun": 1.31,
+      "status": "On Track",
+      "estimatedCost": 103824729,
+      "startDate": "01 Jan 2025",
+      "targetCompletionDate": "31 Dec 2026",
+      "currentStage": "Survey"
+    },
+    {
+      "id": "PROJ-002",
+      "name": "Railway Expansion - Tiruchirappalli",
+      "state": "Tamil Nadu",
+      "district": "Tiruchirappalli",
+      "type": "Railway",
+      "landRequired": 61,
+      "landAcquired": 33,
+      "landPending": 29,
+      "progress": 91,
+      "delayRisk": "High",
+      "predictedDelay": 144,
+      "costOverrun": 1.04,
+      "status": "Delayed",
+      "estimatedCost": 98170440,
+      "startDate": "01 Jan 2025",
+      "targetCompletionDate": "31 Dec 2026",
+      "currentStage": "Negotiation"
+    },
+    {
+      "id": "PROJ-003",
+      "name": "Industrial Corridor - Salem",
+      "state": "Tamil Nadu",
+      "district": "Salem",
+      "type": "Industrial Corridor",
+      "landRequired": 40,
+      "landAcquired": 21,
+      "landPending": 19,
+      "progress": 87,
+      "delayRisk": "Medium",
+      "predictedDelay": 128,
+      "costOverrun": 0.86,
+      "status": "On Track",
+      "estimatedCost": 118464597,
+      "startDate": "01 Jan 2025",
+      "targetCompletionDate": "31 Dec 2026",
+      "currentStage": "Compensation"
+    },
+    {
+      "id": "PROJ-004",
+      "name": "Urban Infrastructure - Coimbatore",
+      "state": "Tamil Nadu",
+      "district": "Coimbatore",
+      "type": "Urban Infrastructure",
+      "landRequired": 30,
+      "landAcquired": 16,
+      "landPending": 14,
+      "progress": 93,
+      "delayRisk": "High",
+      "predictedDelay": 236,
+      "costOverrun": 1.16,
+      "status": "On Track",
+      "estimatedCost": 81575992,
+      "startDate": "01 Jan 2025",
+      "targetCompletionDate": "31 Dec 2026",
+      "currentStage": "Approval"
+    },
+    {
+      "id": "PROJ-005",
+      "name": "Airport Expansion - Bengaluru Rural",
+      "state": "Karnataka",
+      "district": "Bengaluru Rural",
+      "type": "Airport",
+      "landRequired": 70,
+      "landAcquired": 37,
+      "landPending": 33,
+      "progress": 70,
+      "delayRisk": "Medium",
+      "predictedDelay": 195,
+      "costOverrun": 1.01,
+      "status": "Delayed",
+      "estimatedCost": 110169807,
+      "startDate": "01 Jan 2025",
+      "targetCompletionDate": "31 Dec 2026",
+      "currentStage": "Possession"
+    },
+    {
+      "id": "PROJ-006",
+      "name": "Highway Expansion - Mysuru",
+      "state": "Karnataka",
+      "district": "Mysuru",
+      "type": "Highway",
+      "landRequired": 78,
+      "landAcquired": 42,
+      "landPending": 36,
+      "progress": 78,
+      "delayRisk": "Medium",
+      "predictedDelay": 143,
+      "costOverrun": 1.05,
+      "status": "On Track",
+      "estimatedCost": 115650162,
+      "startDate": "01 Jan 2025",
+      "targetCompletionDate": "31 Dec 2026",
+      "currentStage": "Survey"
+    },
+    {
+      "id": "PROJ-007",
+      "name": "Railway Expansion - Mandya",
+      "state": "Karnataka",
+      "district": "Mandya",
+      "type": "Railway",
+      "landRequired": 101,
+      "landAcquired": 54,
+      "landPending": 47,
+      "progress": 68,
+      "delayRisk": "High",
+      "predictedDelay": 220,
+      "costOverrun": 0.97,
+      "status": "Delayed",
+      "estimatedCost": 93606600,
+      "startDate": "01 Jan 2025",
+      "targetCompletionDate": "31 Dec 2026",
+      "currentStage": "Negotiation"
+    },
+    {
+      "id": "PROJ-008",
+      "name": "Industrial Corridor - Belagavi",
+      "state": "Karnataka",
+      "district": "Belagavi",
+      "type": "Industrial Corridor",
+      "landRequired": 107,
+      "landAcquired": 57,
+      "landPending": 50,
+      "progress": 74,
+      "delayRisk": "High",
+      "predictedDelay": 228,
+      "costOverrun": 0.81,
+      "status": "On Track",
+      "estimatedCost": 96683621,
+      "startDate": "01 Jan 2025",
+      "targetCompletionDate": "31 Dec 2026",
+      "currentStage": "Compensation"
+    },
+    {
+      "id": "PROJ-009",
+      "name": "Urban Infrastructure - Ernakulam",
+      "state": "Kerala",
+      "district": "Ernakulam",
+      "type": "Urban Infrastructure",
+      "landRequired": 35,
+      "landAcquired": 19,
+      "landPending": 16,
+      "progress": 95,
+      "delayRisk": "Medium",
+      "predictedDelay": 232,
+      "costOverrun": 0.86,
+      "status": "On Track",
+      "estimatedCost": 37185273,
+      "startDate": "01 Jan 2025",
+      "targetCompletionDate": "31 Dec 2026",
+      "currentStage": "Approval"
+    },
+    {
+      "id": "PROJ-010",
+      "name": "Airport Expansion - Thrissur",
+      "state": "Kerala",
+      "district": "Thrissur",
+      "type": "Airport",
+      "landRequired": 92,
+      "landAcquired": 49,
+      "landPending": 43,
+      "progress": 71,
+      "delayRisk": "High",
+      "predictedDelay": 159,
+      "costOverrun": 0.89,
+      "status": "Delayed",
+      "estimatedCost": 81533308,
+      "startDate": "01 Jan 2025",
+      "targetCompletionDate": "31 Dec 2026",
+      "currentStage": "Possession"
     }
   ],
   "parcels": [
@@ -217,7 +407,7 @@
       "distanceFromProject": 0.5,
       "predictedDelayDays": 166,
       "delayProbability": 98,
-      "riskScore": 82,
+      "riskScore": 87,
       "riskLevel": "High",
       "location": "Koliyanur, Villupuram, Tamil Nadu",
       "surveyNumber": "124/2",
@@ -277,7 +467,7 @@
       "distanceFromProject": 0.8,
       "predictedDelayDays": 20,
       "delayProbability": 15,
-      "riskScore": 22,
+      "riskScore": 15,
       "riskLevel": "Low",
       "location": "Valavanur, Villupuram, Tamil Nadu",
       "surveyNumber": "125/3",
@@ -337,7 +527,7 @@
       "distanceFromProject": 1.2,
       "predictedDelayDays": 278,
       "delayProbability": 98,
-      "riskScore": 85,
+      "riskScore": 99,
       "riskLevel": "High",
       "location": "Oragadam, Kanchipuram, Tamil Nadu",
       "surveyNumber": "126/4",
@@ -395,7 +585,7 @@
       "distanceFromProject": 0.4,
       "predictedDelayDays": 64,
       "delayProbability": 63,
-      "riskScore": 48,
+      "riskScore": 43,
       "riskLevel": "Medium",
       "location": "Singaperumal Koil, Chengalpattu, Tamil Nadu",
       "surveyNumber": "127/2",
@@ -453,7 +643,7 @@
       "distanceFromProject": 1.5,
       "predictedDelayDays": 171,
       "delayProbability": 98,
-      "riskScore": 90,
+      "riskScore": 95,
       "riskLevel": "High",
       "location": "Panruti, Cuddalore, Tamil Nadu",
       "surveyNumber": "128/3",
@@ -511,7 +701,7 @@
       "distanceFromProject": 0.7,
       "predictedDelayDays": 20,
       "delayProbability": 15,
-      "riskScore": 18,
+      "riskScore": 15,
       "riskLevel": "Low",
       "location": "Samayapuram, Tiruchirappalli, Tamil Nadu",
       "surveyNumber": "129/4",
@@ -569,7 +759,7 @@
       "distanceFromProject": 1,
       "predictedDelayDays": 254,
       "delayProbability": 98,
-      "riskScore": 95,
+      "riskScore": 99,
       "riskLevel": "High",
       "location": "Ayothiapattinam, Salem, Tamil Nadu",
       "surveyNumber": "130/2",
@@ -627,7 +817,7 @@
       "distanceFromProject": 0.9,
       "predictedDelayDays": 112,
       "delayProbability": 93,
-      "riskScore": 76,
+      "riskScore": 55,
       "riskLevel": "High",
       "location": "Alanganallur, Madurai, Tamil Nadu",
       "surveyNumber": "131/3",
@@ -685,7 +875,7 @@
       "distanceFromProject": 1.8,
       "predictedDelayDays": 284,
       "delayProbability": 98,
-      "riskScore": 98,
+      "riskScore": 99,
       "riskLevel": "High",
       "location": "Srivaikuntam, Thoothukudi, Tamil Nadu",
       "surveyNumber": "132/4",
@@ -743,7 +933,7 @@
       "distanceFromProject": 0.3,
       "predictedDelayDays": 18,
       "delayProbability": 15,
-      "riskScore": 12,
+      "riskScore": 15,
       "riskLevel": "Low",
       "location": "Vedasandur, Dindigul, Tamil Nadu",
       "surveyNumber": "133/2",
@@ -801,7 +991,7 @@
       "distanceFromProject": 0.6,
       "predictedDelayDays": 167,
       "delayProbability": 98,
-      "riskScore": 91,
+      "riskScore": 87,
       "riskLevel": "High",
       "location": "Karamadai, Coimbatore, Tamil Nadu",
       "surveyNumber": "134/3",
@@ -859,7 +1049,7 @@
       "distanceFromProject": 1.4,
       "predictedDelayDays": 281,
       "delayProbability": 98,
-      "riskScore": 96,
+      "riskScore": 99,
       "riskLevel": "High",
       "location": "Melur, Madurai, Tamil Nadu",
       "surveyNumber": "135/4",
@@ -917,7 +1107,7 @@
       "distanceFromProject": 0.5,
       "predictedDelayDays": 40,
       "delayProbability": 45,
-      "riskScore": 43,
+      "riskScore": 25,
       "riskLevel": "Medium",
       "location": "Katpadi, Vellore, Tamil Nadu",
       "surveyNumber": "136/2",
@@ -975,7 +1165,7 @@
       "distanceFromProject": 2,
       "predictedDelayDays": 172,
       "delayProbability": 98,
-      "riskScore": 88,
+      "riskScore": 95,
       "riskLevel": "High",
       "location": "Vedaranyam, Nagapattinam, Tamil Nadu",
       "surveyNumber": "137/3",
@@ -1033,7 +1223,7 @@
       "distanceFromProject": 0.9,
       "predictedDelayDays": 112,
       "delayProbability": 93,
-      "riskScore": 68,
+      "riskScore": 55,
       "riskLevel": "High",
       "location": "Vallam, Thanjavur, Tamil Nadu",
       "surveyNumber": "138/4",
@@ -1091,7 +1281,7 @@
       "distanceFromProject": 0.4,
       "predictedDelayDays": 20,
       "delayProbability": 15,
-      "riskScore": 27,
+      "riskScore": 15,
       "riskLevel": "Low",
       "location": "Walajapet, Ranipet, Tamil Nadu",
       "surveyNumber": "139/2",
@@ -1149,7 +1339,7 @@
       "distanceFromProject": 1.3,
       "predictedDelayDays": 279,
       "delayProbability": 98,
-      "riskScore": 89,
+      "riskScore": 99,
       "riskLevel": "High",
       "location": "Aruppukkottai, Virudhunagar, Tamil Nadu",
       "surveyNumber": "140/3",
@@ -1207,7 +1397,7 @@
       "distanceFromProject": 0.7,
       "predictedDelayDays": 82,
       "delayProbability": 78,
-      "riskScore": 72,
+      "riskScore": 55,
       "riskLevel": "High",
       "location": "Veppanthattai, Perambalur, Tamil Nadu",
       "surveyNumber": "141/4",
@@ -1265,7 +1455,7 @@
       "distanceFromProject": 1.6,
       "predictedDelayDays": 196,
       "delayProbability": 98,
-      "riskScore": 94,
+      "riskScore": 95,
       "riskLevel": "High",
       "location": "Bodinayakanur, Theni, Tamil Nadu",
       "surveyNumber": "142/2",
@@ -1299,6 +1489,3142 @@
       "costOverrunPercentage": 25,
       "legalRiskProbability": 59,
       "legalRiskLevel": "Medium"
+    },
+    {
+      "id": "LA0001",
+      "surveyNumber": "SF 0001",
+      "projectId": "PROJ-001",
+      "district": "Villupuram",
+      "state": "Tamil Nadu",
+      "taluk": "Villupuram",
+      "village": "Koliyanur",
+      "location": "Koliyanur, Villupuram, Villupuram, Tamil Nadu",
+      "ownerName": "Koliyanur Landowners (3 owners)",
+      "landArea": 3.75,
+      "area": 3.75,
+      "areaUnit": "Acres",
+      "landType": "Residential",
+      "ownersCount": 3,
+      "ownershipStatus": "Disputed",
+      "ownershipDispute": true,
+      "documentsComplete": true,
+      "legalStatus": "Clear",
+      "compensationStatus": "Pending",
+      "compensationAmount": 15573709,
+      "objectionFiled": true,
+      "courtCase": false,
+      "surveyCompleted": false,
+      "environmentalClearance": true,
+      "governmentApproval": false,
+      "acquisitionStage": "Survey",
+      "previousDelay": true,
+      "distanceFromProject": 0.5,
+      "latitude": 11.9369,
+      "longitude": 79.4862,
+      "polygon": [
+        [
+          11.9354,
+          79.4847
+        ],
+        [
+          11.9354,
+          79.48769999999999
+        ],
+        [
+          11.9384,
+          79.48769999999999
+        ],
+        [
+          11.9384,
+          79.4847
+        ],
+        [
+          11.9354,
+          79.4847
+        ]
+      ],
+      "predictedDelayDays": 154,
+      "delayProbability": 98,
+      "riskLevel": "High",
+      "recommendedAction": "Verify land records and complete pending documents",
+      "expectedAdditionalCost": 3426216,
+      "expectedFinalCost": 18999925,
+      "costOverrunPercentage": 22,
+      "legalRiskProbability": 51,
+      "legalRiskLevel": "Medium",
+      "riskScore": 75
+    },
+    {
+      "id": "LA0002",
+      "surveyNumber": "SF 0002",
+      "projectId": "PROJ-002",
+      "district": "Tiruchirappalli",
+      "state": "Tamil Nadu",
+      "taluk": "Manapparai",
+      "village": "Ponnambalapatti",
+      "location": "Ponnambalapatti, Manapparai, Tiruchirappalli, Tamil Nadu",
+      "ownerName": "Ponnambalapatti Landowners (2 owners)",
+      "landArea": 4.08,
+      "area": 4.08,
+      "areaUnit": "Acres",
+      "landType": "Commercial",
+      "ownersCount": 2,
+      "ownershipStatus": "Disputed",
+      "ownershipDispute": true,
+      "documentsComplete": true,
+      "legalStatus": "Clear",
+      "compensationStatus": "Pending",
+      "compensationAmount": 14725566,
+      "objectionFiled": true,
+      "courtCase": false,
+      "surveyCompleted": false,
+      "environmentalClearance": true,
+      "governmentApproval": true,
+      "acquisitionStage": "Negotiation",
+      "previousDelay": true,
+      "distanceFromProject": 0.5,
+      "latitude": 10.6086,
+      "longitude": 78.786,
+      "polygon": [
+        [
+          10.607099999999999,
+          78.78450000000001
+        ],
+        [
+          10.607099999999999,
+          78.7875
+        ],
+        [
+          10.6101,
+          78.7875
+        ],
+        [
+          10.6101,
+          78.78450000000001
+        ],
+        [
+          10.607099999999999,
+          78.78450000000001
+        ]
+      ],
+      "predictedDelayDays": 125,
+      "delayProbability": 98,
+      "riskLevel": "High",
+      "recommendedAction": "Resolve ownership/dispute before compensation",
+      "expectedAdditionalCost": 3239625,
+      "expectedFinalCost": 17965191,
+      "costOverrunPercentage": 22,
+      "legalRiskProbability": 51,
+      "legalRiskLevel": "Medium",
+      "riskScore": 75
+    },
+    {
+      "id": "LA0003",
+      "surveyNumber": "SF 0003",
+      "projectId": "PROJ-003",
+      "district": "Salem",
+      "state": "Tamil Nadu",
+      "taluk": "Salem",
+      "village": "Kannankurichi",
+      "location": "Kannankurichi, Salem, Salem, Tamil Nadu",
+      "ownerName": "Kannankurichi Landowners (5 owners)",
+      "landArea": 2.68,
+      "area": 2.68,
+      "areaUnit": "Acres",
+      "landType": "Industrial",
+      "ownersCount": 5,
+      "ownershipStatus": "Verified",
+      "ownershipDispute": false,
+      "documentsComplete": true,
+      "legalStatus": "Clear",
+      "compensationStatus": "Paid",
+      "compensationAmount": 17769690,
+      "objectionFiled": false,
+      "courtCase": false,
+      "surveyCompleted": true,
+      "environmentalClearance": true,
+      "governmentApproval": false,
+      "acquisitionStage": "Compensation",
+      "previousDelay": true,
+      "distanceFromProject": 0.5,
+      "latitude": 11.6959,
+      "longitude": 78.174,
+      "polygon": [
+        [
+          11.6944,
+          78.17250000000001
+        ],
+        [
+          11.6944,
+          78.1755
+        ],
+        [
+          11.6974,
+          78.1755
+        ],
+        [
+          11.6974,
+          78.17250000000001
+        ],
+        [
+          11.6944,
+          78.17250000000001
+        ]
+      ],
+      "predictedDelayDays": 67,
+      "delayProbability": 57,
+      "riskLevel": "Medium",
+      "recommendedAction": "Process compensation approval",
+      "expectedAdditionalCost": 1421575,
+      "expectedFinalCost": 19191265,
+      "costOverrunPercentage": 8,
+      "legalRiskProbability": 13,
+      "legalRiskLevel": "Low",
+      "riskScore": 33
+    },
+    {
+      "id": "LA0004",
+      "surveyNumber": "SF 0004",
+      "projectId": "PROJ-004",
+      "district": "Coimbatore",
+      "state": "Tamil Nadu",
+      "taluk": "Pollachi",
+      "village": "Anaimalai",
+      "location": "Anaimalai, Pollachi, Coimbatore, Tamil Nadu",
+      "ownerName": "Anaimalai Landowners (2 owners)",
+      "landArea": 2,
+      "area": 2,
+      "areaUnit": "Acres",
+      "landType": "Agricultural",
+      "ownersCount": 2,
+      "ownershipStatus": "Disputed",
+      "ownershipDispute": true,
+      "documentsComplete": true,
+      "legalStatus": "Clear",
+      "compensationStatus": "Pending",
+      "compensationAmount": 12236399,
+      "objectionFiled": true,
+      "courtCase": false,
+      "surveyCompleted": false,
+      "environmentalClearance": true,
+      "governmentApproval": false,
+      "acquisitionStage": "Approval",
+      "previousDelay": true,
+      "distanceFromProject": 0.5,
+      "latitude": 10.5835,
+      "longitude": 76.9346,
+      "polygon": [
+        [
+          10.582,
+          76.93310000000001
+        ],
+        [
+          10.582,
+          76.9361
+        ],
+        [
+          10.585,
+          76.9361
+        ],
+        [
+          10.585,
+          76.93310000000001
+        ],
+        [
+          10.582,
+          76.93310000000001
+        ]
+      ],
+      "predictedDelayDays": 150,
+      "delayProbability": 98,
+      "riskLevel": "High",
+      "recommendedAction": "Complete government approval and acquisition notice",
+      "expectedAdditionalCost": 2692008,
+      "expectedFinalCost": 14928407,
+      "costOverrunPercentage": 22,
+      "legalRiskProbability": 51,
+      "legalRiskLevel": "Medium",
+      "riskScore": 75
+    },
+    {
+      "id": "LA0005",
+      "surveyNumber": "SF 0005",
+      "projectId": "PROJ-005",
+      "district": "Bengaluru Rural",
+      "state": "Karnataka",
+      "taluk": "Devanahalli",
+      "village": "Doddasanne",
+      "location": "Doddasanne, Devanahalli, Bengaluru Rural, Karnataka",
+      "ownerName": "Doddasanne Landowners (2 owners)",
+      "landArea": 4.66,
+      "area": 4.66,
+      "areaUnit": "Acres",
+      "landType": "Residential",
+      "ownersCount": 2,
+      "ownershipStatus": "Disputed",
+      "ownershipDispute": true,
+      "documentsComplete": false,
+      "legalStatus": "Clear",
+      "compensationStatus": "Pending",
+      "compensationAmount": 16525471,
+      "objectionFiled": true,
+      "courtCase": false,
+      "surveyCompleted": false,
+      "environmentalClearance": true,
+      "governmentApproval": true,
+      "acquisitionStage": "Possession",
+      "previousDelay": true,
+      "distanceFromProject": 0.5,
+      "latitude": 13.247,
+      "longitude": 77.705,
+      "polygon": [
+        [
+          13.2455,
+          77.7035
+        ],
+        [
+          13.2455,
+          77.70649999999999
+        ],
+        [
+          13.2485,
+          77.70649999999999
+        ],
+        [
+          13.2485,
+          77.7035
+        ],
+        [
+          13.2455,
+          77.7035
+        ]
+      ],
+      "predictedDelayDays": 142,
+      "delayProbability": 98,
+      "riskLevel": "High",
+      "recommendedAction": "Conduct joint survey and update cadastral records",
+      "expectedAdditionalCost": 4131368,
+      "expectedFinalCost": 20656839,
+      "costOverrunPercentage": 25,
+      "legalRiskProbability": 59,
+      "legalRiskLevel": "Medium",
+      "riskScore": 87
+    },
+    {
+      "id": "LA0006",
+      "surveyNumber": "SF 0006",
+      "projectId": "PROJ-006",
+      "district": "Mysuru",
+      "state": "Karnataka",
+      "taluk": "Nanjangud",
+      "village": "Hullahalli",
+      "location": "Hullahalli, Nanjangud, Mysuru, Karnataka",
+      "ownerName": "Hullahalli Landowners (1 owners)",
+      "landArea": 5.19,
+      "area": 5.19,
+      "areaUnit": "Acres",
+      "landType": "Commercial",
+      "ownersCount": 1,
+      "ownershipStatus": "Verified",
+      "ownershipDispute": false,
+      "documentsComplete": false,
+      "legalStatus": "Clear",
+      "compensationStatus": "Pending",
+      "compensationAmount": 17347524,
+      "objectionFiled": false,
+      "courtCase": false,
+      "surveyCompleted": true,
+      "environmentalClearance": true,
+      "governmentApproval": false,
+      "acquisitionStage": "Survey",
+      "previousDelay": true,
+      "distanceFromProject": 0.5,
+      "latitude": 12.117,
+      "longitude": 76.682,
+      "polygon": [
+        [
+          12.1155,
+          76.68050000000001
+        ],
+        [
+          12.1155,
+          76.6835
+        ],
+        [
+          12.118500000000001,
+          76.6835
+        ],
+        [
+          12.118500000000001,
+          76.68050000000001
+        ],
+        [
+          12.1155,
+          76.68050000000001
+        ]
+      ],
+      "predictedDelayDays": 108,
+      "delayProbability": 79,
+      "riskLevel": "High",
+      "recommendedAction": "Verify land records and complete pending documents",
+      "expectedAdditionalCost": 1908228,
+      "expectedFinalCost": 19255752,
+      "costOverrunPercentage": 11,
+      "legalRiskProbability": 21,
+      "legalRiskLevel": "Low",
+      "riskScore": 53
+    },
+    {
+      "id": "LA0007",
+      "surveyNumber": "SF 0007",
+      "projectId": "PROJ-007",
+      "district": "Mandya",
+      "state": "Karnataka",
+      "taluk": "Maddur",
+      "village": "Koppa",
+      "location": "Koppa, Maddur, Mandya, Karnataka",
+      "ownerName": "Koppa Landowners (1 owners)",
+      "landArea": 6.75,
+      "area": 6.75,
+      "areaUnit": "Acres",
+      "landType": "Industrial",
+      "ownersCount": 1,
+      "ownershipStatus": "Disputed",
+      "ownershipDispute": true,
+      "documentsComplete": false,
+      "legalStatus": "Court Stay Order",
+      "compensationStatus": "Paid",
+      "compensationAmount": 14040990,
+      "objectionFiled": true,
+      "courtCase": true,
+      "surveyCompleted": false,
+      "environmentalClearance": true,
+      "governmentApproval": false,
+      "acquisitionStage": "Negotiation",
+      "previousDelay": true,
+      "distanceFromProject": 0.5,
+      "latitude": 12.585,
+      "longitude": 77.052,
+      "polygon": [
+        [
+          12.5835,
+          77.05050000000001
+        ],
+        [
+          12.5835,
+          77.0535
+        ],
+        [
+          12.586500000000001,
+          77.0535
+        ],
+        [
+          12.586500000000001,
+          77.05050000000001
+        ],
+        [
+          12.5835,
+          77.05050000000001
+        ]
+      ],
+      "predictedDelayDays": 242,
+      "delayProbability": 98,
+      "riskLevel": "High",
+      "recommendedAction": "Resolve ownership/dispute before compensation",
+      "expectedAdditionalCost": 5475986,
+      "expectedFinalCost": 19516976,
+      "costOverrunPercentage": 39,
+      "legalRiskProbability": 96,
+      "legalRiskLevel": "High",
+      "riskScore": 99
+    },
+    {
+      "id": "LA0008",
+      "surveyNumber": "SF 0008",
+      "projectId": "PROJ-008",
+      "district": "Belagavi",
+      "state": "Karnataka",
+      "taluk": "Chikodi",
+      "village": "Nippani",
+      "location": "Nippani, Chikodi, Belagavi, Karnataka",
+      "ownerName": "Nippani Landowners (2 owners)",
+      "landArea": 7.1,
+      "area": 7.1,
+      "areaUnit": "Acres",
+      "landType": "Agricultural",
+      "ownersCount": 2,
+      "ownershipStatus": "Disputed",
+      "ownershipDispute": true,
+      "documentsComplete": false,
+      "legalStatus": "Clear",
+      "compensationStatus": "Pending",
+      "compensationAmount": 14502543,
+      "objectionFiled": true,
+      "courtCase": false,
+      "surveyCompleted": false,
+      "environmentalClearance": true,
+      "governmentApproval": true,
+      "acquisitionStage": "Compensation",
+      "previousDelay": true,
+      "distanceFromProject": 0.5,
+      "latitude": 16.399,
+      "longitude": 74.383,
+      "polygon": [
+        [
+          16.3975,
+          74.3815
+        ],
+        [
+          16.3975,
+          74.38449999999999
+        ],
+        [
+          16.4005,
+          74.38449999999999
+        ],
+        [
+          16.4005,
+          74.3815
+        ],
+        [
+          16.3975,
+          74.3815
+        ]
+      ],
+      "predictedDelayDays": 148,
+      "delayProbability": 98,
+      "riskLevel": "High",
+      "recommendedAction": "Process compensation approval",
+      "expectedAdditionalCost": 3625636,
+      "expectedFinalCost": 18128179,
+      "costOverrunPercentage": 25,
+      "legalRiskProbability": 59,
+      "legalRiskLevel": "Medium",
+      "riskScore": 93
+    },
+    {
+      "id": "LA0009",
+      "surveyNumber": "SF 0009",
+      "projectId": "PROJ-009",
+      "district": "Ernakulam",
+      "state": "Kerala",
+      "taluk": "Aluva",
+      "village": "Chowara",
+      "location": "Chowara, Aluva, Ernakulam, Kerala",
+      "ownerName": "Chowara Landowners (2 owners)",
+      "landArea": 2.35,
+      "area": 2.35,
+      "areaUnit": "Acres",
+      "landType": "Residential",
+      "ownersCount": 2,
+      "ownershipStatus": "Verified",
+      "ownershipDispute": false,
+      "documentsComplete": true,
+      "legalStatus": "Clear",
+      "compensationStatus": "Pending",
+      "compensationAmount": 5577791,
+      "objectionFiled": false,
+      "courtCase": false,
+      "surveyCompleted": true,
+      "environmentalClearance": true,
+      "governmentApproval": false,
+      "acquisitionStage": "Approval",
+      "previousDelay": false,
+      "distanceFromProject": 0.5,
+      "latitude": 10.13,
+      "longitude": 76.36,
+      "polygon": [
+        [
+          10.1285,
+          76.3585
+        ],
+        [
+          10.1285,
+          76.36149999999999
+        ],
+        [
+          10.1315,
+          76.36149999999999
+        ],
+        [
+          10.1315,
+          76.3585
+        ],
+        [
+          10.1285,
+          76.3585
+        ]
+      ],
+      "predictedDelayDays": 71,
+      "delayProbability": 40,
+      "riskLevel": "Medium",
+      "recommendedAction": "Complete government approval and acquisition notice",
+      "expectedAdditionalCost": 223112,
+      "expectedFinalCost": 5800903,
+      "costOverrunPercentage": 4,
+      "legalRiskProbability": 10,
+      "legalRiskLevel": "Low",
+      "riskScore": 25
+    },
+    {
+      "id": "LA0010",
+      "surveyNumber": "SF 0010",
+      "projectId": "PROJ-010",
+      "district": "Thrissur",
+      "state": "Kerala",
+      "taluk": "Chalakudy",
+      "village": "Koratti",
+      "location": "Koratti, Chalakudy, Thrissur, Kerala",
+      "ownerName": "Koratti Landowners (5 owners)",
+      "landArea": 6.12,
+      "area": 6.12,
+      "areaUnit": "Acres",
+      "landType": "Commercial",
+      "ownersCount": 5,
+      "ownershipStatus": "Disputed",
+      "ownershipDispute": true,
+      "documentsComplete": false,
+      "legalStatus": "Clear",
+      "compensationStatus": "Pending",
+      "compensationAmount": 12229996,
+      "objectionFiled": true,
+      "courtCase": false,
+      "surveyCompleted": false,
+      "environmentalClearance": true,
+      "governmentApproval": false,
+      "acquisitionStage": "Possession",
+      "previousDelay": true,
+      "distanceFromProject": 0.5,
+      "latitude": 10.267,
+      "longitude": 76.342,
+      "polygon": [
+        [
+          10.2655,
+          76.3405
+        ],
+        [
+          10.2655,
+          76.34349999999999
+        ],
+        [
+          10.2685,
+          76.34349999999999
+        ],
+        [
+          10.2685,
+          76.3405
+        ],
+        [
+          10.2655,
+          76.3405
+        ]
+      ],
+      "predictedDelayDays": 175,
+      "delayProbability": 98,
+      "riskLevel": "High",
+      "recommendedAction": "Conduct joint survey and update cadastral records",
+      "expectedAdditionalCost": 3057499,
+      "expectedFinalCost": 15287495,
+      "costOverrunPercentage": 25,
+      "legalRiskProbability": 59,
+      "legalRiskLevel": "Medium",
+      "riskScore": 99
+    },
+    {
+      "id": "LA0011",
+      "surveyNumber": "SF 0011",
+      "projectId": "PROJ-001",
+      "district": "Palakkad",
+      "state": "Kerala",
+      "taluk": "Ottapalam",
+      "village": "Shoranur",
+      "location": "Shoranur, Ottapalam, Palakkad, Kerala",
+      "ownerName": "Shoranur Landowners (2 owners)",
+      "landArea": 8.39,
+      "area": 8.39,
+      "areaUnit": "Acres",
+      "landType": "Industrial",
+      "ownersCount": 2,
+      "ownershipStatus": "Disputed",
+      "ownershipDispute": true,
+      "documentsComplete": true,
+      "legalStatus": "Clear",
+      "compensationStatus": "Paid",
+      "compensationAmount": 8084440,
+      "objectionFiled": true,
+      "courtCase": false,
+      "surveyCompleted": false,
+      "environmentalClearance": true,
+      "governmentApproval": true,
+      "acquisitionStage": "Survey",
+      "previousDelay": false,
+      "distanceFromProject": 0.5,
+      "latitude": 10.759,
+      "longitude": 76.271,
+      "polygon": [
+        [
+          10.7575,
+          76.26950000000001
+        ],
+        [
+          10.7575,
+          76.2725
+        ],
+        [
+          10.7605,
+          76.2725
+        ],
+        [
+          10.7605,
+          76.26950000000001
+        ],
+        [
+          10.7575,
+          76.26950000000001
+        ]
+      ],
+      "predictedDelayDays": 101,
+      "delayProbability": 73,
+      "riskLevel": "High",
+      "recommendedAction": "Verify land records and complete pending documents",
+      "expectedAdditionalCost": 1455199,
+      "expectedFinalCost": 9539639,
+      "costOverrunPercentage": 18,
+      "legalRiskProbability": 46,
+      "legalRiskLevel": "Medium",
+      "riskScore": 61
+    },
+    {
+      "id": "LA0012",
+      "surveyNumber": "SF 0012",
+      "projectId": "PROJ-002",
+      "district": "Kollam",
+      "state": "Kerala",
+      "taluk": "Kottarakkara",
+      "village": "Ezhukone",
+      "location": "Ezhukone, Kottarakkara, Kollam, Kerala",
+      "ownerName": "Ezhukone Landowners (1 owners)",
+      "landArea": 4.52,
+      "area": 4.52,
+      "areaUnit": "Acres",
+      "landType": "Agricultural",
+      "ownersCount": 1,
+      "ownershipStatus": "Verified",
+      "ownershipDispute": false,
+      "documentsComplete": true,
+      "legalStatus": "Clear",
+      "compensationStatus": "Pending",
+      "compensationAmount": 6260858,
+      "objectionFiled": false,
+      "courtCase": false,
+      "surveyCompleted": true,
+      "environmentalClearance": true,
+      "governmentApproval": false,
+      "acquisitionStage": "Negotiation",
+      "previousDelay": false,
+      "distanceFromProject": 0.5,
+      "latitude": 10.605,
+      "longitude": 76.89,
+      "polygon": [
+        [
+          10.6035,
+          76.88850000000001
+        ],
+        [
+          10.6035,
+          76.8915
+        ],
+        [
+          10.6065,
+          76.8915
+        ],
+        [
+          10.6065,
+          76.88850000000001
+        ],
+        [
+          10.6035,
+          76.88850000000001
+        ]
+      ],
+      "predictedDelayDays": 76,
+      "delayProbability": 60,
+      "riskLevel": "Medium",
+      "recommendedAction": "Resolve ownership/dispute before compensation",
+      "expectedAdditionalCost": 250434,
+      "expectedFinalCost": 6511292,
+      "costOverrunPercentage": 4,
+      "legalRiskProbability": 10,
+      "legalRiskLevel": "Low",
+      "riskScore": 25
+    },
+    {
+      "id": "LA0013",
+      "surveyNumber": "SF 0013",
+      "projectId": "PROJ-003",
+      "district": "Krishna",
+      "state": "Andhra Pradesh",
+      "taluk": "Vijayawada",
+      "village": "Gannavaram",
+      "location": "Gannavaram, Vijayawada, Krishna, Andhra Pradesh",
+      "ownerName": "Gannavaram Landowners (1 owners)",
+      "landArea": 2.63,
+      "area": 2.63,
+      "areaUnit": "Acres",
+      "landType": "Residential",
+      "ownersCount": 1,
+      "ownershipStatus": "Disputed",
+      "ownershipDispute": true,
+      "documentsComplete": true,
+      "legalStatus": "Clear",
+      "compensationStatus": "Pending",
+      "compensationAmount": 15643529,
+      "objectionFiled": true,
+      "courtCase": false,
+      "surveyCompleted": false,
+      "environmentalClearance": true,
+      "governmentApproval": false,
+      "acquisitionStage": "Compensation",
+      "previousDelay": true,
+      "distanceFromProject": 0.5,
+      "latitude": 16.54,
+      "longitude": 80.803,
+      "polygon": [
+        [
+          16.5385,
+          80.8015
+        ],
+        [
+          16.5385,
+          80.80449999999999
+        ],
+        [
+          16.5415,
+          80.80449999999999
+        ],
+        [
+          16.5415,
+          80.8015
+        ],
+        [
+          16.5385,
+          80.8015
+        ]
+      ],
+      "predictedDelayDays": 152,
+      "delayProbability": 98,
+      "riskLevel": "High",
+      "recommendedAction": "Process compensation approval",
+      "expectedAdditionalCost": 3441576,
+      "expectedFinalCost": 19085105,
+      "costOverrunPercentage": 22,
+      "legalRiskProbability": 51,
+      "legalRiskLevel": "Medium",
+      "riskScore": 75
+    },
+    {
+      "id": "LA0014",
+      "surveyNumber": "SF 0014",
+      "projectId": "PROJ-004",
+      "district": "Guntur",
+      "state": "Andhra Pradesh",
+      "taluk": "Tenali",
+      "village": "Duggirala",
+      "location": "Duggirala, Tenali, Guntur, Andhra Pradesh",
+      "ownerName": "Duggirala Landowners (4 owners)",
+      "landArea": 3.55,
+      "area": 3.55,
+      "areaUnit": "Acres",
+      "landType": "Commercial",
+      "ownersCount": 4,
+      "ownershipStatus": "Disputed",
+      "ownershipDispute": true,
+      "documentsComplete": false,
+      "legalStatus": "Court Stay Order",
+      "compensationStatus": "Pending",
+      "compensationAmount": 11802657,
+      "objectionFiled": true,
+      "courtCase": true,
+      "surveyCompleted": false,
+      "environmentalClearance": true,
+      "governmentApproval": true,
+      "acquisitionStage": "Approval",
+      "previousDelay": true,
+      "distanceFromProject": 0.5,
+      "latitude": 16.32,
+      "longitude": 80.62,
+      "polygon": [
+        [
+          16.3185,
+          80.61850000000001
+        ],
+        [
+          16.3185,
+          80.6215
+        ],
+        [
+          16.3215,
+          80.6215
+        ],
+        [
+          16.3215,
+          80.61850000000001
+        ],
+        [
+          16.3185,
+          80.61850000000001
+        ]
+      ],
+      "predictedDelayDays": 224,
+      "delayProbability": 98,
+      "riskLevel": "High",
+      "recommendedAction": "Complete government approval and acquisition notice",
+      "expectedAdditionalCost": 4603036,
+      "expectedFinalCost": 16405693,
+      "costOverrunPercentage": 39,
+      "legalRiskProbability": 96,
+      "legalRiskLevel": "High",
+      "riskScore": 99
+    },
+    {
+      "id": "LA0015",
+      "surveyNumber": "SF 0015",
+      "projectId": "PROJ-005",
+      "district": "Tirupati",
+      "state": "Andhra Pradesh",
+      "taluk": "Srikalahasti",
+      "village": "Yerpedu",
+      "location": "Yerpedu, Srikalahasti, Tirupati, Andhra Pradesh",
+      "ownerName": "Yerpedu Landowners (1 owners)",
+      "landArea": 1.24,
+      "area": 1.24,
+      "areaUnit": "Acres",
+      "landType": "Industrial",
+      "ownersCount": 1,
+      "ownershipStatus": "Verified",
+      "ownershipDispute": false,
+      "documentsComplete": true,
+      "legalStatus": "Clear",
+      "compensationStatus": "Paid",
+      "compensationAmount": 15998698,
+      "objectionFiled": false,
+      "courtCase": false,
+      "surveyCompleted": true,
+      "environmentalClearance": true,
+      "governmentApproval": false,
+      "acquisitionStage": "Possession",
+      "previousDelay": true,
+      "distanceFromProject": 0.5,
+      "latitude": 13.75,
+      "longitude": 79.72,
+      "polygon": [
+        [
+          13.7485,
+          79.7185
+        ],
+        [
+          13.7485,
+          79.72149999999999
+        ],
+        [
+          13.7515,
+          79.72149999999999
+        ],
+        [
+          13.7515,
+          79.7185
+        ],
+        [
+          13.7485,
+          79.7185
+        ]
+      ],
+      "predictedDelayDays": 63,
+      "delayProbability": 42,
+      "riskLevel": "Medium",
+      "recommendedAction": "Conduct joint survey and update cadastral records",
+      "expectedAdditionalCost": 1279896,
+      "expectedFinalCost": 17278594,
+      "costOverrunPercentage": 8,
+      "legalRiskProbability": 13,
+      "legalRiskLevel": "Low",
+      "riskScore": 25
+    },
+    {
+      "id": "LA0016",
+      "surveyNumber": "SF 0016",
+      "projectId": "PROJ-006",
+      "district": "Visakhapatnam",
+      "state": "Andhra Pradesh",
+      "taluk": "Anakapalle",
+      "village": "Sabbavaram",
+      "location": "Sabbavaram, Anakapalle, Visakhapatnam, Andhra Pradesh",
+      "ownerName": "Sabbavaram Landowners (2 owners)",
+      "landArea": 7.69,
+      "area": 7.69,
+      "areaUnit": "Acres",
+      "landType": "Agricultural",
+      "ownersCount": 2,
+      "ownershipStatus": "Disputed",
+      "ownershipDispute": true,
+      "documentsComplete": true,
+      "legalStatus": "Clear",
+      "compensationStatus": "Pending",
+      "compensationAmount": 15695203,
+      "objectionFiled": true,
+      "courtCase": false,
+      "surveyCompleted": false,
+      "environmentalClearance": true,
+      "governmentApproval": false,
+      "acquisitionStage": "Survey",
+      "previousDelay": false,
+      "distanceFromProject": 0.5,
+      "latitude": 17.68,
+      "longitude": 83.13,
+      "polygon": [
+        [
+          17.6785,
+          83.1285
+        ],
+        [
+          17.6785,
+          83.13149999999999
+        ],
+        [
+          17.6815,
+          83.13149999999999
+        ],
+        [
+          17.6815,
+          83.1285
+        ],
+        [
+          17.6785,
+          83.1285
+        ]
+      ],
+      "predictedDelayDays": 149,
+      "delayProbability": 98,
+      "riskLevel": "High",
+      "recommendedAction": "Verify land records and complete pending documents",
+      "expectedAdditionalCost": 2825137,
+      "expectedFinalCost": 18520340,
+      "costOverrunPercentage": 18,
+      "legalRiskProbability": 46,
+      "legalRiskLevel": "Medium",
+      "riskScore": 71
+    },
+    {
+      "id": "LA0017",
+      "surveyNumber": "SF 0017",
+      "projectId": "PROJ-007",
+      "district": "Rangareddy",
+      "state": "Telangana",
+      "taluk": "Ibrahimpatnam",
+      "village": "Adibatla",
+      "location": "Adibatla, Ibrahimpatnam, Rangareddy, Telangana",
+      "ownerName": "Adibatla Landowners (4 owners)",
+      "landArea": 8.39,
+      "area": 8.39,
+      "areaUnit": "Acres",
+      "landType": "Residential",
+      "ownersCount": 4,
+      "ownershipStatus": "Disputed",
+      "ownershipDispute": true,
+      "documentsComplete": true,
+      "legalStatus": "Clear",
+      "compensationStatus": "Pending",
+      "compensationAmount": 9947488,
+      "objectionFiled": true,
+      "courtCase": false,
+      "surveyCompleted": false,
+      "environmentalClearance": true,
+      "governmentApproval": true,
+      "acquisitionStage": "Negotiation",
+      "previousDelay": true,
+      "distanceFromProject": 0.5,
+      "latitude": 17.2,
+      "longitude": 78.53,
+      "polygon": [
+        [
+          17.1985,
+          78.52850000000001
+        ],
+        [
+          17.1985,
+          78.5315
+        ],
+        [
+          17.2015,
+          78.5315
+        ],
+        [
+          17.2015,
+          78.52850000000001
+        ],
+        [
+          17.1985,
+          78.52850000000001
+        ]
+      ],
+      "predictedDelayDays": 136,
+      "delayProbability": 98,
+      "riskLevel": "High",
+      "recommendedAction": "Resolve ownership/dispute before compensation",
+      "expectedAdditionalCost": 2188447,
+      "expectedFinalCost": 12135935,
+      "costOverrunPercentage": 22,
+      "legalRiskProbability": 51,
+      "legalRiskLevel": "Medium",
+      "riskScore": 81
+    },
+    {
+      "id": "LA0018",
+      "surveyNumber": "SF 0018",
+      "projectId": "PROJ-008",
+      "district": "Medchal-Malkajgiri",
+      "state": "Telangana",
+      "taluk": "Keesara",
+      "village": "Nagaram",
+      "location": "Nagaram, Keesara, Medchal-Malkajgiri, Telangana",
+      "ownerName": "Nagaram Landowners (4 owners)",
+      "landArea": 3.15,
+      "area": 3.15,
+      "areaUnit": "Acres",
+      "landType": "Commercial",
+      "ownersCount": 4,
+      "ownershipStatus": "Verified",
+      "ownershipDispute": false,
+      "documentsComplete": false,
+      "legalStatus": "Clear",
+      "compensationStatus": "Pending",
+      "compensationAmount": 3458172,
+      "objectionFiled": false,
+      "courtCase": false,
+      "surveyCompleted": true,
+      "environmentalClearance": true,
+      "governmentApproval": false,
+      "acquisitionStage": "Compensation",
+      "previousDelay": true,
+      "distanceFromProject": 0.5,
+      "latitude": 17.525,
+      "longitude": 78.65,
+      "polygon": [
+        [
+          17.5235,
+          78.64850000000001
+        ],
+        [
+          17.5235,
+          78.6515
+        ],
+        [
+          17.5265,
+          78.6515
+        ],
+        [
+          17.5265,
+          78.64850000000001
+        ],
+        [
+          17.5235,
+          78.64850000000001
+        ]
+      ],
+      "predictedDelayDays": 103,
+      "delayProbability": 82,
+      "riskLevel": "High",
+      "recommendedAction": "Process compensation approval",
+      "expectedAdditionalCost": 380399,
+      "expectedFinalCost": 3838571,
+      "costOverrunPercentage": 11,
+      "legalRiskProbability": 21,
+      "legalRiskLevel": "Low",
+      "riskScore": 47
+    },
+    {
+      "id": "LA0019",
+      "surveyNumber": "SF 0019",
+      "projectId": "PROJ-009",
+      "district": "Sangareddy",
+      "state": "Telangana",
+      "taluk": "Patancheru",
+      "village": "Rudraram",
+      "location": "Rudraram, Patancheru, Sangareddy, Telangana",
+      "ownerName": "Rudraram Landowners (1 owners)",
+      "landArea": 4.58,
+      "area": 4.58,
+      "areaUnit": "Acres",
+      "landType": "Industrial",
+      "ownersCount": 1,
+      "ownershipStatus": "Disputed",
+      "ownershipDispute": true,
+      "documentsComplete": true,
+      "legalStatus": "Clear",
+      "compensationStatus": "Paid",
+      "compensationAmount": 9921134,
+      "objectionFiled": true,
+      "courtCase": false,
+      "surveyCompleted": false,
+      "environmentalClearance": true,
+      "governmentApproval": false,
+      "acquisitionStage": "Approval",
+      "previousDelay": false,
+      "distanceFromProject": 0.5,
+      "latitude": 17.52,
+      "longitude": 78.25,
+      "polygon": [
+        [
+          17.5185,
+          78.2485
+        ],
+        [
+          17.5185,
+          78.2515
+        ],
+        [
+          17.5215,
+          78.2515
+        ],
+        [
+          17.5215,
+          78.2485
+        ],
+        [
+          17.5185,
+          78.2485
+        ]
+      ],
+      "predictedDelayDays": 121,
+      "delayProbability": 76,
+      "riskLevel": "High",
+      "recommendedAction": "Complete government approval and acquisition notice",
+      "expectedAdditionalCost": 1785804,
+      "expectedFinalCost": 11706938,
+      "costOverrunPercentage": 18,
+      "legalRiskProbability": 46,
+      "legalRiskLevel": "Medium",
+      "riskScore": 55
+    },
+    {
+      "id": "LA0020",
+      "surveyNumber": "SF 0020",
+      "projectId": "PROJ-010",
+      "district": "Warangal",
+      "state": "Telangana",
+      "taluk": "Wardhannapet",
+      "village": "Raiparthy",
+      "location": "Raiparthy, Wardhannapet, Warangal, Telangana",
+      "ownerName": "Raiparthy Landowners (2 owners)",
+      "landArea": 8.11,
+      "area": 8.11,
+      "areaUnit": "Acres",
+      "landType": "Agricultural",
+      "ownersCount": 2,
+      "ownershipStatus": "Disputed",
+      "ownershipDispute": true,
+      "documentsComplete": false,
+      "legalStatus": "Clear",
+      "compensationStatus": "Pending",
+      "compensationAmount": 17148932,
+      "objectionFiled": true,
+      "courtCase": false,
+      "surveyCompleted": false,
+      "environmentalClearance": true,
+      "governmentApproval": true,
+      "acquisitionStage": "Possession",
+      "previousDelay": true,
+      "distanceFromProject": 0.5,
+      "latitude": 17.95,
+      "longitude": 79.85,
+      "polygon": [
+        [
+          17.9485,
+          79.8485
+        ],
+        [
+          17.9485,
+          79.85149999999999
+        ],
+        [
+          17.9515,
+          79.85149999999999
+        ],
+        [
+          17.9515,
+          79.8485
+        ],
+        [
+          17.9485,
+          79.8485
+        ]
+      ],
+      "predictedDelayDays": 150,
+      "delayProbability": 98,
+      "riskLevel": "High",
+      "recommendedAction": "Conduct joint survey and update cadastral records",
+      "expectedAdditionalCost": 4287233,
+      "expectedFinalCost": 21436165,
+      "costOverrunPercentage": 25,
+      "legalRiskProbability": 59,
+      "legalRiskLevel": "Medium",
+      "riskScore": 93
+    },
+    {
+      "id": "LA0021",
+      "surveyNumber": "SF 0021",
+      "projectId": "PROJ-001",
+      "district": "Pune",
+      "state": "Maharashtra",
+      "taluk": "Haveli",
+      "village": "Wagholi",
+      "location": "Wagholi, Haveli, Pune, Maharashtra",
+      "ownerName": "Wagholi Landowners (1 owners)",
+      "landArea": 6.96,
+      "area": 6.96,
+      "areaUnit": "Acres",
+      "landType": "Residential",
+      "ownersCount": 1,
+      "ownershipStatus": "Verified",
+      "ownershipDispute": false,
+      "documentsComplete": false,
+      "legalStatus": "Court Stay Order",
+      "compensationStatus": "Pending",
+      "compensationAmount": 9083770,
+      "objectionFiled": false,
+      "courtCase": true,
+      "surveyCompleted": true,
+      "environmentalClearance": true,
+      "governmentApproval": false,
+      "acquisitionStage": "Survey",
+      "previousDelay": true,
+      "distanceFromProject": 0.5,
+      "latitude": 18.58,
+      "longitude": 73.98,
+      "polygon": [
+        [
+          18.5785,
+          73.97850000000001
+        ],
+        [
+          18.5785,
+          73.9815
+        ],
+        [
+          18.5815,
+          73.9815
+        ],
+        [
+          18.5815,
+          73.97850000000001
+        ],
+        [
+          18.5785,
+          73.97850000000001
+        ]
+      ],
+      "predictedDelayDays": 197,
+      "delayProbability": 98,
+      "riskLevel": "High",
+      "recommendedAction": "Verify land records and complete pending documents",
+      "expectedAdditionalCost": 2270943,
+      "expectedFinalCost": 11354713,
+      "costOverrunPercentage": 25,
+      "legalRiskProbability": 63,
+      "legalRiskLevel": "Medium",
+      "riskScore": 85
+    },
+    {
+      "id": "LA0022",
+      "surveyNumber": "SF 0022",
+      "projectId": "PROJ-002",
+      "district": "Nashik",
+      "state": "Maharashtra",
+      "taluk": "Sinnar",
+      "village": "Ghoti",
+      "location": "Ghoti, Sinnar, Nashik, Maharashtra",
+      "ownerName": "Ghoti Landowners (5 owners)",
+      "landArea": 6.9,
+      "area": 6.9,
+      "areaUnit": "Acres",
+      "landType": "Commercial",
+      "ownersCount": 5,
+      "ownershipStatus": "Disputed",
+      "ownershipDispute": true,
+      "documentsComplete": true,
+      "legalStatus": "Clear",
+      "compensationStatus": "Pending",
+      "compensationAmount": 15794858,
+      "objectionFiled": true,
+      "courtCase": false,
+      "surveyCompleted": false,
+      "environmentalClearance": true,
+      "governmentApproval": false,
+      "acquisitionStage": "Negotiation",
+      "previousDelay": false,
+      "distanceFromProject": 0.5,
+      "latitude": 19.72,
+      "longitude": 73.65,
+      "polygon": [
+        [
+          19.7185,
+          73.64850000000001
+        ],
+        [
+          19.7185,
+          73.6515
+        ],
+        [
+          19.7215,
+          73.6515
+        ],
+        [
+          19.7215,
+          73.64850000000001
+        ],
+        [
+          19.7185,
+          73.64850000000001
+        ]
+      ],
+      "predictedDelayDays": 147,
+      "delayProbability": 98,
+      "riskLevel": "High",
+      "recommendedAction": "Resolve ownership/dispute before compensation",
+      "expectedAdditionalCost": 2843074,
+      "expectedFinalCost": 18637932,
+      "costOverrunPercentage": 18,
+      "legalRiskProbability": 46,
+      "legalRiskLevel": "Medium",
+      "riskScore": 79
+    },
+    {
+      "id": "LA0023",
+      "surveyNumber": "SF 0023",
+      "projectId": "PROJ-003",
+      "district": "Nagpur",
+      "state": "Maharashtra",
+      "taluk": "Hingna",
+      "village": "Wanadongri",
+      "location": "Wanadongri, Hingna, Nagpur, Maharashtra",
+      "ownerName": "Wanadongri Landowners (1 owners)",
+      "landArea": 2.38,
+      "area": 2.38,
+      "areaUnit": "Acres",
+      "landType": "Industrial",
+      "ownersCount": 1,
+      "ownershipStatus": "Disputed",
+      "ownershipDispute": true,
+      "documentsComplete": true,
+      "legalStatus": "Clear",
+      "compensationStatus": "Paid",
+      "compensationAmount": 3620454,
+      "objectionFiled": true,
+      "courtCase": false,
+      "surveyCompleted": false,
+      "environmentalClearance": true,
+      "governmentApproval": true,
+      "acquisitionStage": "Compensation",
+      "previousDelay": false,
+      "distanceFromProject": 0.5,
+      "latitude": 20.95,
+      "longitude": 78.98,
+      "polygon": [
+        [
+          20.9485,
+          78.97850000000001
+        ],
+        [
+          20.9485,
+          78.9815
+        ],
+        [
+          20.9515,
+          78.9815
+        ],
+        [
+          20.9515,
+          78.97850000000001
+        ],
+        [
+          20.9485,
+          78.97850000000001
+        ]
+      ],
+      "predictedDelayDays": 86,
+      "delayProbability": 76,
+      "riskLevel": "High",
+      "recommendedAction": "Process compensation approval",
+      "expectedAdditionalCost": 651682,
+      "expectedFinalCost": 4272136,
+      "costOverrunPercentage": 18,
+      "legalRiskProbability": 46,
+      "legalRiskLevel": "Medium",
+      "riskScore": 55
+    },
+    {
+      "id": "LA0024",
+      "surveyNumber": "SF 0024",
+      "projectId": "PROJ-004",
+      "district": "Aurangabad",
+      "state": "Maharashtra",
+      "taluk": "Paithan",
+      "village": "Kachner",
+      "location": "Kachner, Paithan, Aurangabad, Maharashtra",
+      "ownerName": "Kachner Landowners (3 owners)",
+      "landArea": 6.8,
+      "area": 6.8,
+      "areaUnit": "Acres",
+      "landType": "Agricultural",
+      "ownersCount": 3,
+      "ownershipStatus": "Verified",
+      "ownershipDispute": false,
+      "documentsComplete": true,
+      "legalStatus": "Clear",
+      "compensationStatus": "Pending",
+      "compensationAmount": 4193747,
+      "objectionFiled": false,
+      "courtCase": false,
+      "surveyCompleted": true,
+      "environmentalClearance": true,
+      "governmentApproval": false,
+      "acquisitionStage": "Approval",
+      "previousDelay": false,
+      "distanceFromProject": 0.5,
+      "latitude": 19.475,
+      "longitude": 75.385,
+      "polygon": [
+        [
+          19.4735,
+          75.38350000000001
+        ],
+        [
+          19.4735,
+          75.3865
+        ],
+        [
+          19.4765,
+          75.3865
+        ],
+        [
+          19.4765,
+          75.38350000000001
+        ],
+        [
+          19.4735,
+          75.38350000000001
+        ]
+      ],
+      "predictedDelayDays": 82,
+      "delayProbability": 47,
+      "riskLevel": "Medium",
+      "recommendedAction": "Complete government approval and acquisition notice",
+      "expectedAdditionalCost": 167750,
+      "expectedFinalCost": 4361497,
+      "costOverrunPercentage": 4,
+      "legalRiskProbability": 10,
+      "legalRiskLevel": "Low",
+      "riskScore": 31
+    },
+    {
+      "id": "LA0025",
+      "surveyNumber": "SF 0025",
+      "projectId": "PROJ-005",
+      "district": "Ahmedabad",
+      "state": "Gujarat",
+      "taluk": "Daskroi",
+      "village": "Bopal",
+      "location": "Bopal, Daskroi, Ahmedabad, Gujarat",
+      "ownerName": "Bopal Landowners (5 owners)",
+      "landArea": 1.91,
+      "area": 1.91,
+      "areaUnit": "Acres",
+      "landType": "Residential",
+      "ownersCount": 5,
+      "ownershipStatus": "Disputed",
+      "ownershipDispute": true,
+      "documentsComplete": true,
+      "legalStatus": "Clear",
+      "compensationStatus": "Pending",
+      "compensationAmount": 15910755,
+      "objectionFiled": true,
+      "courtCase": false,
+      "surveyCompleted": false,
+      "environmentalClearance": true,
+      "governmentApproval": false,
+      "acquisitionStage": "Possession",
+      "previousDelay": false,
+      "distanceFromProject": 0.5,
+      "latitude": 23.033,
+      "longitude": 72.465,
+      "polygon": [
+        [
+          23.0315,
+          72.46350000000001
+        ],
+        [
+          23.0315,
+          72.4665
+        ],
+        [
+          23.0345,
+          72.4665
+        ],
+        [
+          23.0345,
+          72.46350000000001
+        ],
+        [
+          23.0315,
+          72.46350000000001
+        ]
+      ],
+      "predictedDelayDays": 135,
+      "delayProbability": 86,
+      "riskLevel": "High",
+      "recommendedAction": "Conduct joint survey and update cadastral records",
+      "expectedAdditionalCost": 2863936,
+      "expectedFinalCost": 18774691,
+      "costOverrunPercentage": 18,
+      "legalRiskProbability": 46,
+      "legalRiskLevel": "Medium",
+      "riskScore": 73
+    },
+    {
+      "id": "LA0026",
+      "surveyNumber": "SF 0026",
+      "projectId": "PROJ-006",
+      "district": "Vadodara",
+      "state": "Gujarat",
+      "taluk": "Savli",
+      "village": "Manjusar",
+      "location": "Manjusar, Savli, Vadodara, Gujarat",
+      "ownerName": "Manjusar Landowners (2 owners)",
+      "landArea": 5.38,
+      "area": 5.38,
+      "areaUnit": "Acres",
+      "landType": "Commercial",
+      "ownersCount": 2,
+      "ownershipStatus": "Disputed",
+      "ownershipDispute": true,
+      "documentsComplete": true,
+      "legalStatus": "Clear",
+      "compensationStatus": "Pending",
+      "compensationAmount": 14030093,
+      "objectionFiled": true,
+      "courtCase": false,
+      "surveyCompleted": false,
+      "environmentalClearance": true,
+      "governmentApproval": true,
+      "acquisitionStage": "Survey",
+      "previousDelay": false,
+      "distanceFromProject": 0.5,
+      "latitude": 22.43,
+      "longitude": 73.55,
+      "polygon": [
+        [
+          22.4285,
+          73.5485
+        ],
+        [
+          22.4285,
+          73.55149999999999
+        ],
+        [
+          22.4315,
+          73.55149999999999
+        ],
+        [
+          22.4315,
+          73.5485
+        ],
+        [
+          22.4285,
+          73.5485
+        ]
+      ],
+      "predictedDelayDays": 113,
+      "delayProbability": 83,
+      "riskLevel": "High",
+      "recommendedAction": "Verify land records and complete pending documents",
+      "expectedAdditionalCost": 2525417,
+      "expectedFinalCost": 16555510,
+      "costOverrunPercentage": 18,
+      "legalRiskProbability": 46,
+      "legalRiskLevel": "Medium",
+      "riskScore": 71
+    },
+    {
+      "id": "LA0027",
+      "surveyNumber": "SF 0027",
+      "projectId": "PROJ-007",
+      "district": "Surat",
+      "state": "Gujarat",
+      "taluk": "Kamrej",
+      "village": "Kosamba",
+      "location": "Kosamba, Kamrej, Surat, Gujarat",
+      "ownerName": "Kosamba Landowners (1 owners)",
+      "landArea": 0.81,
+      "area": 0.81,
+      "areaUnit": "Acres",
+      "landType": "Industrial",
+      "ownersCount": 1,
+      "ownershipStatus": "Verified",
+      "ownershipDispute": false,
+      "documentsComplete": true,
+      "legalStatus": "Clear",
+      "compensationStatus": "Paid",
+      "compensationAmount": 14211572,
+      "objectionFiled": false,
+      "courtCase": false,
+      "surveyCompleted": true,
+      "environmentalClearance": true,
+      "governmentApproval": false,
+      "acquisitionStage": "Negotiation",
+      "previousDelay": true,
+      "distanceFromProject": 0.5,
+      "latitude": 21.48,
+      "longitude": 73.08,
+      "polygon": [
+        [
+          21.4785,
+          73.0785
+        ],
+        [
+          21.4785,
+          73.08149999999999
+        ],
+        [
+          21.4815,
+          73.08149999999999
+        ],
+        [
+          21.4815,
+          73.0785
+        ],
+        [
+          21.4785,
+          73.0785
+        ]
+      ],
+      "predictedDelayDays": 62,
+      "delayProbability": 62,
+      "riskLevel": "Medium",
+      "recommendedAction": "Resolve ownership/dispute before compensation",
+      "expectedAdditionalCost": 1136926,
+      "expectedFinalCost": 15348498,
+      "costOverrunPercentage": 8,
+      "legalRiskProbability": 13,
+      "legalRiskLevel": "Low",
+      "riskScore": 25
+    },
+    {
+      "id": "LA0028",
+      "surveyNumber": "SF 0028",
+      "projectId": "PROJ-008",
+      "district": "Rajkot",
+      "state": "Gujarat",
+      "taluk": "Gondal",
+      "village": "Shapar",
+      "location": "Shapar, Gondal, Rajkot, Gujarat",
+      "ownerName": "Shapar Landowners (5 owners)",
+      "landArea": 6.08,
+      "area": 6.08,
+      "areaUnit": "Acres",
+      "landType": "Agricultural",
+      "ownersCount": 5,
+      "ownershipStatus": "Disputed",
+      "ownershipDispute": true,
+      "documentsComplete": true,
+      "legalStatus": "Court Stay Order",
+      "compensationStatus": "Pending",
+      "compensationAmount": 6800903,
+      "objectionFiled": true,
+      "courtCase": true,
+      "surveyCompleted": false,
+      "environmentalClearance": true,
+      "governmentApproval": false,
+      "acquisitionStage": "Compensation",
+      "previousDelay": true,
+      "distanceFromProject": 0.5,
+      "latitude": 22.12,
+      "longitude": 70.83,
+      "polygon": [
+        [
+          22.1185,
+          70.8285
+        ],
+        [
+          22.1185,
+          70.83149999999999
+        ],
+        [
+          22.1215,
+          70.83149999999999
+        ],
+        [
+          22.1215,
+          70.8285
+        ],
+        [
+          22.1185,
+          70.8285
+        ]
+      ],
+      "predictedDelayDays": 245,
+      "delayProbability": 98,
+      "riskLevel": "High",
+      "recommendedAction": "Process compensation approval",
+      "expectedAdditionalCost": 2448325,
+      "expectedFinalCost": 9249228,
+      "costOverrunPercentage": 36,
+      "legalRiskProbability": 93,
+      "legalRiskLevel": "High",
+      "riskScore": 99
+    },
+    {
+      "id": "LA0029",
+      "surveyNumber": "SF 0029",
+      "projectId": "PROJ-009",
+      "district": "Jaipur",
+      "state": "Rajasthan",
+      "taluk": "Sanganer",
+      "village": "Sitapura",
+      "location": "Sitapura, Sanganer, Jaipur, Rajasthan",
+      "ownerName": "Sitapura Landowners (3 owners)",
+      "landArea": 6.98,
+      "area": 6.98,
+      "areaUnit": "Acres",
+      "landType": "Residential",
+      "ownersCount": 3,
+      "ownershipStatus": "Disputed",
+      "ownershipDispute": true,
+      "documentsComplete": false,
+      "legalStatus": "Clear",
+      "compensationStatus": "Pending",
+      "compensationAmount": 11930355,
+      "objectionFiled": true,
+      "courtCase": false,
+      "surveyCompleted": false,
+      "environmentalClearance": true,
+      "governmentApproval": true,
+      "acquisitionStage": "Approval",
+      "previousDelay": false,
+      "distanceFromProject": 0.5,
+      "latitude": 26.79,
+      "longitude": 75.83,
+      "polygon": [
+        [
+          26.7885,
+          75.8285
+        ],
+        [
+          26.7885,
+          75.83149999999999
+        ],
+        [
+          26.7915,
+          75.83149999999999
+        ],
+        [
+          26.7915,
+          75.8285
+        ],
+        [
+          26.7885,
+          75.8285
+        ]
+      ],
+      "predictedDelayDays": 132,
+      "delayProbability": 93,
+      "riskLevel": "High",
+      "recommendedAction": "Complete government approval and acquisition notice",
+      "expectedAdditionalCost": 2505375,
+      "expectedFinalCost": 14435730,
+      "costOverrunPercentage": 21,
+      "legalRiskProbability": 54,
+      "legalRiskLevel": "Medium",
+      "riskScore": 83
+    },
+    {
+      "id": "LA0030",
+      "surveyNumber": "SF 0030",
+      "projectId": "PROJ-010",
+      "district": "Jodhpur",
+      "state": "Rajasthan",
+      "taluk": "Luni",
+      "village": "Salawas",
+      "location": "Salawas, Luni, Jodhpur, Rajasthan",
+      "ownerName": "Salawas Landowners (1 owners)",
+      "landArea": 2.06,
+      "area": 2.06,
+      "areaUnit": "Acres",
+      "landType": "Commercial",
+      "ownersCount": 1,
+      "ownershipStatus": "Verified",
+      "ownershipDispute": false,
+      "documentsComplete": true,
+      "legalStatus": "Clear",
+      "compensationStatus": "Pending",
+      "compensationAmount": 13458150,
+      "objectionFiled": false,
+      "courtCase": false,
+      "surveyCompleted": true,
+      "environmentalClearance": true,
+      "governmentApproval": false,
+      "acquisitionStage": "Possession",
+      "previousDelay": false,
+      "distanceFromProject": 0.5,
+      "latitude": 26.18,
+      "longitude": 73.01,
+      "polygon": [
+        [
+          26.1785,
+          73.00850000000001
+        ],
+        [
+          26.1785,
+          73.0115
+        ],
+        [
+          26.1815,
+          73.0115
+        ],
+        [
+          26.1815,
+          73.00850000000001
+        ],
+        [
+          26.1785,
+          73.00850000000001
+        ]
+      ],
+      "predictedDelayDays": 70,
+      "delayProbability": 40,
+      "riskLevel": "Medium",
+      "recommendedAction": "Conduct joint survey and update cadastral records",
+      "expectedAdditionalCost": 538326,
+      "expectedFinalCost": 13996476,
+      "costOverrunPercentage": 4,
+      "legalRiskProbability": 10,
+      "legalRiskLevel": "Low",
+      "riskScore": 25
+    },
+    {
+      "id": "LA0031",
+      "surveyNumber": "SF 0031",
+      "projectId": "PROJ-001",
+      "district": "Kota",
+      "state": "Rajasthan",
+      "taluk": "Ladpura",
+      "village": "Dabi",
+      "location": "Dabi, Ladpura, Kota, Rajasthan",
+      "ownerName": "Dabi Landowners (2 owners)",
+      "landArea": 1.05,
+      "area": 1.05,
+      "areaUnit": "Acres",
+      "landType": "Industrial",
+      "ownersCount": 2,
+      "ownershipStatus": "Disputed",
+      "ownershipDispute": true,
+      "documentsComplete": true,
+      "legalStatus": "Clear",
+      "compensationStatus": "Paid",
+      "compensationAmount": 15473529,
+      "objectionFiled": true,
+      "courtCase": false,
+      "surveyCompleted": false,
+      "environmentalClearance": true,
+      "governmentApproval": false,
+      "acquisitionStage": "Survey",
+      "previousDelay": false,
+      "distanceFromProject": 0.5,
+      "latitude": 25.08,
+      "longitude": 75.52,
+      "polygon": [
+        [
+          25.0785,
+          75.5185
+        ],
+        [
+          25.0785,
+          75.52149999999999
+        ],
+        [
+          25.0815,
+          75.52149999999999
+        ],
+        [
+          25.0815,
+          75.5185
+        ],
+        [
+          25.0785,
+          75.5185
+        ]
+      ],
+      "predictedDelayDays": 113,
+      "delayProbability": 81,
+      "riskLevel": "High",
+      "recommendedAction": "Verify land records and complete pending documents",
+      "expectedAdditionalCost": 2785235,
+      "expectedFinalCost": 18258764,
+      "costOverrunPercentage": 18,
+      "legalRiskProbability": 46,
+      "legalRiskLevel": "Medium",
+      "riskScore": 55
+    },
+    {
+      "id": "LA0032",
+      "surveyNumber": "SF 0032",
+      "projectId": "PROJ-002",
+      "district": "Ajmer",
+      "state": "Rajasthan",
+      "taluk": "Kishangarh",
+      "village": "Madanganj",
+      "location": "Madanganj, Kishangarh, Ajmer, Rajasthan",
+      "ownerName": "Madanganj Landowners (1 owners)",
+      "landArea": 2.22,
+      "area": 2.22,
+      "areaUnit": "Acres",
+      "landType": "Agricultural",
+      "ownersCount": 1,
+      "ownershipStatus": "Disputed",
+      "ownershipDispute": true,
+      "documentsComplete": false,
+      "legalStatus": "Clear",
+      "compensationStatus": "Pending",
+      "compensationAmount": 6125915,
+      "objectionFiled": true,
+      "courtCase": false,
+      "surveyCompleted": false,
+      "environmentalClearance": true,
+      "governmentApproval": true,
+      "acquisitionStage": "Negotiation",
+      "previousDelay": true,
+      "distanceFromProject": 0.5,
+      "latitude": 26.59,
+      "longitude": 74.85,
+      "polygon": [
+        [
+          26.5885,
+          74.8485
+        ],
+        [
+          26.5885,
+          74.85149999999999
+        ],
+        [
+          26.5915,
+          74.85149999999999
+        ],
+        [
+          26.5915,
+          74.8485
+        ],
+        [
+          26.5885,
+          74.8485
+        ]
+      ],
+      "predictedDelayDays": 136,
+      "delayProbability": 98,
+      "riskLevel": "High",
+      "recommendedAction": "Resolve ownership/dispute before compensation",
+      "expectedAdditionalCost": 1531479,
+      "expectedFinalCost": 7657394,
+      "costOverrunPercentage": 25,
+      "legalRiskProbability": 59,
+      "legalRiskLevel": "Medium",
+      "riskScore": 87
+    },
+    {
+      "id": "LA0033",
+      "surveyNumber": "SF 0033",
+      "projectId": "PROJ-003",
+      "district": "Indore",
+      "state": "Madhya Pradesh",
+      "taluk": "Depalpur",
+      "village": "Mangliya",
+      "location": "Mangliya, Depalpur, Indore, Madhya Pradesh",
+      "ownerName": "Mangliya Landowners (5 owners)",
+      "landArea": 3.48,
+      "area": 3.48,
+      "areaUnit": "Acres",
+      "landType": "Residential",
+      "ownersCount": 5,
+      "ownershipStatus": "Verified",
+      "ownershipDispute": false,
+      "documentsComplete": true,
+      "legalStatus": "Clear",
+      "compensationStatus": "Pending",
+      "compensationAmount": 10458785,
+      "objectionFiled": false,
+      "courtCase": false,
+      "surveyCompleted": true,
+      "environmentalClearance": true,
+      "governmentApproval": false,
+      "acquisitionStage": "Compensation",
+      "previousDelay": false,
+      "distanceFromProject": 0.5,
+      "latitude": 22.85,
+      "longitude": 75.93,
+      "polygon": [
+        [
+          22.8485,
+          75.92850000000001
+        ],
+        [
+          22.8485,
+          75.9315
+        ],
+        [
+          22.8515,
+          75.9315
+        ],
+        [
+          22.8515,
+          75.92850000000001
+        ],
+        [
+          22.8485,
+          75.92850000000001
+        ]
+      ],
+      "predictedDelayDays": 74,
+      "delayProbability": 55,
+      "riskLevel": "Medium",
+      "recommendedAction": "Process compensation approval",
+      "expectedAdditionalCost": 418351,
+      "expectedFinalCost": 10877136,
+      "costOverrunPercentage": 4,
+      "legalRiskProbability": 10,
+      "legalRiskLevel": "Low",
+      "riskScore": 33
+    },
+    {
+      "id": "LA0034",
+      "surveyNumber": "SF 0034",
+      "projectId": "PROJ-004",
+      "district": "Bhopal",
+      "state": "Madhya Pradesh",
+      "taluk": "Huzur",
+      "village": "Berasia Road",
+      "location": "Berasia Road, Huzur, Bhopal, Madhya Pradesh",
+      "ownerName": "Berasia Road Landowners (4 owners)",
+      "landArea": 4.51,
+      "area": 4.51,
+      "areaUnit": "Acres",
+      "landType": "Commercial",
+      "ownersCount": 4,
+      "ownershipStatus": "Disputed",
+      "ownershipDispute": true,
+      "documentsComplete": true,
+      "legalStatus": "Clear",
+      "compensationStatus": "Pending",
+      "compensationAmount": 6642457,
+      "objectionFiled": true,
+      "courtCase": false,
+      "surveyCompleted": false,
+      "environmentalClearance": true,
+      "governmentApproval": false,
+      "acquisitionStage": "Approval",
+      "previousDelay": false,
+      "distanceFromProject": 0.5,
+      "latitude": 23.3,
+      "longitude": 77.4,
+      "polygon": [
+        [
+          23.2985,
+          77.39850000000001
+        ],
+        [
+          23.2985,
+          77.4015
+        ],
+        [
+          23.3015,
+          77.4015
+        ],
+        [
+          23.3015,
+          77.39850000000001
+        ],
+        [
+          23.2985,
+          77.39850000000001
+        ]
+      ],
+      "predictedDelayDays": 141,
+      "delayProbability": 86,
+      "riskLevel": "High",
+      "recommendedAction": "Complete government approval and acquisition notice",
+      "expectedAdditionalCost": 1195642,
+      "expectedFinalCost": 7838099,
+      "costOverrunPercentage": 18,
+      "legalRiskProbability": 46,
+      "legalRiskLevel": "Medium",
+      "riskScore": 65
+    },
+    {
+      "id": "LA0035",
+      "surveyNumber": "SF 0035",
+      "projectId": "PROJ-005",
+      "district": "Jabalpur",
+      "state": "Madhya Pradesh",
+      "taluk": "Panagar",
+      "village": "Sihora",
+      "location": "Sihora, Panagar, Jabalpur, Madhya Pradesh",
+      "ownerName": "Sihora Landowners (1 owners)",
+      "landArea": 3.19,
+      "area": 3.19,
+      "areaUnit": "Acres",
+      "landType": "Industrial",
+      "ownersCount": 1,
+      "ownershipStatus": "Disputed",
+      "ownershipDispute": true,
+      "documentsComplete": true,
+      "legalStatus": "Court Stay Order",
+      "compensationStatus": "Paid",
+      "compensationAmount": 3091692,
+      "objectionFiled": true,
+      "courtCase": true,
+      "surveyCompleted": false,
+      "environmentalClearance": true,
+      "governmentApproval": true,
+      "acquisitionStage": "Possession",
+      "previousDelay": false,
+      "distanceFromProject": 0.5,
+      "latitude": 23.49,
+      "longitude": 80.1,
+      "polygon": [
+        [
+          23.4885,
+          80.0985
+        ],
+        [
+          23.4885,
+          80.10149999999999
+        ],
+        [
+          23.4915,
+          80.10149999999999
+        ],
+        [
+          23.4915,
+          80.0985
+        ],
+        [
+          23.4885,
+          80.0985
+        ]
+      ],
+      "predictedDelayDays": 173,
+      "delayProbability": 91,
+      "riskLevel": "High",
+      "recommendedAction": "Conduct joint survey and update cadastral records",
+      "expectedAdditionalCost": 989341,
+      "expectedFinalCost": 4081033,
+      "costOverrunPercentage": 32,
+      "legalRiskProbability": 88,
+      "legalRiskLevel": "High",
+      "riskScore": 87
+    },
+    {
+      "id": "LA0036",
+      "surveyNumber": "SF 0036",
+      "projectId": "PROJ-006",
+      "district": "Gwalior",
+      "state": "Madhya Pradesh",
+      "taluk": "Morar",
+      "village": "Banmore",
+      "location": "Banmore, Morar, Gwalior, Madhya Pradesh",
+      "ownerName": "Banmore Landowners (4 owners)",
+      "landArea": 5.31,
+      "area": 5.31,
+      "areaUnit": "Acres",
+      "landType": "Agricultural",
+      "ownersCount": 4,
+      "ownershipStatus": "Verified",
+      "ownershipDispute": false,
+      "documentsComplete": true,
+      "legalStatus": "Clear",
+      "compensationStatus": "Pending",
+      "compensationAmount": 1560470,
+      "objectionFiled": false,
+      "courtCase": false,
+      "surveyCompleted": true,
+      "environmentalClearance": true,
+      "governmentApproval": false,
+      "acquisitionStage": "Survey",
+      "previousDelay": false,
+      "distanceFromProject": 0.5,
+      "latitude": 26.05,
+      "longitude": 78,
+      "polygon": [
+        [
+          26.0485,
+          77.9985
+        ],
+        [
+          26.0485,
+          78.0015
+        ],
+        [
+          26.0515,
+          78.0015
+        ],
+        [
+          26.0515,
+          77.9985
+        ],
+        [
+          26.0485,
+          77.9985
+        ]
+      ],
+      "predictedDelayDays": 78,
+      "delayProbability": 52,
+      "riskLevel": "Medium",
+      "recommendedAction": "Verify land records and complete pending documents",
+      "expectedAdditionalCost": 62419,
+      "expectedFinalCost": 1622889,
+      "costOverrunPercentage": 4,
+      "legalRiskProbability": 10,
+      "legalRiskLevel": "Low",
+      "riskScore": 31
+    },
+    {
+      "id": "LA0037",
+      "surveyNumber": "SF 0037",
+      "projectId": "PROJ-007",
+      "district": "Lucknow",
+      "state": "Uttar Pradesh",
+      "taluk": "Mohanlalganj",
+      "village": "Sultanpur",
+      "location": "Sultanpur, Mohanlalganj, Lucknow, Uttar Pradesh",
+      "ownerName": "Sultanpur Landowners (3 owners)",
+      "landArea": 2.64,
+      "area": 2.64,
+      "areaUnit": "Acres",
+      "landType": "Residential",
+      "ownersCount": 3,
+      "ownershipStatus": "Disputed",
+      "ownershipDispute": true,
+      "documentsComplete": true,
+      "legalStatus": "Clear",
+      "compensationStatus": "Pending",
+      "compensationAmount": 6299270,
+      "objectionFiled": true,
+      "courtCase": false,
+      "surveyCompleted": false,
+      "environmentalClearance": true,
+      "governmentApproval": false,
+      "acquisitionStage": "Negotiation",
+      "previousDelay": false,
+      "distanceFromProject": 0.5,
+      "latitude": 26.76,
+      "longitude": 81.05,
+      "polygon": [
+        [
+          26.7585,
+          81.0485
+        ],
+        [
+          26.7585,
+          81.05149999999999
+        ],
+        [
+          26.7615,
+          81.05149999999999
+        ],
+        [
+          26.7615,
+          81.0485
+        ],
+        [
+          26.7585,
+          81.0485
+        ]
+      ],
+      "predictedDelayDays": 137,
+      "delayProbability": 98,
+      "riskLevel": "High",
+      "recommendedAction": "Resolve ownership/dispute before compensation",
+      "expectedAdditionalCost": 1133869,
+      "expectedFinalCost": 7433139,
+      "costOverrunPercentage": 18,
+      "legalRiskProbability": 46,
+      "legalRiskLevel": "Medium",
+      "riskScore": 65
+    },
+    {
+      "id": "LA0038",
+      "surveyNumber": "SF 0038",
+      "projectId": "PROJ-008",
+      "district": "Agra",
+      "state": "Uttar Pradesh",
+      "taluk": "Kiraoli",
+      "village": "Fatehpur Sikri",
+      "location": "Fatehpur Sikri, Kiraoli, Agra, Uttar Pradesh",
+      "ownerName": "Fatehpur Sikri Landowners (3 owners)",
+      "landArea": 1.51,
+      "area": 1.51,
+      "areaUnit": "Acres",
+      "landType": "Commercial",
+      "ownersCount": 3,
+      "ownershipStatus": "Disputed",
+      "ownershipDispute": true,
+      "documentsComplete": true,
+      "legalStatus": "Clear",
+      "compensationStatus": "Pending",
+      "compensationAmount": 3230299,
+      "objectionFiled": true,
+      "courtCase": false,
+      "surveyCompleted": false,
+      "environmentalClearance": true,
+      "governmentApproval": true,
+      "acquisitionStage": "Compensation",
+      "previousDelay": false,
+      "distanceFromProject": 0.5,
+      "latitude": 27.1,
+      "longitude": 77.93,
+      "polygon": [
+        [
+          27.0985,
+          77.92850000000001
+        ],
+        [
+          27.0985,
+          77.9315
+        ],
+        [
+          27.1015,
+          77.9315
+        ],
+        [
+          27.1015,
+          77.92850000000001
+        ],
+        [
+          27.0985,
+          77.92850000000001
+        ]
+      ],
+      "predictedDelayDays": 104,
+      "delayProbability": 86,
+      "riskLevel": "High",
+      "recommendedAction": "Process compensation approval",
+      "expectedAdditionalCost": 581454,
+      "expectedFinalCost": 3811753,
+      "costOverrunPercentage": 18,
+      "legalRiskProbability": 46,
+      "legalRiskLevel": "Medium",
+      "riskScore": 65
+    },
+    {
+      "id": "LA0039",
+      "surveyNumber": "SF 0039",
+      "projectId": "PROJ-009",
+      "district": "Varanasi",
+      "state": "Uttar Pradesh",
+      "taluk": "Pindra",
+      "village": "Babatpur",
+      "location": "Babatpur, Pindra, Varanasi, Uttar Pradesh",
+      "ownerName": "Babatpur Landowners (5 owners)",
+      "landArea": 0.92,
+      "area": 0.92,
+      "areaUnit": "Acres",
+      "landType": "Industrial",
+      "ownersCount": 5,
+      "ownershipStatus": "Verified",
+      "ownershipDispute": false,
+      "documentsComplete": false,
+      "legalStatus": "Clear",
+      "compensationStatus": "Paid",
+      "compensationAmount": 12467918,
+      "objectionFiled": false,
+      "courtCase": false,
+      "surveyCompleted": true,
+      "environmentalClearance": true,
+      "governmentApproval": false,
+      "acquisitionStage": "Approval",
+      "previousDelay": true,
+      "distanceFromProject": 0.5,
+      "latitude": 25.45,
+      "longitude": 82.82,
+      "polygon": [
+        [
+          25.4485,
+          82.8185
+        ],
+        [
+          25.4485,
+          82.82149999999999
+        ],
+        [
+          25.4515,
+          82.82149999999999
+        ],
+        [
+          25.4515,
+          82.8185
+        ],
+        [
+          25.4485,
+          82.8185
+        ]
+      ],
+      "predictedDelayDays": 77,
+      "delayProbability": 57,
+      "riskLevel": "Medium",
+      "recommendedAction": "Complete government approval and acquisition notice",
+      "expectedAdditionalCost": 1371471,
+      "expectedFinalCost": 13839389,
+      "costOverrunPercentage": 11,
+      "legalRiskProbability": 21,
+      "legalRiskLevel": "Low",
+      "riskScore": 45
+    },
+    {
+      "id": "LA0040",
+      "surveyNumber": "SF 0040",
+      "projectId": "PROJ-010",
+      "district": "Prayagraj",
+      "state": "Uttar Pradesh",
+      "taluk": "Soraon",
+      "village": "Phaphamau",
+      "location": "Phaphamau, Soraon, Prayagraj, Uttar Pradesh",
+      "ownerName": "Phaphamau Landowners (5 owners)",
+      "landArea": 5.84,
+      "area": 5.84,
+      "areaUnit": "Acres",
+      "landType": "Agricultural",
+      "ownersCount": 5,
+      "ownershipStatus": "Disputed",
+      "ownershipDispute": true,
+      "documentsComplete": true,
+      "legalStatus": "Clear",
+      "compensationStatus": "Pending",
+      "compensationAmount": 2152754,
+      "objectionFiled": true,
+      "courtCase": false,
+      "surveyCompleted": false,
+      "environmentalClearance": true,
+      "governmentApproval": false,
+      "acquisitionStage": "Possession",
+      "previousDelay": true,
+      "distanceFromProject": 0.5,
+      "latitude": 25.54,
+      "longitude": 81.87,
+      "polygon": [
+        [
+          25.5385,
+          81.86850000000001
+        ],
+        [
+          25.5385,
+          81.8715
+        ],
+        [
+          25.5415,
+          81.8715
+        ],
+        [
+          25.5415,
+          81.86850000000001
+        ],
+        [
+          25.5385,
+          81.86850000000001
+        ]
+      ],
+      "predictedDelayDays": 160,
+      "delayProbability": 98,
+      "riskLevel": "High",
+      "recommendedAction": "Conduct joint survey and update cadastral records",
+      "expectedAdditionalCost": 473606,
+      "expectedFinalCost": 2626360,
+      "costOverrunPercentage": 22,
+      "legalRiskProbability": 51,
+      "legalRiskLevel": "Medium",
+      "riskScore": 89
+    },
+    {
+      "id": "LA0041",
+      "surveyNumber": "SF 0041",
+      "projectId": "PROJ-001",
+      "district": "North 24 Parganas",
+      "state": "West Bengal",
+      "taluk": "Barasat",
+      "village": "Madhyamgram",
+      "location": "Madhyamgram, Barasat, North 24 Parganas, West Bengal",
+      "ownerName": "Madhyamgram Landowners (2 owners)",
+      "landArea": 5.78,
+      "area": 5.78,
+      "areaUnit": "Acres",
+      "landType": "Residential",
+      "ownersCount": 2,
+      "ownershipStatus": "Disputed",
+      "ownershipDispute": true,
+      "documentsComplete": true,
+      "legalStatus": "Clear",
+      "compensationStatus": "Pending",
+      "compensationAmount": 10928741,
+      "objectionFiled": true,
+      "courtCase": false,
+      "surveyCompleted": false,
+      "environmentalClearance": true,
+      "governmentApproval": true,
+      "acquisitionStage": "Survey",
+      "previousDelay": true,
+      "distanceFromProject": 0.5,
+      "latitude": 22.7,
+      "longitude": 88.45,
+      "polygon": [
+        [
+          22.6985,
+          88.44850000000001
+        ],
+        [
+          22.6985,
+          88.4515
+        ],
+        [
+          22.7015,
+          88.4515
+        ],
+        [
+          22.7015,
+          88.44850000000001
+        ],
+        [
+          22.6985,
+          88.44850000000001
+        ]
+      ],
+      "predictedDelayDays": 129,
+      "delayProbability": 95,
+      "riskLevel": "High",
+      "recommendedAction": "Verify land records and complete pending documents",
+      "expectedAdditionalCost": 2404323,
+      "expectedFinalCost": 13333064,
+      "costOverrunPercentage": 22,
+      "legalRiskProbability": 51,
+      "legalRiskLevel": "Medium",
+      "riskScore": 81
+    },
+    {
+      "id": "LA0042",
+      "surveyNumber": "SF 0042",
+      "projectId": "PROJ-002",
+      "district": "Hooghly",
+      "state": "West Bengal",
+      "taluk": "Chinsurah",
+      "village": "Singur",
+      "location": "Singur, Chinsurah, Hooghly, West Bengal",
+      "ownerName": "Singur Landowners (5 owners)",
+      "landArea": 3.05,
+      "area": 3.05,
+      "areaUnit": "Acres",
+      "landType": "Commercial",
+      "ownersCount": 5,
+      "ownershipStatus": "Verified",
+      "ownershipDispute": false,
+      "documentsComplete": true,
+      "legalStatus": "Court Stay Order",
+      "compensationStatus": "Pending",
+      "compensationAmount": 3831230,
+      "objectionFiled": false,
+      "courtCase": true,
+      "surveyCompleted": true,
+      "environmentalClearance": true,
+      "governmentApproval": false,
+      "acquisitionStage": "Negotiation",
+      "previousDelay": true,
+      "distanceFromProject": 0.5,
+      "latitude": 22.81,
+      "longitude": 88.23,
+      "polygon": [
+        [
+          22.8085,
+          88.22850000000001
+        ],
+        [
+          22.8085,
+          88.2315
+        ],
+        [
+          22.8115,
+          88.2315
+        ],
+        [
+          22.8115,
+          88.22850000000001
+        ],
+        [
+          22.8085,
+          88.22850000000001
+        ]
+      ],
+      "predictedDelayDays": 173,
+      "delayProbability": 98,
+      "riskLevel": "High",
+      "recommendedAction": "Resolve ownership/dispute before compensation",
+      "expectedAdditionalCost": 842871,
+      "expectedFinalCost": 4674101,
+      "costOverrunPercentage": 22,
+      "legalRiskProbability": 55,
+      "legalRiskLevel": "Medium",
+      "riskScore": 75
+    },
+    {
+      "id": "LA0043",
+      "surveyNumber": "SF 0043",
+      "projectId": "PROJ-003",
+      "district": "Nadia",
+      "state": "West Bengal",
+      "taluk": "Kalyani",
+      "village": "Madanpur",
+      "location": "Madanpur, Kalyani, Nadia, West Bengal",
+      "ownerName": "Madanpur Landowners (4 owners)",
+      "landArea": 3.41,
+      "area": 3.41,
+      "areaUnit": "Acres",
+      "landType": "Industrial",
+      "ownersCount": 4,
+      "ownershipStatus": "Disputed",
+      "ownershipDispute": true,
+      "documentsComplete": true,
+      "legalStatus": "Clear",
+      "compensationStatus": "Paid",
+      "compensationAmount": 11519890,
+      "objectionFiled": true,
+      "courtCase": false,
+      "surveyCompleted": false,
+      "environmentalClearance": true,
+      "governmentApproval": false,
+      "acquisitionStage": "Compensation",
+      "previousDelay": true,
+      "distanceFromProject": 0.5,
+      "latitude": 22.97,
+      "longitude": 88.45,
+      "polygon": [
+        [
+          22.9685,
+          88.44850000000001
+        ],
+        [
+          22.9685,
+          88.4515
+        ],
+        [
+          22.9715,
+          88.4515
+        ],
+        [
+          22.9715,
+          88.44850000000001
+        ],
+        [
+          22.9685,
+          88.44850000000001
+        ]
+      ],
+      "predictedDelayDays": 134,
+      "delayProbability": 98,
+      "riskLevel": "High",
+      "recommendedAction": "Process compensation approval",
+      "expectedAdditionalCost": 2534376,
+      "expectedFinalCost": 14054266,
+      "costOverrunPercentage": 22,
+      "legalRiskProbability": 51,
+      "legalRiskLevel": "Medium",
+      "riskScore": 65
+    },
+    {
+      "id": "LA0044",
+      "surveyNumber": "SF 0044",
+      "projectId": "PROJ-004",
+      "district": "Khordha",
+      "state": "Odisha",
+      "taluk": "Bhubaneswar",
+      "village": "Jatni",
+      "location": "Jatni, Bhubaneswar, Khordha, Odisha",
+      "ownerName": "Jatni Landowners (1 owners)",
+      "landArea": 3.19,
+      "area": 3.19,
+      "areaUnit": "Acres",
+      "landType": "Agricultural",
+      "ownersCount": 1,
+      "ownershipStatus": "Disputed",
+      "ownershipDispute": true,
+      "documentsComplete": false,
+      "legalStatus": "Clear",
+      "compensationStatus": "Pending",
+      "compensationAmount": 8565347,
+      "objectionFiled": true,
+      "courtCase": false,
+      "surveyCompleted": false,
+      "environmentalClearance": true,
+      "governmentApproval": true,
+      "acquisitionStage": "Approval",
+      "previousDelay": true,
+      "distanceFromProject": 0.5,
+      "latitude": 20.17,
+      "longitude": 85.7,
+      "polygon": [
+        [
+          20.1685,
+          85.69850000000001
+        ],
+        [
+          20.1685,
+          85.7015
+        ],
+        [
+          20.1715,
+          85.7015
+        ],
+        [
+          20.1715,
+          85.69850000000001
+        ],
+        [
+          20.1685,
+          85.69850000000001
+        ]
+      ],
+      "predictedDelayDays": 138,
+      "delayProbability": 98,
+      "riskLevel": "High",
+      "recommendedAction": "Complete government approval and acquisition notice",
+      "expectedAdditionalCost": 2141337,
+      "expectedFinalCost": 10706684,
+      "costOverrunPercentage": 25,
+      "legalRiskProbability": 59,
+      "legalRiskLevel": "Medium",
+      "riskScore": 87
+    },
+    {
+      "id": "LA0045",
+      "surveyNumber": "SF 0045",
+      "projectId": "PROJ-005",
+      "district": "Cuttack",
+      "state": "Odisha",
+      "taluk": "Cuttack Sadar",
+      "village": "Niali",
+      "location": "Niali, Cuttack Sadar, Cuttack, Odisha",
+      "ownerName": "Niali Landowners (4 owners)",
+      "landArea": 6.27,
+      "area": 6.27,
+      "areaUnit": "Acres",
+      "landType": "Residential",
+      "ownersCount": 4,
+      "ownershipStatus": "Verified",
+      "ownershipDispute": false,
+      "documentsComplete": true,
+      "legalStatus": "Clear",
+      "compensationStatus": "Pending",
+      "compensationAmount": 4252506,
+      "objectionFiled": false,
+      "courtCase": false,
+      "surveyCompleted": true,
+      "environmentalClearance": true,
+      "governmentApproval": false,
+      "acquisitionStage": "Possession",
+      "previousDelay": true,
+      "distanceFromProject": 0.5,
+      "latitude": 20.08,
+      "longitude": 86.13,
+      "polygon": [
+        [
+          20.0785,
+          86.1285
+        ],
+        [
+          20.0785,
+          86.13149999999999
+        ],
+        [
+          20.0815,
+          86.13149999999999
+        ],
+        [
+          20.0815,
+          86.1285
+        ],
+        [
+          20.0785,
+          86.1285
+        ]
+      ],
+      "predictedDelayDays": 96,
+      "delayProbability": 59,
+      "riskLevel": "Medium",
+      "recommendedAction": "Conduct joint survey and update cadastral records",
+      "expectedAdditionalCost": 340200,
+      "expectedFinalCost": 4592706,
+      "costOverrunPercentage": 8,
+      "legalRiskProbability": 13,
+      "legalRiskLevel": "Low",
+      "riskScore": 41
+    },
+    {
+      "id": "LA0046",
+      "surveyNumber": "SF 0046",
+      "projectId": "PROJ-006",
+      "district": "Patna",
+      "state": "Bihar",
+      "taluk": "Danapur",
+      "village": "Bihta",
+      "location": "Bihta, Danapur, Patna, Bihar",
+      "ownerName": "Bihta Landowners (1 owners)",
+      "landArea": 7.71,
+      "area": 7.71,
+      "areaUnit": "Acres",
+      "landType": "Commercial",
+      "ownersCount": 1,
+      "ownershipStatus": "Disputed",
+      "ownershipDispute": true,
+      "documentsComplete": true,
+      "legalStatus": "Clear",
+      "compensationStatus": "Pending",
+      "compensationAmount": 6338930,
+      "objectionFiled": true,
+      "courtCase": false,
+      "surveyCompleted": false,
+      "environmentalClearance": true,
+      "governmentApproval": false,
+      "acquisitionStage": "Survey",
+      "previousDelay": true,
+      "distanceFromProject": 0.5,
+      "latitude": 25.56,
+      "longitude": 84.87,
+      "polygon": [
+        [
+          25.5585,
+          84.86850000000001
+        ],
+        [
+          25.5585,
+          84.8715
+        ],
+        [
+          25.5615,
+          84.8715
+        ],
+        [
+          25.5615,
+          84.86850000000001
+        ],
+        [
+          25.5585,
+          84.86850000000001
+        ]
+      ],
+      "predictedDelayDays": 164,
+      "delayProbability": 98,
+      "riskLevel": "High",
+      "recommendedAction": "Verify land records and complete pending documents",
+      "expectedAdditionalCost": 1394565,
+      "expectedFinalCost": 7733495,
+      "costOverrunPercentage": 22,
+      "legalRiskProbability": 51,
+      "legalRiskLevel": "Medium",
+      "riskScore": 81
+    },
+    {
+      "id": "LA0047",
+      "surveyNumber": "SF 0047",
+      "projectId": "PROJ-007",
+      "district": "Gaya",
+      "state": "Bihar",
+      "taluk": "Tekari",
+      "village": "Belaganj",
+      "location": "Belaganj, Tekari, Gaya, Bihar",
+      "ownerName": "Belaganj Landowners (1 owners)",
+      "landArea": 2.81,
+      "area": 2.81,
+      "areaUnit": "Acres",
+      "landType": "Industrial",
+      "ownersCount": 1,
+      "ownershipStatus": "Disputed",
+      "ownershipDispute": true,
+      "documentsComplete": false,
+      "legalStatus": "Clear",
+      "compensationStatus": "Paid",
+      "compensationAmount": 1630283,
+      "objectionFiled": true,
+      "courtCase": false,
+      "surveyCompleted": false,
+      "environmentalClearance": true,
+      "governmentApproval": true,
+      "acquisitionStage": "Negotiation",
+      "previousDelay": false,
+      "distanceFromProject": 0.5,
+      "latitude": 24.98,
+      "longitude": 84.98,
+      "polygon": [
+        [
+          24.9785,
+          84.97850000000001
+        ],
+        [
+          24.9785,
+          84.9815
+        ],
+        [
+          24.9815,
+          84.9815
+        ],
+        [
+          24.9815,
+          84.97850000000001
+        ],
+        [
+          24.9785,
+          84.97850000000001
+        ]
+      ],
+      "predictedDelayDays": 102,
+      "delayProbability": 96,
+      "riskLevel": "High",
+      "recommendedAction": "Resolve ownership/dispute before compensation",
+      "expectedAdditionalCost": 342359,
+      "expectedFinalCost": 1972642,
+      "costOverrunPercentage": 21,
+      "legalRiskProbability": 54,
+      "legalRiskLevel": "Medium",
+      "riskScore": 67
+    },
+    {
+      "id": "LA0048",
+      "surveyNumber": "SF 0048",
+      "projectId": "PROJ-008",
+      "district": "Ludhiana",
+      "state": "Punjab",
+      "taluk": "Ludhiana East",
+      "village": "Sahnewal",
+      "location": "Sahnewal, Ludhiana East, Ludhiana, Punjab",
+      "ownerName": "Sahnewal Landowners (2 owners)",
+      "landArea": 8.25,
+      "area": 8.25,
+      "areaUnit": "Acres",
+      "landType": "Agricultural",
+      "ownersCount": 2,
+      "ownershipStatus": "Verified",
+      "ownershipDispute": false,
+      "documentsComplete": false,
+      "legalStatus": "Clear",
+      "compensationStatus": "Pending",
+      "compensationAmount": 8574020,
+      "objectionFiled": false,
+      "courtCase": false,
+      "surveyCompleted": true,
+      "environmentalClearance": true,
+      "governmentApproval": false,
+      "acquisitionStage": "Compensation",
+      "previousDelay": true,
+      "distanceFromProject": 0.5,
+      "latitude": 30.84,
+      "longitude": 75.97,
+      "polygon": [
+        [
+          30.8385,
+          75.9685
+        ],
+        [
+          30.8385,
+          75.97149999999999
+        ],
+        [
+          30.8415,
+          75.97149999999999
+        ],
+        [
+          30.8415,
+          75.9685
+        ],
+        [
+          30.8385,
+          75.9685
+        ]
+      ],
+      "predictedDelayDays": 116,
+      "delayProbability": 89,
+      "riskLevel": "High",
+      "recommendedAction": "Process compensation approval",
+      "expectedAdditionalCost": 943142,
+      "expectedFinalCost": 9517162,
+      "costOverrunPercentage": 11,
+      "legalRiskProbability": 21,
+      "legalRiskLevel": "Low",
+      "riskScore": 53
+    },
+    {
+      "id": "LA0049",
+      "surveyNumber": "SF 0049",
+      "projectId": "PROJ-009",
+      "district": "Gurugram",
+      "state": "Haryana",
+      "taluk": "Sohna",
+      "village": "Bhondsi",
+      "location": "Bhondsi, Sohna, Gurugram, Haryana",
+      "ownerName": "Bhondsi Landowners (2 owners)",
+      "landArea": 2.34,
+      "area": 2.34,
+      "areaUnit": "Acres",
+      "landType": "Residential",
+      "ownersCount": 2,
+      "ownershipStatus": "Disputed",
+      "ownershipDispute": true,
+      "documentsComplete": false,
+      "legalStatus": "Court Stay Order",
+      "compensationStatus": "Pending",
+      "compensationAmount": 6949485,
+      "objectionFiled": true,
+      "courtCase": true,
+      "surveyCompleted": false,
+      "environmentalClearance": true,
+      "governmentApproval": false,
+      "acquisitionStage": "Approval",
+      "previousDelay": false,
+      "distanceFromProject": 0.5,
+      "latitude": 28.345,
+      "longitude": 77.06,
+      "polygon": [
+        [
+          28.3435,
+          77.05850000000001
+        ],
+        [
+          28.3435,
+          77.0615
+        ],
+        [
+          28.3465,
+          77.0615
+        ],
+        [
+          28.3465,
+          77.05850000000001
+        ],
+        [
+          28.3435,
+          77.05850000000001
+        ]
+      ],
+      "predictedDelayDays": 236,
+      "delayProbability": 98,
+      "riskLevel": "High",
+      "recommendedAction": "Complete government approval and acquisition notice",
+      "expectedAdditionalCost": 2432320,
+      "expectedFinalCost": 9381805,
+      "costOverrunPercentage": 35,
+      "legalRiskProbability": 96,
+      "legalRiskLevel": "High",
+      "riskScore": 99
     }
   ],
   "alerts": [

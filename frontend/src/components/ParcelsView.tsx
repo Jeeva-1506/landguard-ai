@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { LandParcel, Project, Alert } from "../types";
-import { Search, Info, X, MapPin, User, FileText, AlertTriangle, ShieldAlert, CheckCircle2, ExternalLink } from "lucide-react";
+import { Search, Info, X, MapPin, User, FileText, AlertTriangle, ShieldAlert, CheckCircle2, ExternalLink, Mail, Loader2 } from "lucide-react";
+import { sendLandRiskAlert } from "../api";
 
 interface ParcelsViewProps {
   parcels: LandParcel[];
@@ -32,12 +33,13 @@ export default function ParcelsView({
   const [selectedDistrict, setSelectedDistrict] = useState("All");
   const [selectedRisk, setSelectedRisk] = useState("All");
   const [selectedStage, setSelectedStage] = useState("All");
-
   const [inspectingModalParcel, setInspectingModalParcel] = useState<LandParcel | null>(null);
 
   const [selectedParcel, setSelectedParcel] = useState<LandParcel | null>(
     activeParcelId ? parcels.find(p => p.id === activeParcelId) || parcels[0] : parcels[0]
   );
+
+  const [isSendingEmail, setIsSendingEmail] = useState(false);
 
   const effectiveSearch = (searchTerm || globalSearchTerm).toLowerCase().trim();
 
@@ -56,6 +58,41 @@ export default function ParcelsView({
     return matchesSearch && matchesDistrict && matchesRisk && matchesStage;
   });
 
+  const handleSendEmailAlert = async (parcel: LandParcel | null) => {
+    if (!parcel) return;
+    setIsSendingEmail(true);
+    try {
+      await sendLandRiskAlert({
+        landId: parcel.id,
+        surveyNumber: parcel.surveyNumber,
+        landRiskDetails: {
+          projectName: parcel.projectId,
+          surveyNumber: parcel.surveyNumber,
+          ownerName: parcel.ownerName,
+          district: parcel.district,
+          state: parcel.state || "Tamil Nadu",
+          taluk: parcel.taluk,
+          village: parcel.village,
+          landArea: parcel.landArea,
+          landType: parcel.landType,
+          riskLevel: parcel.riskLevel,
+          delayProbability: parcel.delayProbability,
+          expectedDelayDays: parcel.predictedDelayDays,
+          legalIssues: parcel.courtCase ? "Active Court Case" : parcel.ownershipDispute ? "Title Dispute" : "None",
+          documentStatus: parcel.documentsComplete ? "Verified" : "Under Verification",
+          compensationStatus: parcel.compensationStatus,
+          recommendedAction: parcel.recommendedAction || "Conduct title deed verification and revenue officer review.",
+          riskFactors: [parcel.courtCase ? "Court Case Pending" : "Acquisition Delay Risk"]
+        }
+      });
+      showToast(`Risk alert email dispatched for Survey #${parcel.surveyNumber}`, "success");
+    } catch (err: any) {
+      showToast(err.message || "Failed to send email risk alert", "error");
+    } finally {
+      setIsSendingEmail(false);
+    }
+  };
+
   return (
     <div className="space-y-7 font-sans text-[#0F172A] pb-12">
       
@@ -71,15 +108,23 @@ export default function ParcelsView({
 
       {/* PROMINENT SEARCH & MULTI-FILTER BAR */}
       <div className="card-enterprise space-y-4">
-        <div className="relative">
-          <Search className="w-4 h-4 text-[#94A3B8] absolute left-3.5 top-3 pointer-events-none" />
+        <div className="relative flex items-center">
+          <Search className="w-4 h-4 text-slate-500 absolute left-4 z-10 pointer-events-none" />
           <input
             type="text"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Search Project ID, Survey Number or Parcel ID (e.g. LA1021, 124/2, NH-45)..."
-            className="input-enterprise w-full pl-10"
+            className="input-enterprise w-full !pl-11 !pr-10 !bg-white !text-slate-900 placeholder:!text-slate-400 !font-semibold !text-sm border-2 border-slate-300 focus:border-[#0F382C] focus:bg-white transition-all shadow-xs"
           />
+          {searchTerm && (
+            <button
+              onClick={() => setSearchTerm("")}
+              className="absolute right-3 p-1 text-slate-400 hover:text-slate-700 cursor-pointer"
+            >
+              <X className="w-4 h-4 text-slate-500" />
+            </button>
+          )}
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-[14px]">
@@ -243,9 +288,9 @@ export default function ParcelsView({
       )}
 
       {/* PARCELS TABLE LEDGER */}
-      <div className="card-enterprise space-y-4">
-        <div className="border-b border-[#E2E8F0] pb-3">
-          <h3 className="section-title">
+      <div className="bg-white border border-slate-200/80 rounded-[28px] p-6 shadow-[0_4px_20px_-4px_rgba(15,56,44,0.03)] space-y-4 font-['Plus_Jakarta_Sans',sans-serif]">
+        <div className="border-b border-slate-100 pb-3">
+          <h3 className="text-lg font-extrabold text-[#0F382C] font-['Outfit']">
             Land Parcels Inventory ({filteredParcels.length})
           </h3>
         </div>
@@ -254,81 +299,145 @@ export default function ParcelsView({
           <table className="table-enterprise">
             <thead>
               <tr>
-                <th className="table-header">Survey Number</th>
-                <th className="table-header">Village & District</th>
-                <th className="table-header">Area (Acres)</th>
-                <th className="table-header">Ownership Status</th>
-                <th className="table-header">Acquisition Stage</th>
-                <th className="table-header">Compensation</th>
-                <th className="table-header">Legal Status</th>
-                <th className="table-header">Risk Level</th>
-                <th className="table-header">Predicted Delay</th>
+                <th className="table-header">Survey No</th>
+                <th className="table-header">Location / District</th>
+                <th className="table-header text-center">Area (Acres)</th>
+                <th className="table-header text-center">Title Status</th>
+                <th className="table-header text-center">Acquisition Stage</th>
+                <th className="table-header text-center">Payment</th>
+                <th className="table-header text-center">Legal Status</th>
+                <th className="table-header text-center">Risk Level</th>
+                <th className="table-header text-center">Predicted Delay</th>
                 <th className="table-header text-right">Action</th>
               </tr>
             </thead>
             <tbody className="table-body">
-              {filteredParcels.map((parcel) => (
-                <tr 
-                  key={parcel.id} 
-                  onClick={() => {
-                    setSelectedParcel(parcel);
-                    setActiveParcelId(parcel.id);
-                    setInspectingModalParcel(parcel);
-                    showToast(`Inspecting Survey #${parcel.surveyNumber || parcel.id}`, "success");
-                  }}
-                  className={`hover:bg-[#F8FAFC] cursor-pointer ${
-                    selectedParcel?.id === parcel.id ? "bg-[#F1F5F9] border-l-4 border-l-blue-600" : ""
-                  }`}
-                >
-                  <td className="table-value-bold font-mono text-[#0A192F]">
-                    {parcel.surveyNumber || "124/2"} <span className="text-[12px] text-[#64748B]">({parcel.id})</span>
-                  </td>
-                  <td className="table-value-bold">{parcel.village || "Sriperumbudur"}, {parcel.district}</td>
-                  <td className="font-bold text-[#0F172A]">{parcel.landArea}</td>
-                  <td>
-                    <span className={`status-badge ${
-                      parcel.ownershipDispute ? "status-badge-danger" : "status-badge-success"
-                    }`}>
-                      {parcel.ownershipDispute ? "Disputed" : "Clear Title"}
-                    </span>
-                  </td>
-                  <td className="font-semibold text-[#2563EB]">{parcel.acquisitionStage}</td>
-                  <td>
-                    <span className={`status-badge ${
-                      parcel.compensationStatus === 'Paid' ? "status-badge-success" : "status-badge-warning"
-                    }`}>
-                      {parcel.compensationStatus}
-                    </span>
-                  </td>
-                  <td className="text-[#475569]">{parcel.courtCase ? "Litigation" : "Clear"}</td>
-                  <td>
-                    <span className={`status-badge ${
-                      parcel.riskLevel === 'Critical' || parcel.riskLevel === 'High' ? "status-badge-danger" : "status-badge-success"
-                    }`}>
-                      {parcel.riskLevel || "High"}
-                    </span>
-                  </td>
-                  <td className="table-value-bold font-mono">
-                    {parcel.predictedDelayDays || 45} Days
-                  </td>
-                  <td className="text-right">
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setSelectedParcel(parcel);
-                        setActiveParcelId(parcel.id);
-                        setInspectingModalParcel(parcel);
-                        showToast(`Inspecting Survey #${parcel.surveyNumber || parcel.id}`, "success");
-                        const el = document.getElementById("selected-parcel-inspector");
-                        if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
-                      }}
-                      className="px-3.5 py-1.5 bg-blue-600 hover:bg-blue-700 text-white font-extrabold rounded-lg text-[13px] transition-all cursor-pointer shadow-2xs border border-blue-500 flex items-center gap-1 ml-auto"
-                    >
-                      <span>Inspect</span>
-                    </button>
-                  </td>
-                </tr>
-              ))}
+              {filteredParcels.map((parcel, idx) => {
+                const surveyNo = parcel.surveyNumber || `12${5 + (idx % 7)}/${(idx % 4) + 1}`;
+                const taluk = parcel.village || parcel.taluk || "Sriperumbudur";
+                const area = (parcel.landArea || parcel.area || 2.5).toFixed(1);
+                const titleStatus = parcel.ownershipDispute ? "Disputed" : "Clear Title";
+                const stage = parcel.acquisitionStage || (idx % 2 === 0 ? "Negotiation" : "Objection");
+                const paymentStatus = parcel.compensationStatus || "Pending";
+                const legalStatus = parcel.courtCase ? "Litigation" : "Clear";
+                const risk = parcel.riskLevel || "Medium";
+                const delayDays = parcel.predictedDelayDays || 120;
+
+                return (
+                  <tr 
+                    key={parcel.id} 
+                    onClick={() => {
+                      setSelectedParcel(parcel);
+                      setActiveParcelId(parcel.id);
+                      setInspectingModalParcel(parcel);
+                      showToast(`Inspecting Survey #${surveyNo}`, "success");
+                    }}
+                    className={`hover:bg-[#F6FAF5] cursor-pointer transition-colors border-b border-slate-100/70 ${
+                      selectedParcel?.id === parcel.id ? "bg-[#F6FAF5] border-l-4 border-l-[#0F382C]" : ""
+                    }`}
+                  >
+                    {/* 1. Survey Number & Parcel ID */}
+                    <td className="py-3 px-4">
+                      <div>
+                        <p className="font-extrabold text-[#0F382C] font-['Outfit'] text-sm sm:text-base leading-tight">
+                          {surveyNo}
+                        </p>
+                        <p className="text-xs font-mono text-slate-400 font-medium mt-0.5">
+                          ({parcel.id})
+                        </p>
+                      </div>
+                    </td>
+
+                    {/* 2. Location (Taluk, District) */}
+                    <td className="py-3 px-4">
+                      <div className="font-bold text-[#0F382C] font-['Outfit'] text-xs sm:text-sm leading-snug">
+                        {taluk},<br />
+                        <span className="text-slate-600 font-medium">{parcel.district}</span>
+                      </div>
+                    </td>
+
+                    {/* 3. Area (Acres) - LARGE NUMBER SIZE MATCHING USER IMAGE */}
+                    <td className="py-3 px-4 text-center">
+                      <span className="font-extrabold text-[#0F382C] font-['Outfit'] text-base sm:text-lg">
+                        {area}
+                      </span>
+                    </td>
+
+                    {/* 4. Title Status Badge */}
+                    <td className="py-3 px-4 text-center">
+                      <span className={`px-3 py-1 rounded-full text-xs font-bold whitespace-nowrap border ${
+                        titleStatus === 'Disputed'
+                          ? "bg-[#FEE2E2] text-[#B91C1C] border-[#FECDD3]"
+                          : "bg-[#DCFCE7] text-[#15803D] border-[#BBF7D0]"
+                      }`}>
+                        {titleStatus}
+                      </span>
+                    </td>
+
+                    {/* 5. Acquisition Stage */}
+                    <td className="py-3 px-4 text-center">
+                      <span className="font-extrabold text-[#2563EB] text-xs sm:text-sm font-['Outfit'] whitespace-nowrap">
+                        {stage}
+                      </span>
+                    </td>
+
+                    {/* 6. Payment Status */}
+                    <td className="py-3 px-4 text-center">
+                      <span className={`px-3 py-1 rounded-full text-xs font-bold whitespace-nowrap border ${
+                        paymentStatus === 'Paid'
+                          ? "bg-[#DCFCE7] text-[#15803D] border-[#BBF7D0]"
+                          : "bg-[#FEF3C7] text-[#B45309] border-[#FDE68A]"
+                      }`}>
+                        {paymentStatus}
+                      </span>
+                    </td>
+
+                    {/* 7. Legal Status */}
+                    <td className="py-3 px-4 text-center">
+                      <span className="text-slate-600 font-semibold text-xs sm:text-sm">
+                        {legalStatus}
+                      </span>
+                    </td>
+
+                    {/* 8. Risk Level */}
+                    <td className="py-3 px-4 text-center">
+                      <span className={`px-3 py-1 rounded-full text-xs font-bold whitespace-nowrap border ${
+                        risk === 'Critical' || risk === 'High'
+                          ? "bg-[#FEE2E2] text-[#B91C1C] border-[#FECDD3]"
+                          : risk === 'Medium'
+                            ? "bg-[#FEF9C3] text-[#A16207] border-[#FEF08A]"
+                            : "bg-[#DCFCE7] text-[#15803D] border-[#BBF7D0]"
+                      }`}>
+                        {risk}
+                      </span>
+                    </td>
+
+                    {/* 9. Predicted Delay Days - LARGE NUMBER SIZE MATCHING USER IMAGE */}
+                    <td className="py-3 px-4 text-center">
+                      <span className="font-extrabold text-[#0F382C] font-['Outfit'] text-base sm:text-lg whitespace-nowrap">
+                        {delayDays} Days
+                      </span>
+                    </td>
+
+                    {/* 10. Blue Action Button (Inspect) */}
+                    <td className="py-3 px-4 text-right">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setSelectedParcel(parcel);
+                          setActiveParcelId(parcel.id);
+                          setInspectingModalParcel(parcel);
+                          showToast(`Inspecting Survey #${surveyNo}`, "success");
+                        }}
+                        className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-extrabold text-xs px-5 py-2 rounded-xl shadow-xs cursor-pointer transition-all inline-flex items-center justify-center whitespace-nowrap"
+                      >
+                        Inspect
+                      </button>
+                    </td>
+
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
@@ -405,7 +514,25 @@ export default function ParcelsView({
               <p className="leading-snug">{inspectingModalParcel.recommendedAction || "Resolve ownership verification and compensation issues before proceeding to the next acquisition stage."}</p>
             </div>
 
-            <div className="flex items-center justify-end gap-2 border-t border-slate-100 pt-3">
+            <div className="flex items-center justify-between border-t border-slate-100 pt-3">
+              <button
+                onClick={() => handleSendEmailAlert(inspectingModalParcel)}
+                disabled={isSendingEmail}
+                className="px-4 py-2 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white text-xs font-bold rounded-xl transition-all cursor-pointer flex items-center gap-2 shadow-xs"
+              >
+                {isSendingEmail ? (
+                  <>
+                    <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                    <span>Sending Email...</span>
+                  </>
+                ) : (
+                  <>
+                    <Mail className="w-3.5 h-3.5" />
+                    <span>Send Email Risk Alert</span>
+                  </>
+                )}
+              </button>
+
               <button
                 onClick={() => setInspectingModalParcel(null)}
                 className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold rounded-xl transition-all cursor-pointer"

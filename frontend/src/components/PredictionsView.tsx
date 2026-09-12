@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { runManualPrediction } from "../api";
+import { runManualPrediction, sendLandRiskAlert } from "../api";
 import { 
   Sparkles, 
   Clock, 
@@ -16,7 +16,8 @@ import {
   Zap,
   BarChart3,
   CheckCircle2,
-  FileSpreadsheet
+  FileSpreadsheet,
+  Mail
 } from "lucide-react";
 
 interface PredictionsViewProps {
@@ -28,6 +29,37 @@ export default function PredictionsView({ initialSubTab = 'delay', showToast }: 
   const [activeSubTab, setActiveSubTab] = useState<'delay' | 'cost' | 'legal'>(initialSubTab);
   const [isLoading, setIsLoading] = useState(false);
   const [predictionResult, setPredictionResult] = useState<any>(null);
+  const [isSendingPredictionEmail, setIsSendingPredictionEmail] = useState(false);
+
+  const handleSendPredictionEmail = async () => {
+    if (!predictionResult) return;
+    setIsSendingPredictionEmail(true);
+    try {
+      const delayProb = predictionResult.probability ?? predictionResult.delayProbability ?? 75;
+      const delayDaysVal = predictionResult.predictedDelayDays ?? predictionResult.expectedDelayDays ?? 60;
+      const riskLvl = predictionResult.riskClass || predictionResult.riskLevel || (delayProb > 65 ? "High" : "Medium");
+
+      await sendLandRiskAlert({
+        landRiskDetails: {
+          projectName: "ML Predictive Analytics Engine",
+          surveyNumber: "ML-PREDICTION-INFERENCE",
+          ownerName: "Simulated Title Holder",
+          district: "Kanchipuram",
+          state: "Tamil Nadu",
+          riskLevel: riskLvl,
+          delayProbability: delayProb,
+          expectedDelayDays: delayDaysVal,
+          recommendedAction: predictionResult.aiRecommendation || "Execute SHAP delay factor mitigation steps.",
+          riskFactors: predictionResult.shapFactors ? predictionResult.shapFactors.map((f: any) => `${f.feature}: +${f.impactDays} Days`) : ["ML Inference Assessment"]
+        }
+      });
+      if (showToast) showToast("Prediction Risk Alert email dispatched!", "success");
+    } catch (err: any) {
+      if (showToast) showToast(err.message || "Failed to send prediction email", "error");
+    } finally {
+      setIsSendingPredictionEmail(false);
+    }
+  };
 
   React.useEffect(() => {
     setActiveSubTab(initialSubTab);
@@ -415,9 +447,28 @@ export default function PredictionsView({ initialSubTab = 'delay', showToast }: 
                   </h4>
                   <p className="text-[10px] text-slate-500 font-medium">Model: {predictionResult.model}</p>
                 </div>
-                <span className="text-[10px] font-extrabold uppercase bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-1 rounded-full">
-                  ✓ High Accuracy
-                </span>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={handleSendPredictionEmail}
+                    disabled={isSendingPredictionEmail}
+                    className="px-3 py-1 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white text-[11px] font-bold rounded-lg transition-all cursor-pointer flex items-center gap-1.5 shadow-xs"
+                  >
+                    {isSendingPredictionEmail ? (
+                      <>
+                        <Loader2 className="w-3 h-3 animate-spin" />
+                        <span>Sending...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Mail className="w-3 h-3" />
+                        <span>Email Risk Alert</span>
+                      </>
+                    )}
+                  </button>
+                  <span className="text-[10px] font-extrabold uppercase bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-1 rounded-full">
+                    ✓ High Accuracy
+                  </span>
+                </div>
               </div>
 
               {/* Output Stats Display */}

@@ -82,6 +82,22 @@ export async function resolveAlert(id: string): Promise<Alert> {
   return res.json();
 }
 
+export async function markAlertRead(id: string): Promise<Alert> {
+  const res = await fetch(`/api/alerts/${id}/read`, { method: "POST" });
+  if (!res.ok) throw new Error("Failed to mark alert as read");
+  return res.json();
+}
+
+export async function updateNotificationPreferences(preferences: any): Promise<any> {
+  const res = await fetch("/api/auth/preferences", {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(preferences)
+  });
+  if (!res.ok) throw new Error("Failed to update notification preferences");
+  return res.json();
+}
+
 export async function fetchDocuments(): Promise<DocumentAnalysis[]> {
   const res = await fetch("/api/documents");
   if (!res.ok) throw new Error("Failed to fetch documents");
@@ -215,4 +231,86 @@ export async function clearChatHistory(userId?: string): Promise<any> {
   if (!res.ok) throw new Error("Failed to clear chat history");
   return res.json();
 }
+
+export async function trainMLModel(): Promise<any> {
+  const res = await fetch("/api/train-model", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" }
+  });
+  if (!res.ok) throw new Error("Failed to train ML model");
+  return res.json();
+}
+
+// Notification Prototype APIs (/api/notifications)
+export async function fetchNotificationConfig(): Promise<any> {
+  const res = await fetch("/api/notifications/config");
+  if (!res.ok) throw new Error("Failed to fetch notification configuration");
+  return res.json();
+}
+
+export async function sendPrototypeTestNotification(): Promise<any> {
+  const res = await fetch("/api/notifications/test-send", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" }
+  });
+  if (!res.ok) throw new Error("Failed to send test notification");
+  return res.json();
+}
+
+export async function fetchNotificationHistory(): Promise<any> {
+  const res = await fetch("/api/notifications/history");
+  if (!res.ok) throw new Error("Failed to fetch notification history");
+  return res.json();
+}
+
+export async function sendLandRiskAlert(payload: {
+  recipientEmail?: string;
+  landId?: string;
+  surveyNumber?: string;
+  landRiskDetails?: any;
+}): Promise<any> {
+  const res = await fetch("/api/notifications/send-land-alert", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  });
+  const data = await res.json();
+  if (!res.ok || data.success === false) {
+    throw new Error(data.error || "Failed to send land risk alert email");
+  }
+  return data;
+}
+
+export async function sendTestHighRiskEmailAlert(landRecordId?: string): Promise<any> {
+  const res = await fetch("/api/alerts/test-high-risk-email", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ landRecordId })
+  });
+  if (!res.ok) throw new Error("Failed to trigger test high risk email alert");
+  return res.json();
+}
+
+export async function sendReportPdfEmail(payload: {
+  recipientEmail?: string;
+  templateId?: string;
+  title: string;
+  date?: string;
+  meta?: Record<string, any>;
+  metrics?: Array<{ label: string; value: string }>;
+  bodyText?: string;
+}): Promise<any> {
+  const res = await fetch("/api/reports/send-email-pdf", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  });
+  const data = await res.json();
+  if (!res.ok || data.success === false) {
+    throw new Error(data.error || data.message || "Failed to send PDF report email");
+  }
+  return data;
+}
+
+
 

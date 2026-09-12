@@ -167,6 +167,22 @@ export default function GovHeader({
             <span>Role: {userRole}</span>
           </button>
 
+          {/* Notification Bell Shortcut */}
+          <div className="relative">
+            <button
+              onClick={() => setActiveTab("alerts")}
+              className="relative p-2 text-slate-600 hover:text-blue-700 hover:bg-slate-100 rounded-xl transition-all cursor-pointer"
+              title="Notification Center"
+            >
+              <Bell className="w-5 h-5" />
+              {alertCount > 0 && (
+                <span className="absolute top-1 right-1 w-4 h-4 bg-rose-600 text-white text-[10px] font-extrabold rounded-full flex items-center justify-center animate-pulse">
+                  {alertCount}
+                </span>
+              )}
+            </button>
+          </div>
+
           {/* User Profile Trigger */}
           <div 
             onClick={onOpenProfile}

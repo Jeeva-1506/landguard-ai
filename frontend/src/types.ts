@@ -71,6 +71,12 @@ export interface LandParcel {
   nlpConfidence?: number;
   nlpKeywords?: string[];
   complaintText?: string;
+
+  // High Risk Alert Tracking
+  highRiskAlertSent?: boolean;
+  highRiskAlertSentAt?: string;
+  lastAlertStatus?: 'SENT' | 'FAILED' | 'NONE';
+  lastAlertError?: string;
 }
 
 export interface Alert {
@@ -81,9 +87,19 @@ export interface Alert {
   parcelId: string;
   surveyNumber?: string;
   issue: string;
+  issueType?: 'HIGH_DELAY_RISK' | 'LEGAL_ISSUE' | 'DOCUMENT_MISMATCH' | 'COMPENSATION_PENDING' | 'SURVEY_ISSUE' | 'CRITICAL_ALERT';
   expectedDelay: number; // days
   recommendedAction: string;
   status: 'Open' | 'Assigned' | 'Resolved';
+  read?: boolean;
+  emailStatus?: 'PENDING' | 'SENT' | 'FAILED';
+  whatsappStatus?: 'PENDING' | 'SENT' | 'FAILED';
+  deliveryLogs?: Array<{
+    channel: 'EMAIL' | 'WHATSAPP' | 'IN_APP';
+    status: 'SENT' | 'FAILED' | 'DEMO';
+    message: string;
+    timestamp: string;
+  }>;
   timestamp: string;
 }
 
@@ -105,6 +121,9 @@ export interface DocumentAnalysis {
   disputedLandDetails?: string;
   legalCitations?: string[];
   aiRecommendation?: string;
+  fileType?: string;
+  fileSize?: string;
+  fileUrl?: string;
   uploadDate: string;
 }
 
@@ -130,3 +149,47 @@ export interface PredictionHistory {
   inputs: Record<string, any>;
   outputs: Record<string, any>;
 }
+
+export interface MaskedOffer {
+  id: number;
+  name: string;
+  enabled: boolean;
+  whatsappMasked?: string;
+  emailMasked?: string;
+  channels: ("WhatsApp" | "Email")[];
+}
+
+export interface NotificationConfigResponse {
+  prototypeMode: boolean;
+  activeOfferId: number;
+  recipient: {
+    whatsappMasked: string;
+    emailMasked: string;
+  };
+  channels: ("WhatsApp" | "Email")[];
+  offers: MaskedOffer[];
+}
+
+export interface NotificationHistoryItem {
+  notificationId: string;
+  eventId: string;
+  offerId: number;
+  recipient: {
+    whatsappMasked: string;
+    emailMasked: string;
+  };
+  channels: ("WhatsApp" | "Email")[];
+  whatsappStatus: 'PENDING' | 'ACCEPTED' | 'SENT' | 'DELIVERED' | 'READ' | 'FAILED';
+  emailStatus: 'PENDING' | 'SENT' | 'DELIVERED' | 'FAILED';
+  whatsappProviderMessageId?: string;
+  emailProviderMessageId?: string;
+  errorCode?: string;
+  errorMessage?: string;
+  createdAt: string;
+  sentAt?: string;
+  deliveredAt?: string;
+  readAt?: string;
+  isTest?: boolean;
+  eventDetails?: Record<string, any>;
+}
+
