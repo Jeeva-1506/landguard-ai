@@ -186,6 +186,127 @@
       "parcelsCount": 1,
       "completionRate": 45,
       "riskLevel": "High"
+    },
+    {
+      "id": "NH-544",
+      "name": "NH-544 Highway Project",
+      "state": "Tamil Nadu",
+      "district": "Krishnagiri",
+      "purpose": "Highway",
+      "totalValue": 910000,
+      "parcelsCount": 1,
+      "completionRate": 90,
+      "riskLevel": "Low"
+    },
+    {
+      "id": "Airport-01",
+      "name": "Parandur Greenfield Airport Project",
+      "state": "Tamil Nadu",
+      "district": "Chengalpattu",
+      "purpose": "Airport",
+      "totalValue": 1100000,
+      "parcelsCount": 1,
+      "completionRate": 70,
+      "riskLevel": "Low"
+    },
+    {
+      "id": "Port-01",
+      "name": "Thoothukudi Port Expansion Project",
+      "state": "Tamil Nadu",
+      "district": "Thoothukudi",
+      "purpose": "Port/Industrial",
+      "totalValue": 1920000,
+      "parcelsCount": 1,
+      "completionRate": 20,
+      "riskLevel": "High"
+    },
+    {
+      "id": "Rail-01",
+      "name": "Madurai Double Rail Corridor Project",
+      "state": "Tamil Nadu",
+      "district": "Madurai",
+      "purpose": "Railway",
+      "totalValue": 1020000,
+      "parcelsCount": 1,
+      "completionRate": 90,
+      "riskLevel": "Low"
+    },
+    {
+      "id": "Industrial-01",
+      "name": "Perundurai Industrial Estate Corridor",
+      "state": "Tamil Nadu",
+      "district": "Erode",
+      "purpose": "Industrial",
+      "totalValue": 1350000,
+      "parcelsCount": 1,
+      "completionRate": 50,
+      "riskLevel": "High"
+    },
+    {
+      "id": "Agri-01",
+      "name": "Delta Agri Logistics Park",
+      "state": "Tamil Nadu",
+      "district": "Thanjavur",
+      "purpose": "Agricultural Logistics",
+      "totalValue": 1410000,
+      "parcelsCount": 1,
+      "completionRate": 65,
+      "riskLevel": "Medium"
+    },
+    {
+      "id": "Water-01",
+      "name": "Bhavani River Pipeline & Reservoir",
+      "state": "Tamil Nadu",
+      "district": "Tiruppur",
+      "purpose": "Water Infrastructure",
+      "totalValue": 790000,
+      "parcelsCount": 1,
+      "completionRate": 35,
+      "riskLevel": "High"
+    },
+    {
+      "id": "Airport-02",
+      "name": "Coimbatore Airport Expressway",
+      "state": "Tamil Nadu",
+      "district": "Coimbatore",
+      "purpose": "Airport Connectivity",
+      "totalValue": 1250000,
+      "parcelsCount": 1,
+      "completionRate": 95,
+      "riskLevel": "Low"
+    },
+    {
+      "id": "Greenway-01",
+      "name": "Coastal Eco Expressway Project",
+      "state": "Tamil Nadu",
+      "district": "Kanyakumari",
+      "purpose": "Green/Transport",
+      "totalValue": 1560000,
+      "parcelsCount": 1,
+      "completionRate": 30,
+      "riskLevel": "High"
+    },
+    {
+      "id": "Logistics-01",
+      "name": "Vaniyambadi Logistics Hub",
+      "state": "Tamil Nadu",
+      "district": "Vellore",
+      "purpose": "Logistics",
+      "totalValue": 1330000,
+      "parcelsCount": 1,
+      "completionRate": 75,
+      "riskLevel": "Low"
+    },
+    {
+      "id": "Industrial-02",
+      "name": "SIPCOT Industrial Complex Corridor",
+      "state": "Tamil Nadu",
+      "district": "Cuddalore",
+      "purpose": "Industrial",
+      "totalValue": 1750000,
+      "parcelsCount": 1,
+      "completionRate": 45,
+      "riskLevel": "High"
     }
   ],
   "parcels": [
@@ -1581,6 +1702,1206 @@
       "daysPending": 196,
       "delayRiskLevel": "High",
       "projectValue": 2070000
+    },
+    {
+      "id": "LA2001",
+      "projectId": "NH-544",
+      "district": "Krishnagiri",
+      "state": "Tamil Nadu",
+      "ownerName": "S. Murugan",
+      "landArea": 2.3,
+      "area": 2.3,
+      "areaUnit": "Acres",
+      "landType": "Agricultural",
+      "ownersCount": 2,
+      "ownershipDispute": false,
+      "documentsComplete": true,
+      "compensationStatus": "Paid",
+      "compensationAmount": 910000,
+      "objectionFiled": false,
+      "courtCase": false,
+      "surveyCompleted": true,
+      "environmentalClearance": true,
+      "governmentApproval": true,
+      "acquisitionStage": "Possession",
+      "previousDelay": false,
+      "distanceFromProject": 0.6,
+      "predictedDelayDays": 18,
+      "delayProbability": 12,
+      "riskScore": 12,
+      "riskLevel": "Low",
+      "location": "Hosur, Krishnagiri, Tamil Nadu",
+      "surveyNumber": "201/4",
+      "ownershipStatus": "Verified",
+      "latitude": 12.7409,
+      "longitude": 77.8253,
+      "polygon": [
+        [
+          12.7399,
+          77.8243
+        ],
+        [
+          12.7399,
+          77.8263
+        ],
+        [
+          12.7419,
+          77.8263
+        ],
+        [
+          12.7419,
+          77.8243
+        ],
+        [
+          12.7399,
+          77.8243
+        ]
+      ],
+      "expectedAdditionalCost": 36400,
+      "expectedFinalCost": 946400,
+      "costOverrunPercentage": 4,
+      "legalRiskProbability": 8,
+      "legalRiskLevel": "Low"
+    },
+    {
+      "id": "LA2002",
+      "projectId": "NH-48",
+      "district": "Ranipet",
+      "state": "Tamil Nadu",
+      "ownerName": "P. Lakshmi",
+      "landArea": 3.7,
+      "area": 3.7,
+      "areaUnit": "Acres",
+      "landType": "Industrial",
+      "ownersCount": 4,
+      "ownershipDispute": true,
+      "documentsComplete": false,
+      "compensationStatus": "Pending",
+      "compensationAmount": 1640000,
+      "objectionFiled": true,
+      "courtCase": true,
+      "surveyCompleted": true,
+      "environmentalClearance": true,
+      "governmentApproval": false,
+      "acquisitionStage": "Objection",
+      "previousDelay": true,
+      "distanceFromProject": 1.1,
+      "predictedDelayDays": 238,
+      "delayProbability": 96,
+      "riskScore": 94,
+      "riskLevel": "High",
+      "location": "Walajapet, Ranipet, Tamil Nadu",
+      "surveyNumber": "202/7",
+      "ownershipStatus": "Disputed",
+      "latitude": 12.9254,
+      "longitude": 79.3642,
+      "polygon": [
+        [
+          12.9244,
+          79.3632
+        ],
+        [
+          12.9244,
+          79.3652
+        ],
+        [
+          12.9264,
+          79.3652
+        ],
+        [
+          12.9264,
+          79.3632
+        ],
+        [
+          12.9244,
+          79.3632
+        ]
+      ],
+      "expectedAdditionalCost": 574000,
+      "expectedFinalCost": 2214000,
+      "costOverrunPercentage": 35,
+      "legalRiskProbability": 92,
+      "legalRiskLevel": "High"
+    },
+    {
+      "id": "LA2003",
+      "projectId": "NH-44",
+      "district": "Namakkal",
+      "state": "Tamil Nadu",
+      "ownerName": "V. Ganesan",
+      "landArea": 2.8,
+      "area": 2.8,
+      "areaUnit": "Acres",
+      "landType": "Agricultural",
+      "ownersCount": 3,
+      "ownershipDispute": false,
+      "documentsComplete": false,
+      "compensationStatus": "Pending",
+      "compensationAmount": 1030000,
+      "objectionFiled": true,
+      "courtCase": false,
+      "surveyCompleted": true,
+      "environmentalClearance": true,
+      "governmentApproval": true,
+      "acquisitionStage": "Negotiation",
+      "previousDelay": false,
+      "distanceFromProject": 0.9,
+      "predictedDelayDays": 76,
+      "delayProbability": 72,
+      "riskScore": 58,
+      "riskLevel": "High",
+      "location": "Namakkal, Tamil Nadu",
+      "surveyNumber": "203/2",
+      "ownershipStatus": "Joint Family Title",
+      "latitude": 11.2189,
+      "longitude": 78.1674,
+      "polygon": [
+        [
+          11.2179,
+          78.1664
+        ],
+        [
+          11.2179,
+          78.1684
+        ],
+        [
+          11.2199,
+          78.1684
+        ],
+        [
+          11.2199,
+          78.1664
+        ],
+        [
+          11.2179,
+          78.1664
+        ]
+      ],
+      "expectedAdditionalCost": 123600,
+      "expectedFinalCost": 1153600,
+      "costOverrunPercentage": 12,
+      "legalRiskProbability": 28,
+      "legalRiskLevel": "Low"
+    },
+    {
+      "id": "LA2004",
+      "projectId": "NH-81",
+      "district": "Ariyalur",
+      "state": "Tamil Nadu",
+      "ownerName": "K. Selvam",
+      "landArea": 4.6,
+      "area": 4.6,
+      "areaUnit": "Acres",
+      "landType": "Agricultural",
+      "ownersCount": 5,
+      "ownershipDispute": true,
+      "documentsComplete": false,
+      "compensationStatus": "Pending",
+      "compensationAmount": 1510000,
+      "objectionFiled": true,
+      "courtCase": false,
+      "surveyCompleted": false,
+      "environmentalClearance": true,
+      "governmentApproval": false,
+      "acquisitionStage": "Survey",
+      "previousDelay": true,
+      "distanceFromProject": 1.7,
+      "predictedDelayDays": 184,
+      "delayProbability": 97,
+      "riskScore": 91,
+      "riskLevel": "High",
+      "location": "Ariyalur, Tamil Nadu",
+      "surveyNumber": "204/5",
+      "ownershipStatus": "Disputed",
+      "latitude": 11.1387,
+      "longitude": 79.0785,
+      "polygon": [
+        [
+          11.1377,
+          79.0775
+        ],
+        [
+          11.1377,
+          79.0795
+        ],
+        [
+          11.1397,
+          79.0795
+        ],
+        [
+          11.1397,
+          79.0775
+        ],
+        [
+          11.1377,
+          79.0775
+        ]
+      ],
+      "expectedAdditionalCost": 377500,
+      "expectedFinalCost": 1887500,
+      "costOverrunPercentage": 25,
+      "legalRiskProbability": 67,
+      "legalRiskLevel": "Medium"
+    },
+    {
+      "id": "LA2005",
+      "projectId": "NH-36",
+      "district": "Pudukkottai",
+      "state": "Tamil Nadu",
+      "ownerName": "A. Rajendran",
+      "landArea": 1.9,
+      "area": 1.9,
+      "areaUnit": "Acres",
+      "landType": "Residential",
+      "ownersCount": 2,
+      "ownershipDispute": false,
+      "documentsComplete": true,
+      "compensationStatus": "Paid",
+      "compensationAmount": 720000,
+      "objectionFiled": false,
+      "courtCase": false,
+      "surveyCompleted": true,
+      "environmentalClearance": true,
+      "governmentApproval": true,
+      "acquisitionStage": "Possession",
+      "previousDelay": false,
+      "distanceFromProject": 0.4,
+      "predictedDelayDays": 16,
+      "delayProbability": 10,
+      "riskScore": 10,
+      "riskLevel": "Low",
+      "location": "Pudukkottai, Tamil Nadu",
+      "surveyNumber": "205/3",
+      "ownershipStatus": "Verified",
+      "latitude": 10.3797,
+      "longitude": 78.8208,
+      "polygon": [
+        [
+          10.3787,
+          78.8198
+        ],
+        [
+          10.3787,
+          78.8218
+        ],
+        [
+          10.3807,
+          78.8218
+        ],
+        [
+          10.3807,
+          78.8198
+        ],
+        [
+          10.3787,
+          78.8198
+        ]
+      ],
+      "expectedAdditionalCost": 28800,
+      "expectedFinalCost": 748800,
+      "costOverrunPercentage": 4,
+      "legalRiskProbability": 7,
+      "legalRiskLevel": "Low"
+    },
+    {
+      "id": "LA2006",
+      "projectId": "NH-44",
+      "district": "Dharmapuri",
+      "state": "Tamil Nadu",
+      "ownerName": "R. Karthikeyan",
+      "landArea": 3.1,
+      "area": 3.1,
+      "areaUnit": "Acres",
+      "landType": "Agricultural",
+      "ownersCount": 4,
+      "ownershipDispute": true,
+      "documentsComplete": false,
+      "compensationStatus": "Pending",
+      "compensationAmount": 1190000,
+      "objectionFiled": true,
+      "courtCase": true,
+      "surveyCompleted": true,
+      "environmentalClearance": false,
+      "governmentApproval": false,
+      "acquisitionStage": "Objection",
+      "previousDelay": true,
+      "distanceFromProject": 1.3,
+      "predictedDelayDays": 261,
+      "delayProbability": 98,
+      "riskScore": 98,
+      "riskLevel": "High",
+      "location": "Dharmapuri, Tamil Nadu",
+      "surveyNumber": "206/6",
+      "ownershipStatus": "Disputed",
+      "latitude": 12.1211,
+      "longitude": 78.1582,
+      "polygon": [
+        [
+          12.1201,
+          78.1572
+        ],
+        [
+          12.1201,
+          78.1592
+        ],
+        [
+          12.1221,
+          78.1592
+        ],
+        [
+          12.1221,
+          78.1572
+        ],
+        [
+          12.1201,
+          78.1572
+        ]
+      ],
+      "expectedAdditionalCost": 416500,
+      "expectedFinalCost": 1606500,
+      "costOverrunPercentage": 35,
+      "legalRiskProbability": 94,
+      "legalRiskLevel": "High"
+    },
+    {
+      "id": "LA2007",
+      "projectId": "NH-785",
+      "district": "Sivaganga",
+      "state": "Tamil Nadu",
+      "ownerName": "M. Saravanan",
+      "landArea": 2.5,
+      "area": 2.5,
+      "areaUnit": "Acres",
+      "landType": "Agricultural",
+      "ownersCount": 3,
+      "ownershipDispute": false,
+      "documentsComplete": true,
+      "compensationStatus": "Paid",
+      "compensationAmount": 840000,
+      "objectionFiled": false,
+      "courtCase": false,
+      "surveyCompleted": true,
+      "environmentalClearance": true,
+      "governmentApproval": true,
+      "acquisitionStage": "Completion",
+      "previousDelay": false,
+      "distanceFromProject": 0.8,
+      "predictedDelayDays": 14,
+      "delayProbability": 9,
+      "riskScore": 9,
+      "riskLevel": "Low",
+      "location": "Sivaganga, Tamil Nadu",
+      "surveyNumber": "207/2",
+      "ownershipStatus": "Verified",
+      "latitude": 9.8433,
+      "longitude": 78.4809,
+      "polygon": [
+        [
+          9.8423,
+          78.4799
+        ],
+        [
+          9.8423,
+          78.4819
+        ],
+        [
+          9.8443,
+          78.4819
+        ],
+        [
+          9.8443,
+          78.4799
+        ],
+        [
+          9.8423,
+          78.4799
+        ]
+      ],
+      "expectedAdditionalCost": 33600,
+      "expectedFinalCost": 873600,
+      "costOverrunPercentage": 4,
+      "legalRiskProbability": 6,
+      "legalRiskLevel": "Low"
+    },
+    {
+      "id": "LA2008",
+      "projectId": "NH-744",
+      "district": "Tenkasi",
+      "state": "Tamil Nadu",
+      "ownerName": "J. Meenakshi",
+      "landArea": 3.9,
+      "area": 3.9,
+      "areaUnit": "Acres",
+      "landType": "Agricultural",
+      "ownersCount": 6,
+      "ownershipDispute": true,
+      "documentsComplete": false,
+      "compensationStatus": "Pending",
+      "compensationAmount": 1280000,
+      "objectionFiled": true,
+      "courtCase": false,
+      "surveyCompleted": false,
+      "environmentalClearance": false,
+      "governmentApproval": false,
+      "acquisitionStage": "Survey",
+      "previousDelay": true,
+      "distanceFromProject": 2.1,
+      "predictedDelayDays": 201,
+      "delayProbability": 97,
+      "riskScore": 93,
+      "riskLevel": "High",
+      "location": "Tenkasi, Tamil Nadu",
+      "surveyNumber": "208/4",
+      "ownershipStatus": "Joint Family Title",
+      "latitude": 8.9594,
+      "longitude": 77.3152,
+      "polygon": [
+        [
+          8.9584,
+          77.3142
+        ],
+        [
+          8.9584,
+          77.3162
+        ],
+        [
+          8.9604,
+          77.3162
+        ],
+        [
+          8.9604,
+          77.3142
+        ],
+        [
+          8.9584,
+          77.3142
+        ]
+      ],
+      "expectedAdditionalCost": 384000,
+      "expectedFinalCost": 1664000,
+      "costOverrunPercentage": 30,
+      "legalRiskProbability": 61,
+      "legalRiskLevel": "Medium"
+    },
+    {
+      "id": "LA2009",
+      "projectId": "NH-83",
+      "district": "Karur",
+      "state": "Tamil Nadu",
+      "ownerName": "T. Kumar",
+      "landArea": 2.2,
+      "area": 2.2,
+      "areaUnit": "Acres",
+      "landType": "Commercial",
+      "ownersCount": 1,
+      "ownershipDispute": false,
+      "documentsComplete": true,
+      "compensationStatus": "Paid",
+      "compensationAmount": 980000,
+      "objectionFiled": false,
+      "courtCase": false,
+      "surveyCompleted": true,
+      "environmentalClearance": true,
+      "governmentApproval": true,
+      "acquisitionStage": "Possession",
+      "previousDelay": false,
+      "distanceFromProject": 0.5,
+      "predictedDelayDays": 19,
+      "delayProbability": 13,
+      "riskScore": 13,
+      "riskLevel": "Low",
+      "location": "Karur, Tamil Nadu",
+      "surveyNumber": "209/5",
+      "ownershipStatus": "Private",
+      "latitude": 10.9601,
+      "longitude": 78.0766,
+      "polygon": [
+        [
+          10.9591,
+          78.0756
+        ],
+        [
+          10.9591,
+          78.0776
+        ],
+        [
+          10.9611,
+          78.0776
+        ],
+        [
+          10.9611,
+          78.0756
+        ],
+        [
+          10.9591,
+          78.0756
+        ]
+      ],
+      "expectedAdditionalCost": 39200,
+      "expectedFinalCost": 1019200,
+      "costOverrunPercentage": 4,
+      "legalRiskProbability": 8,
+      "legalRiskLevel": "Low"
+    },
+    {
+      "id": "LA2010",
+      "projectId": "NH-38",
+      "district": "Tirunelveli",
+      "state": "Tamil Nadu",
+      "ownerName": "N. Muthukumar",
+      "landArea": 4.2,
+      "area": 4.2,
+      "areaUnit": "Acres",
+      "landType": "Agricultural",
+      "ownersCount": 5,
+      "ownershipDispute": true,
+      "documentsComplete": false,
+      "compensationStatus": "Pending",
+      "compensationAmount": 1460000,
+      "objectionFiled": true,
+      "courtCase": true,
+      "surveyCompleted": true,
+      "environmentalClearance": true,
+      "governmentApproval": false,
+      "acquisitionStage": "Objection",
+      "previousDelay": true,
+      "distanceFromProject": 1.4,
+      "predictedDelayDays": 247,
+      "delayProbability": 98,
+      "riskScore": 97,
+      "riskLevel": "High",
+      "location": "Tirunelveli, Tamil Nadu",
+      "surveyNumber": "210/3",
+      "ownershipStatus": "Disputed",
+      "latitude": 8.7139,
+      "longitude": 77.7567,
+      "polygon": [
+        [
+          8.7129,
+          77.7557
+        ],
+        [
+          8.7129,
+          77.7577
+        ],
+        [
+          8.7149,
+          77.7577
+        ],
+        [
+          8.7149,
+          77.7557
+        ],
+        [
+          8.7129,
+          77.7557
+        ]
+      ],
+      "expectedAdditionalCost": 511000,
+      "expectedFinalCost": 1971000,
+      "costOverrunPercentage": 35,
+      "legalRiskProbability": 93,
+      "legalRiskLevel": "High"
+    },
+    {
+      "id": "LA2011",
+      "projectId": "Airport-01",
+      "district": "Chengalpattu",
+      "state": "Tamil Nadu",
+      "ownerName": "R. Venkatesh",
+      "landArea": 1.7,
+      "area": 1.7,
+      "areaUnit": "Acres",
+      "landType": "Residential",
+      "ownersCount": 2,
+      "ownershipDispute": false,
+      "documentsComplete": true,
+      "compensationStatus": "Pending",
+      "compensationAmount": 1100000,
+      "objectionFiled": false,
+      "courtCase": false,
+      "surveyCompleted": true,
+      "environmentalClearance": true,
+      "governmentApproval": true,
+      "acquisitionStage": "Negotiation",
+      "previousDelay": false,
+      "distanceFromProject": 1,
+      "predictedDelayDays": 42,
+      "delayProbability": 38,
+      "riskScore": 32,
+      "riskLevel": "Low",
+      "location": "Parandur, Kancheepuram region, Tamil Nadu",
+      "surveyNumber": "211/7",
+      "ownershipStatus": "Verified",
+      "latitude": 12.8606,
+      "longitude": 79.8264,
+      "polygon": [
+        [
+          12.8596,
+          79.8254
+        ],
+        [
+          12.8596,
+          79.8274
+        ],
+        [
+          12.8616,
+          79.8274
+        ],
+        [
+          12.8616,
+          79.8254
+        ],
+        [
+          12.8596,
+          79.8254
+        ]
+      ],
+      "expectedAdditionalCost": 88000,
+      "expectedFinalCost": 1188000,
+      "costOverrunPercentage": 8,
+      "legalRiskProbability": 14,
+      "legalRiskLevel": "Low"
+    },
+    {
+      "id": "LA2012",
+      "projectId": "Port-01",
+      "district": "Thoothukudi",
+      "state": "Tamil Nadu",
+      "ownerName": "S. Arumugam",
+      "landArea": 5.4,
+      "area": 5.4,
+      "areaUnit": "Acres",
+      "landType": "Industrial",
+      "ownersCount": 7,
+      "ownershipDispute": true,
+      "documentsComplete": false,
+      "compensationStatus": "Pending",
+      "compensationAmount": 1920000,
+      "objectionFiled": true,
+      "courtCase": true,
+      "surveyCompleted": false,
+      "environmentalClearance": false,
+      "governmentApproval": false,
+      "acquisitionStage": "Survey",
+      "previousDelay": true,
+      "distanceFromProject": 1.9,
+      "predictedDelayDays": 289,
+      "delayProbability": 99,
+      "riskScore": 99,
+      "riskLevel": "High",
+      "location": "Thoothukudi Port region, Tamil Nadu",
+      "surveyNumber": "212/2",
+      "ownershipStatus": "Disputed",
+      "latitude": 8.7642,
+      "longitude": 78.1348,
+      "polygon": [
+        [
+          8.7632,
+          78.1338
+        ],
+        [
+          8.7632,
+          78.1358
+        ],
+        [
+          8.7652,
+          78.1358
+        ],
+        [
+          8.7652,
+          78.1338
+        ],
+        [
+          8.7632,
+          78.1338
+        ]
+      ],
+      "expectedAdditionalCost": 768000,
+      "expectedFinalCost": 2688000,
+      "costOverrunPercentage": 40,
+      "legalRiskProbability": 97,
+      "legalRiskLevel": "High"
+    },
+    {
+      "id": "LA2013",
+      "projectId": "Rail-01",
+      "district": "Madurai",
+      "state": "Tamil Nadu",
+      "ownerName": "P. Dhanasekar",
+      "landArea": 2.6,
+      "area": 2.6,
+      "areaUnit": "Acres",
+      "landType": "Agricultural",
+      "ownersCount": 3,
+      "ownershipDispute": false,
+      "documentsComplete": true,
+      "compensationStatus": "Paid",
+      "compensationAmount": 1020000,
+      "objectionFiled": false,
+      "courtCase": false,
+      "surveyCompleted": true,
+      "environmentalClearance": true,
+      "governmentApproval": true,
+      "acquisitionStage": "Possession",
+      "previousDelay": false,
+      "distanceFromProject": 0.7,
+      "predictedDelayDays": 17,
+      "delayProbability": 11,
+      "riskScore": 11,
+      "riskLevel": "Low",
+      "location": "Melur Road region, Madurai, Tamil Nadu",
+      "surveyNumber": "213/6",
+      "ownershipStatus": "Verified",
+      "latitude": 9.9388,
+      "longitude": 78.1371,
+      "polygon": [
+        [
+          9.9378,
+          78.1361
+        ],
+        [
+          9.9378,
+          78.1381
+        ],
+        [
+          9.9398,
+          78.1381
+        ],
+        [
+          9.9398,
+          78.1361
+        ],
+        [
+          9.9378,
+          78.1361
+        ]
+      ],
+      "expectedAdditionalCost": 40800,
+      "expectedFinalCost": 1060800,
+      "costOverrunPercentage": 4,
+      "legalRiskProbability": 7,
+      "legalRiskLevel": "Low"
+    },
+    {
+      "id": "LA2014",
+      "projectId": "Industrial-01",
+      "district": "Erode",
+      "state": "Tamil Nadu",
+      "ownerName": "C. Ramesh",
+      "landArea": 3.5,
+      "area": 3.5,
+      "areaUnit": "Acres",
+      "landType": "Industrial",
+      "ownersCount": 4,
+      "ownershipDispute": true,
+      "documentsComplete": false,
+      "compensationStatus": "Pending",
+      "compensationAmount": 1350000,
+      "objectionFiled": true,
+      "courtCase": false,
+      "surveyCompleted": true,
+      "environmentalClearance": false,
+      "governmentApproval": false,
+      "acquisitionStage": "Negotiation",
+      "previousDelay": true,
+      "distanceFromProject": 1.2,
+      "predictedDelayDays": 173,
+      "delayProbability": 95,
+      "riskScore": 89,
+      "riskLevel": "High",
+      "location": "Perundurai, Erode, Tamil Nadu",
+      "surveyNumber": "214/4",
+      "ownershipStatus": "Private",
+      "latitude": 11.2757,
+      "longitude": 77.5831,
+      "polygon": [
+        [
+          11.2747,
+          77.5821
+        ],
+        [
+          11.2747,
+          77.5841
+        ],
+        [
+          11.2767,
+          77.5841
+        ],
+        [
+          11.2767,
+          77.5821
+        ],
+        [
+          11.2747,
+          77.5821
+        ]
+      ],
+      "expectedAdditionalCost": 337500,
+      "expectedFinalCost": 1687500,
+      "costOverrunPercentage": 25,
+      "legalRiskProbability": 57,
+      "legalRiskLevel": "Medium"
+    },
+    {
+      "id": "LA2015",
+      "projectId": "Agri-01",
+      "district": "Thanjavur",
+      "state": "Tamil Nadu",
+      "ownerName": "K. Balasubramanian",
+      "landArea": 4.8,
+      "area": 4.8,
+      "areaUnit": "Acres",
+      "landType": "Agricultural",
+      "ownersCount": 3,
+      "ownershipDispute": false,
+      "documentsComplete": false,
+      "compensationStatus": "Pending",
+      "compensationAmount": 1410000,
+      "objectionFiled": true,
+      "courtCase": false,
+      "surveyCompleted": true,
+      "environmentalClearance": true,
+      "governmentApproval": true,
+      "acquisitionStage": "Negotiation",
+      "previousDelay": false,
+      "distanceFromProject": 0.9,
+      "predictedDelayDays": 69,
+      "delayProbability": 68,
+      "riskScore": 52,
+      "riskLevel": "Medium",
+      "location": "Papanasam, Thanjavur, Tamil Nadu",
+      "surveyNumber": "215/8",
+      "ownershipStatus": "Joint Family Title",
+      "latitude": 10.9242,
+      "longitude": 79.2691,
+      "polygon": [
+        [
+          10.9232,
+          79.2681
+        ],
+        [
+          10.9232,
+          79.2701
+        ],
+        [
+          10.9252,
+          79.2701
+        ],
+        [
+          10.9252,
+          79.2681
+        ],
+        [
+          10.9232,
+          79.2681
+        ]
+      ],
+      "expectedAdditionalCost": 141000,
+      "expectedFinalCost": 1551000,
+      "costOverrunPercentage": 10,
+      "legalRiskProbability": 19,
+      "legalRiskLevel": "Low"
+    },
+    {
+      "id": "LA2016",
+      "projectId": "Water-01",
+      "district": "Tiruppur",
+      "state": "Tamil Nadu",
+      "ownerName": "M. Prakash",
+      "landArea": 2.1,
+      "area": 2.1,
+      "areaUnit": "Acres",
+      "landType": "Agricultural",
+      "ownersCount": 2,
+      "ownershipDispute": true,
+      "documentsComplete": false,
+      "compensationStatus": "Pending",
+      "compensationAmount": 790000,
+      "objectionFiled": true,
+      "courtCase": false,
+      "surveyCompleted": false,
+      "environmentalClearance": true,
+      "governmentApproval": false,
+      "acquisitionStage": "Survey",
+      "previousDelay": true,
+      "distanceFromProject": 1.6,
+      "predictedDelayDays": 154,
+      "delayProbability": 94,
+      "riskScore": 86,
+      "riskLevel": "High",
+      "location": "Avinashi, Tiruppur, Tamil Nadu",
+      "surveyNumber": "216/3",
+      "ownershipStatus": "Disputed",
+      "latitude": 11.1928,
+      "longitude": 77.2689,
+      "polygon": [
+        [
+          11.1918,
+          77.2679
+        ],
+        [
+          11.1918,
+          77.2699
+        ],
+        [
+          11.1938,
+          77.2699
+        ],
+        [
+          11.1938,
+          77.2679
+        ],
+        [
+          11.1918,
+          77.2679
+        ]
+      ],
+      "expectedAdditionalCost": 158000,
+      "expectedFinalCost": 948000,
+      "costOverrunPercentage": 20,
+      "legalRiskProbability": 72,
+      "legalRiskLevel": "High"
+    },
+    {
+      "id": "LA2017",
+      "projectId": "Airport-02",
+      "district": "Coimbatore",
+      "state": "Tamil Nadu",
+      "ownerName": "D. Srinivasan",
+      "landArea": 1.4,
+      "area": 1.4,
+      "areaUnit": "Acres",
+      "landType": "Residential",
+      "ownersCount": 1,
+      "ownershipDispute": false,
+      "documentsComplete": true,
+      "compensationStatus": "Paid",
+      "compensationAmount": 1250000,
+      "objectionFiled": false,
+      "courtCase": false,
+      "surveyCompleted": true,
+      "environmentalClearance": true,
+      "governmentApproval": true,
+      "acquisitionStage": "Completion",
+      "previousDelay": false,
+      "distanceFromProject": 0.5,
+      "predictedDelayDays": 15,
+      "delayProbability": 8,
+      "riskScore": 8,
+      "riskLevel": "Low",
+      "location": "Sulur, Coimbatore, Tamil Nadu",
+      "surveyNumber": "217/5",
+      "ownershipStatus": "Verified",
+      "latitude": 11.0241,
+      "longitude": 77.1246,
+      "polygon": [
+        [
+          11.0231,
+          77.1236
+        ],
+        [
+          11.0231,
+          77.1256
+        ],
+        [
+          11.0251,
+          77.1256
+        ],
+        [
+          11.0251,
+          77.1236
+        ],
+        [
+          11.0231,
+          77.1236
+        ]
+      ],
+      "expectedAdditionalCost": 50000,
+      "expectedFinalCost": 1300000,
+      "costOverrunPercentage": 4,
+      "legalRiskProbability": 5,
+      "legalRiskLevel": "Low"
+    },
+    {
+      "id": "LA2018",
+      "projectId": "Greenway-01",
+      "district": "Kanyakumari",
+      "state": "Tamil Nadu",
+      "ownerName": "F. Joseph",
+      "landArea": 3.3,
+      "area": 3.3,
+      "areaUnit": "Acres",
+      "landType": "Residential",
+      "ownersCount": 3,
+      "ownershipDispute": true,
+      "documentsComplete": false,
+      "compensationStatus": "Pending",
+      "compensationAmount": 1560000,
+      "objectionFiled": true,
+      "courtCase": true,
+      "surveyCompleted": true,
+      "environmentalClearance": false,
+      "governmentApproval": false,
+      "acquisitionStage": "Objection",
+      "previousDelay": true,
+      "distanceFromProject": 1.5,
+      "predictedDelayDays": 226,
+      "delayProbability": 97,
+      "riskScore": 96,
+      "riskLevel": "High",
+      "location": "Nagercoil, Kanyakumari, Tamil Nadu",
+      "surveyNumber": "218/2",
+      "ownershipStatus": "Disputed",
+      "latitude": 8.1775,
+      "longitude": 77.4345,
+      "polygon": [
+        [
+          8.1765,
+          77.4335
+        ],
+        [
+          8.1765,
+          77.4355
+        ],
+        [
+          8.1785,
+          77.4355
+        ],
+        [
+          8.1785,
+          77.4335
+        ],
+        [
+          8.1765,
+          77.4335
+        ]
+      ],
+      "expectedAdditionalCost": 468000,
+      "expectedFinalCost": 2028000,
+      "costOverrunPercentage": 30,
+      "legalRiskProbability": 95,
+      "legalRiskLevel": "High"
+    },
+    {
+      "id": "LA2019",
+      "projectId": "Logistics-01",
+      "district": "Vellore",
+      "state": "Tamil Nadu",
+      "ownerName": "S. Anand",
+      "landArea": 2.7,
+      "area": 2.7,
+      "areaUnit": "Acres",
+      "landType": "Commercial",
+      "ownersCount": 2,
+      "ownershipDispute": false,
+      "documentsComplete": true,
+      "compensationStatus": "Pending",
+      "compensationAmount": 1330000,
+      "objectionFiled": false,
+      "courtCase": false,
+      "surveyCompleted": true,
+      "environmentalClearance": true,
+      "governmentApproval": true,
+      "acquisitionStage": "Negotiation",
+      "previousDelay": false,
+      "distanceFromProject": 0.8,
+      "predictedDelayDays": 35,
+      "delayProbability": 31,
+      "riskScore": 28,
+      "riskLevel": "Low",
+      "location": "Vaniyambadi, Vellore region, Tamil Nadu",
+      "surveyNumber": "219/6",
+      "ownershipStatus": "Private",
+      "latitude": 12.6812,
+      "longitude": 78.6214,
+      "polygon": [
+        [
+          12.6802,
+          78.6204
+        ],
+        [
+          12.6802,
+          78.6224
+        ],
+        [
+          12.6822,
+          78.6224
+        ],
+        [
+          12.6822,
+          78.6204
+        ],
+        [
+          12.6802,
+          78.6204
+        ]
+      ],
+      "expectedAdditionalCost": 66500,
+      "expectedFinalCost": 1396500,
+      "costOverrunPercentage": 5,
+      "legalRiskProbability": 11,
+      "legalRiskLevel": "Low"
+    },
+    {
+      "id": "LA2020",
+      "projectId": "Industrial-02",
+      "district": "Cuddalore",
+      "state": "Tamil Nadu",
+      "ownerName": "V. Chandran",
+      "landArea": 4.4,
+      "area": 4.4,
+      "areaUnit": "Acres",
+      "landType": "Industrial",
+      "ownersCount": 6,
+      "ownershipDispute": true,
+      "documentsComplete": false,
+      "compensationStatus": "Pending",
+      "compensationAmount": 1750000,
+      "objectionFiled": true,
+      "courtCase": false,
+      "surveyCompleted": true,
+      "environmentalClearance": false,
+      "governmentApproval": false,
+      "acquisitionStage": "Negotiation",
+      "previousDelay": true,
+      "distanceFromProject": 1.3,
+      "predictedDelayDays": 189,
+      "delayProbability": 96,
+      "riskScore": 92,
+      "riskLevel": "High",
+      "location": "Chidambaram, Cuddalore, Tamil Nadu",
+      "surveyNumber": "220/4",
+      "ownershipStatus": "Disputed",
+      "latitude": 11.3998,
+      "longitude": 79.6914,
+      "polygon": [
+        [
+          11.3988,
+          79.6904
+        ],
+        [
+          11.3988,
+          79.6924
+        ],
+        [
+          11.4008,
+          79.6924
+        ],
+        [
+          11.4008,
+          79.6904
+        ],
+        [
+          11.3988,
+          79.6904
+        ]
+      ],
+      "expectedAdditionalCost": 437500,
+      "expectedFinalCost": 2187500,
+      "costOverrunPercentage": 25,
+      "legalRiskProbability": 64,
+      "legalRiskLevel": "Medium"
     }
   ],
   "alerts": [

@@ -65,13 +65,11 @@ app.use("/api/notifications", notificationRoutes);
 // Legacy backward-compatible aliases for existing frontend components
 app.get("/api/parcels", async (req, res, next) => {
   try {
+    const seed = getLegacySeedData();
     if (isDbConnected()) {
       const lands = await LandRecordModel.find().lean();
-      if (lands && lands.length > 0) return res.json(lands);
+      if (lands && lands.length >= (seed.parcels || []).length) return res.json(lands);
     }
-
-    // Fallback to legacy db.json if MongoDB is unconnected/empty/unseeded
-    const seed = getLegacySeedData();
     return res.json(seed.parcels || []);
   } catch (err) {
     next(err);

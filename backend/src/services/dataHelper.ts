@@ -13,19 +13,39 @@ export function isDbConnected(): boolean {
 }
 
 export function getLegacySeedData(): any {
-  if (cachedJsonData) return cachedJsonData;
   const dbFile = path.join(__dirname, "../../../database/data/db.json");
+  const datasetFile = path.join(__dirname, "../../../database/data/new_land_dataset.json");
+  let data: any = { projects: [], parcels: [], landParcels: [], alerts: [], documents: [] };
+
   if (fs.existsSync(dbFile)) {
     try {
       const raw = fs.readFileSync(dbFile, "utf-8");
-      cachedJsonData = JSON.parse(raw);
-      if (cachedJsonData && cachedJsonData.landParcels && !cachedJsonData.parcels) {
-        cachedJsonData.parcels = cachedJsonData.landParcels;
-      }
-      return cachedJsonData;
+      data = JSON.parse(raw);
     } catch (e) {
-      return { projects: [], parcels: [], landParcels: [], alerts: [], documents: [] };
+      console.error("Error reading db.json:", e);
     }
   }
-  return { projects: [], parcels: [], landParcels: [], alerts: [], documents: [] };
+
+  const parcelMap = new Map<string, any>();
+  if (Array.isArray(data.parcels)) {
+    data.parcels.forEach((p: any) => parcelMap.set(p.id, p));
+  }
+
+  if (fs.existsSync(datasetFile)) {
+    try {
+      const rawDataset = fs.readFileSync(datasetFile, "utf-8");
+      const parsedDataset = JSON.parse(rawDataset);
+      if (parsedDataset && Array.isArray(parsedDataset.parcels)) {
+        parsedDataset.parcels.forEach((p: any) => parcelMap.set(p.id, p));
+      }
+    } catch (e) {
+      console.error("Error reading new_land_dataset.json:", e);
+    }
+  }
+
+  const combinedParcels = Array.from(parcelMap.values());
+  data.parcels = combinedParcels;
+  data.landParcels = combinedParcels;
+
+  return data;
 }

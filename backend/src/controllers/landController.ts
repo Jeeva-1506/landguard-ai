@@ -5,6 +5,7 @@ import { isDbConnected, getLegacySeedData } from "../services/dataHelper";
 export const getLands = async (req: Request, res: Response) => {
   try {
     const { district, riskLevel, search, surveyNumber } = req.query;
+    const seed = getLegacySeedData();
 
     if (isDbConnected()) {
       const filter: any = {};
@@ -16,11 +17,12 @@ export const getLands = async (req: Request, res: Response) => {
         filter.$or = [{ ownerName: regex }, { surveyNumber: regex }, { district: regex }, { village: regex }];
       }
       const lands = await LandRecordModel.find(filter).lean();
-      return res.json(lands);
+      if (lands && lands.length >= (seed.parcels || []).length) {
+        return res.json(lands);
+      }
     }
 
     // Hybrid fallback mode
-    const seed = getLegacySeedData();
     let parcels = seed.parcels || [];
     if (district) parcels = parcels.filter((p: any) => p.district === district);
     if (riskLevel) parcels = parcels.filter((p: any) => p.riskLevel === riskLevel);
